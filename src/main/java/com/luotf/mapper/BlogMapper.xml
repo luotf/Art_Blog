@@ -73,8 +73,8 @@
   <select id="selectBlogCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(*) FROM t_blog
 		<where>
-		 	<if test="title!=null and title!=''">
-		 		and title like CONCAT(CONCAT('%', #{title}), '%')
+		 	<if test="keyword!=null and keyword!=''">
+		 		and title like CONCAT(CONCAT('%', #{keyword}), '%')
 		 	</if>
 		 	<if test="type_id!=null and type_id!=''">
 		 		and type_id=#{type_id}
@@ -113,8 +113,8 @@
 		 		and content like CONCAT(CONCAT('%', #{content}), '%')
 		 	</if>
 		 	
-		 	<if test="isRecommend!=null and isRecommend!=''">
-		 		and isRecommend=#{isRecommend}
+		 	<if test="isTop!=null and isTop!=''">
+		 		and isTop=#{isTop}
 		 	</if>
 		 	<if test="type_id!=null and type_id!=''">
 		 		and type_id=#{type_id}
@@ -163,7 +163,7 @@
       #{keyword,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, 0, 
       0, 0, 0, 
       0, #{updatetime,jdbcType=TIMESTAMP},  
-      0, #{type.id,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      #{status,jdbcType=INTEGER}, #{type.id,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
   

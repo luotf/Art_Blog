@@ -174,19 +174,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clearfix"></div>
 						</div>
 						<div class="mail-body text-right tooltip-demo">
-							<button id="" type="button" onclick="addBlog()"
+							<button id="" type="button" onclick="addBlog(1)"
 								class="btn btn-sm btn-primary" data-toggle="tooltip"
 								data-placement="top" title="Send">
 								<i class="fa fa-reply"></i> 发布
 							</button>
-							<button id="" type="button" onclick="addBlog()"
-								class="btn btn-white btn-sm" data-toggle="tooltip"
-								data-placement="top" title="Discard email">
-								<i class="fa fa-times"></i> 放弃</a>
-								<button id="" type="button" onclick="selectAllBlogType()"
+					
+								<button id="" type="button" onclick="addBlog(0)"
 									class="btn btn-white btn-sm" data-toggle="tooltip"
 									data-placement="top" title="Move to draft folder">
-									<i class="fa fa-pencil"></i> 存为草稿</a>
+									<i class="fa fa-pencil"></i> 存为草稿
+								</button>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -300,16 +298,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  });  
 		 }  
 
-		
-		
-		
-            var addBlog=function(){
+            var addBlog=function(id){
             	var params ={
         				'title':$("#title").val(),
         				'introduction':$("#introduction").val(),
         				'type.id':$("#typeName").val(),
         				'keyword':$("#keyword").val(),
-        				'content':$("#summernote").code()
+        				'content':$("#summernote").code(),
+        				'status':id
         		};
             	$.ajax({
                     url:'addBlog',    

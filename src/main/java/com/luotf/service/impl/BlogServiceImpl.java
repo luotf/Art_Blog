@@ -54,19 +54,19 @@ public class BlogServiceImpl implements BlogService{
 	@Override
 	public List<Blog> selectBlogByTypeId(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return blogMapper.selectBlogByTypeId(id);
 	}
 
 	@Override
 	public Blog selectPrevBlog(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return blogMapper.selectPrevBlog(id);
 	}
 
 	@Override
 	public Blog selectNextBlog(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return blogMapper.selectNextBlog(id);
 	}
 
 	@Override
