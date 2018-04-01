@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luotf.mapper.BlogMapper">
+  <resultMap id="BaseResultMap" type="com.luotf.model.Blog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="keyword" jdbcType="VARCHAR" property="keyword" />
+    <result column="images" jdbcType="VARCHAR" property="images" />
+    <result column="clickNum" jdbcType="INTEGER" property="clicknum" />
+    <result column="commentNum" jdbcType="INTEGER" property="commentnum" />
+    <result column="agreeNum" jdbcType="INTEGER" property="agreenum" />
+    <result column="isTop" jdbcType="INTEGER" property="istop" />
+    <result column="isRecommend" jdbcType="INTEGER" property="isrecommend" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <!-- 配置 多对一 关联关系 -->
+    <association property="type" column="type_id" javaType="com.luotf.model.BlogType" select="com.luotf.mapper.BlogTypeMapper.selectBlogTypeById" >
+    
+    </association>
+ 
+  </resultMap>
+  
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.luotf.model.Blog">
+    
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, introduction, keyword, images, clickNum, commentNum, agreeNum, isTop, 
+    isRecommend, updateTime, addTime, status, type_id
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  
+
+  
+  <select id="selectBlogById" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_blog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectBlogByTypeId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_blog
+    where type_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteBlogById" parameterType="java.lang.Integer">
+    delete from t_blog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  	<select id="selectBlogListByDate" resultType="map">
+		  SELECT 
+		    DATE_FORMAT(addTime,'%Y-%m-%d') AS addTime,
+		    COUNT(*) AS count
+		  FROM
+		    t_blog 
+		  GROUP BY DATE_FORMAT(addTime,'%Y-%m-%d')
+		  ORDER BY addTime DESC
+	</select>
+	
+  
+  
+  <select id="selectBlogCount" parameterType="Map" resultType="Long">
+		SELECT COUNT(*) FROM t_blog
+		<where>
+		 	<if test="title!=null and title!=''">
+		 		and title like CONCAT(CONCAT('%', #{title}), '%')
+		 	</if>
+		 	<if test="type_id!=null and type_id!=''">
+		 		and type_id=#{type_id}
+		 	</if>
+		 	<if test="status!=null and status!=''">
+		 		and status=#{status}
+		 	</if>
+		 	<if test="isRecommend!=null and isRecommend!=''">
+		 		and isRecommend=#{isRecommend}
+		 	</if>
+		 	<if test="addTime!=null and addTime!=''">
+		 		and DATE_FORMAT(addTime,'%Y-%m-%d')=#{addTime}
+		 	</if>
+		 </where>
+	</select>
+  
+  
+  
+  <select id="selectBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
+	SELECT 
+	<include refid="Base_Column_List" />
+   	,
+    <include refid="Blob_Column_List" />
+		FROM t_blog
+		<where>
+		 	<if test="title!=null and title!=''">
+		 		and title like CONCAT(CONCAT('%', #{title}), '%')
+		 	</if>
+		 	<if test="introduction!=null and introduction!=''">
+		 		and introduction like CONCAT(CONCAT('%', #{introduction}), '%')
+		 	</if>
+		 	<if test="keyword!=null and keyword!=''">
+		 		and keyword like CONCAT(CONCAT('%', #{keyword}), '%')
+		 	</if>
+		 	<if test="content!=null and content!=''">
+		 		and content like CONCAT(CONCAT('%', #{content}), '%')
+		 	</if>
+		 	
+		 	<if test="isRecommend!=null and isRecommend!=''">
+		 		and isRecommend=#{isRecommend}
+		 	</if>
+		 	<if test="type_id!=null and type_id!=''">
+		 		and type_id=#{type_id}
+		 	</if>
+		 	<if test="status!=null and status!=''">
+		 		and status=#{status}
+		 	</if>
+		 	<if test="isRecommend!=null and isRecommend!=''">
+		 		and isRecommend=#{isRecommend}
+		 	</if>
+		 	<if test="addTime!=null and addTime!=''">
+		 		and DATE_FORMAT(addTime,'%Y-%m-%d')=#{addTime}
+		 	</if>
+		 </where>
+		  ORDER BY addTime DESC
+		 <!--  <if test="pageNow!=null and pageSize!=null">
+		 	limit #{pageNow},#{pageSize}
+		 </if>
+		 -->
+	</select>
+  
+  <select id="selectPrevBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">
+	SELECT 
+	<include refid="Base_Column_List" />
+   	,
+    <include refid="Blob_Column_List" />
+	from t_blog where id&lt;#{id} ORDER BY id DESC LIMIT 1
+	</select>
+	
+	<select id="selectNextBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">
+	SELECT 
+	<include refid="Base_Column_List" />
+   	,
+    <include refid="Blob_Column_List" />
+	from t_blog where id&gt;#{id} ORDER BY id ASC LIMIT 1
+	</select>
+  
+  <insert id="insertBlog" parameterType="com.luotf.model.Blog">
+    insert into t_blog (id, title, introduction, 
+      keyword, images, clickNum, 
+      commentNum, agreeNum, isTop, 
+      isRecommend, updateTime, 
+      status, type_id, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{keyword,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, 0, 
+      0, 0, 0, 
+      0, #{updatetime,jdbcType=TIMESTAMP},  
+      0, #{type.id,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+  <insert id="insertBlogSelective" parameterType="com.luotf.model.Blog">
+    insert into t_blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="keyword != null">
+        keyword,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="clicknum != null">
+        clickNum,
+      </if>
+      <if test="commentnum != null">
+        commentNum,
+      </if>
+      <if test="agreenum != null">
+        agreeNum,
+      </if>
+      <if test="istop != null">
+        isTop,
+      </if>
+      <if test="isrecommend != null">
+        isRecommend,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="addtime != null">
+        addTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="clicknum != null">
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="commentnum != null">
+        #{commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="agreenum != null">
+        #{agreenum,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null">
+        #{istop,jdbcType=INTEGER},
+      </if>
+      <if test="isrecommend != null">
+        #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type.id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateBlogSelective" parameterType="com.luotf.model.Blog">
+    update t_blog
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=VARCHAR},
+      </if>
+      <if test="clicknum != null">
+        clickNum = #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="commentnum != null">
+        commentNum = #{commentnum,jdbcType=INTEGER},
+      </if>
+      <if test="agreenum != null">
+        agreeNum = #{agreenum,jdbcType=INTEGER},
+      </if>
+      <if test="istop != null">
+        isTop = #{istop,jdbcType=INTEGER},
+      </if>
+      <if test="isrecommend != null">
+        isRecommend = #{isrecommend,jdbcType=INTEGER},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null">
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type_id = #{type.id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateBlogWithBLOBs" parameterType="com.luotf.model.Blog">
+    update t_blog
+    set title = #{title,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR},
+      clickNum = #{clicknum,jdbcType=INTEGER},
+      commentNum = #{commentnum,jdbcType=INTEGER},
+      agreeNum = #{agreenum,jdbcType=INTEGER},
+      isTop = #{istop,jdbcType=INTEGER},
+      isRecommend = #{isrecommend,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      addTime = #{addtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      type_id = #{type.id,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateBlog" parameterType="com.luotf.model.Blog">
+    update t_blog
+    set title = #{title,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      keyword = #{keyword,jdbcType=VARCHAR},
+      images = #{images,jdbcType=VARCHAR},
+      clickNum = #{clicknum,jdbcType=INTEGER},
+      commentNum = #{commentnum,jdbcType=INTEGER},
+      agreeNum = #{agreenum,jdbcType=INTEGER},
+      isTop = #{istop,jdbcType=INTEGER},
+      isRecommend = #{isrecommend,jdbcType=INTEGER},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      addTime = #{addtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      type_id = #{type.id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

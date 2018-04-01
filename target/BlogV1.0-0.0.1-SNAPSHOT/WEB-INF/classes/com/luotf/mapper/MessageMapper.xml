@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luotf.mapper.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.luotf.model.Message">
+    
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="isReply" jdbcType="INTEGER" property="isreply" />
+    <result column="replyContent" jdbcType="VARCHAR" property="replycontent" />
+    <result column="replyTime" jdbcType="TIMESTAMP" property="replytime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+   
+    id, email, content, addTime, isReply, replyContent, replyTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    
+    select 
+    <include refid="Base_Column_List" />
+    from t_message
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    
+    delete from t_message
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.luotf.model.Message">
+    
+    insert into t_message (id, email, content, 
+      addTime, isReply, replyContent, 
+      replyTime)
+    values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{isreply,jdbcType=INTEGER}, #{replycontent,jdbcType=VARCHAR}, 
+      #{replytime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luotf.model.Message">
+   
+    insert into t_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="addtime != null">
+        addTime,
+      </if>
+      <if test="isreply != null">
+        isReply,
+      </if>
+      <if test="replycontent != null">
+        replyContent,
+      </if>
+      <if test="replytime != null">
+        replyTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isreply != null">
+        #{isreply,jdbcType=INTEGER},
+      </if>
+      <if test="replycontent != null">
+        #{replycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replytime != null">
+        #{replytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luotf.model.Message">
+    
+    update t_message
+    <set>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null">
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isreply != null">
+        isReply = #{isreply,jdbcType=INTEGER},
+      </if>
+      <if test="replycontent != null">
+        replyContent = #{replycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replytime != null">
+        replyTime = #{replytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luotf.model.Message">
+    
+    update t_message
+    set email = #{email,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      addTime = #{addtime,jdbcType=TIMESTAMP},
+      isReply = #{isreply,jdbcType=INTEGER},
+      replyContent = #{replycontent,jdbcType=VARCHAR},
+      replyTime = #{replytime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>
