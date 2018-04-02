@@ -71,7 +71,7 @@
   
   
   <select id="selectBlogCount" parameterType="Map" resultType="Long">
-		SELECT COUNT(*) FROM t_blog
+		SELECT COUNT(*) from t_blog
 		<where>
 		 	<if test="keyword!=null and keyword!=''">
 		 		and title like CONCAT(CONCAT('%', #{keyword}), '%')
@@ -94,11 +94,11 @@
   
   
   <select id="selectBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
-	SELECT 
+	select 
 	<include refid="Base_Column_List" />
    	,
     <include refid="Blob_Column_List" />
-		FROM t_blog
+		from t_blog
 		<where>
 		 	<if test="title!=null and title!=''">
 		 		and title like CONCAT(CONCAT('%', #{title}), '%')

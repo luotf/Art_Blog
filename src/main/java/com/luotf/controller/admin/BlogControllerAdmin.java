@@ -111,10 +111,9 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/deleteBlog",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map deleteBlog(String id) throws Exception{
+	 public Map deleteBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
-		int blogId=Integer.parseInt(id);
-		 if(blogService.deleteBlogById(blogId)!=0){
+		 if(blogService.deleteBlogById(id)!=0){
 			 map.put("status", 200);
 		 }else{
 			 //0表示：删除失败
@@ -151,10 +150,9 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogById",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectBlogById(String id) throws Exception{
+	 public Map selectBlogById(Integer id) throws Exception{
 		 Map map=new HashMap();
-		 int blogId=Integer.parseInt(id);
-		 Blog blog=blogService.selectBlogById(blogId);
+		 Blog blog=blogService.selectBlogById(id);
 		 if(blog!=null){
 			 map.put("status", 200);
 			 map.put("blog", blog);
@@ -173,10 +171,9 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogByTypeId",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectBlogByTypeId(String id) throws Exception{
+	 public Map selectBlogByTypeId(Integer id) throws Exception{
 		 Map map=new HashMap();
-		 int blogTypeId=Integer.parseInt(id);
-		 List<Blog> blogList=blogService.selectBlogByTypeId(blogTypeId);
+		 List<Blog> blogList=blogService.selectBlogByTypeId(id);
 		 if(blogList.size()>0){
 			 map.put("status", 200);
 			 map.put("blogList", blogList);
@@ -195,7 +192,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogListByPage",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectBlogListByPage(Blog blog) throws Exception{
+	 public Map selectBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		 
 		 if(blog.getTitle()!=null||blog.getTitle()!=""){
@@ -213,7 +210,7 @@ public class BlogControllerAdmin {
 		 if(blog.getIstop()!=null){
 			 map.put("isTop", blog.getIstop());
 		 }
-		 if(blog.getType().getId()!=null){
+		 if(blog.getType()!=null){
 			 map.put("type_id", blog.getType().getId());
 		 }
 		 if(blog.getStatus()!=null){
@@ -226,7 +223,7 @@ public class BlogControllerAdmin {
 			 map.put("addTime", blog.getAddtime());
 		 }
 		 //分页显示：第1页开始，每页显示10条记录
-		 PageHelper.startPage(1, 10);
+		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectBlogListByPage(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
 		 	/*System.out.println("总记录数："+pageInfo.getTotal());
@@ -234,15 +231,17 @@ public class BlogControllerAdmin {
 	    	System.out.println("当前页："+pageInfo.getPageNum());
 	    	System.out.println("每页的数量："+pageInfo.getPageSize());
 	    	System.out.println("当前页数量："+pageInfo.getSize());*/
+		 Map returnMap=new HashMap();
+		 
 		 if(blogList.size()>0){
-			 map.put("status", 200);
-			 map.put("blogList", blogList);
-			 map.put("pageInfo", pageInfo);
+			 returnMap.put("status", 200);
+			 returnMap.put("blogList", blogList);
+			 returnMap.put("pageInfo", pageInfo);
 		 }else{
 			 //500表示：返回值为Null
-			 map.put("status", 500);
+			 returnMap.put("status", 500);
 		 }
-		 return map;
+		 return returnMap;
 	 }
 	 
 	 
@@ -259,7 +258,7 @@ public class BlogControllerAdmin {
 		 if(blog.getKeyword()!=null||blog.getKeyword()!=""){
 			 map.put("keyword", blog.getKeyword());
 		 }
-		 if(blog.getType().getId()!=null){
+		 if(blog.getType()!=null){
 			 map.put("type_id", blog.getType().getId());
 		 }
 		 if(blog.getStatus()!=null){
@@ -272,14 +271,15 @@ public class BlogControllerAdmin {
 			 map.put("addTime", blog.getAddtime());
 		 }
 		 Long count=blogService.selectBlogCount(map);
+		 Map returnMap=new HashMap();
 		 if(count>0){
-			 map.put("status", 200);
-			 map.put("count", count);
+			 returnMap.put("status", 200);
+			 returnMap.put("count", count);
 		 }else{
 			 //500表示：返回值为Null
-			 map.put("status", 500);
+			 returnMap.put("status", 500);
 		 }
-		 return map;
+		 return returnMap;
 	 }
 	 
 	 
@@ -291,10 +291,9 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectPrevBlog",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectPrevBlog(String id) throws Exception{
+	 public Map selectPrevBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
-		 int blogId=Integer.parseInt(id);
-		 Blog blog=blogService.selectPrevBlog(blogId);
+		 Blog blog=blogService.selectPrevBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
 			 map.put("blog", blog);
@@ -313,10 +312,9 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectNextBlog",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectNextBlog(String id) throws Exception{
+	 public Map selectNextBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
-		 int blogId=Integer.parseInt(id);
-		 Blog blog=blogService.selectNextBlog(blogId);
+		 Blog blog=blogService.selectNextBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
 			 map.put("blog", blog);

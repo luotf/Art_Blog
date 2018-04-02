@@ -126,12 +126,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<div class="pull-right tooltip-demo">
-							<a href="mailbox.html" class="btn btn-white btn-sm"
+							<button class="btn btn-white btn-sm" type="button" onclick="selectBlogListByPage()"
 								data-toggle="tooltip" data-placement="top" title="存为草稿"><i
-								class="fa fa-pencil"></i> 存为草稿</a> <a href="mailbox.html"
+								class="fa fa-pencil"></i> 存为草稿</button> <button type="button" onclick="selectBlogListByPage()"
 								class="btn btn-danger btn-sm" data-toggle="tooltip"
 								data-placement="top" title="放弃"><i class="fa fa-times"></i>
-								放弃</a>
+								放弃</button>
 						</div>
 						<h2>写博客</h2>
 					</div>
@@ -298,28 +298,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  });  
 		 }  
 
-            var addBlog=function(id){
-            	var params ={
-        				'title':$("#title").val(),
-        				'introduction':$("#introduction").val(),
-        				'type.id':$("#typeName").val(),
-        				'keyword':$("#keyword").val(),
-        				'content':$("#summernote").code(),
-        				'status':id
-        		};
-            	$.ajax({
-                    url:'addBlog',    
-                    type:'post',
-                    data:params,
-                    dataType:'json',    
-                    success:function (data) { 
-                    	if(data.status==200){
-                    		alert("添加成功");
-                    	}else{
-                    		alert("添加失败");
-                    	}
-                    
-                    	
+		//按照不同条件分页查询博客信息
+		var selectBlogListByPage=function(){
+			var params ={
+        			'title':'罗'
+        	};
+			$.ajax({
+                url:'selectBlogListByPage',    
+                type:'post',
+                data:params,
+                dataType:'json',
+                success:function (data) { 
+                	console.log(data);
+                	//var response = eval('('+data+')');
+                	//console.log(response);
+                	for (var i = 0; i < data.length; i++) {
+                		console.log(data[i]);
+                    }
+                 if(data.status==200){
+                 	alert("添加成功");
+                 }else{
+                 	alert("添加失败");
+                 }	
+                 },    
+     		    error:function(){
+     		    	alert("上传失败");
+     		    }	
+             }); 
+		}
+        var addBlog=function(id){
+          var params ={
+        			'title':$("#title").val(),
+        			'introduction':$("#introduction").val(),
+        			'type.id':$("#typeName").val(),
+        			'keyword':$("#keyword").val(),
+        			'content':$("#summernote").code(),
+        			'status':id
+        	};
+            $.ajax({
+                   url:'addBlog',    
+                   type:'post',
+                   data:params,
+                   dataType:'json',    
+                   success:function (data) { 
+                    if(data.status==200){
+                    	alert("添加成功");
+                    }else{
+                    	alert("添加失败");
+                    }	
                     },    
         		    error:function(){
         		    	alert("上传失败");

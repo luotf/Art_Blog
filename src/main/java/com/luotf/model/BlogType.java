@@ -5,9 +5,10 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })  
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class BlogType {
     /**  */
     private Integer id;
@@ -22,6 +23,7 @@ public class BlogType {
     private Date addTime;
     
     /**该类别下的所有博客信息*/
+    @JsonBackReference
     private List<Blog> blogs;
 
     

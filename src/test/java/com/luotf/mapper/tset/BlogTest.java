@@ -36,10 +36,10 @@ public class BlogTest{
     @Test
     public void selectByExample()  {
     	//意思是从第1页开始，每页显示3条记录
-    /*	
+    	
     	Map map=new HashMap();
     	map.put("title", "罗");
-    	map.put("addTime", "2018-03-28");
+    //	map.put("addTime", "2018-03-28");
     	//map.put(key, value)
     	PageHelper.startPage(1, 3);
     	List<Blog> blogList=blogService.selectBlogListByPage(map);
@@ -53,12 +53,12 @@ public class BlogTest{
     	System.out.println("当前页："+p.getPageNum());
     	System.out.println("每页的数量："+p.getPageSize());
     	System.out.println("当前页数量："+p.getSize());
-    	*/
-    	/*
+    	
+    	
     	List<Map> list=blogMapper.selectBlogListByDate();
-    	for(Map map:list){
-    		System.out.println(map);
-    	}*/
+    	for(Map map1:list){
+    		System.out.println(map1);
+    	}
     	
     	
     }

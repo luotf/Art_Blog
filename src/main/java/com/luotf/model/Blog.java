@@ -6,7 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })  
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 public class Blog {
     /** 自增 */
     private Integer id;
@@ -50,6 +50,7 @@ public class Blog {
     private Integer status;
 
     /** 类别 */
+    //@JsonBackReference
     private BlogType type;
 
     /** 博客内容 */
@@ -393,12 +394,10 @@ public class Blog {
     public void setStatus(Integer status) {
         this.status = status;
     }
-
-    @JsonBackReference
 	public BlogType getType() {
 		return type;
 	}
-	@JsonBackReference
+	
 	public void setType(BlogType type) {
 		this.type = type;
 	}

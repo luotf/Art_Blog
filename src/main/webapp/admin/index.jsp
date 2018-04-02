@@ -429,7 +429,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </button>
                 <nav class="page-tabs J_menuTabs">
                     <div class="page-tabs-content">
-                        <a href="javascript:;" class="active J_menuTab" data-id="${pageContext.request.contextPath}/admin/addBlog.jsp">首页</a>
+                        <a href="javascript:;" class="active J_menuTab" data-id="${pageContext.request.contextPath}/admin/table/blogTable.jsp">首页</a>
                     </div>
                 </nav>
                 <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -451,7 +451,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
             </div>
             <div class="row J_mainContent" id="content-main">
-                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${pageContext.request.contextPath}/admin/addBlog.jsp" frameborder="0" data-id="${pageContext.request.contextPath}/admin/addBlog.jsp" seamless></iframe>
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="${pageContext.request.contextPath}/admin/table/blogTable.jsp" frameborder="0" data-id="${pageContext.request.contextPath}/admin/table/blogTable.jsp" seamless></iframe>
             </div>
             <div class="footer">
                 <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
