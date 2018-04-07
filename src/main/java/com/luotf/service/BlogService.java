@@ -45,6 +45,22 @@ public interface BlogService {
 	 */
 	List<Blog> selectBlogListByPage(Map<String, Object> map);
 
+	/**
+ 	 * 模糊分页查询博客
+ 	 * @param map
+ 	 * @return
+ 	 */
+
+ 	List<Blog> selectLikeBlogListByPage(Map<String, Object> map);
+ 	
+ 	/**
+ 	 * 模糊分页组合查询博客
+ 	 * @param map
+ 	 * @return
+ 	 */
+
+ 	List<Blog> selectGroupLikeBlogListByPage(Map<String, Object> map);
+ 	
 	List<Blog> selectBlogByTypeId(Integer id);
 
 	/**

@@ -190,6 +190,117 @@ public class BlogControllerAdmin {
 	  * @return
 	  * @throws Exception
 	  */
+	 @RequestMapping(value = "/selectLikeBlogListByPage",method = RequestMethod.POST)
+	 @ResponseBody
+	 public Map selectLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+		 Map map=new HashMap();
+		 
+		 if(blog.getTitle()!=null||blog.getTitle()!=""){
+			 map.put("title", blog.getTitle());
+		 }
+		 if(blog.getIntroduction()!=null||blog.getIntroduction()!=""){
+			 map.put("introduction", blog.getIntroduction());
+		 }
+		 if(blog.getKeyword()!=null||blog.getKeyword()!=""){
+			 map.put("keyword", blog.getKeyword());
+		 }
+		 if(blog.getContent()!=null||blog.getContent()!=""){
+			 map.put("content", blog.getContent());
+		 }
+		 if(blog.getIstop()!=null){
+			 map.put("isTop", blog.getIstop());
+		 }
+		 if(blog.getType()!=null){
+			 map.put("type_id", blog.getType().getId());
+		 }
+		 if(blog.getStatus()!=null){
+			 map.put("status", blog.getStatus());
+		 }
+		 if(blog.getIsrecommend()!=null){
+			 map.put("isRecommend", blog.getIsrecommend());
+		 }
+		 if(blog.getAddtime()!=null){
+			 map.put("addTime", blog.getAddtime());
+		 }
+		 //分页显示：第1页开始，每页显示10条记录
+		 PageHelper.startPage(page, pageSize);
+		 List<Blog> blogList=blogService.selectLikeBlogListByPage(map);
+		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
+		 //System.out.println("type_id:"+blog.getType().getId());
+		 Map returnMap=new HashMap();
+		 if(blogList.size()>0){
+			 returnMap.put("status", 200);
+			 returnMap.put("blogList", blogList);
+			 returnMap.put("pageInfo", pageInfo);
+		 }else{
+			 //500表示：返回值为Null
+			 returnMap.put("status", 500);
+		 }
+		 return returnMap;
+	 }
+	 
+	 
+	 /**
+	  * 模糊分页组合查询博客信息
+	  * @param id
+	  * @return
+	  * @throws Exception
+	  */
+	 @RequestMapping(value = "/selectGroupLikeBlogListByPage",method = RequestMethod.POST)
+	 @ResponseBody
+	 public Map selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+		 Map map=new HashMap();
+		 
+		 if(blog.getTitle()!=null||blog.getTitle()!=""){
+			 map.put("title", blog.getTitle());
+		 }
+		 if(blog.getIntroduction()!=null||blog.getIntroduction()!=""){
+			 map.put("introduction", blog.getIntroduction());
+		 }
+		 if(blog.getKeyword()!=null||blog.getKeyword()!=""){
+			 map.put("keyword", blog.getKeyword());
+		 }
+		 if(blog.getContent()!=null||blog.getContent()!=""){
+			 map.put("content", blog.getContent());
+		 }
+		 if(blog.getIstop()!=null){
+			 map.put("isTop", blog.getIstop());
+		 }
+		 if(blog.getType()!=null){
+			 map.put("type_id", blog.getType().getId());
+		 }
+		 if(blog.getStatus()!=null){
+			 map.put("status", blog.getStatus());
+		 }
+		 if(blog.getIsrecommend()!=null){
+			 map.put("isRecommend", blog.getIsrecommend());
+		 }
+		 if(blog.getAddtime()!=null){
+			 map.put("addTime", blog.getAddtime());
+		 }
+		 //分页显示：第1页开始，每页显示10条记录
+		 PageHelper.startPage(page, pageSize);
+		 List<Blog> blogList=blogService.selectGroupLikeBlogListByPage(map);
+		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
+		 //System.out.println("type_id:"+blog.getType().getId());
+		 Map returnMap=new HashMap();
+		 if(blogList.size()>0){
+			 returnMap.put("status", 200);
+			 returnMap.put("blogList", blogList);
+			 returnMap.put("pageInfo", pageInfo);
+		 }else{
+			 //500表示：返回值为Null
+			 returnMap.put("status", 500);
+		 }
+		 return returnMap;
+	 }
+	 
+	 /**
+	  * 按照不同条件分页查询博客信息
+	  * @param id
+	  * @return
+	  * @throws Exception
+	  */
 	 @RequestMapping(value = "/selectBlogListByPage",method = RequestMethod.POST)
 	 @ResponseBody
 	 public Map selectBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
@@ -281,6 +392,9 @@ public class BlogControllerAdmin {
 		 }
 		 return returnMap;
 	 }
+	 
+	 
+	 
 	 
 	 
 	 /**

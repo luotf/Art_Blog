@@ -136,6 +136,84 @@
 		 -->
 	</select>
   
+  
+   <select id="selectLikeBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
+	select 
+	<include refid="Base_Column_List" />
+   	,
+    <include refid="Blob_Column_List" />
+		from t_blog
+		<where>
+		 	<if test="title!=null and title!=''">
+		 		or title like CONCAT(CONCAT('%', #{title}), '%')
+		 	</if>
+		 	<if test="introduction!=null and introduction!=''">
+		 		or introduction like CONCAT(CONCAT('%', #{introduction}), '%')
+		 	</if>
+		 	<if test="keyword!=null and keyword!=''">
+		 		or keyword like CONCAT(CONCAT('%', #{keyword}), '%')
+		 	</if>
+		 	<if test="content!=null and content!=''">
+		 		or content like CONCAT(CONCAT('%', #{content}), '%')
+		 	</if>
+		 	
+		 	<if test="isTop!=null and isTop!=''">
+		 		or isTop=#{isTop}
+		 	</if>
+		 	<if test="type_id!=null and type_id!=''">
+		 		or type_id=#{type_id}
+		 	</if>
+		 	<if test="status!=null and status!=''">
+		 		or status=#{status}
+		 	</if>
+		 	<if test="isRecommend!=null and isRecommend!=''">
+		 		or isRecommend=#{isRecommend}
+		 	</if>
+		 	<if test="addTime!=null and addTime!=''">
+		 		or DATE_FORMAT(addTime,'%Y-%m-%d')=#{addTime}
+		 	</if>
+		 </where>
+		  ORDER BY addTime DESC
+		 <!--  <if test="pageNow!=null and pageSize!=null">
+		 	limit #{pageNow},#{pageSize}
+		 </if>
+		 -->
+	</select>
+  
+  <select id="selectGroupLikeBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
+	select 
+	<include refid="Base_Column_List" />
+   
+		from t_blog
+		<where>
+		 	<if test="isTop!=null and isTop!=''">
+		 		and isTop=#{isTop}
+		 	</if>
+		 	<if test="type_id!=null and type_id!=''">
+		 		and type_id=#{type_id}
+		 	</if>
+		 	<if test="status!=null and status!=''">
+		 		and status=#{status}
+		 	</if>
+		 	<if test="isRecommend!=null and isRecommend!=''">
+		 		and isRecommend=#{isRecommend}
+		 	</if>
+		 	<if test="addTime!=null and addTime!=''">
+		 		and DATE_FORMAT(addTime,'%Y-%m-%d')=#{addTime}
+		 	</if>
+		 	
+		 	<if test="title!=null and title!=''">
+		 	and ( title like CONCAT(CONCAT('%', #{title}), '%') or keyword like CONCAT(CONCAT('%', #{keyword}), '%'))
+		 	</if>
+		 	
+		 </where>
+		  ORDER BY addTime DESC
+		 <!--  <if test="pageNow!=null and pageSize!=null">
+		 	limit #{pageNow},#{pageSize}
+		 </if>
+		 -->
+	</select>
+  
   <select id="selectPrevBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">
 	SELECT 
 	<include refid="Base_Column_List" />

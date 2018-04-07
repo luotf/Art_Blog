@@ -80,5 +80,17 @@ public class BlogServiceImpl implements BlogService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Blog> selectLikeBlogListByPage(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return blogMapper.selectLikeBlogListByPage(map);
+	}
+
+	@Override
+	public List<Blog> selectGroupLikeBlogListByPage(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return blogMapper.selectGroupLikeBlogListByPage(map);
+	}
 	
 }

@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>基本</h5>
+                <h5>博客信息表格</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -53,7 +53,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <table id="allBlog" data-mobile-responsive="true">
                                
                       </table>
-                    
+                    <div id="toolbar">
+                    <button class="type btn btn-outline btn-primary" type="button" id="typeButton" value="5">All</button>
+					  	<button class="type btn btn-outline btn-primary" type="button" id="typeButton" value="-1">草稿</button>
+					  	<button class="type btn btn-outline btn-info"    type="button" id="typeButton" value="1">发布</button>    
+					  	<button class="type btn btn-outline btn-danger"  type="button" id="typeButton" value="2">垃圾箱</button>    
+					  	<button class="type btn btn-outline btn-success" type="button" id="typeButton" value="3">推荐</button>    
+					  	<button class="type btn btn-outline btn-primary" type="button" id="typeButton" value="4">置顶</button>    
+						<div class="btn-group">
+                                <button data-toggle="dropdown" class="btn btn-outline btn-warning dropdown-toggle">类别 <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                   
+                                </ul>
+                            </div>
+					</div>  
                  </div>
                </div>
                
@@ -76,170 +89,249 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<script>
 	$(document).ready(function() {
-	  $('#allBlog').bootstrapTable({
-			method: 'post',  
-			url: '../selectBlogListByPage', 
-			dataType: "json",  
-			striped: true,     //使表格带有条纹  
-			pagination: true, //在表格底部显示分页工具栏  
-			pageSize: 10,  
-			pageNumber: 1,  
-			pageList: [10, 20, 50, 100, 200, 500],  
-			idField: "id",  //标识哪个字段为id主键  
-			showToggle: false,   //名片格式  
-			cardView: false,//设置为True时显示名片（card）布局  
-			showColumns: true, //显示隐藏列    
-			showRefresh: true,  //显示刷新按钮  
-			singleSelect: true,//复选框只能选择一条记录  
-			search: true,//是否显示右上角的搜索框  
-			clickToSelect: true,//点击行即可选中单选/复选框  
-			queryParams: queryParams, //参数  
-			//queryParamsType: "limit", //查询参数组织方式
-			toolbar: "#toolbar", //设置工具栏的Id或者class  
-		    sidePagination: "server", //服务端处理分页
-		    //silent: true,  //刷新事件必须设置  
-		    toolbarAlign:'right',//工具栏对齐方式
-		    buttonsAlign:'right',//按钮对齐方式
-		    toolbar:'#toolbar',//指定工作栏
-		    contentType: "application/x-www-form-urlencoded",
-		    formatLoadingMessage: function () {  
-		        return "请稍等，正在加载中...";  
-		      },  
-		      formatNoMatches: function () {  //没有匹配的结果  
-		        return "无符合条件的记录";  
-		      },  
-		    responseHandler: function(res) {
-                return {
-                    "total": res.pageInfo.total,//总页数
-                    "rows": res.pageInfo.list   //数据
-                 };
-            },
-		    columns: [
-		             {
-                		title:'全选',
-                		field:'select',
-                		//复选框
-                		checkbox:true,
-                		width:'5%',
-                		align:'center',
-                		valign:'middle'
-            		},
-	                  {
-	                      title: 'ID',
-	                      field: 'id',
-	                      align: 'center',
-	                      valign: 'middle',
-	                      width: '5%',
-	                      sortable:true,
-	                  }, 
-	                  {
-	                      title: '标题',
-	                      field: 'title',
-	                      align: 'center',
-	                      valign: 'middle',
-	                      width:'15%',
-	                  },
-	                  {
-	                      title: '类别',
-	                      field: 'type.typename',
-	                      align: 'center',
-	                      width:'8%',
-	                  },
-	                  {
-	                      title: '关键字',
-	                      field: 'keyword',
-	                      align: 'center',
-	                      width:'15%',
-	                  },
-	                  /*
-	                  {
-	                      title: '封面图',
-	                      field: 'images',
-	                      align: 'center',
-	                      width:'10%',
-	                      formatter:function(value,row,index){  
-	                      var e = '<a href="'+row.images+'">'+row.images+'</a> ';  
-	    	   	                return e;  
-	    	   	                 } 
-	                  },*/
-	                  {
-	                      title: '浏览量',
-	                      field: 'clicknum',
-	                      align: 'center',
-	                      width:'5%',
-	                      sortable:true,
-	                  },
-	                  {
-	                      title: '评论量',
-	                      field: 'commentnum',
-	                      align: 'center',
-	                      width:'5%',
-	                      sortable:true,
-	                  },
-	                  {
-	                      title: '点赞量',
-	                      field: 'agreenum',
-	                      align: 'center',
-	                      width:'5%',
-	                      sortable:true,
-	                  },
-	                  {
-	                      title: '博主推荐',
-	                      field: 'isrecommend',
-	                      align: 'center',
-	                      width:'5%',
-	                      formatter:function(value,row,index){  
-	   	                  if(row.isrecommend==0){
-	   	                	return "否";  
-	   	                  		}
-	   	                    } 
-	                  },
-	                  {
-	                      title: '状态',
-	                      field: 'status',
-	                      align: 'center',
-	                      width:'7%',
-	                      formatter:function(value,row,index){  
-	   	                  if(row.status==0){
-	   	                	return '<i class="fa fa-lock" style="color:red">草稿</i>';  
-	   	                  	}else if(row.status==1){
-	   	                  	return '<i class="fa fa-unlock" style="color:green">正常</i>'; 
-	   	                  	}else if(row.status==2){
-	   	                  	return "回收站"; 
-	   	                  	}
-	   	                   } 
-	                  },
-	                  {
-	                      title: '发表时间',
-	                      field: 'addtime',
-	                      align: 'center',
-	                      width:'13%',
-	                      sortable:true,
-	                      formatter:function(value,row,index){  
-	                    	 return Format(row.addtime,"yyyy-MM-dd hh:mm:ss");
-		   	                 } 
-	                  },
-	                  {
-	                      title: '操作',
-	                      field: 'id',
-	                      align: 'center',
-	                      width:'20%',
-	                      formatter:function(value,row,index){  
-	                   var e = '<a href="#" mce_href="#" onclick="edit(\''+ row.id + '\')">编辑</a> ';  
-	                   var d = '<a href="#" mce_href="#" onclick="del(\''+ row.id +'\')">删除</a> ';  
-	                        return e+d;  
-	                    } 
-	                  }
-	              ]
-	      });
+		//var url="../selectGroupLikeBlogListByPage";
+		selectBlog();
 	}); 
 	
+	//草稿/发布...按钮绑定查询事件  
+    $("#toolbar .type").click(function() { 
+ 		var statu;
+ 		var isrecommend;
+ 		var istop;
+ 		if($(this).val()<3)
+ 			statu=$(this).val();
+ 		if($(this).val()==3)
+ 			isrecommend=1;
+ 		if($(this).val()==4)
+ 			istop=1;
+        var params = $('#allBlog').bootstrapTable('getOptions')  
+        params.queryParams = function(params) {  
+         return{
+            pageSize: params.limit,
+            page:(params.offset)/params.limit+1,
+            title:$(".form-control").val(),
+            keyword:$(".form-control").val(),
+            status:statu,
+            isrecommend:isrecommend,
+            istop:istop,
+    		}
+        }  
+        $('#allBlog').bootstrapTable('refresh',params) 
+    }); 
+	
+	//实现点击类别传参数到后台
+    $("#toolbar .btn-group .btn").click(function() { 
+    	selectBlogType();
+    });
+	
+	  var selectBlogType=function(){
+		  var params ={
+  				"data":"all"
+  		};
+			$.ajax({
+              url:'../selectBlogType',    
+              type:'post',
+              data:params,
+              dataType:'json',    
+              success:function (data) {
+              	  var typeName = '';
+              	  $(".btn-group").find(".dropdown-menu").html('');
+                  for (var i = 0; i < data.length; i++) {
+                	  typeName +='<li><a href="javascript:void(0);" onclick="sendType('+data[i].id+')">' + data[i].typename + '</a></li>';
+                  }
+                  // 初始化数据
+                  $(".btn-group").find(".dropdown-menu").append(typeName);
+              },    
+  		    error:function(){
+  		    	alert("上传失败");
+  		    }	
+          });
+	  }
+	
+	  var sendType=function(type_id){
+		  var params = $('#allBlog').bootstrapTable('getOptions')  
+	        params.queryParams = function(params) {  
+	         return{
+	            pageSize: params.limit,
+	            page:(params.offset)/params.limit+1,
+	            title:$(".form-control").val(),
+	            keyword:$(".form-control").val(),
+	            'type.id':type_id,
+      		  }
+	        }  
+	        $('#allBlog').bootstrapTable('refresh',params) 
+	  }
+	  
+	  var selectBlog=function(){
+		  $('#allBlog').bootstrapTable({
+				method: 'post',  
+				url: "../selectGroupLikeBlogListByPage", 
+				dataType: "json",  
+				striped: false,     //使表格带有条纹  
+				pagination: true, //在表格底部显示分页工具栏  
+				pageSize: 10,  
+				pageNumber: 1,
+				sortStable:true, 
+				sortable:true,
+				pageList: [10, 20, 50],  
+				idField: "id",  //标识哪个字段为id主键  
+				showToggle: false,   //名片格式  
+				cardView: false,//设置为True时显示名片（card）布局  
+				showColumns: true, //显示隐藏列    
+				showRefresh: true,  //显示刷新按钮  
+				//singleSelect: true,//复选框只能选择一条记录  
+				search: true,//是否显示搜索框
+				searchOnEnterKey:true,//设置为 true时，按回车触发搜索方法，否则自动触发搜索方法
+				clickToSelect: true,//点击行即可选中单选/复选框  
+				queryParams: queryParams, //参数  
+				//showFullscreen:true,  //全屏按钮
+				//queryParamsType: "limit", //查询参数组织方式
+			    sidePagination: "server", //服务端处理分页
+			    //silent: true,  //刷新事件必须设置  
+			    
+			    toolbarAlign:'left',//工具栏对齐方式
+			    buttonsAlign:'right',//按钮对齐方式
+			    toolbar:'#toolbar',//指定工作栏
+			    searchAlign:'right',
+			    contentType: "application/x-www-form-urlencoded",
+			    formatLoadingMessage: function () {  
+			        return "请稍等，正在加载中...";  
+			      },  
+			      formatNoMatches: function () {  //没有匹配的结果  
+			        return "无符合条件的记录";  
+			      },  
+			    responseHandler: function(res) {
+	                return {
+	                    "total": res.pageInfo.total,//总页数
+	                    "rows": res.pageInfo.list   //数据
+	                 };
+	            },
+			    columns: [
+			             {
+	                		//title:'全选',
+	                		//field:'全选',
+	                		//复选框
+	                		checkbox:true,
+	                		width:'5%',
+	                		align:'center',
+	                		valign:'middle'
+	            		},
+		                  {
+		                      title: 'ID',
+		                      field: 'id',
+		                      align: 'center',
+		                      valign: 'middle',
+		                      width: '5%',
+		                      //sortable:true,
+		                  }, 
+		                  {
+		                      title: '标题',
+		                      field: 'title',
+		                      align: 'center',
+		                      valign: 'middle',
+		                      width:'15%',
+		                  },
+		                  {
+		                      title: '类别',
+		                      field: 'type.typename',
+		                      align: 'center',
+		                      width:'8%',
+		                  },
+		                  {
+		                      title: '关键字',
+		                      field: 'keyword',
+		                      align: 'center',
+		                      width:'15%',
+		                  },
+		                  
+		                  {
+		                      title: '浏览量',
+		                      field: 'clicknum',
+		                      align: 'center',
+		                      width:'5%',
+		                      
+		                  },
+		                  {
+		                      title: '评论量',
+		                      field: 'commentnum',
+		                      align: 'center',
+		                      width:'5%',
+		                     
+		                  },
+		                  {
+		                      title: '点赞量',
+		                      field: 'agreenum',
+		                      align: 'center',
+		                      width:'5%',
+		                      
+		                  },
+		                  {
+		                      title: '博主推荐',
+		                      field: 'isrecommend',
+		                      align: 'center',
+		                      width:'5%',
+		                      formatter:function(value,row,index){  
+		   	                  if(row.isrecommend==0){
+		   	                	return '<button class="btn-xs">否</button> ';  
+		   	                  	}else if(row.isrecommend==1){
+		   	                  	return '<button class="btn-xs btn-success">是</button>'; 
+		   	                  	}
+		   	                  	 
+		   	                    } 
+		                  },
+		                  {
+		                      title: '状态',
+		                      field: 'status',
+		                      align: 'center',
+		                      width:'7%',
+		                      formatter:function(value,row,index){  
+		   	                  if(row.status==-1){
+		   	                	return '<button class="btn-xs btn-primary">草稿</button>';  
+		   	                  	}else if(row.status==1){
+		   	                  	return '<button class="btn-xs btn-info">发布</button>'; 
+		   	                  	}else if(row.status==2){
+		   	                  	return '<button class="btn-xs btn-danger">垃圾</button>'; 
+		   	                  	}
+		   	                   } 
+		                  },
+		                  {
+		                      title: '发表时间',
+		                      field: 'addtime',
+		                      align: 'center',
+		                      width:'14%',
+		                      
+		                      formatter:function(value,row,index){  
+		                    	 return Format(row.addtime,"yyyy-MM-dd hh:mm:ss");
+			   	                 } 
+		                  },
+		                  {
+		                      title: '操作',
+		                      field: 'id',
+		                      align: 'center',
+		                      width:'20%',
+		                      formatter:function(value,row,index){
+		                    	
+		                   var e = '<button class="btn-xs btn-info" onclick="edit(\''+ row.id + '\')">查看</button> ';  
+		                   var d = '<button class="btn-xs btn-primary" onclick="del(\''+ row.id +'\')">编辑</button> ';  
+		                        return e+d;  
+		                    } 
+		                  }
+		              ]
+		      });
+	  }
+	
+	
+		
 	function queryParams(params){
+		
         return{
             //每页多少条数据
         	//pageIndex: params.offset+1,
             pageSize: params.limit,
             page:(params.offset)/params.limit+1,
+            title:$(".form-control").val(),
+            keyword:$(".form-control").val(),
+           
         }
     }
 	
