@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				//queryParamsType: "limit", //查询参数组织方式
 			    sidePagination: "server", //服务端处理分页
 			    //silent: true,  //刷新事件必须设置  
-			    
+			    searchTimeOut:500, //设置搜索超时时间
 			    toolbarAlign:'left',//工具栏对齐方式
 			    buttonsAlign:'right',//按钮对齐方式
 			    toolbar:'#toolbar',//指定工作栏
@@ -230,6 +230,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      align: 'center',
 		                      valign: 'middle',
 		                      width:'15%',
+		                      formatter:function(value,row,index){ 
+		                    	  var title="";
+		                    	  var content=$(".form-control").val();
+		                    	  if(content==""||content==null){
+		                    		  title=row.title;
+		                    	  }else if(row.title.search(content)!=-1){
+		                    		  var strs= new Array();
+			                    	  strs=row.title.split("");
+		                    		  var strStartIndex = row.title.indexOf(content);
+		                    		  var strEndIndex = strStartIndex+content.length-1;
+		                    		  for(var i=0;i<strs.length;i++){
+		                    			  if(i>=strStartIndex&&i<=strEndIndex){
+		                    				  title+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
+		                    			  }else{
+		                    				  title+='<span >'+strs[i]+'</span>';
+		                    			  }
+		                    		  }
+		                    	  }
+		                    	  return title;
+			   	                } 
 		                  },
 		                  {
 		                      title: '类别',
@@ -242,6 +262,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      field: 'keyword',
 		                      align: 'center',
 		                      width:'15%',
+		                      formatter:function(value,row,index){
+		                    	  var keyword = '';
+		                    	  if(row.keyword!=''&&row.keyword!=null){
+		                    		  if(row.keyword.search(';')!=-1){
+		                    			 var strs= new Array();
+		                    		     strs=row.keyword.split(";");
+		                    		     var label = new Array("label-info","label-danger","label-warning");
+			                             for (var i = 0; i < strs.length; i++) {
+			                        	   keyword +='<span class="label '+label[i]+' pull-left">'+strs[i]+'</span>&nbsp;';
+			                          }
+		                    	    }
+		                    	  }
+			   	                  return keyword;
+			   	                }
 		                  },
 		                  
 		                  {

@@ -35,9 +35,9 @@ public class subString {
 	 * @param keyword
 	 * @return
 	 */
-	public static String[] subKeyword(String keyword) {
+	public static String subKeyword(String keyword) {
 		String str = keyword.replace("；", ";");
-		String[] result = str.split(";");
-		return result;
+		//String[] result = str.split(";");
+		return str;
 	}
 }

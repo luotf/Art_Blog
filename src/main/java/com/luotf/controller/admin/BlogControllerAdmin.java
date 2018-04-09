@@ -91,7 +91,13 @@ public class BlogControllerAdmin {
 	 public Map addBlog(Blog blog) throws Exception{
 		 Map map=new HashMap();
 		 //设置博客封面
-		 blog.setImages(subString.subImages(blog.getContent()));
+		 if(blog.getContent()!=null&&blog.getContent()!=""){
+			 blog.setImages(subString.subImages(blog.getContent()));
+		 }
+		 //将中文的分号转换成英文的分号
+		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
+			 blog.setKeyword(subString.subKeyword(blog.getKeyword()));
+		 }
 		 blog.setUpdatetime(new Date());
 		 if(blogService.insertBlog(blog)!=0){
 			 map.put("status", 200);
@@ -155,11 +161,12 @@ public class BlogControllerAdmin {
 		 Blog blog=blogService.selectBlogById(id);
 		 if(blog!=null){
 			 map.put("status", 200);
-			 map.put("blog", blog);
+			
 		 }else{
 			 //500表示：返回值为Null
 			 map.put("status", 500);
 		 }
+		 map.put("blog", blog);
 		 return map;
 	 }
 	 
@@ -176,11 +183,11 @@ public class BlogControllerAdmin {
 		 List<Blog> blogList=blogService.selectBlogByTypeId(id);
 		 if(blogList.size()>0){
 			 map.put("status", 200);
-			 map.put("blogList", blogList);
 		 }else{
 			 //500表示：返回值为Null
 			 map.put("status", 500);
 		 }
+		 map.put("blogList", blogList);
 		 return map;
 	 }
 	 
@@ -195,16 +202,16 @@ public class BlogControllerAdmin {
 	 public Map selectLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		 
-		 if(blog.getTitle()!=null||blog.getTitle()!=""){
+		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
 		 }
-		 if(blog.getIntroduction()!=null||blog.getIntroduction()!=""){
+		 if(blog.getIntroduction()!=null&&blog.getIntroduction()!=""){
 			 map.put("introduction", blog.getIntroduction());
 		 }
-		 if(blog.getKeyword()!=null||blog.getKeyword()!=""){
+		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 map.put("keyword", blog.getKeyword());
 		 }
-		 if(blog.getContent()!=null||blog.getContent()!=""){
+		 if(blog.getContent()!=null&&blog.getContent()!=""){
 			 map.put("content", blog.getContent());
 		 }
 		 if(blog.getIstop()!=null){
@@ -230,12 +237,13 @@ public class BlogControllerAdmin {
 		 Map returnMap=new HashMap();
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
-			 returnMap.put("blogList", blogList);
-			 returnMap.put("pageInfo", pageInfo);
+			 
 		 }else{
 			 //500表示：返回值为Null
 			 returnMap.put("status", 500);
 		 }
+		 returnMap.put("blogList", blogList);
+		 returnMap.put("pageInfo", pageInfo);
 		 return returnMap;
 	 }
 	 
@@ -251,16 +259,16 @@ public class BlogControllerAdmin {
 	 public Map selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		 
-		 if(blog.getTitle()!=null||blog.getTitle()!=""){
+		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
 		 }
-		 if(blog.getIntroduction()!=null||blog.getIntroduction()!=""){
+		 if(blog.getIntroduction()!=null&&blog.getIntroduction()!=""){
 			 map.put("introduction", blog.getIntroduction());
 		 }
-		 if(blog.getKeyword()!=null||blog.getKeyword()!=""){
+		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 map.put("keyword", blog.getKeyword());
 		 }
-		 if(blog.getContent()!=null||blog.getContent()!=""){
+		 if(blog.getContent()!=null&&blog.getContent()!=""){
 			 map.put("content", blog.getContent());
 		 }
 		 if(blog.getIstop()!=null){
@@ -286,12 +294,12 @@ public class BlogControllerAdmin {
 		 Map returnMap=new HashMap();
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
-			 returnMap.put("blogList", blogList);
-			 returnMap.put("pageInfo", pageInfo);
 		 }else{
 			 //500表示：返回值为Null
 			 returnMap.put("status", 500);
 		 }
+		 returnMap.put("blogList", blogList);
+		 returnMap.put("pageInfo", pageInfo);
 		 return returnMap;
 	 }
 	 
@@ -306,16 +314,16 @@ public class BlogControllerAdmin {
 	 public Map selectBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		 
-		 if(blog.getTitle()!=null||blog.getTitle()!=""){
+		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
 		 }
-		 if(blog.getIntroduction()!=null||blog.getIntroduction()!=""){
+		 if(blog.getIntroduction()!=null&&blog.getIntroduction()!=""){
 			 map.put("introduction", blog.getIntroduction());
 		 }
-		 if(blog.getKeyword()!=null||blog.getKeyword()!=""){
+		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 map.put("keyword", blog.getKeyword());
 		 }
-		 if(blog.getContent()!=null||blog.getContent()!=""){
+		 if(blog.getContent()!=null&&blog.getContent()!=""){
 			 map.put("content", blog.getContent());
 		 }
 		 if(blog.getIstop()!=null){
@@ -346,12 +354,13 @@ public class BlogControllerAdmin {
 		 
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
-			 returnMap.put("blogList", blogList);
-			 returnMap.put("pageInfo", pageInfo);
+			 
 		 }else{
 			 //500表示：返回值为Null
 			 returnMap.put("status", 500);
 		 }
+		 returnMap.put("blogList", blogList);
+		 returnMap.put("pageInfo", pageInfo);
 		 return returnMap;
 	 }
 	 
@@ -366,7 +375,7 @@ public class BlogControllerAdmin {
 	 @ResponseBody
 	 public Map selectBlogCount(Blog blog) throws Exception{
 		 Map map=new HashMap();
-		 if(blog.getKeyword()!=null||blog.getKeyword()!=""){
+		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 map.put("keyword", blog.getKeyword());
 		 }
 		 if(blog.getType()!=null){
@@ -385,11 +394,11 @@ public class BlogControllerAdmin {
 		 Map returnMap=new HashMap();
 		 if(count>0){
 			 returnMap.put("status", 200);
-			 returnMap.put("count", count);
 		 }else{
 			 //500表示：返回值为Null
 			 returnMap.put("status", 500);
 		 }
+		 returnMap.put("count", count);
 		 return returnMap;
 	 }
 	 
@@ -410,11 +419,12 @@ public class BlogControllerAdmin {
 		 Blog blog=blogService.selectPrevBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
-			 map.put("blog", blog);
+			 
 		 }else{
 			 //500表示：返回值为Null
 			 map.put("status", 500);
 		 }
+		 map.put("blog", blog);
 		 return map;
 	 }
 	 
@@ -431,11 +441,12 @@ public class BlogControllerAdmin {
 		 Blog blog=blogService.selectNextBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
-			 map.put("blog", blog);
+			 
 		 }else{
 			 //500表示：返回值为Null
 			 map.put("status", 500);
 		 }
+		 map.put("blog", blog);
 		 return map;
 	 }
 	 
