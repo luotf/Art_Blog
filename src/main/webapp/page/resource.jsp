@@ -138,7 +138,7 @@
     </div>
 
     <div class="rightbox animated fadeInUp">
-      <div class="search ">
+      <div class="search1 ">
         <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
           <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
           <input name="show" value="title" type="hidden">

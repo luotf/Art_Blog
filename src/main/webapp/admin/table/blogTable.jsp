@@ -90,46 +90,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="modal-content animated fadeInUp">
 						<button type="button" class="close" style="margin-right:7px" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 							<div class="infos" style="margin:0px;">
-							
 								<div class="newsview" style="padding-top:0px;">
-									<h3 class="news_title">作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</h3>
+									<h3 class="news_title"></h3>
 									<div class="news_author">
-										<span class="au01">XXX</span><span class="au02">2018-03-18</span><span
-											class="au03">共<b>309</b>人围观
+										<span class="au01">罗廷方</span><span class="au02"></span><span
+											class="au03">共<b></b>人围观
 										</span>
 									</div>
 									<div class="tags">
-										<a href="/">中兴</a> <a href="/" target="_blank">咔咔</a> <a
-											href="/" target="_blank">MWC</a> <a href="/" target="_blank">小蚁</a>
-										<a href="/" target="_blank">运动相机</a>
+										
 									</div>
 									<div class="news_about">
-										<strong>简介</strong>曾经有站长找我求助，他说他不知道该怎么办，自己做出来的网站，不仅没有得到大家的认可，反而让大家给他开了一个评判大会。他自己认为已经是做的最好的，却遭受大家无情的指责是“垃圾”作品。
+										<strong>简介</strong><span class="news_intr">
+									</span>
 									</div>
 									<div class="news_infos">
-										<p>曾经有站长找我求助，他说他不知道该怎么办，自己做出来的网站，不仅没有得到大家的认可，反而让大家给他开了一个评判大会。他自己认为已经是做的最好的，却遭受大家无情的指责是“垃圾”作品。</p>
-										<p>
-											有的给他提出了意见，有的没有提意见，直接扔了两个字，“垃圾”。这没有谁对谁错，每个人的审美观点都不一样，我们能做的就是尊重别人。我相信他是认真对待网站的，我仔细看了他的设计，布局，颜色搭配都是他精心的设计。美和丑是没有一个评判标准的。我给他讲了一个关于建筑设计师的故事。
-										</p>
-										<p>
-											300多年前，建筑设计师克里斯托·莱伊恩受命设计了英国温泽市政府大厅，他运用工程力学的知识，依据自己多年的实践经验，巧妙地设计了只用一根柱子支撑的大厅天花板。但是一年以后，在进行工程验收时，市政府权威人士却对此提出了质疑，并要求莱伊恩一定要再多加几根柱子。莱伊恩对自己的设计很自信，因此他非常苦恼：坚持自己的主张吧，他们肯定会另找人修改设计；不坚持吧，又有悖自己为人的准则。
-										</p>
-										<p>
-											<img src="${pageContext.request.contextPath}/images/v1.jpg">
-										</p>
-										<p>矛盾了很长时间，莱伊恩终于想到了一条妙计，他在大厅里加了四根柱子，但它们并未与天花板连接，只不过是装装样子，糊弄那些刚愎自用的家伙。这个秘密始终没有被发现。直到300多年后市政府准备修缮大厅天花板时，才发现莱伊恩的“弄虚作假”。我们每个人都想得到别人的尊敬，尤其有了一定的社会地位的人，更想得到别人尊重。建筑设计师克里斯托·莱伊恩很明白这一点，当市政府权威人士对他的建筑设计提出疑问时，他并不坚持己见，而是让市政府权威人士感到他对他们很尊重。所以，一个聪明的人，不仅能维护自己的尊严，还能够顾及他人的尊严。</p>
-										<p>
-											<img src="${pageContext.request.contextPath}/images/v2.jpg">
-										</p>
-										<p>莱伊恩的故事，向我们讲述了一个深刻的哲理“恪守着自己的原则，哪怕遭遇到最大的阻力，也要想办法抵达胜利。”</p>
-										<p>就拿我自己来说吧，有时候会很矛盾，设计好的作品，不把它分享出来，会觉得待在自己电脑里面实在是没有意义。干脆就发布出去吧。我也害怕收到大家不好的评论，有些评论，可能说者无意，但是对于每一个用心的站长来说，都会受很深的影响，愤怒，恼羞。</p>
-										<p>心态很重要，再来看莱伊恩，他当时顶着多大的压力呀。同样作为一个前端设计师，哪怕遭到质疑，我们也要像莱伊恩一样恪守自己的原则。</p>
+										
 									</div>
 								</div>
-
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-white" >编辑</button>
+								<span class="update"></span>
 								<button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
 							</div>
 						</div>
@@ -343,11 +324,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    			 var strs= new Array();
 		                    		     strs=row.keyword.split(";");
 		                    		     var label = new Array("label-info","label-danger","label-warning");
-			                             for (var i = 0; i < strs.length; i++) {
-			                        	   keyword +='<span class="label '+label[i]+' pull-left">'+strs[i]+'</span>&nbsp;';
+			                             for (var i = 0; i < strs.length&&strs[i]!=""; i++) {
+			                        	   keyword +='<span class="label '+label[i]+' pull-left">'+strs[i]+'</span>';
 			                          }
 		                    	    }else{
-		                    	    	keyword ='<span class="label label-info pull-left">'+row.keyword+'</span>&nbsp;';
+		                    	    	keyword ='<span class="label label-info pull-left">'+row.keyword+'</span>';
 		                    	    }
 		                    	  }
 			   	                  return keyword;
@@ -421,7 +402,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'20%',
 		                      formatter:function(value,row,index){
 		                    	
-		                   var e = '<button class="btn-xs btn-info" data-toggle="modal" data-target="#myModal" onclick="searchBlog(\''+ row.id + '\')">查看</button> ';  
+		                   var e = '<button class="btn-xs btn-info" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</button> ';  
 		                   var d = '<button class="btn-xs btn-primary" data-toggle="modal" data-target="#myModal" onclick="updateBlog(\''+ row.id +'\')">编辑</button> ';  
 		                        return e+d;  
 		                    } 
@@ -471,10 +452,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    return fmt;
 	}
 	
-	//修改博客内容
-	function updateBlog(blogId){
-		
+	//查看博客内容
+	function selectBlogById(blogId){
+		var param={
+				id:blogId
+		}
+		$.ajax({
+            url:'../selectBlogById',    
+            type:'post',
+            data:param,
+            dataType:'json',    
+            success:function (data) {
+            	//查询成功
+            	if(data.status==200){
+            	  $(".newsview").find(".news_title").html(data.blog.title);
+            	  $(".newsview").find(".au02").html(Format(data.blog.addtime,"yyyy-MM-dd hh:mm:ss"));
+            	  $(".au03").find('b').html(data.blog.clicknum);
+            	  $(".news_about").find(".news_intr").html(data.blog.introduction);
+            	  var keyword='' ;
+            	  $(".newsview").find(".tags").html("");
+            	  if(data.blog.keyword!=''&&data.blog.keyword!=null){
+            		  if(data.blog.keyword.search(';')!=-1){
+            			 var strs= new Array();
+            		     strs=data.blog.keyword.split(";");
+                         for (var i = 0; i < strs.length&&strs[i]!=''; i++) {
+                    	   keyword +='<a href="/">'+strs[i]+'</a>';
+                      }
+            	    }else{
+            	    	keyword ='<a href="/">'+data.blog.keyword+'</a>';
+            	    }
+            	  } 
+            	  $(".newsview").find(".tags").append(keyword);
+            	  $(".newsview").find(".news_infos").html(data.blog.content);
+            	  // var updateUrl="../blog/updateBlog.jsp?id='+data.blog.id+'";
+            	  //<a class="J_menuItem" href="${pageContext.request.contextPath}/admin/addBlog.jsp">写博客</a>
+            	  var update='<a  class="J_menuItem btn btn-white" href="../blog/updateBlog.jsp?id='+data.blog.id+'">编辑</a>';
+            	  $(".modal-footer").find(".update").html(update);
+            	}
+            },    
+		    error:function(){
+		    	alert("查询失败");
+		    }	
+        });
 	}
+	
 	</script>
 </body>
 </html>

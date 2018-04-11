@@ -139,6 +139,16 @@ public class BlogControllerAdmin {
 	 @ResponseBody
 	 public Map updateBlog(Blog blog) throws Exception{
 		 Map map=new HashMap();
+		//设置博客封面
+		 if(blog.getContent()!=null&&blog.getContent()!=""){
+			 blog.setImages(subString.subImages(blog.getContent()));
+		 }
+		 //将中文的分号转换成英文的分号
+		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
+			 blog.setKeyword(subString.subKeyword(blog.getKeyword()));
+		 }
+		 blog.setUpdatetime(new Date());
+		 
 		 if(blogService.updateBlogSelective(blog)!=0){
 			 map.put("status", 200);
 		 }else{

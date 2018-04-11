@@ -58,7 +58,9 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
 .avatar { width: 158px; height: 100px; overflow: hidden;  margin: auto; }
 .avatar img {  height: 100px }
 /*search*/
-.search { background: #FFF; border-radius: 10px; overflow: hidden; padding: 20px; margin: 20px 0 }
+.search1 { background: #FFF; border-radius: 10px; overflow: hidden; 
+padding: 20px;
+margin: 20px 0 }
 .input_text { padding-left: 5px; border: 1px solid #ccc; width: 180px; height: 26px; line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 0 5px }
 .input_submit { background-color: #333; color: #FFF; float: left; width: 50px; border: none; cursor: pointer; height: 28px; line-height: 28px; border-radius: 0 5px 5px 0 }
 /*еепп*/

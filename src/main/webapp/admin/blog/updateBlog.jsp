@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">写博客</a>
+								href="mail_compose.html">修改博客</a>
 							<div class="space-25"></div>
 							<h5>文件夹</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								data-placement="top" title="放弃"><i class="fa fa-times"></i>
 								放弃</button>
 						</div>
-						<h2>写博客</h2>
+						<h2>修改博客</h2>
 					</div>
 					<div class="mail-box">
 						<div class="mail-body">
@@ -174,13 +174,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clearfix"></div>
 						</div>
 						<div class="mail-body text-right tooltip-demo">
-							<button id="" type="button" onclick="addBlog(1)"
+							<button id="" type="button" onclick="updateBlog(1)"
 								class="btn btn-sm btn-primary" data-toggle="tooltip"
 								data-placement="top" title="Send">
 								<i class="fa fa-reply"></i> 发布
 							</button>
 					
-								<button id="" type="button" onclick="addBlog(-1)"
+								<button id="" type="button" onclick="updateBlog(-1)"
 									class="btn btn-white btn-sm" data-toggle="tooltip"
 									data-placement="top" title="Move to draft folder">
 									<i class="fa fa-pencil"></i> 存为草稿
@@ -214,14 +214,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote-zh-CN.js"></script>
 	<script>
         
-	$(document).ready(function() {  
+	$(document).ready(function() { 
+		
+		//获取传过来的url
+		var url = window.location.href;
+		//alert(url);
+		var url_param = url.split("=")[1];
+		   //编辑博客
+			var param={
+					id:url_param
+			}
+			$.ajax({
+	            url:'../selectBlogById',    
+	            type:'post',
+	            data:param,
+	            dataType:'json',    
+	            success:function (data) {
+	            	//查询成功
+	            	if(data.status==200){
+	            	  $("#title").val(data.blog.title);
+	            	  $("#introduction").val(data.blog.introduction);
+	            	  $("#summernote").code(data.blog.content);
+	            	  $("#keyword").val(data.blog.keyword);
+	            	  var typeName='';
+	            	  typeName += '<option style="color:#000;font-weight:bold;" value="' + data.blog.type.id + '">' + data.blog.type.typename + '</option>';
+	            	  $(".form-horizontal").find('select[name=typeName]').append(typeName);
+	            	}
+	            },    
+			    error:function(){
+			    	alert("查询失败");
+			    }	
+	        });
+	
+		
 		//查询出文章类别
 			//设置参数，表示查询所有的类别
 			var params ={
     				"data":"all"
     		};
 			$.ajax({
-                url:'selectBlogType',    
+                url:'../selectBlogType',    
                 type:'post',
                 data:params,
                 dataType:'json',    
@@ -234,7 +266,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $(".form-horizontal").find('select[name=typeName]').append(typeName);
                 },    
     		    error:function(){
-    		    	alert("上传失败");
+    		    	alert("加载失败");
     		    }	
             });
 		
@@ -275,7 +307,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    $.ajax({  
 		    data:data, 
 		    type: "POST",  
-		    url: "uploadImages",
+		    url: "../uploadImages",
 		    dataType:"json",
 		    cache: false,  
 		    contentType: false,  
@@ -298,36 +330,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  });  
 		 }  
 
-		//按照不同条件分页查询博客信息
-		var selectBlogListByPage=function(){
-			var params ={
-        			'title':'罗'
-        	};
-			$.ajax({
-                url:'selectBlogListByPage',    
-                type:'post',
-                data:params,
-                dataType:'json',
-                success:function (data) { 
-                	console.log(data);
-                	//var response = eval('('+data+')');
-                	//console.log(response);
-                	for (var i = 0; i < data.length; i++) {
-                		console.log(data[i]);
-                    }
-                 if(data.status==200){
-                 	alert("添加成功");
-                 }else{
-                 	alert("添加失败");
-                 }	
-                 },    
-     		    error:function(){
-     		    	alert("上传失败");
-     		    }	
-             }); 
-		}
-        var addBlog=function(id){
+        var updateBlog=function(id){
+        	var url = window.location.href;
+    		//alert(url);
+    		var url_param = url.split("=")[1];
           var params ={
+        		    'id':url_param,
         			'title':$("#title").val(),
         			'introduction':$("#introduction").val(),
         			'type.id':$("#typeName").val(),
@@ -336,19 +344,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'status':id
         	};
             $.ajax({
-                   url:'addBlog',    
+                   url:'../updateBlog',    
                    type:'post',
                    data:params,
                    dataType:'json',    
                    success:function (data) { 
                     if(data.status==200){
-                    	alert("添加成功");
+                    	alert("更新成功");
                     }else{
-                    	alert("添加失败");
+                    	alert("更新失败");
                     }	
                     },    
         		    error:function(){
-        		    	alert("上传失败");
+        		    	alert("更新错误");
         		    }	
                 }); 
             	

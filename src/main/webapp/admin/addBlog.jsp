@@ -298,34 +298,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  });  
 		 }  
 
-		//按照不同条件分页查询博客信息
-		var selectBlogListByPage=function(){
-			var params ={
-        			'title':'罗'
-        	};
-			$.ajax({
-                url:'selectBlogListByPage',    
-                type:'post',
-                data:params,
-                dataType:'json',
-                success:function (data) { 
-                	console.log(data);
-                	//var response = eval('('+data+')');
-                	//console.log(response);
-                	for (var i = 0; i < data.length; i++) {
-                		console.log(data[i]);
-                    }
-                 if(data.status==200){
-                 	alert("添加成功");
-                 }else{
-                 	alert("添加失败");
-                 }	
-                 },    
-     		    error:function(){
-     		    	alert("上传失败");
-     		    }	
-             }); 
-		}
+		
         var addBlog=function(id){
           var params ={
         			'title':$("#title").val(),
