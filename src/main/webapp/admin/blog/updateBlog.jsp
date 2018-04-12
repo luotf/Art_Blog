@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="pull-right tooltip-demo">
 							<button class="btn btn-white btn-sm" type="button" onclick="selectBlogListByPage()"
 								data-toggle="tooltip" data-placement="top" title="存为草稿"><i
-								class="fa fa-pencil"></i> 存为草稿</button> <button type="button" onclick="selectBlogListByPage()"
+								class="fa fa-pencil"></i> 存为草稿</button> <button type="button" onclick="javascript:history.back(-1);"
 								class="btn btn-danger btn-sm" data-toggle="tooltip"
 								data-placement="top" title="放弃"><i class="fa fa-times"></i>
 								放弃</button>

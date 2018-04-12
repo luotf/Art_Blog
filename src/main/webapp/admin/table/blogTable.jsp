@@ -80,7 +80,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 								</ul>
 							</div>
+							
+							<button class=" btn  dim btn-outline btn-danger" type="button"
+								onclick="getSelectRows()"><i class="fa fa-remove"></i></button>
 						</div>
+						
 					</div>
 				</div>
 
@@ -131,6 +135,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 
+ 	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
+ 	
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -248,6 +254,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    buttonsAlign:'right',//按钮对齐方式
 			    toolbar:'#toolbar',//指定工作栏
 			    searchAlign:'right',
+			   // singleSelect : true,
 			    contentType: "application/x-www-form-urlencoded",
 			    formatLoadingMessage: function () {  
 			        return "请稍等，正在加载中...";  
@@ -263,13 +270,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            },
 			    columns: [
 			             {
-	                		//title:'全选',
-	                		//field:'全选',
-	                		//复选框
 	                		checkbox:true,
-	                		width:'5%',
-	                		align:'center',
-	                		valign:'middle'
+	                		 width: '3%',
+	                		 align: 'center',
+		                     valign: 'middle',
 	            		},
 		                  {
 		                      title: 'ID',
@@ -277,7 +281,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      align: 'center',
 		                      valign: 'middle',
 		                      width: '5%',
-		                      //sortable:true,
 		                  }, 
 		                  {
 		                      title: '标题',
@@ -402,9 +405,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'20%',
 		                      formatter:function(value,row,index){
 		                    	
-		                   var e = '<button class="btn-xs btn-info" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</button> ';  
-		                   var d = '<button class="btn-xs btn-primary" data-toggle="modal" data-target="#myModal" onclick="updateBlog(\''+ row.id +'\')">编辑</button> ';  
-		                        return e+d;  
+		                   //var e = '<button class="btn-xs btn-info" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</button> ';
+		                   var a = '<a  class=" btn-sm btn-info" href="#" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</a> ';  
+		                   var b = '<a  class=" btn-sm btn-primary"  href="../blog/updateBlog.jsp?id='+row.id+'"><i class="fa fa-edit" ></i>编辑</a> ';  
+		                   var c = '<a  class=" btn-sm btn-danger"  onclick="operationBlog('+ row.id + ',1,null)"><i class="fa fa-file-o" ></i>还原</a> '; 
+		                   //取消推荐
+		                   var d = '<a  class=" btn-sm btn-warning"  onclick="operationBlog('+ row.id + ',null,0)"><i class="fa fa-hand-o-down" ></i>推荐</a> ';  
+		                   if(row.status==2){
+		                	   return a+c;
+		                   } else if(row.status==1){
+		                	   if(row.isrecommend==1){
+		                		   return a+d;
+		                	   }else{
+		                		   return a+b;  
+		                	   }
+		                	 
+		                   }
+		                   
+		                  
 		                    } 
 		                  }
 		              ]
@@ -421,10 +439,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             page:(params.offset)/params.limit+1,
             title:$(".form-control").val(),
             keyword:$(".form-control").val(),
-           
+           	status:1  //1 表示正文
         }
     }
 	
+	//获取行号  
+	var getSelectRows = function(){
+		 var date= $("#allBlog").bootstrapTable('getSelections'); 
+		 var idArray= new Array();
+		 for(var i=0;i<date.length;i++){
+			 idArray[i]=date[i].id;
+			 operationBlog(idArray[i],2,null); //参数2表示  放入回收站
+		}
+	}
+	
+	//博客的操作
+	var operationBlog=function(idArray,status,isrecommend){
+		var param='';
+		if(status!=null){
+			 param={
+					 'id':idArray,
+					 'status':status,
+			}
+		}
+		if(isrecommend!=null){
+			param={
+					 'id':idArray,
+					 'isrecommend':isrecommend,
+			}
+		}
+		console.log(param);  
+		$.ajax({
+            url:'../updateBlog',    
+            type:'post',
+            data:param,
+            dataType:'json',    
+            success:function (data) {
+            	//查询成功
+            	if(data.status==200){
+            		//delTable(idArray);
+            	    //alert("删除成功");
+            		$("#allBlog").bootstrapTable('refresh');
+            	}
+            },    
+		    error:function(){
+		    	alert("删除错误");
+		    }	
+        });
+	}
+	
+	/* var delTable=function(id){
+		$("#allBlog").bootstrapTable('removeByUniqueId',id); 
+		// $("#allBlog").bootstrapTable("load",date);
+	}
+	 */
 	//格式化时间
 	function Format(datetime, fmt) {
 	    if (parseInt(datetime) == datetime) {

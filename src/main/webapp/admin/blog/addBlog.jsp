@@ -221,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				"data":"all"
     		};
 			$.ajax({
-                url:'selectBlogType',    
+                url:'../selectBlogType',    
                 type:'post',
                 data:params,
                 dataType:'json',    
@@ -234,7 +234,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     $(".form-horizontal").find('select[name=typeName]').append(typeName);
                 },    
     		    error:function(){
-    		    	alert("上传失败");
+    		    	alert("初始化类别失败");
     		    }	
             });
 		
@@ -275,7 +275,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    $.ajax({  
 		    data:data, 
 		    type: "POST",  
-		    url: "uploadImages",
+		    url: "../uploadImages",
 		    dataType:"json",
 		    cache: false,  
 		    contentType: false,  
@@ -288,12 +288,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            alert("上传成功！");   
 		        }  
 		    editor.insertImage($editable, date.path);  
-		    //setTimeout(function(){$(".note-alarm").remove();},3000);  
 		    },  
 		    error:function(){  
 		        alert("上传失败！");  
 		        return;  
-		        //setTimeout(function(){$(".note-alarm").remove();},3000);  
 		        }  
 		  });  
 		 }  

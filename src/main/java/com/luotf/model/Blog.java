@@ -46,7 +46,7 @@ public class Blog {
     @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date addtime;
 
-    /** 0为草稿，1为正文 ，2为回收站*/
+    /** -1为草稿，1为正文 ，2为回收站*/
     private Integer status;
 
     /** 类别 */
