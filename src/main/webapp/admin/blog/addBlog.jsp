@@ -50,37 +50,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="btn btn-block btn-primary compose-mail"
 								href="mail_compose.html">写博客</a>
 							<div class="space-25"></div>
-							<h5>文件夹</h5>
+							<h5>博客状态</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-								<li><a href="mailbox.html"> <i class="fa fa-inbox "></i>
-										正文 <span class="label label-info pull-right">14 篇</span>
-								</a></li>
-								<li><a href="mailbox.html"> <i
-										class="fa fa-file-text-o"></i> 草稿 <span
-										class="label label-warning pull-right">2 篇</span>
-								</a></li>
-								<li><a href="mailbox.html"> <i class="fa fa-trash-o"></i>
-										垃圾箱 <span class="label label-danger pull-right">1 篇</span>
-								</a></li>
+								<li><a href="mailbox.html"> <i class="fa fa-inbox "></i>发表<span class="s-1 label label-info pull-right">0 篇</span></a></li>
+								<li><a href="mailbox.html"> <i class="fa fa-file-text-o "></i>草稿<span class="s-2 label label-warning pull-right">0 篇</span></a></li>
+								<li><a href="mailbox.html"> <i class="fa fa-trash-o "></i>垃圾箱<span class="s-3 label label-danger pull-right">0 篇</span></a></li>
 							</ul>
-							<h5>分类</h5>
+							<h5>博客分类</h5>
 							<ul class="category-list" style="padding: 0">
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-navy"></i> 技术博客 <span
-										class="label label-info pull-right">14 篇</span>
-								</a></li>
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-danger"></i> 基础总结 <span
-										class="label label-info pull-right">14 篇</span>
-								</a></li>
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-primary"></i> 面试 <span
-										class="label label-info pull-right">14 篇</span>
-								</a></li>
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-info"></i> 项目案例 <span
-										class="label label-info pull-right">14 篇</span>
-								</a></li>
+								
 							</ul>
 
 							<h5 class="tag-title">标签</h5>
@@ -214,7 +192,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote-zh-CN.js"></script>
 	<script>
         
-	$(document).ready(function() {  
+	$(document).ready(function() {
+		
+		//初始化博客数目
+		$.ajax({
+                url:'../selectBlogListByStatus',    
+                type:'post',
+                data:params,
+                dataType:'json',    
+                success:function (data) {
+                	var blogStatusList = '';
+                	var blogStatus='';
+                	var icon = new Array("fa-inbox","fa-file-text-o"," fa-trash-o");
+                	var label = new Array("label-primary","label-danger"," label-info","label-success","label-warning");
+                    for (var i = 0; i < data.list.length; i++) {
+                    	if(data.list[i].status==-1){
+                    		//blogStatus='草稿';
+                    		 $(".s-2").html(data.list[i].count+'篇');
+                    	}else if(data.list[i].status==1){
+                    		//blogStatus='发表';
+                    		$(".s-1").html(data.list[i].count+'篇');
+                    	}else if(data.list[i].status==2){
+                    		//blogStatus='垃圾箱';
+                    		$(".s-3").html(data.list[i].count+'篇');
+                    	}
+                    	//blogStatusList+='<li><a href="mailbox.html"> <i class="fa '+icon[i]+' "></i>'+blogStatus+' <span class="label label-info pull-right">'+data.list[i].count+' 篇</span></a></li>';
+                    }
+                    // 初始化数据
+                   // $(".folder-list").html(blogStatusList);
+                },    
+    		    error:function(){
+    		    	alert("初始化博客状态失败");
+    		    }	
+            });
+		
 		//查询出文章类别
 			//设置参数，表示查询所有的类别
 			var params ={
@@ -227,11 +238,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 dataType:'json',    
                 success:function (data) {
                 	var typeName = '';
+                	var typeNameAndNum='';
+                	var circle = new Array("text-navy","text-danger"," text-info","text-primary","text-warning");
+                	var label = new Array("label-primary","label-danger"," label-info","label-success","label-warning");
                     for (var i = 0; i < data.length; i++) {
                     	typeName += '<option value="' + data[i].id + '">' + data[i].typename + '</option>';
+                    	
+                    	typeNameAndNum+='<li><a href="mail_compose.html#"> <i class="fa fa-circle '+circle[i%5]+'"></i> '+data[i].typename+'<span class="label '+label[i%5]+' pull-right">'+data[i].num+' 篇</span></a></li>'
                     }
                     // 初始化数据
                     $(".form-horizontal").find('select[name=typeName]').append(typeName);
+                    $(".category-list").html(typeNameAndNum);
                 },    
     		    error:function(){
     		    	alert("初始化类别失败");

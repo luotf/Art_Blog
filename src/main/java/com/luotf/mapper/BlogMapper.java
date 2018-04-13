@@ -38,6 +38,12 @@ public interface BlogMapper {
  	List  selectBlogListByDate();
 
  	/**
+ 	 *  获取博客信息，根据状态分组查询
+ 	 * @return
+ 	 */
+ 	List  selectBlogListByStatus();
+ 	
+ 	/**
  	 * 按不同条件组合 分页查询博客
  	 * @param map
  	 * @return

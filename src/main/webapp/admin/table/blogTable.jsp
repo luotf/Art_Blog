@@ -32,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 </head>
+<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
@@ -134,6 +135,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
+	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
  	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
  	
@@ -447,10 +449,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var getSelectRows = function(){
 		 var date= $("#allBlog").bootstrapTable('getSelections'); 
 		 var idArray= new Array();
-		 for(var i=0;i<date.length;i++){
-			 idArray[i]=date[i].id;
-			 operationBlog(idArray[i],2,null); //参数2表示  放入回收站
-		}
+		 var title='确定要删除这'+date.length+'条信息吗';
+		 swal({
+             title: title,
+             text: "删除后前台将无法显示，请谨慎操作！",
+             type: "warning",
+             showCancelButton: true,
+             confirmButtonColor: "#DD6B55",
+             confirmButtonText: "删除",
+             closeOnConfirm: false
+         }, function () {
+        	 for(var i=0;i<date.length;i++){
+    			 idArray[i]=date[i].id;
+    			 operationBlog(idArray[i],2,null); //参数2表示  放入回收站
+    		}
+             swal("删除成功！", "您可以去垃圾箱中还原该信息", "success");
+         });
+		 
+		 
 	}
 	
 	//博客的操作

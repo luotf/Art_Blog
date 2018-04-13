@@ -94,4 +94,10 @@ public interface BlogService {
 	 */
 	Long selectBlogCount(Map<String, Object> map);
 
+
+ 	/**
+ 	 *  获取博客信息，根据状态分组查询
+ 	 * @return
+ 	 */
+	List  selectBlogListByStatus();
 }

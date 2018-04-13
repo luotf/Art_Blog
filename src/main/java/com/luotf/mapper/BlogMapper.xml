@@ -68,6 +68,15 @@
 		  ORDER BY addTime DESC
 	</select>
 	
+	<select id="selectBlogListByStatus" resultType="map">
+		  SELECT 
+		    status,
+		    COUNT(*) AS count
+		  FROM
+		    t_blog 
+		  GROUP BY status
+	</select>
+	
   
   
   <select id="selectBlogCount" parameterType="Map" resultType="Long">
