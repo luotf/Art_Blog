@@ -12,7 +12,7 @@ public interface BlogTypeMapper {
 
     int insertBlogType(BlogType record);
 
-    int insertBlogTypeSelective(BlogType record);
+    int insertBlogTypeSelective(BlogType BlogType);
     
     BlogType selectBlogTypeById(Integer id);
 
@@ -26,4 +26,12 @@ public interface BlogTypeMapper {
  	 * @return
  	 */
  	List<BlogType> selectBlogTypeListByPage(Map<String, Object> map);
+ 	 
+ 	/**
+ 	 * 根据博客名称查询博客信息
+ 	 * @param typename
+ 	 * @return
+ 	 */
+ 	BlogType selectBlogTypeByName(String typename);
+ 	
 }

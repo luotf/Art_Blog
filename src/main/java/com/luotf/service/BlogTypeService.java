@@ -13,4 +13,23 @@ public interface BlogTypeService {
  	 * @return
  	 */
  	List<BlogType> selectBlogTypeListByPage(Map<String, Object> map);
+ 	
+ 	/**
+ 	 * 插入博客类别
+ 	 * @param map
+ 	 * @return
+ 	 */
+ 	int insertBlogType(BlogType record);
+ 	
+ 	/**
+ 	 * 根据博客名称查询博客信息
+ 	 * @param typename
+ 	 * @return
+ 	 */
+ 	BlogType selectBlogTypeByName(String typename);
+ 	
+ 	
+ 	BlogType selectBlogTypeById(Integer id);
+ 	
+ 	int updateBlogTypeSelective(BlogType record);
 }

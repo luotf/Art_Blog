@@ -26,4 +26,30 @@ public class BlogTypeServiceImpl implements BlogTypeService {
  		return blogTypeMapper.selectBlogTypeListByPage(map);
  	}
 
+	@Override
+	public int insertBlogType(BlogType record) {
+		// TODO Auto-generated method stub
+		return blogTypeMapper.insertBlogTypeSelective(record);
+	}
+
+	@Override
+	public BlogType selectBlogTypeById(Integer id) {
+		// TODO Auto-generated method stub
+		return blogTypeMapper.selectBlogTypeById(id);
+	}
+
+	@Override
+	public int updateBlogTypeSelective(BlogType record) {
+		// TODO Auto-generated method stub
+		return blogTypeMapper.updateBlogTypeSelective(record);
+	}
+
+	@Override
+	public BlogType selectBlogTypeByName(String typename) {
+		// TODO Auto-generated method stub
+		return blogTypeMapper.selectBlogTypeByName(typename);
+	}
+
+	
+
 }

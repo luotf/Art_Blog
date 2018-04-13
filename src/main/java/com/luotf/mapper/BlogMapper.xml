@@ -243,13 +243,13 @@
     insert into t_blog (id, title, introduction, 
       keyword, images, clickNum, 
       commentNum, agreeNum, isTop, 
-      isRecommend, updateTime, 
+      isRecommend, addTime, 
       status, type_id, content
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
       #{keyword,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, 0, 
       0, 0, 0, 
-      0, #{updatetime,jdbcType=TIMESTAMP},  
+      0, #{addTime,jdbcType=TIMESTAMP},  
       #{status,jdbcType=INTEGER}, #{type.id,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -287,9 +287,7 @@
       <if test="isrecommend != null">
         isRecommend,
       </if>
-      <if test="updatetime != null">
-        updateTime,
-      </if>
+      
       <if test="addtime != null">
         addTime,
       </if>
@@ -334,9 +332,7 @@
       <if test="isrecommend != null">
         #{isrecommend,jdbcType=INTEGER},
       </if>
-      <if test="updatetime != null">
-        #{updatetime,jdbcType=TIMESTAMP},
-      </if>
+      
       <if test="addtime != null">
         #{addtime,jdbcType=TIMESTAMP},
       </if>
@@ -381,9 +377,7 @@
       <if test="isrecommend != null">
         isRecommend = #{isrecommend,jdbcType=INTEGER},
       </if>
-      <if test="updatetime != null">
-        updateTime = #{updatetime,jdbcType=TIMESTAMP},
-      </if>
+     
       <if test="addtime != null">
         addTime = #{addtime,jdbcType=TIMESTAMP},
       </if>
@@ -410,7 +404,6 @@
       agreeNum = #{agreenum,jdbcType=INTEGER},
       isTop = #{istop,jdbcType=INTEGER},
       isRecommend = #{isrecommend,jdbcType=INTEGER},
-      updateTime = #{updatetime,jdbcType=TIMESTAMP},
       addTime = #{addtime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
       type_id = #{type.id,jdbcType=INTEGER},
@@ -428,7 +421,6 @@
       agreeNum = #{agreenum,jdbcType=INTEGER},
       isTop = #{istop,jdbcType=INTEGER},
       isRecommend = #{isrecommend,jdbcType=INTEGER},
-      updateTime = #{updatetime,jdbcType=TIMESTAMP},
       addTime = #{addtime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER},
       type_id = #{type.id,jdbcType=INTEGER}

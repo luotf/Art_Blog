@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<div class="pull-right tooltip-demo">
-							<button class="btn btn-white btn-sm" type="button" onclick="selectBlogListByPage()"
+							<button class="btn btn-white btn-sm" type="button" onclick="addBlog(-1)"
 								data-toggle="tooltip" data-placement="top" title="存为草稿"><i
 								class="fa fa-pencil"></i> 存为草稿</button> <button type="button" onclick="selectBlogListByPage()"
 								class="btn btn-danger btn-sm" data-toggle="tooltip"
@@ -147,7 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 							</form>
 						</div>
-						<div class="mail-text h-200">
+						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
 							<div id="summernote"></div>
 							<div class="clearfix"></div>
 						</div>
@@ -324,19 +324,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'status':id
         	};
             $.ajax({
-                   url:'addBlog',    
+                   url:'../addBlog',    
                    type:'post',
                    data:params,
                    dataType:'json',    
                    success:function (data) { 
                     if(data.status==200){
-                    	alert("添加成功");
+                    	alert("添加博客成功");
                     }else{
-                    	alert("添加失败");
+                    	alert("添加博客失败");
                     }	
                     },    
         		    error:function(){
-        		    	alert("上传失败");
+        		    	alert("添加博客错误");
         		    }	
                 }); 
             	

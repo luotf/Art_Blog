@@ -50,73 +50,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="btn btn-block btn-primary compose-mail"
 								href="mail_compose.html">修改博客</a>
 							<div class="space-25"></div>
-							<h5>文件夹</h5>
+							<h5>数据信息</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-								<li><a href="mailbox.html"> <i class="fa fa-inbox "></i>
-										正文 <span class="label label-info pull-right">14 篇</span>
+								
+								<li><a href="mailbox.html"> <i
+										class="fa fa-eye"></i> 浏览量 <span
+										class="label label-info pull-right">278 </span>
 								</a></li>
 								<li><a href="mailbox.html"> <i
-										class="fa fa-file-text-o"></i> 草稿 <span
-										class="label label-warning pull-right">2 篇</span>
+										class="fa fa-commenting-o"></i> 评论量 <span
+										class="label label-success pull-right">15 </span>
 								</a></li>
-								<li><a href="mailbox.html"> <i class="fa fa-trash-o"></i>
-										垃圾箱 <span class="label label-danger pull-right">1 篇</span>
+								<li><a href="mailbox.html"> <i class="fa fa-thumbs-o-up"></i>
+										点赞量 <span class="label label-primary pull-right">1 </span>
 								</a></li>
-							</ul>
-							<h5>分类</h5>
-							<ul class="category-list" style="padding: 0">
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-navy"></i> 技术博客 <span
-										class="label label-info pull-right">14 篇</span>
+								<li><a href="mailbox.html"> <i class="fa fa-level-up"></i>
+										&nbsp;置顶<span class="label label-danger pull-right">否</span>
 								</a></li>
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-danger"></i> 基础总结 <span
-										class="label label-info pull-right">14 篇</span>
-								</a></li>
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-primary"></i> 面试 <span
-										class="label label-info pull-right">14 篇</span>
-								</a></li>
-								<li><a href="mail_compose.html#"> <i
-										class="fa fa-circle text-info"></i> 项目案例 <span
-										class="label label-info pull-right">14 篇</span>
+								<li><a href="mailbox.html"> <i class="fa fa-hand-pointer-o"></i>
+										推荐 <span class="label label-warning pull-right">是</span>
 								</a></li>
 							</ul>
-
+							
 							<h5 class="tag-title">标签</h5>
-							<ul class="tag-list" style="padding: 0">
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										I/O
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>MySQL
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>Struts2
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										Spring
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										Hibernate
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										Mybatis
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										SpringMVC
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										基础框架
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										JVM
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										多线程
-								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
-										高并发
-								</a></li>
-							</ul>
+							
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -126,12 +83,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<div class="pull-right tooltip-demo">
-							<button class="btn btn-white btn-sm" type="button" onclick="selectBlogListByPage()"
+							<button class="btn btn-white btn-sm" type="button" onclick="updateBlog(-1)"
 								data-toggle="tooltip" data-placement="top" title="存为草稿"><i
 								class="fa fa-pencil"></i> 存为草稿</button> <button type="button" onclick="javascript:history.back(-1);"
 								class="btn btn-danger btn-sm" data-toggle="tooltip"
-								data-placement="top" title="放弃"><i class="fa fa-times"></i>
-								放弃</button>
+								data-placement="top" title="返回"><i class="fa fa-times"></i>
+								返回</button>
 						</div>
 						<h2>修改博客</h2>
 					</div>
@@ -169,8 +126,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 							</form>
 						</div>
-						<div class="mail-text h-200">
-							<div id="summernote"></div>
+						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
+							<div id="summernote" ></div>
 							<div class="clearfix"></div>
 						</div>
 						<div class="mail-body text-right tooltip-demo">
@@ -275,7 +232,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					height: 300,//初始化默认高度    
 					minHeight: null, //最小高度             
 					maxHeight: null, //最大高度
-					//focus: true,//是否定位
+					focus: true,//是否定位
 					lang:'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
 					placeholder:"请在这里写下您的内容",
 					//下面重写上传图片方法
@@ -317,7 +274,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		            alert("返回结果为null");  
 		            return;  
 		        }else{  
-		            alert("上传成功！");   
+		            alert("上传成功！");  
+		            return; 
 		        }  
 		    editor.insertImage($editable, date.path);  
 		    //setTimeout(function(){$(".note-alarm").remove();},3000);  
@@ -351,12 +309,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    success:function (data) { 
                     if(data.status==200){
                     	alert("更新成功");
+                    	 return; 
                     }else{
                     	alert("更新失败");
+                    	 return; 
                     }	
                     },    
         		    error:function(){
         		    	alert("更新错误");
+        		    	 return; 
         		    }	
                 }); 
             	

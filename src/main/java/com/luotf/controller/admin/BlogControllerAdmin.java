@@ -98,7 +98,7 @@ public class BlogControllerAdmin {
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 blog.setKeyword(subString.subKeyword(blog.getKeyword()));
 		 }
-		 blog.setUpdatetime(new Date());
+		// blog.setUpdatetime(new Date());
 		 if(blogService.insertBlog(blog)!=0){
 			 map.put("status", 200);
 		}else{
@@ -147,7 +147,7 @@ public class BlogControllerAdmin {
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 blog.setKeyword(subString.subKeyword(blog.getKeyword()));
 		 }
-		 blog.setUpdatetime(new Date());
+		 //blog.setUpdatetime(new Date());
 		 
 		 if(blogService.updateBlogSelective(blog)!=0){
 			 map.put("status", 200);

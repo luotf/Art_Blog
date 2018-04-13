@@ -85,15 +85,19 @@
 					<li><a href="#"><i class="fa fa-desktop"></i> <span
 							class="nav-label">博客模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a href="#">类别 <span class="fa arrow"></span></a>
+							<%-- <li><a href="#">类别 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
 									<li><a class="J_menuItem"
-										href="${pageContext.request.contextPath}/admin/table/blogTable.jsp">查询类别</a>
+										href="${pageContext.request.contextPath}/admin/table/blogType.jsp">类别</a>
 									</li>
 									<li><a class="J_menuItem"
 										href="${pageContext.request.contextPath}/admin/blog/addBlog.jsp">增加类别</a>
 									</li>
-								</ul></li>
+								</ul></li> --%>
+								<li><a class="J_menuItem"
+								href="${pageContext.request.contextPath}/admin/blog/blogType.jsp">类别</a>
+							</li>
+								
 							<li><a class="J_menuItem"
 								href="${pageContext.request.contextPath}/admin/table/blogTable.jsp">查询博客</a>
 							</li>
