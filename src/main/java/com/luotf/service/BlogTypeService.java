@@ -32,4 +32,6 @@ public interface BlogTypeService {
  	BlogType selectBlogTypeById(Integer id);
  	
  	int updateBlogTypeSelective(BlogType record);
+ 	
+ 	 int deleteBlogTypeById(Integer id);
 }

@@ -249,7 +249,7 @@
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
       #{keyword,jdbcType=VARCHAR}, #{images,jdbcType=VARCHAR}, 0, 
       0, 0, 0, 
-      0, #{addTime,jdbcType=TIMESTAMP},  
+      0, #{addtime,jdbcType=TIMESTAMP},  
       #{status,jdbcType=INTEGER}, #{type.id,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>

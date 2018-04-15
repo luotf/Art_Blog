@@ -54,7 +54,6 @@ public class BlogControllerAdmin {
 				 MultipartFile file=mreq.getFile(fileNamesIter.next());
 				 if(file!=null){
 					 String myFileName=file.getOriginalFilename();
-					 //System.out.println("myFileName:"+myFileName);
 					 if(myFileName.trim()!=""){
 						 String fileName=file.getOriginalFilename();
 						 String fileBaseName=fileName.substring(0,fileName.lastIndexOf("."));
@@ -69,7 +68,6 @@ public class BlogControllerAdmin {
 						 }
 						 file.transferTo(localFile);
 						 fileNames="http://localhost:8080/BlogV1.0/upload/"+newFileName+"/"+fileNames;
-						 //System.out.println("上传成功");
 						 map.put("name",fileBaseName);
 						 map.put("path",fileNames);
 						 map.put("status",200);

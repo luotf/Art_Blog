@@ -50,6 +50,12 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 		return blogTypeMapper.selectBlogTypeByName(typename);
 	}
 
+	@Override
+	public int deleteBlogTypeById(Integer id) {
+		// TODO Auto-generated method stub
+		return blogTypeMapper.deleteBlogTypeById(id);
+	}
+
 	
 
 }

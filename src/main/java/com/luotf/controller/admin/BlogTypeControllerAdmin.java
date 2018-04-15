@@ -56,6 +56,24 @@ public class BlogTypeControllerAdmin {
 		return map;
 	}
 
+	@RequestMapping(value = "/deleteBlogType", method = RequestMethod.POST)
+	@ResponseBody
+	public Map deleteBlogType(BlogType blogType) throws Exception {
+		Map map = new HashMap();
+		//查询该类别下是否有博客
+		if (blogTypeService.selectBlogTypeById(blogType.getId()).getNum()!=0) {
+			// 该类别下有博客  不能删除
+			map.put("status", 2);
+		} else {
+			if ((blogTypeService.deleteBlogTypeById(blogType.getId())!=0)) {
+				map.put("status", 200);
+			} else {
+				map.put("status", 0);
+			}
+		}
+		return map;
+	}
+
 	@RequestMapping(value = "/addBlogType", method = RequestMethod.POST)
 	@ResponseBody
 	public Map addBlogType(BlogType blogType) throws Exception {
@@ -72,7 +90,8 @@ public class BlogTypeControllerAdmin {
 		}
 		return map;
 	}
-
+	
+	
 	/**
 	 * 按照不同条件分页查询博客类别信息
 	 * 

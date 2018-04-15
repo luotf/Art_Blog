@@ -36,7 +36,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight">
-
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h5>博客信息表格</h5>
@@ -123,7 +122,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 
 
-
 			</div>
 		</div>
 
@@ -136,7 +134,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
-
  	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
  	
 	<!-- Bootstrap table -->
@@ -407,12 +404,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'20%',
 		                      formatter:function(value,row,index){
 		                    	
-		                   //var e = '<button class="btn-xs btn-info" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</button> ';
 		                   var a = '<a  class=" btn-sm btn-info" href="#" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</a> ';  
 		                   var b = '<a  class=" btn-sm btn-primary"  href="../blog/updateBlog.jsp?id='+row.id+'"><i class="fa fa-edit" ></i>编辑</a> ';  
 		                   var c = '<a  class=" btn-sm btn-danger"  onclick="operationBlog('+ row.id + ',1,null)"><i class="fa fa-file-o" ></i>还原</a> '; 
 		                   //取消推荐
-		                   var d = '<a  class=" btn-sm btn-warning"  onclick="operationBlog('+ row.id + ',null,0)"><i class="fa fa-hand-o-down" ></i>推荐</a> ';  
+		                   var d = '<a  class=" btn-sm btn-warning"  onclick="operationBlog('+ row.id + ',null,0)"><i class="fa fa-hand-o-down" ></i>推荐</a> ';
+		                   //发布
+		                   var e = '<a  class=" btn-sm btn-danger"  onclick="operationBlog('+ row.id + ',1,null)"><i class="fa fa-check-square-o" ></i>发表</a> ';  
+		                   
 		                   if(row.status==2){
 		                	   return a+c;
 		                   } else if(row.status==1){
@@ -422,9 +421,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                		   return a+b;  
 		                	   }
 		                	 
-		                   }
-		                   
-		                  
+		                   }else if(row.status==-1)
+		                	   return a+e;  
 		                    } 
 		                  }
 		              ]
@@ -435,8 +433,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//传参数到后台
 	function queryParams(params){
         return{
-            //每页多少条数据
-        	//pageIndex: params.offset+1,
             pageSize: params.limit,
             page:(params.offset)/params.limit+1,
             title:$(".form-control").val(),
@@ -504,11 +500,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
 	}
 	
-	/* var delTable=function(id){
-		$("#allBlog").bootstrapTable('removeByUniqueId',id); 
-		// $("#allBlog").bootstrapTable("load",date);
-	}
-	 */
+	
 	//格式化时间
 	function Format(datetime, fmt) {
 	    if (parseInt(datetime) == datetime) {
@@ -560,16 +552,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             			 var strs= new Array();
             		     strs=data.blog.keyword.split(";");
                          for (var i = 0; i < strs.length&&strs[i]!=''; i++) {
-                    	   keyword +='<a href="/">'+strs[i]+'</a>';
+                    	   keyword +='<a href="#">'+strs[i]+'</a>';
                       }
             	    }else{
-            	    	keyword ='<a href="/">'+data.blog.keyword+'</a>';
+            	    	keyword ='<a href="#">'+data.blog.keyword+'</a>';
             	    }
             	  } 
             	  $(".newsview").find(".tags").append(keyword);
             	  $(".newsview").find(".news_infos").html(data.blog.content);
-            	  // var updateUrl="../blog/updateBlog.jsp?id='+data.blog.id+'";
-            	  //<a class="J_menuItem" href="${pageContext.request.contextPath}/admin/addBlog.jsp">写博客</a>
             	  var update='<a  class="J_menuItem btn btn-white" href="../blog/updateBlog.jsp?id='+data.blog.id+'">编辑</a>';
             	  $(".modal-footer").find(".update").html(update);
             	}

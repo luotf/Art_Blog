@@ -34,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -118,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
-
+	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 	<!-- iCheck -->
 	<script
@@ -275,7 +276,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function queryParams(params){
 	        return{
 	            //每页多少条数据
-	        	//pageIndex: params.offset+1,
 	            pageSize: params.limit,
 	            page:(params.offset)/params.limit+1,
 	            typename:$(".search .form-control").val(),
@@ -297,18 +297,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	var updateButton=' <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="updateBlogType('+data.blogType.id+')" type="button"><strong>提交</strong></button>'
                     	$("#update").html(updateButton);
                     }else if(data.status==0){
-                    	alert("该类别信息为空");
+                    	swal("查询失败", "不存在该类别信息", "error");
                     }	
                     },    
         		    error:function(){
-        		    	alert("添加类别错误");
+        		    	swal("查询错误", "请重新操作", "error");
         		    }	
                 }); 
 			
 		};
 		
 	 	var updateBlogType=function(id){
-	 		//var typename=$("#newTypeName").val();
 	 		var params ={
 	 				'id':id,
         			'typename':$("#newTypeName").val(),
@@ -325,18 +324,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   	$("#allBlogType").bootstrapTable('refresh');
                   	$(".tip2").html("");
                   	$("#newTypeName").val(""); 
-                  
+                  	swal("更新成功", "", "success");
                   }else if(data.status==2){
                   	$(".tip2").html("该类别已经存在");
                   }	
                   },    
       		    error:function(){
-      		    	alert("添加类别错误");
+      		    	swal("更新错误", "请重新操作", "error");
       		    }	
               });
 	 	}
 		
+		var deleteBlogType=function(id){
+			var params ={
+	 				'id':id,
+        			//'typename':$("#newTypeName").val(),
+        	};
+			swal({
+	             title: "确定要删除该类别吗",
+	             text: "删除后将无法恢复，请谨慎操作！",
+	             type: "warning",
+	             showCancelButton: true,
+	             confirmButtonColor: "#DD6B55",
+	             confirmButtonText: "删除",
+	             closeOnConfirm: false
+	         }, function () {
+	        	 
+	        	 $.ajax({
+	                 url:'../deleteBlogType',    
+	                 type:'post',
+	                 data:params,
+	                 dataType:'json',    
+	                 success:function (data) { 
+	                  if(data.status==200){
+	                	  $("#allBlogType").bootstrapTable('refresh');
+	                	  initType();
+	                	  swal("删除成功！", "", "success");
+	                  }else if(data.status==2){
+	                	  swal("删除失败", "该类别下有博客,不能删除", "error");
+	                  }else{
+	                	  swal("删除失败", "请重新操作", "error");
+	                  }	
+	                  },    
+	      		    error:function(){
+	      		    	swal("删除错误", "请重新操作", "error");
+	      		    }	
+	              });
+	         });
 			
+	 		 
+		}	
+	 	
+	 	
         var addBlogType=function(){
           var params ={
         			'typename':$("#typename").val(),
@@ -352,12 +391,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	$("#allBlogType").bootstrapTable('refresh');
                     	$(".tip").html("");
                     	$("#typename").val("");
+                    	swal("添加成功", "", "success");
                     }else if(data.status==2){
                     	$(".tip").html("该类别已经存在");
                     }	
                     },    
         		    error:function(){
-        		    	alert("添加类别错误");
+        		    	swal("添加类别错误", "请重新操作", "error");
         		    }	
                 }); 
             };
