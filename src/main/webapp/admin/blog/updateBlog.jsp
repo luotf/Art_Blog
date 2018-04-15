@@ -91,8 +91,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<div class="pull-right tooltip-demo">
-							<button class="btn btn-white btn-sm" type="button"
-								onclick="updateBlog(-1)" data-toggle="tooltip"
+							<button id="add_draft" type="button" 
+								class="btn btn-white btn-sm" data-toggle="tooltip"
 								data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
 							</button>
@@ -106,18 +106,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="mail-box">
 						<div class="mail-body">
-							<form class="form-horizontal" method="post">
+							<form class="form-horizontal" method="post" id="commentForm">
 								<div class="form-group">
 									<label class="col-sm-2 control-label">标题：</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="title"
+										<input type="text" class="form-control" id="title" required="" aria-required="true"
 											name="title" value="">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">摘要：</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="introduction"
+										<input type="text" class="form-control" id="introduction" required="" aria-required="true"
 											name="introduction" value="">
 									</div>
 								</div>
@@ -133,10 +133,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<div class="form-group">
 									<label class="col-sm-2 control-label">关键字：</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="keyword"
-											name="keyword" value=""> <span
-											class="help-block m-b-none" style="color:red">多个关键字之间用“
-											; ”分隔</span>
+										<input type="text" class="form-control" id="keyword" required="" aria-required="true"
+											name="keyword" value=""> <p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
 									</div>
 								</div>
 							</form>
@@ -146,12 +144,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clearfix"></div>
 						</div>
 						<div class="mail-body text-right tooltip-demo">
-							<button id="" type="button" data-target="#myModal"
-								onclick="prevBlog()" class="btn btn-sm btn-primary"
-								data-toggle="modal" data-placement="top" title="预览">
+							<button id="prev1" type="button" 
+								class="btn btn-sm btn-primary"
+								 data-placement="top" title="预览">
 								<i class="fa fa-reply"></i> 预览
 							</button>
-							<button id="" type="button" onclick="updateBlog(-1)"
+							<button id="prev2"  type="button" style="display:none"
+							onclick="prevBlog()" data-target="#myModal" data-toggle="modal">
+							</button>
+							<button id="add_draft" type="button" 
 								class="btn btn-white btn-sm" data-toggle="tooltip"
 								data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
@@ -212,6 +213,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
+
+	<!-- jQuery Validation plugin javascript-->
+    <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
+
 
 	<!-- SUMMERNOTE -->
 	<script
@@ -389,9 +396,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    success:function (data) { 
                     if(data.status==200){
                     	$("#myModal").modal('hide');
+                    	 var title="更新成功";
+                    	 var text="博客已在前端展示";
+                    	 if(id==-1){
+                    	    title="放入草稿成功";
+                    		text="你可以前往草稿箱查看";
+                    	 }
                     	swal({ 
-        		    		title:"更新成功",
-        		    		text:"博客已在前端展示",
+        		    		title:title,
+        		    		text:text,
         		    		type:"success",
         		    		timer: 1500,
         		    	 });
@@ -408,7 +421,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }); 
             	
             }
-        
         
       //格式化时间
     	function Format(datetime, fmt) {
@@ -436,6 +448,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     	    return fmt;
     	}
+      
+    	//只有验证通过才能执行 添加
+		$("#add_draft").click(function(){
+		    if($("#commentForm").valid()){
+		    	updateBlog(-1);
+		     }
+		});
+		
+		//只有验证通过才能执行 预览
+		$("#prev1").click(function(){
+			    if($("#commentForm").valid()){
+			    	$("#prev2").click();
+			     }
+			});
+		
+      
+      
+      
     </script>
 
 

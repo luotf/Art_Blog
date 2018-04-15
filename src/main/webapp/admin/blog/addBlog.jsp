@@ -116,9 +116,9 @@
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<div class="pull-right tooltip-demo">
-							<button class="btn btn-white btn-sm" type="button"
-								onclick="addBlog(-1)" data-toggle="tooltip" data-placement="top"
-								title="存为草稿">
+							<button id="add_draft" type="button" 
+								class="btn btn-white btn-sm" data-toggle="tooltip"
+								data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
 							</button>
 							<button type="button" onclick="" class="btn btn-danger btn-sm"
@@ -130,19 +130,19 @@
 					</div>
 					<div class="mail-box">
 						<div class="mail-body">
-							<form class="form-horizontal" method="post">
+							<form class="form-horizontal" method="post" id="commentForm">
 								<div class="form-group">
 									<label class="col-sm-2 control-label">标题：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="title"
-											name="title" value="">
+											name="title" value="" required="" aria-required="true">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">摘要：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="introduction"
-											name="introduction" value="">
+											name="introduction" value="" required="" aria-required="true">
 									</div>
 								</div>
 								<div class="form-group">
@@ -156,12 +156,12 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label">关键字：</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="keyword"
-											name="keyword" value=""> <span
-											class="help-block m-b-none" style="color:red">多个关键字之间用“
-											; ”分隔</span>
+										<input type="text" class="form-control" id="keyword" required="" aria-required="true"
+											name="keyword" value=""> 
+											<p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
 									</div>
 								</div>
+								
 							</form>
 						</div>
 						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
@@ -169,12 +169,16 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="mail-body text-right tooltip-demo">
-							<button id="" type="button" data-target="#myModal"
-								onclick="prevBlog()" class="btn btn-sm btn-primary"
-								data-toggle="modal" data-placement="top" title="预览">
+						
+							<button id="prev1" type="button" 
+								class="btn btn-sm btn-primary"
+								 data-placement="top" title="预览">
 								<i class="fa fa-reply"></i> 预览
 							</button>
-							<button id="" type="button" onclick="addBlog(-1)"
+							<button id="prev2"  type="button" style="display:none"
+							onclick="prevBlog()" data-target="#myModal" data-toggle="modal">
+							</button>
+							<button id="add_draft" type="button" 
 								class="btn btn-white btn-sm" data-toggle="tooltip"
 								data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
@@ -230,6 +234,12 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
+
+<!-- jQuery Validation plugin javascript-->
+    <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
+
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
@@ -275,7 +285,7 @@
 									swal("初始化博客状态错误", "请重新操作", "error");
 								}
 							});
-
+							
 							//查询出文章类别
 							//设置参数，表示查询所有的类别
 							var params = {
@@ -423,18 +433,47 @@
 				success : function(data) {
 					if (data.status == 200) {
 						$("#myModal").modal('hide');
-						swal("发布成功", "博客已在前端展示", "success");
-						$("#title").val(""), $("#introduction").val(""), $(
-								"#keyword").val(""), $("#summernote").code("");
+						if(id==1){
+						 swal("发布成功", "博客已在前端展示", "success");
+						}else if(id==-1){
+						 swal("放入草稿成功", "你可以前往草稿箱查看", "success");
+						}
+						$("#title").val("");
+						$("#introduction").val("");
+						$("#keyword").val("");
+						$("#summernote").code("");
 					} else {
-						swal("发布失败", "请重新操作", "error");
+						if(id==1){
+							swal("发布失败", "请重新操作", "error");
+						}else if(id==-1){
+							swal("放入草稿失败", "请重新操作", "error");
+						}
 					}
 				},
 				error : function() {
-					swal("发布错误", "请重新操作", "error");
+					if(id==1){
+						swal("发布错误", "请重新操作", "error");
+					}else if(id==-1){
+						swal("放入草稿错误", "请重新操作", "error");
+					}
 				}
 			});
-		}
+		};
+		
+		//只有验证通过才能执行 添加
+		$("#add_draft").click(function(){
+		    if($("#commentForm").valid()){
+		    	addBlog(-1);
+		     }
+		});
+		
+		//只有验证通过才能执行 预览
+		$("#prev1").click(function(){
+			    if($("#commentForm").valid()){
+			    	$("#prev2").click();
+			     }
+			});
+		
 	</script>
 
 </body>

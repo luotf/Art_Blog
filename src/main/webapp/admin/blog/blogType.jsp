@@ -48,16 +48,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								href="mail_compose.html">博客类别</a>
 							<div class="space-25"></div>
 							<h5 class="tag-title">增加类别</h5>
-							<form role="form" class="form-inline">
-								<div class="form-group">
-									<input type="text" placeholder="请输入类别名称" id="typename"
+							<form role="form" class="form-inline" id="commentForm1">
+								<div class="form-group" >
+									<input type="text" placeholder="请输入类别名称" id="typename" required="" aria-required="true"
 										class="form-control" style="width:76%;">
-									<button class="btn btn-white pull-right" type="button"
-										onclick="addBlogType()">提交</button>
+									<button id="addType" class="btn btn-white pull-right" type="button"
+										>提交</button>
 									<span class="tip"
-										style="color:red;font-size:12px;padding: 0px 6%;"></span>
+										style="color:red;font-size:12px;padding: 0px;"></span>
 								</div>
-
 							</form>
 							
 							<h5>所有类别</h5>
@@ -90,16 +89,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="row">
                             <h3 class="m-t-none m-b">修改类别名称</h3>
 
-                            <form role="form">
+                            <form role="form" id="commentForm2">
                                 <div class="form-group">
                                     <label>原始名称：</label><span id="oldTypeName"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="新名称" class="form-control" id="newTypeName">
+                                    <input type="text" placeholder="新名称" required="" aria-required="true" class="form-control" id="newTypeName">
                                 </div>
                                 <span class="tip2" style="color:red"></span>
                                 <div id="update">
-                                   
                                     
                                 </div>
                             </form>
@@ -124,7 +122,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
-
+	
+	<!-- jQuery Validation plugin javascript-->
+    <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
+	
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -312,33 +315,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 				'id':id,
         			'typename':$("#newTypeName").val(),
         	};
-	 		 $.ajax({
-                 url:'../updateBlogType',    
-                 type:'post',
-                 data:params,
-                 dataType:'json',    
-                 success:function (data) { 
-                  if(data.status==200){
-                	$("#modal-form").modal('hide');
-                  	initType();
-                  	$("#allBlogType").bootstrapTable('refresh');
-                  	$(".tip2").html("");
-                  	$("#newTypeName").val(""); 
-                  	swal("更新成功", "", "success");
-                  }else if(data.status==2){
-                  	$(".tip2").html("该类别已经存在");
-                  }	
-                  },    
-      		    error:function(){
-      		    	swal("更新错误", "请重新操作", "error");
-      		    }	
-              });
+	 		if($("#commentForm2").valid()){
+	 			 $.ajax({
+	                 url:'../updateBlogType',    
+	                 type:'post',
+	                 data:params,
+	                 dataType:'json',    
+	                 success:function (data) { 
+	                  if(data.status==200){
+	                	$("#modal-form").modal('hide');
+	                  	initType();
+	                  	$("#allBlogType").bootstrapTable('refresh');
+	                  	$(".tip2").html("");
+	                  	$("#newTypeName").val(""); 
+	                  	swal("更新成功", "", "success");
+	                  }else if(data.status==2){
+	                  	$(".tip2").html("该类别已经存在");
+	                  }	
+	                  },    
+	      		    error:function(){
+	      		    	swal("更新错误", "请重新操作", "error");
+	      		    }	
+	              });	
+			     }
+	 		
 	 	}
 		
 		var deleteBlogType=function(id){
 			var params ={
 	 				'id':id,
-        			//'typename':$("#newTypeName").val(),
         	};
 			swal({
 	             title: "确定要删除该类别吗",
@@ -375,6 +380,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		 
 		}	
 	 	
+		//只有验证通过才能执行 添加
+		$("#addType").click(function(){
+		    if($("#commentForm1").valid()){
+		    	addBlogType();
+		     }
+		});
 	 	
         var addBlogType=function(){
           var params ={
