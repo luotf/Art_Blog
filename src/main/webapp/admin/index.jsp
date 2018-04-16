@@ -99,7 +99,7 @@
 							</li>
 								
 							<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/table/blogTable.jsp">查询博客</a>
+								href="${pageContext.request.contextPath}/admin/blog/findBlog.jsp">查询博客</a>
 							</li>
 
 							<li><a class="J_menuItem"

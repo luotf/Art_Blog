@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<button id="addType" class="btn btn-white pull-right" type="button"
 										>提交</button>
 									<span class="tip"
-										style="color:red;font-size:12px;padding: 0px;"></span>
+										style="color:#a94442;font-size:12px;padding: 0px;"></span>
 								</div>
 							</form>
 							
@@ -96,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <input type="text" placeholder="新名称" required="" aria-required="true" class="form-control" id="newTypeName">
                                 </div>
-                                <span class="tip2" style="color:red"></span>
+                                <span class="tip2" style="color:#a94442"></span>
                                 <div id="update">
                                     
                                 </div>

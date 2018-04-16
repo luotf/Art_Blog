@@ -200,7 +200,7 @@ public class BlogControllerAdmin {
 	 }
 	 
 	 /**
-	  * 按照不同条件分页查询博客信息
+	  * 多条件模糊分页查询博客信息(or)
 	  * @param id
 	  * @return
 	  * @throws Exception
@@ -257,7 +257,7 @@ public class BlogControllerAdmin {
 	 
 	 
 	 /**
-	  * 模糊分页组合查询博客信息
+	  * 模糊组合分页查询博客信息(and)
 	  * @param id
 	  * @return
 	  * @throws Exception
