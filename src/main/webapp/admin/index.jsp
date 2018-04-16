@@ -44,8 +44,8 @@
 				<ul class="nav" id="side-menu">
 					<li class="nav-header">
 						<div class="dropdown profile-element">
-							<span><img alt="image" class="img-circle"
-								src="${pageContext.request.contextPath}/images/profile_small.jpg" /></span>
+							<span><img alt="image" style="width:64px;height:64px;"class="img-circle"
+								src="${pageContext.request.contextPath}/images/my.jpeg" /></span>
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
 								class="clear"> <span class="block m-t-xs"><strong
 										class="font-bold">Beaut-zihan</strong></span> <span
@@ -64,17 +64,14 @@
 						</div>
 						<div class="logo-element">H+</div>
 					</li>
-					<li><a href="#"> <i class="fa fa-home"></i> <span
+					<li><a href="${pageContext.request.contextPath}/admin/index_v1.jsp" class="J_menuItem"> <i class="fa fa-home"></i> <span
 							class="nav-label">主页</span>
-
 					</a></li>
 
-					<li><a href="mailbox.html"><i class="fa fa-envelope"></i>
-							<span class="nav-label">专栏设置</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="mailbox.html">收件箱</a></li>
-
-						</ul></li>
+					<li><a class="J_menuItem"
+								href="${pageContext.request.contextPath}/admin/options.jsp"><i class="fa fa-envelope"></i>
+					<span class="nav-label">专栏设置</span></a>
+					
 					<li><a href="#"><i class="fa fa-edit"></i> <span
 							class="nav-label">数据图表</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -110,65 +107,21 @@
 					<li><a href="#"><i class="fa fa-flask"></i> <span
 							class="nav-label">项目模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="typography.html">排版</a></li>
+							
 							<li><a href="#">字体图标 <span class="fa arrow"></span></a>
 								<ul class="nav nav-third-level">
 									<li><a class="J_menuItem" href="fontawesome.html">Font
 											Awesome</a></li>
-									<li><a class="J_menuItem" href="glyphicons.html">Glyphicon</a>
-									</li>
-									<li><a class="J_menuItem" href="iconfont.html">阿里巴巴矢量图标库</a>
-									</li>
+									
 								</ul></li>
-							<li><a href="#">拖动排序 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="draggable_panels.html">拖动面板</a>
-									</li>
-									<li><a class="J_menuItem" href="agile_board.html">任务清单</a>
-									</li>
-								</ul></li>
+							
 							<li><a class="J_menuItem" href="buttons.html">按钮</a></li>
-							<li><a class="J_menuItem" href="tabs_panels.html">选项卡
-									&amp; 面板</a></li>
-							<li><a class="J_menuItem" href="notifications.html">通知
-									&amp; 提示</a></li>
-							<li><a class="J_menuItem" href="badges_labels.html">徽章，标签，进度条</a>
-							</li>
-							<li><a class="J_menuItem" href="grid_options.html">栅格</a></li>
-							<li><a class="J_menuItem" href="plyr.html">视频、音频</a></li>
-							<li><a href="#">弹框插件 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="layer.html">Web弹层组件layer</a>
-									</li>
-									<li><a class="J_menuItem" href="modal_window.html">模态窗口</a>
-									</li>
-									<li><a class="J_menuItem" href="sweetalert.html">SweetAlert</a>
-									</li>
-								</ul></li>
-							<li><a href="#">树形视图 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="jstree.html">jsTree</a></li>
-									<li><a class="J_menuItem" href="tree_view.html">Bootstrap
-											Tree View</a></li>
-									<li><a class="J_menuItem" href="nestable_list.html">nestable</a>
-									</li>
-								</ul></li>
-							<li><a class="J_menuItem" href="toastr_notifications.html">Toastr通知</a>
-							</li>
-							<li><a class="J_menuItem" href="diff.html">文本对比</a></li>
-							<li><a class="J_menuItem" href="spinners.html">加载动画</a></li>
-							<li><a class="J_menuItem" href="widgets.html">小部件</a></li>
+							
 						</ul></li>
 					<li><a href="#"><i class="fa fa-table"></i> <span
 							class="nav-label">资源模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="table_basic.html">基本表格</a></li>
-							<li><a class="J_menuItem" href="table_data_tables.html">DataTables</a>
-							</li>
-							<li><a class="J_menuItem" href="table_jqgrid.html">jqGrid</a>
-							</li>
-							<li><a class="J_menuItem" href="table_foo_table.html">Foo
-									Tables</a></li>
+							
 							<li><a class="J_menuItem" href="table_bootstrap.html">Bootstrap
 									Table <span class="label label-danger pull-right">推荐</span>
 							</a></li>
@@ -178,18 +131,12 @@
 						<ul class="nav nav-second-level">
 							<li><a class="J_menuItem" href="basic_gallery.html">基本图库</a>
 							</li>
-							<li><a class="J_menuItem" href="carousel.html">图片切换</a></li>
-							<li><a class="J_menuItem" href="blueimp.html">Blueimp相册</a>
-							</li>
+							
 						</ul></li>
 					<li><a class="J_menuItem" href="css_animation.html"><i
 							class="fa fa-magic"></i> <span class="nav-label">留言模块</span></a></li>
 					<li><a href="#"><i class="fa fa-cutlery"></i> <span
-							class="nav-label">前台页面 </span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="form_builder.html">表单构建器</a>
-							</li>
-						</ul></li>
+							class="nav-label">前台页面 </span></a>
 
 				</ul>
 			</div>
@@ -278,9 +225,7 @@
 									</div>
 								</li>
 							</ul></li>
-						<li class="hidden-xs"><a href="index_v1.html"
-							class="J_menuItem" data-index="0"><i
-								class="fa fa-cart-arrow-down"></i> 购买</a></li>
+						
 						<li class="dropdown hidden-xs"><a
 							class="right-sidebar-toggle" aria-expanded="false"> <i
 								class="fa fa-tasks"></i> 主题
@@ -295,7 +240,7 @@
 				<nav class="page-tabs J_menuTabs">
 					<div class="page-tabs-content">
 						<a href="javascript:;" class="active J_menuTab"
-							data-id="${pageContext.request.contextPath}/admin/table/blog">首页</a>
+							data-id="${pageContext.request.contextPath}/admin/index_v1.jsp">主页</a>
 					</div>
 				</nav>
 				<button class="roll-nav roll-right J_tabRight">
@@ -318,9 +263,9 @@
 			</div>
 			<div class="row J_mainContent" id="content-main">
 				<iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-					src="${pageContext.request.contextPath}/admin/table/blogTable"
+					src="${pageContext.request.contextPath}/admin/index_v1.jsp"
 					frameborder="0"
-					data-id="${pageContext.request.contextPath}/admin/table/blogTable"
+					data-id="${pageContext.request.contextPath}/admin/index_v1.jsp"
 					seamless></iframe>
 			</div>
 			<div class="footer">

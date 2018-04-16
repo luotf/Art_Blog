@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<h2>博客详情</h2>
-							<div class="infos" style="margin:0px;">
+							<div class="infos" style="margin:0px auto;width: 91.2%;">
 							<div class="newsview" style="padding-top:0px;">
 								<h3 class="news_title"></h3>
 								<div class="news_author">
@@ -102,36 +102,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="news_infos"></div>
 							</div>
+							<div class="news_pl">
+							   <h2>文章评论</h2>
+								<div id="SOHUCS" ></div>
+
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="modal-form" class="modal fade" aria-hidden="true">
-        <div class="modal-dialog" style="width: 25%;">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                            <h3 class="m-t-none m-b">修改类别名称</h3>
-
-                            <form role="form" id="commentForm2">
-                                <div class="form-group">
-                                    <label>原始名称：</label><span id="oldTypeName"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text"  placeholder="新名称" required="" aria-required="true" class="form-control" id="newTypeName">
-                                </div>
-                                <span class="tip2" style="color:#a94442"></span>
-                                <div id="update">
-                                    
-                                </div>
-                            </form>
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	
 
 
 
@@ -161,8 +143,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+
 	<script>
         
+	window.changyan.api.config({
+		appid: 'cytzgc0zN',
+		conf: 'prod_ec7d15b967a200776168768da4600a2a'
+		});
+	
 	$(document).ready(function() {
 		//参数1表示当前页为1
 		initBlog(1);
@@ -204,32 +193,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 $(".pageNav").html(pageNav);
 			 
              $(".category-list").html(blogList);
-             //console.log(page);
              $(".allTotal").find("b").html(page.total);
              $(".cPage").find("b").html(page.pageNum);
              $(".allPage").find("b").html(page.pages);
              
-             
               //初始化右边详情内容
-              $(".newsview").find(".news_title").html(data[0].title);
-          	  $(".newsview").find(".au02").html(Format(data[0].addtime,"yyyy-MM-dd hh:mm:ss"));
-          	  $(".au03").find('b').html(data[0].clicknum);
-          	  $(".news_about").find(".news_intr").html(data[0].introduction);
-          	  var keyword='' ;
-          	  $(".newsview").find(".tags").html("");
-          	  if(data[0].keyword!=''&&data[0].keyword!=null){
-          		  if(data[0].keyword.search(';')!=-1){
-          			 var strs= new Array();
-          		     strs=data[0].keyword.split(";");
-                       for (var i = 0; i < strs.length&&strs[i]!=''; i++) {
-                  	   keyword +='<a href="#">'+strs[i]+'</a>';
-                    }
-          	    }else{
-          	    	keyword ='<a href="#">'+data[0].keyword+'</a>';
-          	    }
-          	  } 
-          	  	$(".newsview").find(".tags").append(keyword);
-          	  	$(".newsview").find(".news_infos").html(data[0].content);
+             findBlogById(data[0].id);
             	
             	},    
 		    error:function(){
@@ -264,7 +233,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             data:params,
             dataType:'json',    
             success:function (data) {
-               //console.log(data);
               //初始化右边详情内容
               $(".newsview").find(".news_title").html(data.blog.title);
           	  $(".newsview").find(".au02").html(Format(data.blog.addtime,"yyyy-MM-dd hh:mm:ss"));
