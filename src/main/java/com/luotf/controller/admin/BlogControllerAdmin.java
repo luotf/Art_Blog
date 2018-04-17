@@ -169,7 +169,6 @@ public class BlogControllerAdmin {
 		 Blog blog=blogService.selectBlogById(id);
 		 if(blog!=null){
 			 map.put("status", 200);
-			
 		 }else{
 			 //500表示：返回值为Null
 			 map.put("status", 500);
@@ -241,7 +240,6 @@ public class BlogControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectLikeBlogListByPage(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
-		 //System.out.println("type_id:"+blog.getType().getId());
 		 Map returnMap=new HashMap();
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
@@ -262,11 +260,12 @@ public class BlogControllerAdmin {
 	  * @return
 	  * @throws Exception
 	  */
-	 @RequestMapping(value = "/selectGroupLikeBlogListByPage",method = RequestMethod.POST)
+	 @RequestMapping(value = "/selectGroupLikeBlogListByPage")
 	 @ResponseBody
-	 public Map selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+	 public Map selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
-		 
+		// if(sort)
+		 map.put("sort", sort);
 		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
 		 }

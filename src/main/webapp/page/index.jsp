@@ -11,22 +11,8 @@
 <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
-<!--[if lt IE 9]>
-<script src="js/modernizr.js"></script>
-<![endif]-->
-<script>
-window.onload = function ()
-{
-	var oH2 = document.getElementsByTagName("h2")[0];
-	var oUl = document.getElementsByTagName("ul")[0];
-	oH2.onclick = function ()
-	{
-		var style = oUl.style;
-		style.display = style.display == "block" ? "none" : "block";
-		oH2.className = style.display == "block" ? "open" : ""
-	}
-}
-</script>
+<link href="${pageContext.request.contextPath}/css/font-awesome.css"
+	rel="stylesheet">
 </head>
 <body>
 <header>
@@ -57,76 +43,27 @@ window.onload = function ()
 <article>
   <div class="pics animated fadeInUp ">
     <ul>
-      <li><a href="info.jsp"><img src="${pageContext.request.contextPath}/images/t01.jpg"></a><span>这组图片中的静物等非常的日系</span></li>
-      <li><a href="/"><img src="${pageContext.request.contextPath}/images/t02.jpg"></a><span>这组图片中的静物等非常的日系</span></li>
-      <li><a href="/"><img src="${pageContext.request.contextPath}/images/t03.jpg"></a><span>这组图片中的静物等非常的日系</span></li>
+      
     </ul>
   </div>
+  
+  
   <div class="leftbox animated fadeInUp">
-    <div class="tuijian">
+    <div class="tuijian" style="margin: 0px ">
       <h2 class="hometitle"><span><a href="list.jsp">资源分享</a><a href="list.jsp">技术专栏</a><a href="/">面试宝典</a><a href="/">热门标签</a></span>特别推荐</h2>
       <ul>
-        <li>
-          <div class="tpic"><img src="${pageContext.request.contextPath}/images/b01.png"></div>
-          <b>6条网页设计配色原则,让你秒变配色高手</b><span>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</span><a href="/" class="readmore">阅读原文</a></li>
-        <li>
-          <div class="tpic"><img src="${pageContext.request.contextPath}/images/b02.jpg"></div>
-          <b>作为一个设计师,如果遭到质疑你是否能恪守自己的原则</b><span>就拿我自己来说吧，有时候会很矛盾，设计好的作品，不把它分享出来，会觉得待在自己电脑里面实在是没有意义...</span><a href="/" class="readmore">阅读原文</a></li>
-        <li>
-          <div class="tpic"><img src="${pageContext.request.contextPath}/images/b03.jpg"></div>
-          <b>愿有人陪你一起颠沛流离</b><span>有一天晚上我收到朋友的邮件，他问我怎样可以最快地摆脱寂寞，我想了想不知道应该怎么回答他，因为我从来没有摆脱过这个问题，我只能去习惯它，就像习惯身体的一部分...</span><a href="/" class="readmore">阅读原文</a></li>
-        <li>
-          <div class="tpic"><img src="${pageContext.request.contextPath}/images/b04.jpg"></div>
-          <b>你要去相信，没有到不了的明天</b><span>不管你现在是一个人走在异乡的街道上始终没有找到一丝归属感，还是你在跟朋友们一起吃饭开心地笑着的时候闪过一丝落寞。...</span><a href="/" class="readmore">阅读原文</a></li>
-        <li>
-          <div class="tpic"><img src="${pageContext.request.contextPath}/images/b05.jpg"></div>
-          <b>美丽的茧</b><span>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。...</span><a href="/" class="readmore">阅读原文</a></li>
-        <li>
-          <div class="tpic"><img src="${pageContext.request.contextPath}/images/b01.png"></div>
-          <b>6条网页设计配色原则,让你秒变配色高手</b><span>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</span><a href="/" class="readmore">阅读原文</a></li>
+        
       </ul>
     </div>
     <div class="newblogs">
       <h2 class="hometitle">最新文章</h2>
       <ul>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >6条网页设计配色原则,让你秒变配色高手</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/t01.jpg"  /></a></span>
-            <p>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >作为一个设计师,如果遭到质疑你是否能恪守自己的原则</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b01.png"  /></a></span>
-            <p>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >Come on,行动起来吧!我们和时间来一场赛跑!</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b06.jpg"  /></a></span>
-            <p>"时间过得那么飞快,使我的小心眼儿里不只是着急,还有悲伤.有一天,我放学回家,看到太阳快落山了,就下决心说:"我要比太阳更快地回家."我狂奔回去,站在庭院前喘气的时候,看到太阳还露着半边脸,我高兴地跳跃起来,那一天我跑赢了太阳.以后我就时常做那样的游戏,有时和太阳赛跑...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >或许换一个活法,能让你走出阴霾</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b06.jpg"  /></a></span>
-            <p>前段时间回成都,去见了几年未见的老友.一起吃了饭,还带我家宝宝去玩.我问她为什么这么久都还没有打算要孩子,她说,她有一段时间患上了忧郁症,很长的时间才走出来,我听她这么说,我都很惊讶!想问问她原因,可见她欲言又止的神情,我便不再主动问她.就听着她慢慢的说.其实主要的原因还是源自于工作和家庭,工作压力大,每天的程序代码,上级不停的催,她甚至连续好几个通宵的熬夜...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >即便是坑，我也想要拉你入伙！</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b07.jpg"  /></a></span>
-            <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无非就是学会html和css，先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》，如果你还不知道如何着手，请仔细阅读....7天的时间，入门是没有问题的，当然，如果你用心的话！...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
+        
       </ul>
     </div>
   </div>
+  
+  
   <div class="rightbox animated fadeInUp">
     <div class="aboutme">
       <h2 class="ab_title">关于我</h2>
@@ -139,7 +76,7 @@ window.onload = function ()
       </div>
     </div>
     <div class="search1">
-      <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+      <form action="/e/search/index.php" method="get" name="searchform" id="searchform">
         <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
         <input name="show" value="title" type="hidden">
         <input name="tempid" value="1" type="hidden">
@@ -150,23 +87,9 @@ window.onload = function ()
     <div class="paihang">
       <h2 class="ab_title"><a href="/">点击排行</a></h2>
       <ul>
-        <li><b><a href="/" target="_blank">住在手机里的朋友</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无学...</p>
-        </li>
-        <li><b><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门...</p>
-        </li>
-        <li><b><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码</a></b>
-          <p>.先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></b>
-          <p>对于刚毕业的学生来说，.需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>
-          <p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p>
-        </li>
+        
       </ul>
-      <div class="ad"><img src="${pageContext.request.contextPath}/images/ad300x100.jpg"></div>
+      <div class="ad"><img src="${pageContext.request.contextPath}/images/ad300x100.jpg"></div> 
     </div>
     <div class="links">
       <h2 class="ab_title">友情链接</h2>
@@ -187,5 +110,179 @@ window.onload = function ()
 <footer>
   <p>Design by <a href="/">XXX个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
 </footer>
+<!-- 全局js -->
+	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script>
+window.onload = function ()
+{
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function ()
+	{
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : ""
+	}
+}
+	$(document).ready(function() {
+		initBlogByTop();            //初始化置顶的3篇文章
+		initBlogByLike();           //初始化特别推荐6篇文章
+		initBlogByNew();   			//初始化最新5篇文章
+		initBlogByClick();   			//初始化点击排行5篇文章
+	});
+	
+	var initBlogByTop=function(){
+		//设置参数
+		var params ={
+				 pageSize: 3,
+		         page:1,
+		         istop:1  //1 表示置顶
+		};
+		$.ajax({
+            url:'../admin/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var topBlog='';
+            	var data=data.blogList;
+                for (var i = 0; i < data.length; i++) {
+                	topBlog+='<li><a href="find/'+data[i].id+'" onclick=""><img style="width:415px;height:155px;" src="'+data[i].images+'"></a><span>'+data[i].title+'</span></li>'
+                }
+                // 初始化数据
+                $(".pics").find("ul").html(topBlog);
+            },    
+		    error:function(){
+		    	alert("初始化类别失败");
+		    }	
+        });
+	};
+	
+	//初始化推荐
+	var initBlogByLike=function(){
+		//设置参数
+		var params ={
+				 pageSize: 6,
+		         page:1,
+		         isrecommend:1  //1 表示置顶
+		};
+		$.ajax({
+            url:'../admin/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var likeBlog='';
+            	var data=data.blogList;
+                for (var i = 0; i < data.length; i++) {
+                	likeBlog+='<li><div class="tpic"><img src="'+data[i].images+'"></div><b>'+data[i].title+'</b><span>'+data[i].introduction+'</span><a href="../find/'+data[i].id+'" class="readmore">阅读原文</a></li>'
+                }
+                // 初始化数据
+                $(".tuijian").find("ul").html(likeBlog);
+            },    
+		    error:function(){
+		    	alert("初始化类别失败");
+		    }	
+        });
+	};
+	
+	//初始化最新文章
+	var initBlogByNew=function(){
+		//设置参数
+		var params ={
+				 pageSize: 5,
+		         page:1,
+		};
+		$.ajax({
+            url:'../admin/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var newBlog='';
+            	var data=data.blogList;
+            	
+                for (var i = 0; i < data.length; i++) {
+                	newBlog+='<li><h3 class="blogtitle"><a href="../find/'+data[i].id+'"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="../find/'+data[i].id+'" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+data[i].keyword.replace(/;/g,"|")+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="../find/'+data[i].id+'" class="more">阅读原文>></a></span></div></li>'
+                }
+                // 初始化数据
+                $(".newblogs").find("ul").html(newBlog);
+            },    
+		    error:function(){
+		    	alert("初始化类别失败");
+		    }	
+        });
+	};
+	
+	//初始化点击排行
+	var initBlogByClick=function(){
+		//设置参数
+		var params ={
+				 pageSize: 5,
+		         page:1,
+		         sort:"clickNum",   //按点击量排序,默认按时间
+		};
+		$.ajax({
+            url:'../admin/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var clickBlog='';
+            	var data=data.blogList;
+            	 
+                for (var i = 0; i < data.length; i++) {
+                	if(data[i].title.length>35){
+                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
+                	}
+                	
+                	if(data[i].introduction.length>35){
+                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
+                	}
+                	clickBlog+='<li><b><a href="../find/'+data[i].id+'">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
+                }
+                // 初始化数据
+                $(".paihang").find("ul").html(clickBlog);
+            },    
+		    error:function(){
+		    	alert("初始化类别失败");
+		    }	
+        });
+	};
+	
+	 	
+          //格式化时间
+        	function Format(datetime, fmt) {
+        	    if (parseInt(datetime) == datetime) {
+        	        if (datetime.length == 10) {
+        	            datetime = parseInt(datetime) * 1000;
+        	        } else if (datetime.length == 13) {
+        	            datetime = parseInt(datetime);
+        	        }
+        	    }
+        	    datetime = new Date(datetime);
+        	    var o = {
+        	        "M+": datetime.getMonth() + 1,                 //月份   
+        	        "d+": datetime.getDate(),                    //日   
+        	        "h+": datetime.getHours(),                   //小时   
+        	        "m+": datetime.getMinutes(),                 //分   
+        	        "s+": datetime.getSeconds(),                 //秒   
+        	        "q+": Math.floor((datetime.getMonth() + 3) / 3), //季度   
+        	        "S": datetime.getMilliseconds()             //毫秒   
+        	    };
+        	    if (/(y+)/.test(fmt))
+        	        fmt = fmt.replace(RegExp.$1, (datetime.getFullYear() + "").substr(4 - RegExp.$1.length));
+        	    for (var k in o)
+        	        if (new RegExp("(" + k + ")").test(fmt))
+        	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        	    return fmt;
+        	}   	
+        
+    </script>
+
+
+
+
+
 </body>
 </html>

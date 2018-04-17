@@ -192,7 +192,6 @@
   <select id="selectGroupLikeBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
 	select 
 	<include refid="Base_Column_List" />
-   	
 		from t_blog
 		<where>
 		 	<if test="isTop!=null and isTop!=''">
@@ -216,7 +215,11 @@
 		 	</if>
 		 	
 		 </where>
-		  ORDER BY addTime DESC
+		  ORDER BY 
+		  <if test="sort!=null and sort!=''">
+		 	#{sort}
+		  </if>
+		  DESC
 		 <!--  <if test="pageNow!=null and pageSize!=null">
 		 	limit #{pageNow},#{pageSize}
 		 </if>

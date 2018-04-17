@@ -6,7 +6,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="typeName" jdbcType="VARCHAR" property="typename" />
     <result column="num" jdbcType="INTEGER" property="num" />
-    
+   <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
+   
     <!-- 配置 一对多 关联关系 -->
     <collection property="blogs" javaType="ArrayList" column="id"
     ofType="com.luotf.model.Blog" select="com.luotf.mapper.BlogMapper.selectBlogByTypeId" fetchType="lazy">
@@ -15,16 +16,45 @@
     
   </resultMap>
   <sql id="Base_Column_List">
-    
-    id, typeName, num
+    id, typeName, num,addTime
   </sql>
+   
+  <select id="selectBlogTypeListByPage" parameterType="Map" resultMap="BaseResultMap">
+	SELECT 
+	<include refid="Base_Column_List" />
+		 from t_blogtype
+		<where>
+		 	<if test="typeName!=null and typeName!=''">
+		 		and typeName like CONCAT(CONCAT('%', #{typeName}), '%')
+		 	</if>
+		 	
+		 	<if test="addTime!=null and addTime!=''">
+		 		and DATE_FORMAT(addTime,'%Y-%m-%d')=#{addTime}
+		 	</if>
+		 </where>
+		  ORDER BY num DESC
+		 <!--  <if test="pageNow!=null and pageSize!=null">
+		 	limit #{pageNow},#{pageSize}
+		 </if>
+		 -->
+	</select>
+  
+  
   <select id="selectBlogTypeById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     
     select 
     <include refid="Base_Column_List" />
     from t_blogtype
-    where id = #{type.id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectBlogTypeByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_blogtype
+    where typeName = #{typename,jdbcType=VARCHAR}
+  </select>
+  
   <delete id="deleteBlogTypeById" parameterType="java.lang.Integer">
     
     delete from t_blogtype
@@ -32,9 +62,9 @@
   </delete>
   <insert id="insertBlogType" parameterType="com.luotf.model.BlogType">
     
-    insert into t_blogtype (id, typeName, num
+    insert into t_blogtype (id, typeName, num,addTime
       )
-    values (#{id,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{typename,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER},#{addTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertBlogTypeSelective" parameterType="com.luotf.model.BlogType">
@@ -50,6 +80,9 @@
       <if test="num != null">
         num,
       </if>
+      <if test="addTime != null">
+      addTime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -61,6 +94,10 @@
       <if test="num != null">
         #{num,jdbcType=INTEGER},
       </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+     
     </trim>
   </insert>
   <update id="updateBlogTypeSelective" parameterType="com.luotf.model.BlogType">
@@ -73,6 +110,9 @@
       <if test="num != null">
         num = #{num,jdbcType=INTEGER},
       </if>
+      <if test="addTime != null">
+        addTime = #{addTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -80,7 +120,7 @@
     
     update t_blogtype
     set typeName = #{typename,jdbcType=VARCHAR},
-      num = #{num,jdbcType=INTEGER}
+      num = #{num,jdbcType=INTEGER},addTime = #{addTime,jdbcType=TIMESTAMP},
     where id = #{id,jdbcType=INTEGER}
   </update>
   
