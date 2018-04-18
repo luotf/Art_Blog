@@ -19,7 +19,12 @@ public class BlogServiceImpl implements BlogService{
 	@Override
 	public Blog selectBlogById(Integer id) {
 		// TODO Auto-generated method stub
-		return blogMapper.selectBlogById(id);
+		Blog blog=blogMapper.selectBlogById(id);
+		if(blog!=null){
+			blog.setClicknum(blog.getClicknum()+1);
+			blogMapper.updateBlogSelective(blog);
+		}
+		return blog;
 	}
 
 	@Override

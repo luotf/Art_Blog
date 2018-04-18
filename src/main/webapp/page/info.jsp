@@ -14,9 +14,7 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css"
 	rel="stylesheet">
-<script>
 
-</script>
 </head>
 <body>
 	<header>
@@ -60,55 +58,46 @@
 
 					<c:choose>
 						<c:when test="${status== '0' || status== '500'}">
-        	出错啦
-         </c:when>
+			        		出错啦
+			        	</c:when>
 						<c:otherwise>
 							<h3 class="news_title">${blog.title}</h3>
+							<input class="id" type="hidden" value="${blog.id}">
 							<div class="news_author">
-								<span class="au01">罗廷方</span><span class="au02">
-								<input
+								<span class="au01">罗廷方</span><span class="au02"> <input
 									class="addtime" type="hidden" value="${blog.addtime}"></span><span
 									class="au03">共<b>${blog.clicknum}</b>人围观
 								</span>
 							</div>
+							<input class="typeId" type="hidden" value="${blog.type.id}">
 							<div class="tags">
-							<input class="tag" type="hidden" value="${blog.keyword}">
+								<input class="tag" type="hidden" value="${blog.keyword}">
 							</div>
 							<div class="news_about">
 								<strong>简介</strong>${blog.introduction}</div>
 							<div class="news_infos">${blog.content}</div>
 						</c:otherwise>
 					</c:choose>
-
-
-
 				</div>
 				<div class="share">分享：</div>
 			</div>
 			<div class="nextinfo">
 				<p>
-					上一篇：<a href="/">传微软将把入门级Surface平板价格下调150美元</a>
+					上一篇：<span class="pre"></span>
 				</p>
 				<p>
-					下一篇：<a href="/">云南之行——大理洱海一日游</a>
+					下一篇：<span class="next"></span>
 				</p>
 			</div>
 			<div class="otherlink">
 				<h2>相关文章</h2>
 				<ul>
-					<li><a href="/" title="云南之行——丽江古镇玉龙雪山">云南之行——丽江古镇玉龙雪山</a></li>
-					<li><a href="/" title="云南之行——大理洱海一日游">云南之行——大理洱海一日游</a></li>
-					<li><a href="/" target="_blank">住在手机里的朋友</a></li>
-					<li><a href="/" target="_blank">豪雅手机正式发布! 在法国全手工打造的奢侈品</a></li>
-					<li><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></li>
-					<li><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码...</a></li>
+					
 				</ul>
 			</div>
 			<div class="news_pl">
 				<h2>文章评论</h2>
-				<ul>
-
-				</ul>
+				<div id="SOHUCS" sid="${blog.id }"></div>
 			</div>
 		</div>
 		<div class="rightbox animated fadeInUp">
@@ -180,56 +169,152 @@
 		</p>
 	</footer>
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
 	<script type="text/javascript">
-//格式化时间
-$(document).ready(function() {
-	$(".au02").html(Format($(".addtime").val()));
-	Tags();
-	});
 	
-window.onload = function ()
-{
-	var oH2 = document.getElementsByTagName("h2")[0];
-	var oUl = document.getElementsByTagName("ul")[0];
-	oH2.onclick = function ()
-	{
-		var style = oUl.style;
-		style.display = style.display == "block" ? "none" : "block";
-		oH2.className = style.display == "block" ? "open" : ""
-	}
-}
+	window.changyan.api.config({
+		appid: 'cytzg9rLH',
+		conf: 'prod_230eb23e872ad7a4302e5802e6f91bf9'
+		});
 
-function Tags(){
-	var tag=$(".tag").val();
-	var keyword="";
-	  $(".newsview").find(".tags").html("");
-	  if(tag!=''&&tag!=null){
-		  if(tag.search(';')!=-1){
-			 var strs= new Array();
-		     strs=tag.split(";");
-             for (var i = 0; i < strs.length&&strs[i]!=''; i++) {
-        	   keyword +='<a href="#">'+strs[i]+'</a>';
-          }
-	    }else{
-	    	keyword ='<a href="#">'+tag+'</a>';
-	    }
-	  } 
-	  	$(".newsview").find(".tags").append(keyword);
-}
+		$(document).ready(function() {
+			Format();
+			Tags();
+			selectPrevBlog();
+			selectNextBlog();
+			initBlogByRel();   //初始化相关文章
+		});
 
-	//格式化时间
-function Format(datetime) {
-	var month=new Array(); 
-	month["Jan"] = '01'; month["Feb"] = '02'; month["Mar"] = '03'; month["Apr"] = '04'; month["May"] = '05'; month["Jan"] = '06'; 
-    month["Jul"] = '07'; month["Aug"] = '08'; month["Sep"] = '09'; month["Oct"] = 10; month["Nov"] = 11; month["Dec"] = 12;
-	var arr=new Array();
-	arr=datetime.split(" ");
-	var fmt=arr[5]+'-'+month[arr[1]]+'-'+arr[2];
-    return fmt;
-}
-        	
-        	
-    </script>
+		//加载完成后
+		window.onload = function() {
+			var oH2 = document.getElementsByTagName("h2")[0];
+			var oUl = document.getElementsByTagName("ul")[0];
+			oH2.onclick = function() {
+				var style = oUl.style;
+				style.display = style.display == "block" ? "none" : "block";
+				oH2.className = style.display == "block" ? "open" : ""
+			}
+		}
+
+		var Tags=function() {
+			var tag = $(".tag").val();
+			var keyword = "";
+			$(".newsview").find(".tags").html("");
+			if (tag != '' && tag != null) {
+				if (tag.search(';') != -1) {
+					var strs = new Array();
+					strs = tag.split(";");
+					for (var i = 0; i < strs.length && strs[i] != ''; i++) {
+						keyword += '<a href="#">' + strs[i] + '</a>';
+					}
+				} else {
+					keyword = '<a href="#">' + tag + '</a>';
+				}
+			}
+			$(".newsview").find(".tags").append(keyword);
+		}
+
+		var selectPrevBlog=function(){
+			var id=$(".id").val();
+			var params ={
+					id:id
+			};
+			$.ajax({
+	            url:'../selectPrevBlog',    
+	            type:'get',
+	            data:params,
+	            dataType:'json',    
+	            success:function (data) {
+	              var id=data.blog.id.toString(8)*data.blog.id;
+	              var preTitle='<a href="../find/'+id+'.html">'+data.blog.title+'</a>';
+	          	  	$(".pre").html(preTitle);
+	            	}, 
+			    error:function(){
+			    	alert("初始化失败");
+			    }	
+	        });
+			
+		};
+
+		var selectNextBlog=function(){
+			var id=$(".id").val();
+			var params ={
+					id:id
+			};
+			$.ajax({
+	            url:'../selectNextBlog',    
+	            type:'get',
+	            data:params,
+	            dataType:'json',    
+	            success:function (data) {
+	              var id=data.blog.id.toString(8)*data.blog.id;
+	              var nextTitle='<a href="../find/'+id+'.html">'+data.blog.title+'</a>';
+	          	  	$(".next").html(nextTitle);
+	            	}, 
+			    error:function(){
+			    	alert("初始化失败");
+			    }	
+	        });
+			
+		};
+		
+		//初始化相关文章
+		var initBlogByRel=function(){
+			//设置参数
+			
+			var params ={
+					 pageSize: 6,
+			         page:1,
+			         'type.id':$(".typeId").val(),
+			        // sort:"clickNum",   //按点击量排序,默认按时间
+			};
+			$.ajax({
+	            url:'../../admin/selectGroupLikeBlogListByPage',    
+	            type:'get',
+	            data:params,
+	            dataType:'json',    
+	            success:function (data) {
+	            	var relBlog='';
+	            	var data=data.blogList;
+	                for (var i = 0; i < data.length; i++) {
+	                	if(data[i].title.length>20){
+	                		data[i].title=data[i].title.substring(0,19)+"...";
+	                	}
+	                	var id=data[i].id.toString(8)*data[i].id;
+	                	relBlog+='<li><a href="'+id+'.html" title="'+data[i].title+'">'+data[i].title+'</a></li>'
+	                }
+	                // 初始化数据
+	                $(".otherlink").find("ul").html(relBlog);
+	            },    
+			    error:function(){
+			    	alert("初始化类别失败");
+			    }	
+	        });
+		};
+		
+		//格式化时间
+		var Format=function() {
+			var datetime=$(".addtime").val();
+			var month = new Array();
+			month["Jan"] = '01';
+			month["Feb"] = '02';
+			month["Mar"] = '03';
+			month["Apr"] = '04';
+			month["May"] = '05';
+			month["Jan"] = '06';
+			month["Jul"] = '07';
+			month["Aug"] = '08';
+			month["Sep"] = '09';
+			month["Oct"] = 10;
+			month["Nov"] = 11;
+			month["Dec"] = 12;
+			var arr = new Array();
+			arr = datetime.split(" ");
+			var fmt = arr[5] + '-' + month[arr[1]] + '-' + arr[2];
+			$(".au02").html(fmt);
+		}
+	</script>
 
 </body>
 </html>

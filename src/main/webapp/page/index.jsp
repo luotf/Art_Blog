@@ -147,7 +147,8 @@ window.onload = function ()
             	var topBlog='';
             	var data=data.blogList;
                 for (var i = 0; i < data.length; i++) {
-                	topBlog+='<li><a href="find/'+data[i].id+'" onclick=""><img style="width:415px;height:155px;" src="'+data[i].images+'"></a><span>'+data[i].title+'</span></li>'
+                	var id=data[i].id.toString(8)*data[i].id;
+                	topBlog+='<li><a href="find/'+id+'.html" onclick=""><img style="width:415px;height:155px;" src="'+data[i].images+'"></a><span>'+data[i].title+'</span></li>'
                 }
                 // 初始化数据
                 $(".pics").find("ul").html(topBlog);
@@ -175,7 +176,8 @@ window.onload = function ()
             	var likeBlog='';
             	var data=data.blogList;
                 for (var i = 0; i < data.length; i++) {
-                	likeBlog+='<li><div class="tpic"><img src="'+data[i].images+'"></div><b>'+data[i].title+'</b><span>'+data[i].introduction+'</span><a href="../find/'+data[i].id+'" class="readmore">阅读原文</a></li>'
+                	var id=data[i].id.toString(8)*data[i].id;
+                	likeBlog+='<li><div class="tpic"><img src="'+data[i].images+'"></div><b>'+data[i].title+'</b><span>'+data[i].introduction+'</span><a href="find/'+id+'.html" class="readmore">阅读原文</a></li>'
                 }
                 // 初始化数据
                 $(".tuijian").find("ul").html(likeBlog);
@@ -203,7 +205,8 @@ window.onload = function ()
             	var data=data.blogList;
             	
                 for (var i = 0; i < data.length; i++) {
-                	newBlog+='<li><h3 class="blogtitle"><a href="../find/'+data[i].id+'"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="../find/'+data[i].id+'" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+data[i].keyword.replace(/;/g,"|")+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="../find/'+data[i].id+'" class="more">阅读原文>></a></span></div></li>'
+                	var id=data[i].id.toString(8)*data[i].id;
+                	newBlog+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+data[i].keyword.replace(/;/g,"|")+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
                 }
                 // 初始化数据
                 $(".newblogs").find("ul").html(newBlog);
@@ -232,14 +235,12 @@ window.onload = function ()
             	var data=data.blogList;
             	 
                 for (var i = 0; i < data.length; i++) {
-                	if(data[i].title.length>35){
-                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
-                	}
                 	
                 	if(data[i].introduction.length>35){
                 		data[i].introduction=data[i].introduction.substring(0,34)+"...";
                 	}
-                	clickBlog+='<li><b><a href="../find/'+data[i].id+'">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
+                	var id=data[i].id.toString(8)*data[i].id;
+                	clickBlog+='<li><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
                 }
                 // 初始化数据
                 $(".paihang").find("ul").html(clickBlog);
@@ -256,7 +257,7 @@ window.onload = function ()
         	    if (parseInt(datetime) == datetime) {
         	        if (datetime.length == 10) {
         	            datetime = parseInt(datetime) * 1000;
-        	        } else if (datetime.length == 13) {
+        	        }else if (datetime.length == 13) {
         	            datetime = parseInt(datetime);
         	        }
         	    }

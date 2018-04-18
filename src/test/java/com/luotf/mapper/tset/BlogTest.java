@@ -81,4 +81,17 @@ public class BlogTest{
 		System.out.println(list);
 	 }
 
+    @Test
+    public  void BlogIdToSafe(){
+		int id=2279;
+    	int bId=0;
+    	System.out.println(Integer.toOctalString(id));
+		for(int i=2;i<id;i++){
+			if((Integer.parseInt(Integer.toOctalString(i))*i)==id){
+				bId=i;
+				break;
+			}
+		}
+		System.out.println("bid:"+bId);
+	}
 }
