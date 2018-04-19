@@ -11,6 +11,7 @@
 .pics ul li span { width: 100%; display: block; position: absolute; bottom: 10px; background: #000; line-height: 30px; height: 30px; overflow: hidden; text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px; color: #ccc; padding-left: 10px }
 .pics ul li:hover img { transform: scale(1.1) }
 /*h2*/
+
 .hometitle { padding: 0 10px; line-height: 40px; height: 40px; font-size: 18px; ; border-bottom: #000 2px solid; position: relative; }
 .hometitle span { float: right; font-weight: normal; font-size: 14px; height: 42px; overflow: hidden; position: absolute; right: 0; width: 100%; text-align: right }
 .hometitle span a { display: block; float: right; position: relative; overflow: hidden; margin-right: 20px }

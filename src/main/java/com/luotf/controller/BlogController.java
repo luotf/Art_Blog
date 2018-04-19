@@ -30,7 +30,6 @@ public class BlogController {
 	private BlogService blogService;
 	
 	
-	
 	 @RequestMapping(value = "/find/{id}.html")
 	 public String selectBlogById(@PathVariable Integer id,Model model) throws Exception {
 		 int sId=BlogIdSafe.BlogIdToSafe(id);

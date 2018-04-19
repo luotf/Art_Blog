@@ -1,3 +1,3 @@
 eclipse.preferences.version=1
-validator.Checked=src/main/webapp/js/demo/table_base.json,src/main/webapp/js/jquery-2.1.1.min.js,src/main/webapp/js/jquery.min.js,src/main/webapp/js/demo/photos.json
+validator.Checked=src/main/webapp/js/layer,src/main/webapp/js/jquery-2.1.1.min.js,src/main/webapp/js/demo/table_base.json,src/main/webapp/js/demo/photos.json,src/main/webapp/js/jquery.min.js,src/main/webapp/js/layer.js,src/main/webapp/js/layui.js
 validator.Unchecked=

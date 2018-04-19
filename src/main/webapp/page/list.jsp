@@ -11,22 +11,6 @@
 <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
-<!--[if lt IE 9]>
-<script src="${pageContext.request.contextPath}/js/modernizr.js"></script>
-<![endif]-->
-<script>
-window.onload = function ()
-{
-	var oH2 = document.getElementsByTagName("h2")[0];
-	var oUl = document.getElementsByTagName("ul")[0];
-	oH2.onclick = function ()
-	{
-		var style = oUl.style;
-		style.display = style.display == "block" ? "none" : "block";
-		oH2.className = style.display == "block" ? "open" : ""
-	}
-}
-</script>
 </head>
 <body>
 <header>
@@ -133,7 +117,7 @@ window.onload = function ()
       <div class="pagelist"><a title="Total record">&nbsp;<b>142</b> </a>&nbsp;&nbsp;<a href="index.html">首页</a>&nbsp;<a href="/jstt/index.html">上一页</a>&nbsp;<a href="/jstt/index.html">1</a>&nbsp;<b>2</b>&nbsp;<a href="/jstt/index_3.html">3</a>&nbsp;<a href="/jstt/index_4.html">4</a>&nbsp;<a href="/jstt/index_5.html">5</a>&nbsp;<a href="/jstt/index_6.html">6</a>&nbsp;<a href="/jstt/index_3.html">下一页</a>&nbsp;<a href="/jstt/index_6.html">尾页</a></div>
     </div>
   </div>
-  <div class="rightbox animated fadeInUp">
+  <div class="rightbox">
     <div class="search1">
       <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
         <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
@@ -186,7 +170,7 @@ window.onload = function ()
       <div class="ad"><img src="${pageContext.request.contextPath}/images/ad01.jpg"></div>
     </div>
     <div class="weixin">
-      <h2 class="ab_title">打赏</h2>
+      <h2 class="ab_title">公众号</h2>
       <ul>
         <img src="${pageContext.request.contextPath}/images/wx.jpg">
       </ul>
@@ -196,5 +180,24 @@ window.onload = function ()
 <footer>
   <p>Design by <a href="/">XXX个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
 </footer>
+<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		
+	});
+
+
+	window.onload = function (){
+		var oH2 = document.getElementsByTagName("h2")[0];
+		var oUl = document.getElementsByTagName("ul")[0];
+		oH2.onclick = function ()
+		{
+			var style = oUl.style;
+			style.display = style.display == "block" ? "none" : "block";
+			oH2.className = style.display == "block" ? "open" : ""
+		}
+}
+</script>
+
 </body>
 </html>

@@ -113,8 +113,7 @@
 <!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script>
-window.onload = function ()
-{
+window.onload = function (){
 	var oH2 = document.getElementsByTagName("h2")[0];
 	var oUl = document.getElementsByTagName("ul")[0];
 	oH2.onclick = function ()
@@ -125,9 +124,9 @@ window.onload = function ()
 	}
 }
 	$(document).ready(function() {
-		initBlogByTop();            //初始化置顶的3篇文章
-		initBlogByLike();           //初始化特别推荐6篇文章
-		initBlogByNew();   			//初始化最新5篇文章
+		initBlogByTop();              //初始化置顶的3篇文章
+		initBlogByLike();             //初始化特别推荐6篇文章
+		initBlogByNew();   			  //初始化最新5篇文章
 		initBlogByClick();   			//初始化点击排行5篇文章
 	});
 	
