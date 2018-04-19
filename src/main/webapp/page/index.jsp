@@ -41,67 +41,58 @@
   </nav>
 </header>
 <article>
-  <div class="pics animated fadeInUp ">
-    <ul>
+  <div class="pics ">
+    <ul >
       
     </ul>
   </div>
   
   
-  <div class="leftbox animated fadeInUp">
+  <div class="leftbox ">
     <div class="tuijian" style="margin: 0px ">
-      <h2 class="hometitle"><span><a href="list.jsp">资源分享</a><a href="list.jsp">技术专栏</a><a href="/">面试宝典</a><a href="/">热门标签</a></span>特别推荐</h2>
-      <ul>
+      <h2 class="hometitle "><span><a href="list.jsp">资源分享</a><a href="list.jsp">技术专栏</a><a href="/">面试宝典</a><a href="/">热门标签</a></span>特别推荐</h2>
+      <ul class="animated fadeInDown">
         
       </ul>
     </div>
     <div class="newblogs">
       <h2 class="hometitle">最新文章</h2>
-      <ul>
+      <ul class="animated fadeInDown">
         
       </ul>
     </div>
   </div>
   
   
-  <div class="rightbox animated fadeInUp">
+  <div class="rightbox">
     <div class="aboutme">
-      <h2 class="ab_title">关于我</h2>
-      <div class="avatar"><img src="${pageContext.request.contextPath}/images/my.jpeg" /></div>
-      <div class="ab_con">
+      <h2 class="ab_title ">关于我</h2>
+      <div class="avatar animated fadeInDown"><img src="${pageContext.request.contextPath}/images/my.jpeg" /></div>
+      <div class="ab_con animated fadeInDown">
         <p>网名：我倾尽一生,囚你无期 | Luotf</p>
         <p>职业：Java开发工程师 | 全栈 </p>
         <p>籍贯：四川省—成都市</p>
         <p>邮箱：849673404@qq.com</p>
       </div>
     </div>
-    <div class="search1">
-      <form action="/e/search/index.php" method="get" name="searchform" id="searchform">
-        <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
-        <input name="show" value="title" type="hidden">
-        <input name="tempid" value="1" type="hidden">
-        <input name="tbname" value="news" type="hidden">
-        <input name="Submit" class="input_submit" value="搜索" type="submit">
-      </form>
-    </div>
     <div class="paihang">
       <h2 class="ab_title"><a href="/">点击排行</a></h2>
-      <ul>
+      <ul class="animated fadeInDown">
         
       </ul>
       <div class="ad"><img src="${pageContext.request.contextPath}/images/ad300x100.jpg"></div> 
     </div>
     <div class="links">
       <h2 class="ab_title">友情链接</h2>
-      <ul>
+      <ul class="animated fadeInDown">
         <li><a href="/">XXX Github</a></li>
         <li><a href="/">XXX Gitee&nbsp;&nbsp;</a></li>
         <li><a href="/">优秀个人博客</a></li>
       </ul>
     </div>
     <div class="weixin">
-      <h2 class="ab_title">打赏</h2>
-      <ul>
+      <h2 class="ab_title">公众号</h2>
+      <ul class="animated fadeInDown">
         <img src="${pageContext.request.contextPath}/images/wx.jpg">
       </ul>
     </div>

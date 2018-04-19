@@ -61,6 +61,10 @@ public interface BlogService {
 
  	List<Blog> selectGroupLikeBlogListByPage(Map<String, Object> map);
  	
+ 	
+ 	List<Blog> selectLikeBlogListByPageWithBlobs(Map<String, Object> map);
+ 	
+ 	
 	List<Blog> selectBlogByTypeId(Integer id);
 
 	/**

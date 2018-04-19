@@ -146,13 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
 
 	<script>
-	  var pl='<div id="SOHUCS"></div>';
-	  	$(".news_pl").html(pl);
-	    window.changyan.api.config({
-		appid: 'cytzgc0zN',
-		conf: 'prod_ec7d15b967a200776168768da4600a2a'
-		});
-	 
+	  
 	$(document).ready(function() {
 		//参数1表示当前页为1
 		initBlog(1);

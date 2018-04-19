@@ -8,9 +8,12 @@
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/font-awesome.css"
+	rel="stylesheet">
 </head>
 <body>
 <header>
@@ -39,153 +42,259 @@
   </nav>
 </header>
 <article>
-  <div class="leftbox animated fadeInUp">
-    <div class="newblogs">
+  <div class="leftbox">
+    <div class="newblogs ">
       <h2 class="hometitle"><span><a href="">心得笔记</a><a href="">Java</a><a href="">问题汇总</a><a href="">Mysql</a></span>技术专栏</h2>
-      <ul>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >6条网页设计配色原则,让你秒变配色高手</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/t01.jpg"  /></a></span>
-            <p>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >作为一个设计师,如果遭到质疑你是否能恪守自己的原则</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b01.png"  /></a></span>
-            <p>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >Come on,行动起来吧!我们和时间来一场赛跑!</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b06.jpg"  /></a></span>
-            <p>"时间过得那么飞快,使我的小心眼儿里不只是着急,还有悲伤.有一天,我放学回家,看到太阳快落山了,就下决心说:"我要比太阳更快地回家."我狂奔回去,站在庭院前喘气的时候,看到太阳还露着半边脸,我高兴地跳跃起来,那一天我跑赢了太阳.以后我就时常做那样的游戏,有时和太阳赛跑...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >或许换一个活法,能让你走出阴霾</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b06.jpg"  /></a></span>
-            <p>前段时间回成都,去见了几年未见的老友.一起吃了饭,还带我家宝宝去玩.我问她为什么这么久都还没有打算要孩子,她说,她有一段时间患上了忧郁症,很长的时间才走出来,我听她这么说,我都很惊讶!想问问她原因,可见她欲言又止的神情,我便不再主动问她.就听着她慢慢的说.其实主要的原因还是源自于工作和家庭,工作压力大,每天的程序代码,上级不停的催,她甚至连续好几个通宵的熬夜...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >即便是坑，我也想要拉你入伙！</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b07.jpg"  /></a></span>
-            <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无非就是学会html和css，先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》，如果你还不知道如何着手，请仔细阅读....7天的时间，入门是没有问题的，当然，如果你用心的话！...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >6条网页设计配色原则,让你秒变配色高手</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/t01.jpg"  /></a></span>
-            <p>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >作为一个设计师,如果遭到质疑你是否能恪守自己的原则</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b01.png"  /></a></span>
-            <p>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >Come on,行动起来吧!我们和时间来一场赛跑!</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b06.jpg"  /></a></span>
-            <p>"时间过得那么飞快,使我的小心眼儿里不只是着急,还有悲伤.有一天,我放学回家,看到太阳快落山了,就下决心说:"我要比太阳更快地回家."我狂奔回去,站在庭院前喘气的时候,看到太阳还露着半边脸,我高兴地跳跃起来,那一天我跑赢了太阳.以后我就时常做那样的游戏,有时和太阳赛跑...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >或许换一个活法,能让你走出阴霾</a></h3>
-          <div class="bloginfo"><!--<span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b06.jpg"  /></a></span>-->
-            <p>前段时间回成都,去见了几年未见的老友.一起吃了饭,还带我家宝宝去玩.我问她为什么这么久都还没有打算要孩子,她说,她有一段时间患上了忧郁症,很长的时间才走出来,我听她这么说,我都很惊讶!想问问她原因,可见她欲言又止的神情,我便不再主动问她.就听着她慢慢的说.其实主要的原因还是源自于工作和家庭,工作压力大,每天的程序代码,上级不停的催,她甚至连续好几个通宵的熬夜...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
-        <li>
-          <h3 class="blogtitle"><a href="/" target="_blank" >即便是坑，我也想要拉你入伙！</a></h3>
-          <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img src="${pageContext.request.contextPath}/images/b07.jpg"  /></a></span>
-            <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无非就是学会html和css，先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》，如果你还不知道如何着手，请仔细阅读....7天的时间，入门是没有问题的，当然，如果你用心的话！...</p>
-          </div>
-          <div class="autor"><span class="lm f_l"><a href="/">XXX个人博客</a></span><span class="dtime f_l">2014-02-19</span><span class="viewnum f_l">浏览（<a href="/">459</a>）</span><span class="pingl f_l">评论（<a href="/">30</a>）</span><span class="f_r"><a href="/" class="more">阅读原文>></a></span></div>
-        </li>
+      <ul class="animated fadeInDown">
+      
       </ul>
-      <div class="pagelist"><a title="Total record">&nbsp;<b>142</b> </a>&nbsp;&nbsp;<a href="index.html">首页</a>&nbsp;<a href="/jstt/index.html">上一页</a>&nbsp;<a href="/jstt/index.html">1</a>&nbsp;<b>2</b>&nbsp;<a href="/jstt/index_3.html">3</a>&nbsp;<a href="/jstt/index_4.html">4</a>&nbsp;<a href="/jstt/index_5.html">5</a>&nbsp;<a href="/jstt/index_6.html">6</a>&nbsp;<a href="/jstt/index_3.html">下一页</a>&nbsp;<a href="/jstt/index_6.html">尾页</a></div>
+      <div class="pagelist "><a title="Total record">&nbsp;<b>142</b> </a>&nbsp;&nbsp;<a href="index.html">首页</a>&nbsp;<a href="/jstt/index.html">上一页</a>&nbsp;<a href="/jstt/index.html">1</a>&nbsp;<b>2</b>&nbsp;<a href="/jstt/index_3.html">3</a>&nbsp;<a href="/jstt/index_4.html">4</a>&nbsp;<a href="/jstt/index_5.html">5</a>&nbsp;<a href="/jstt/index_6.html">6</a>&nbsp;<a href="/jstt/index_3.html">下一页</a>&nbsp;<a href="/jstt/index_6.html">尾页</a></div>
     </div>
   </div>
   <div class="rightbox">
     <div class="search1">
-      <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
-        <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
-        <input name="show" value="title" type="hidden">
-        <input name="tempid" value="1" type="hidden">
-        <input name="tbname" value="news" type="hidden">
-        <input name="Submit" class="input_submit" value="搜索" type="submit">
+      <form action="" method="post" name="searchform" id="searchform">
+        <input name="keyword" id="keyword"  class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+        <input name="Submit" class="input_submit" value="搜索" type="button" onclick="search()">
       </form>
+     
+     <ul class="tag-list animated fadeIn" style="padding: 0">
+		
+	</ul >
+	
     </div>
-    <div class="paihang">
-      <h2 class="ab_title"><a href="/">本栏推荐</a></h2>
-      <ul>
-        <li><b><a href="/" target="_blank">住在手机里的朋友</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无学...</p>
-        </li>
-        <li><b><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门...</p>
-        </li>
-        <li><b><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码</a></b>
-          <p>.先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></b>
-          <p>对于刚毕业的学生来说，.需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>
-          <p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p>
-        </li>
-      </ul>
-      <div class="ad"><img src="${pageContext.request.contextPath}/images/ad300x100.jpg"></div>
-    </div>
-    <div class="paihang">
-      <h2 class="ab_title"><a href="">点击排行</a></h2>
-      <ul>
-        <li><b><a href="/" target="_blank">住在手机里的朋友</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无学...</p>
-        </li>
-        <li><b><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门...</p>
-        </li>
-        <li><b><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码</a></b>
-          <p>.先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></b>
-          <p>对于刚毕业的学生来说，.需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>
-          <p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p>
-        </li>
-      </ul>
-      <div class="ad"><img src="${pageContext.request.contextPath}/images/ad01.jpg"></div>
-    </div>
+    
+      <div class="paihang " >
+				<h2 class="ab_title">
+					<a href="/">本栏推荐</a>
+				</h2>
+				<ul class="like animated fadeInDown" >
+
+				</ul>
+				<div class="ad"></div>
+			</div>
+			<div class="paihang ">
+				<h2 class="ab_title">
+					<a href="/">点击排行</a>
+				</h2>
+				<ul class="click animated fadeInDown">
+
+				</ul>
+
+			</div>
+    
     <div class="weixin">
       <h2 class="ab_title">公众号</h2>
-      <ul>
-        <img src="${pageContext.request.contextPath}/images/wx.jpg">
+      <ul class="animated fadeInDown">
+        
       </ul>
     </div>
   </div>
 </article>
-<footer>
-  <p>Design by <a href="/">XXX个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
-</footer>
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 <script>
 	$(document).ready(function() {
-		
+		//初始化类别信息
+		initBlogType();
+		//初始化技术专栏的信息
+		initBlogListByPage(1);
+		initBlogByLike();
+		initBlogByClick();
 	});
-
+	var initBlogListByPage=function(pageNum){
+		//查询出文章
+		//获取关键字，表示查询所有符合的记录
+		var keyword=$("#keyword").val();
+		if(keyword=="请输入关键字")
+			keyword="";
+		var params ={
+				pageSize: 10,
+	            page:pageNum,
+	            title:keyword,
+	            content:keyword,
+	            introduction:keyword,
+	            keyword:keyword,
+	           	status:1  //1 表示已发布
+		};
+		$.ajax({
+            url:'../page/selectLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var blogList='';
+            	var page=data.pageInfo;
+            	var data=data.blogList;
+            	if(data.length>0){
+            		 for (var i = 0; i < data.length; i++) {
+                      	var id=data[i].id.toString(8)*data[i].id;
+                      	blogList+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+data[i].keyword.replace(/;/g,"|")+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
+                      }
+            	}else{
+            		blogList="无查询结果";
+            	}
+            	 $(".newblogs").find("ul").html(blogList);
+            	 
+            /*  var pageNav='';
+             var prePage=page.pageNum-1;
+             var nextPage=page.pageNum+1;
+             var first='<a href="#" title="首页" onclick="pageNav(1,'+page.pages+')"><i class="fa fa-angle-double-left"></i></a>&nbsp;&nbsp;';
+			 var pre='<a href="#" title="上一页" onclick="pageNav('+prePage+','+page.pages+')"><i class="fa fa-angle-left" ></i></a>&nbsp;&nbsp;';
+			 var next='<a href="#" title="下一页" onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-angle-right"></i></a>&nbsp;&nbsp;';
+			 var last='<a href="#" title="尾页" onclick="pageNav('+page.pages+','+page.pages+')"><i class="fa fa-angle-double-right"></i></a>';	
+			 pageNav=first+pre+next+last;
+			 
+			 $(".pageNav").html(pageNav);
+			 
+             $(".category-list").html(blogList);
+             $(".allTotal").find("b").html(page.total);
+             $(".cPage").find("b").html(page.pageNum);
+             $(".allPage").find("b").html(page.pages); */
+            
+             
+            	},    
+		    error:function(){
+		    	alert("初始化失败");
+		    }	
+        });
+	};
+	
+	var search=function(){
+		var index ='';
+	     layer.ready(function(){
+	    	index=layer.load(2, {
+				  shade: [0.1,'#eee'] //0.1透明度的白色背景
+	    	});
+	    }); 
+	     initBlogListByPage(1);
+		setTimeout(function () {
+			layer.close(index);
+		},200);
+	}
+	
+	//初始化所有类别信息
+	var initBlogType=function(){
+		//查询出文章类别
+		//设置参数，表示查询所有的类别
+		var params ={
+				"data":"all"
+		};
+		$.ajax({
+            url:'../admin/selectBlogType',    
+            type:'post',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var typeName='';
+                for (var i = 0; i < data.length; i++) {
+                	typeName+='<li><a style="padding: 5px;margin-right: 3px;" href="find/type/'+data[i].id+'"> <i class="fa fa-tag"></i>'+data[i].typename+'</a></li>'
+                }
+                // 初始化数据
+                $(".tag-list").html(typeName);
+            },    
+		    error:function(){
+		    	alert("初始化类别失败");
+		    }	
+        });
+	}
+	
+	//初始化推荐
+	var initBlogByLike=function(){
+		var params ={
+				 pageSize: 5,
+		         page:1,
+		         isrecommend:1  //1 表示推荐
+		};
+		$.ajax({
+            url:'../admin/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var likeBlog='';
+            	var data=data.blogList;
+                for (var i = 0; i < data.length; i++) {
+                	if(data[i].introduction.length>35){
+                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
+                	}
+                	var id=data[i].id.toString(8)*data[i].id;
+                	likeBlog+='<li><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
+                }
+                // 初始化数据
+                $(".paihang").find(".like").html(likeBlog);
+                var ad='<img src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
+				$(".ad").html(ad);
+				
+            },    
+		    error:function(){
+		    	layer.msg('出错啦', {icon: 2});
+		    }	
+        });
+	};
+	
+	//初始化点击排行
+	var initBlogByClick=function(){
+		//设置参数
+		var params ={
+				 pageSize: 5,
+		         page:1,
+		         sort:"clickNum",   //按点击量排序,默认按时间
+		};
+		$.ajax({
+            url:'../admin/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var clickBlog='';
+            	var data=data.blogList;
+            	 
+                for (var i = 0; i < data.length; i++) {
+                	if(data[i].introduction.length>35){
+                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
+                	}
+                	var id=data[i].id.toString(8)*data[i].id;
+                	clickBlog+='<li><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
+                }
+                // 初始化数据
+                $(".paihang").find(".click").html(clickBlog);
+                var ab='<img src="../images/wx.jpg">';
+            	$(".weixin").find("ul").html(ab);
+            	
+            },    
+		    error:function(){
+		    	layer.msg('出错啦', {icon: 2});
+		    }	
+        });
+	};
+	
+	//格式化时间
+	function Format(datetime, fmt) {
+	    if (parseInt(datetime) == datetime) {
+	        if (datetime.length == 10) {
+	            datetime = parseInt(datetime) * 1000;
+	        }else if (datetime.length == 13) {
+	            datetime = parseInt(datetime);
+	        }
+	    }
+	    datetime = new Date(datetime);
+	    var o = {
+	        "M+": datetime.getMonth() + 1,                 //月份   
+	        "d+": datetime.getDate(),                    //日   
+	        "h+": datetime.getHours(),                   //小时   
+	        "m+": datetime.getMinutes(),                 //分   
+	        "s+": datetime.getSeconds(),                 //秒   
+	        "q+": Math.floor((datetime.getMonth() + 3) / 3), //季度   
+	        "S": datetime.getMilliseconds()             //毫秒   
+	    };
+	    if (/(y+)/.test(fmt))
+	        fmt = fmt.replace(RegExp.$1, (datetime.getFullYear() + "").substr(4 - RegExp.$1.length));
+	    for (var k in o)
+	        if (new RegExp("(" + k + ")").test(fmt))
+	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	    return fmt;
+	}   	
 
 	window.onload = function (){
 		var oH2 = document.getElementsByTagName("h2")[0];

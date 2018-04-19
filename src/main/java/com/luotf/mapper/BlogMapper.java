@@ -59,13 +59,20 @@ public interface BlogMapper {
  	List<Blog> selectLikeBlogListByPage(Map<String, Object> map);
  	
  	/**
- 	 * 模糊分页组合查询博客
+ 	 * 模糊分页组合查询博客 (不含内容)
  	 * @param map
  	 * @return
  	 */
 
  	List<Blog> selectGroupLikeBlogListByPage(Map<String, Object> map);
-
+ 	
+ 	
+ 	/**
+ 	 * 模糊分页组合查询博客 含内容
+ 	 * @param map
+ 	 * @return
+ 	 */
+ 	List<Blog> selectLikeBlogListByPageWithBlobs(Map<String, Object> map);
  	/**
  	 *  根据组合条件获取Blog条数
  	 * @param map

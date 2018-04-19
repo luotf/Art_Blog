@@ -14,6 +14,7 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 </head>
 <body>
 	<header>
@@ -50,7 +51,7 @@
 	<article>
 		<div class="leftbox">
 			<div class="infos">
-				<div class="newsview">
+				<div class="newsview ">
 					<h2 class="intitle">
 						您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/">技术专栏</a>
 					</h2>
@@ -60,25 +61,25 @@
 			        		出错啦
 			        	</c:when>
 						<c:otherwise>
-							<h3 class="news_title">${blog.title}</h3>
+							<h3 class="news_title animated fadeInDown">${blog.title}</h3>
 							<input class="id" type="hidden" value="${blog.id}">
-							<div class="news_author">
-								<span class="au01">罗廷方</span><span class="au02"> <input
+							<div class="news_author animated fadeInDown">
+								<span class="au01 ">罗廷方</span><span class="au02"> <input
 									class="addtime" type="hidden" value="${blog.addtime}"></span><span
 									class="au03">共<b>${blog.clicknum}</b>人围观
 								</span>
 							</div>
 							<input class="typeId" type="hidden" value="${blog.type.id}">
-							<div class="tags">
+							<div class="tags animated fadeInDown">
 								<input class="tag" type="hidden" value="${blog.keyword}">
 							</div>
-							<div class="news_about">
+							<div class="news_about animated fadeInDown">
 								<strong>简介</strong>${blog.introduction}</div>
-							<div class="news_infos">${blog.content}</div>
+							<div class="news_infos animated fadeInDown">${blog.content}</div>
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="ds" style="text-align: center;display:none">
+				<div class="ds " style="text-align: center;display:none">
 					<div id="cyReward" role="cylabs" data-use="reward"></div>
 				</div>
 				<div class="share">
@@ -86,7 +87,7 @@
 				</div>
 
 			</div>
-			<div class="nextinfo">
+			<div class="nextinfo animated fadeInDown">
 				<p>
 					上一篇：<span class="pre"></span>
 				</p>
@@ -94,7 +95,7 @@
 					下一篇：<span class="next"></span>
 				</p>
 			</div>
-			<div class="otherlink">
+			<div class="otherlink animated fadeInDown">
 				<h2>相关文章</h2>
 				<ul>
 
@@ -111,30 +112,21 @@
 			</div>
 		</div>
 		<div class="rightbox  ">
-			<div class="search1">
-				<form name="searchform" id="searchform">
-					<input name="keywords" id="keywords" class="input_text"
-						value="请输入关键字" style="color: rgb(153, 153, 153);"
-						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
-						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
-						type="text"><input name="Submit" class="input_submit"
-						value="搜索" type="button" onclick="search()">
-				</form>
-			</div>
-			<div class="paihang">
+			
+			<div class="paihang ">
 				<h2 class="ab_title">
 					<a href="/">本栏推荐</a>
 				</h2>
-				<ul class="like">
+				<ul class="like animated fadeInDown">
 
 				</ul>
-				<div class="ad"></div>
+				<div class="ad animated fadeInDown"></div>
 			</div>
-			<div class="paihang">
+			<div class="paihang ">
 				<h2 class="ab_title">
 					<a href="/">点击排行</a>
 				</h2>
-				<ul class="click">
+				<ul class="click animated fadeInDown">
 
 				</ul>
 
@@ -144,7 +136,7 @@
 				<h2 class="ab_title">
 					<a href="#">评论排行</a>
 				</h2>
-				<div class='pl_paihang' style="display:none" id="cyHotusers"
+				<div class='pl_paihang animated fadeInDown' style="display:none" id="cyHotusers"
 					role="cylabs" data-use="hotusers"></div>
 				<script type="text/javascript" charset="utf-8"
 					src="http://changyan.itc.cn/js/lib/jquery.js"></script>
@@ -154,7 +146,7 @@
 
 			<div class="weixin">
 				<h2 class="ab_title">公众号</h2>
-				<ul>
+				<ul class="animated fadeInDown">
 
 				</ul>
 			</div>
@@ -177,10 +169,13 @@
 				var width = window.innerWidth || document.documentElement.clientWidth; 
 				if (width < 960) { 
 				window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
-			var index = layer.load(2, {
-				  shade: [0.1,'#fff'] //0.1透明度的白色背景
-				});
-			
+			    var index ='';
+				
+			     layer.ready(function(){
+			    	index=layer.load(2, {
+						  shade: [0.1,'#eee'] //0.1透明度的白色背景
+			    	});
+			    }); 
 				 Format();
 				 Tags(); 
 			setTimeout(function () {
@@ -193,8 +188,8 @@
 				setTimeout(function () {
 					$(".pl_paihang").css("display","block");
 					layer.close(index);
-				},500);    
-			 }, 300);
+				},200);    
+			 }, 200);
 			
 		});
 
@@ -376,10 +371,6 @@
 	        });
 		};
 		
-		var search=function(){
-			var keyword=$("#keywords").val();
-			window.location.href='../list.jsp?find="'+keyword+'"';
-		}
 		
 		//格式化时间
 		var Format=function() {
