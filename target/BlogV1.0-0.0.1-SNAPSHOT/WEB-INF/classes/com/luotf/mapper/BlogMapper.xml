@@ -192,7 +192,6 @@
   <select id="selectGroupLikeBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
 	select 
 	<include refid="Base_Column_List" />
-   	
 		from t_blog
 		<where>
 		 	<if test="isTop!=null and isTop!=''">
@@ -216,7 +215,11 @@
 		 	</if>
 		 	
 		 </where>
-		  ORDER BY addTime DESC
+		  ORDER BY 
+		  <if test="sort!=null and sort!=''">
+		 	#{sort}
+		  </if>
+		  DESC
 		 <!--  <if test="pageNow!=null and pageSize!=null">
 		 	limit #{pageNow},#{pageSize}
 		 </if>
@@ -225,17 +228,13 @@
   
   <select id="selectPrevBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">
 	SELECT 
-	<include refid="Base_Column_List" />
-   	,
-    <include refid="Blob_Column_List" />
+	id, title
 	from t_blog where id&lt;#{id} ORDER BY id DESC LIMIT 1
 	</select>
 	
 	<select id="selectNextBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">
 	SELECT 
-	<include refid="Base_Column_List" />
-   	,
-    <include refid="Blob_Column_List" />
+	id, title
 	from t_blog where id&gt;#{id} ORDER BY id ASC LIMIT 1
 	</select>
   

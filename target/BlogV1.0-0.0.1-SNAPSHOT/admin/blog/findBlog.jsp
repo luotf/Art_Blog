@@ -102,11 +102,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="news_infos"></div>
 							</div>
-							<div class="news_pl">
+							 <div class="news_pl">
 							   <h2>文章评论</h2>
-								<div id="SOHUCS" ></div>
+								
 
-							</div>
+							</div> 
 						</div>
 					</div>
 				</div>
@@ -146,12 +146,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
 
 	<script>
-        
-	window.changyan.api.config({
+	  var pl='<div id="SOHUCS"></div>';
+	  	$(".news_pl").html(pl);
+	    window.changyan.api.config({
 		appid: 'cytzgc0zN',
 		conf: 'prod_ec7d15b967a200776168768da4600a2a'
 		});
-	
+	 
 	$(document).ready(function() {
 		//参数1表示当前页为1
 		initBlog(1);
@@ -196,10 +197,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              $(".allTotal").find("b").html(page.total);
              $(".cPage").find("b").html(page.pageNum);
              $(".allPage").find("b").html(page.pages);
-             
+            
               //初始化右边详情内容
              findBlogById(data[0].id);
-            	
+             
             	},    
 		    error:function(){
 		    	alert("初始化失败");
@@ -253,8 +254,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	  } 
           	  	$(".newsview").find(".tags").append(keyword);
           	  	$(".newsview").find(".news_infos").html(data.blog.content);
-            	
-            	},    
+            	}, 
 		    error:function(){
 		    	alert("初始化失败");
 		    }	
@@ -288,33 +288,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         	    return fmt;
         	}   	
-        
-        	//格式化时间
-        	function Format(datetime, fmt) {
-        	    if (parseInt(datetime) == datetime) {
-        	        if (datetime.length == 10) {
-        	            datetime = parseInt(datetime) * 1000;
-        	        } else if (datetime.length == 13) {
-        	            datetime = parseInt(datetime);
-        	        }
-        	    }
-        	    datetime = new Date(datetime);
-        	    var o = {
-        	        "M+": datetime.getMonth() + 1,                 //月份   
-        	        "d+": datetime.getDate(),                    //日   
-        	        "h+": datetime.getHours(),                   //小时   
-        	        "m+": datetime.getMinutes(),                 //分   
-        	        "s+": datetime.getSeconds(),                 //秒   
-        	        "q+": Math.floor((datetime.getMonth() + 3) / 3), //季度   
-        	        "S": datetime.getMilliseconds()             //毫秒   
-        	    };
-        	    if (/(y+)/.test(fmt))
-        	        fmt = fmt.replace(RegExp.$1, (datetime.getFullYear() + "").substr(4 - RegExp.$1.length));
-        	    for (var k in o)
-        	        if (new RegExp("(" + k + ")").test(fmt))
-        	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        	    return fmt;
-        	}   	
+          	
           
           
     </script>

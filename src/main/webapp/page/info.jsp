@@ -12,9 +12,9 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/animate.css"
+<%-- <link href="${pageContext.request.contextPath}/css/animate.css"
 	rel="stylesheet">
-
+ --%>
 </head>
 <body>
 	<header>
@@ -79,7 +79,11 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
+				<div style="text-align: center;	">
+				<div  id="cyReward" role="cylabs" data-use="reward"></div>
+				</div>
 				<div class="share">分享：</div>
+				
 			</div>
 			<div class="nextinfo">
 				<p>
@@ -97,7 +101,17 @@
 			</div>
 			<div class="news_pl">
 				<h2>文章评论</h2>
-				<div id="SOHUCS" sid="${blog.id }"></div>
+				<div style="width:90%" id="cyEmoji" role="cylabs" data-use="emoji" sid="${blog.id }"></div>
+				<!--PC和WAP自适应版-->
+				<div style="width:90%" id="SOHUCS" sid="${blog.id }"></div> 
+				<script type="text/javascript"> 
+				(function(){ 
+				var appid = 'cytzg9rLH'; 
+				var conf = 'prod_230eb23e872ad7a4302e5802e6f91bf9'; 
+				var width = window.innerWidth || document.documentElement.clientWidth; 
+				if (width < 960) { 
+				window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
+								
 			</div>
 		</div>
 		<div class="rightbox animated fadeInUp">
@@ -151,10 +165,18 @@
 					<li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>
 						<p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p></li>
 				</ul>
-				<div class="ad">
-					<img src="${pageContext.request.contextPath}/images/ad01.jpg">
-				</div>
+				
 			</div>
+			
+			<div class="paihang">
+				<h2 class="ab_title">
+					<a href="#">评论排行</a>
+				</h2>
+				<div  id="cyHotusers" role="cylabs" data-use="hotusers"></div>
+				<script type="text/javascript" charset="utf-8" src="http://changyan.itc.cn/js/lib/jquery.js"></script>
+    			<script type="text/javascript" charset="utf-8" src="http://changyan.sohu.com/js/changyan.labs.https.js?appid=cytzg9rLH"></script>
+			</div>
+			
 			<div class="weixin">
 				<h2 class="ab_title">打赏</h2>
 				<ul>
@@ -170,14 +192,11 @@
 	</footer>
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	
+	
+	
 	<script type="text/javascript">
 	
-	window.changyan.api.config({
-		appid: 'cytzg9rLH',
-		conf: 'prod_230eb23e872ad7a4302e5802e6f91bf9'
-		});
-
 		$(document).ready(function() {
 			Format();
 			Tags();
