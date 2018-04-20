@@ -16,12 +16,19 @@
     <!--加载数据库配置文件-->
     <context:property-placeholder location="classpath:mysql.properties" />
 
-    <!--配置数据源 c3p0l连接池-->
+    <!--配置数据源 c3p0l连接池-->	
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
         <property name="driverClass" value="${jdbc.driver}" />
         <property name="jdbcUrl" value="${jdbc.url}" />
         <property name="user" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
+        <property name="testConnectionOnCheckout" value="${jdbc.c3p0.testConnectionOnCheckout}" />
+        <property name="testConnectionOnCheckin" value="${jdbc.c3p0.testConnectionOnCheckin}" />
+        <property name="idleConnectionTestPeriod" value="${jdbc.c3p0.idleConnectionTestPeriod}" />
+        <property name="initialPoolSize" value="${jdbc.c3p0.initialPoolSize}" />
+        <property name="minPoolSize" value="${jdbc.c3p0.minPoolSize}" />
+		<property name="maxPoolSize" value="${jdbc.c3p0.maxPoolSize}" />
+		<property name="maxIdleTime" value="${jdbc.c3p0.maxIdleTime}" />
     </bean>
 
     <!--配置SqlSessionFactory-->

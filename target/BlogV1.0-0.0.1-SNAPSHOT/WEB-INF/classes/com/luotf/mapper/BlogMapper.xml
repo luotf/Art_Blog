@@ -220,10 +220,41 @@
 		 	#{sort}
 		  </if>
 		  DESC
-		 <!--  <if test="pageNow!=null and pageSize!=null">
-		 	limit #{pageNow},#{pageSize}
-		 </if>
-		 -->
+		
+	</select>
+  
+   <select id="selectLikeBlogListByPageWithBlobs" parameterType="Map" resultMap="ResultMapWithBLOBs">
+	select 
+	<include refid="Base_Column_List" />
+		from t_blog
+		<where>
+		 	<if test="isTop!=null and isTop!=''">
+		 		and isTop=#{isTop}
+		 	</if>
+		 	<if test="type_id!=null and type_id!=''">
+		 		and type_id=#{type_id}
+		 	</if>
+		 	<if test="status!=null and status!=''">
+		 		and status=#{status}
+		 	</if>
+		 	<if test="isRecommend!=null and isRecommend!=''">
+		 		and isRecommend=#{isRecommend}
+		 	</if>
+		 	<if test="addTime!=null and addTime!=''">
+		 		and DATE_FORMAT(addTime,'%Y-%m-%d')=#{addTime}
+		 	</if>
+		 	
+		 	<if test="title!=null and title!=''">
+		 	and ( title like CONCAT(CONCAT('%', #{title}), '%') or keyword like CONCAT(CONCAT('%', #{keyword}), '%') or introduction like CONCAT(CONCAT('%', #{introduction}), '%') or content like CONCAT(CONCAT('%', #{content}), '%'))
+		 	</if>
+		 	
+		 </where>
+		  ORDER BY 
+		  <if test="sort!=null and sort!=''">
+		 	#{sort}
+		  </if>
+		  DESC
+		
 	</select>
   
   <select id="selectPrevBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">

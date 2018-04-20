@@ -196,7 +196,16 @@ window.onload = function (){
             	
                 for (var i = 0; i < data.length; i++) {
                 	var id=data[i].id.toString(8)*data[i].id;
-                	newBlog+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+data[i].keyword.replace(/;/g,"|")+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
+                	var keyword="";
+                  	if(data[i].keyword!=""&&data[i].keyword!=null){
+                  		if(data[i].keyword.search(';')!=-1){
+                  			keyword=data[i].keyword.replace(/;/g,"|");
+                  		}else{
+                  			keyword=data[i].keyword;
+                  		}
+                  	}
+                	
+                	newBlog+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
                 }
                 // 初始化数据
                 $(".newblogs").find("ul").html(newBlog);
