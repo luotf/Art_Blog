@@ -412,9 +412,9 @@
 			}
 			$(".newsview").find(".tags").append(keyword);
 			$(".newsview").find(".news_infos").html($("#summernote").code());
-			var add = '<a  class="btn btn-white" href="#" onclick="addBlog(1)">发表</a>';
+			var add = '<a  class="btn btn-white" href="javascript:void(0);" onclick="addBlog(1)">发表</a>';
 			$(".modal-footer").find(".add").html(add);
-		}
+		};
 
 		var addBlog = function(id) {
 			var params = {
@@ -426,8 +426,8 @@
 				'status' : id
 			};
 			$.ajax({
-				url : '../addBlog',
-				type : 'post',
+				url : "../addBlog",
+				type : "POST",
 				data : params,
 				dataType : 'json',
 				success : function(data) {

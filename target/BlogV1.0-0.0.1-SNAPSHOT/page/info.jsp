@@ -103,11 +103,12 @@
 			</div>
 			<div class="news_pl">
 				<h2>文章评论</h2>
-				<div style="width:90%" id="cyEmoji" role="cylabs" data-use="emoji"
+				<div style="width:90%;margin: 0 auto;">
+				<div  id="cyEmoji" role="cylabs" data-use="emoji"
 					sid="${blog.id }"></div>
 				<!--PC和WAP自适应版-->
-				<div style="width:90%" id="SOHUCS" sid="${blog.id }"></div>
-
+				<div  id="SOHUCS" sid="${blog.id }"></div>
+				</div>
 
 			</div>
 		</div>
