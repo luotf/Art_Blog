@@ -52,16 +52,7 @@
       
       </ul>
       <div class="pagelist ">
-      <!-- <a title="Total record">&nbsp;<b>142</b> </a>&nbsp;&nbsp;
-      <a href="index.html">首页</a>&nbsp;
-      <a href="/jstt/index.html">上一页</a>&nbsp;
-      <a href="/jstt/index.html">1</a>&nbsp;<b>2</b>&nbsp;
-      <a href="/jstt/index_3.html">3</a>&nbsp;
-      <a href="/jstt/index_4.html">4</a>&nbsp;
-      <a href="/jstt/index_5.html">5</a>&nbsp;
-      <a href="/jstt/index_6.html">6</a>&nbsp;
-      <a href="/jstt/index_3.html">下一页</a>&nbsp;
-      <a href="/jstt/index_6.html">尾页</a>-->
+      
       </div> 
     </div>
   </div>
@@ -107,8 +98,10 @@
     </div>
   </div>
 </article>
+
 <script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
+<script id="cy_cmt_num" src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytzg9rLH"></script>
 <script>
 	$(document).ready(function() {
 		//初始化类别信息
@@ -118,6 +111,9 @@
 		initBlogByLike();
 		initBlogByClick();
 	});
+	function ser(){
+		return 5; 
+	}
 	var initBlogListByPage=function(pageNum,type_id){
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
@@ -154,7 +150,11 @@
             	var page=data.pageInfo;
             	var data=data.blogList;
             	if(data.length>0){
+            		 var parm="";
+            		 var arr=new Array();
             		 for (var i = 0; i < data.length; i++) {
+            			 arr[i]=data[i].id;
+            			 parm+=data[i].id+",";
                       	var id=data[i].id.toString(8)*data[i].id;
                       	var keyword="";
                       	if(data[i].keyword!=""&&data[i].keyword!=null){
@@ -164,13 +164,34 @@
                       			keyword=data[i].keyword;
                       		}
                       	}
-                      	blogList+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
-                      }
+                      	blogList+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a class='+data[i].id+' href="javascript:void(0);"></a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
+            		 };
+            		
+            		 var p={
+	           				 client_id:'cytzg9rLH',
+	           				 topic_source_id:parm
+	           			 };
+	                      	$.ajax({
+	        	            url:'http://changyan.sohu.com/api/2/topic/count',    
+	        	            type:'get',
+	        	            data:p,
+	        	            dataType:'jsonp',    
+	        	            success:function (pl) {
+	        	            	for(var i=0;i<arr.length;i++){
+	        	            		$('.'+arr[i]).html(pl.result[arr[i]].comments);
+	        	            	}
+	        	            },
+	        			    error:function(){
+	        			    	alert("失败");
+	        			    }	
+	        	        });
+            		 
+            		 
             	}else{
             		blogList="无查询结果";
             	}
             	 $(".newblogs").find("ul").html(blogList);
-            	
+            	// $(".plNum").html('<span id = "sourceId::54" class = "cy_cmt_count" ></span>');
             	//初始化分页、总数>10显示分页栏
             	 if(page.total>10){
             		 var allTotal='<a title="Total record">&nbsp;<b>'+page.total+'</b> </a>&nbsp;&nbsp;';
@@ -236,6 +257,7 @@
 	var pageNav=function(pageNum){
 		var type="";
 		type=$(".type_id").val();
+		$(".type_id").val("");
 		if(type==null||type==""){
 			type="none";
 		}
@@ -263,7 +285,7 @@
 				  shade: [0.1,'#eee'] //0.1透明度的白色背景
 	    	});
 	    }); 
-	     initBlogListByPage(1);
+	     initBlogListByPage(1,"none");
 		setTimeout(function () {
 			layer.close(index);
 		},200);
@@ -431,6 +453,6 @@
 		}
 }
 </script>
-
 </body>
+
 </html>

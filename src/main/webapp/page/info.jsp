@@ -174,11 +174,11 @@
 		$(document).ready(function() {
 			var index ='';
 				
-			     layer.ready(function(){
+			     /* layer.ready(function(){
 			    	index=layer.load(2, {
 						  shade: [0.1,'#eee'] //0.1透明度的白色背景
 			    	});
-			    }); 
+			    });  */
 				 Format();
 				 Tags(); 
 			setTimeout(function () {
@@ -190,7 +190,7 @@
 				initBlogByClick(); 
 				setTimeout(function () {
 					$(".pl_paihang").css("display","block");
-					layer.close(index);
+					//layer.close(index);
 				},200);    
 			 }, 200);
 			
