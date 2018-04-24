@@ -82,6 +82,7 @@ public class BlogTypeControllerAdmin {
 			// 已经存在该类别
 			map.put("status", 2);
 		} else {
+			blogType.setAddTime(new Date());
 			if ((blogTypeService.insertBlogType(blogType)) != 0) {
 				map.put("status", 200);
 			} else {

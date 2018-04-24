@@ -48,6 +48,7 @@ public interface BlogMapper {
  	 * @param map
  	 * @return
  	 */
+ 	
  	List<Blog> selectBlogListByPage(Map<String, Object> map);
  	
  	/**
