@@ -21,7 +21,7 @@
     <div class="newblogs ">
       <h2 class="hometitle">
       <span class="tagTitle">
-      </span>技术专栏</h2>
+      </span>知识总结</h2>
       <ul class="animated fadeInDown">
       
       </ul>

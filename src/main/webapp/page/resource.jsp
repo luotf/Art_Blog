@@ -13,47 +13,29 @@
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.ico"> 
-   <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
 </head>
 <body>
-<header>
-    <div id="mnav">
-      <h2><span class="navicon"></span></h2>
-      <ul>
-      <li><a href="${pageContext.request.contextPath}/page/index.jsp">网站首页</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/list.jsp">技术博客</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/list.jsp">面试汇总</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/project.jsp">项目案例</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/resource.jsp">资源分享</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/about.jsp">关于我</a></li>
-      <li><a href="/">留言</a></li>
-      </ul>
-    </div>
-    <nav>
-      <ul>
-     <li><a href="${pageContext.request.contextPath}/page/index.jsp">网站首页</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/list.jsp">技术博客</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/list.jsp">面试汇总</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/project.jsp">项目案例</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/resource.jsp">资源分享</a></li>
-      <li><a href="${pageContext.request.contextPath}/page/about.jsp">关于我</a></li>
-      <li><a href="/">留言</a></li>
-      </ul>
-    </nav>
-  </header>
-
+<%@ include file="top.jsp" %>
   <article>
     <div class="leftbox">
       <div class="newblogs">
+      <h2 class="hometitle">
+	      <span class="tagTitle">
+	      	<a href="javascript:void(0);">学习视频</a>
+	      	<a href="javascript:void(0);">项目源码</a>
+	      	<a href="javascript:void(0);">笔记</a>
+	      	<a href="javascript:void(0);">开发工具</a>
+	      </span>
+	     资源分享
+	     </h2>
         <div class="row">
             <div class="col-sm-12">
                 <div class="wrapper wrapper-content ">
-                   
-                 
                      
                 </div>
                 <div class="pagelist ">
@@ -68,30 +50,16 @@
     <div class="rightbox ">
       <div class="search1">
         <form name="searchform" id="searchform">
-          <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
-          <input name="Submit" class="input_submit" value="搜索" type="submit">
+          <input id="keyword" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+          <input  class="input_submit" value="搜索" type="button" onclick="selectResource()">
         </form>
       </div>
       <div class="paihang ">
         <h2 class="ab_title"><a href="/">本栏推荐</a></h2>
-        <ul class="animated fadeInDown">
-          <li><b><a href="/" target="_blank">住在手机里的朋友</a></b>
-            <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无学...</p>
-          </li>
-          <li><b><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></b>
-            <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门...</p>
-          </li>
-          <li><b><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码</a></b>
-            <p>.先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》</p>
-          </li>
-          <li><b><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></b>
-            <p>对于刚毕业的学生来说，.需要学习什么？》</p>
-          </li>
-          <li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>
-            <p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p>
-          </li>
+        <ul class="like animated fadeInDown">
+         
         </ul>
-        <div class="ad"><img src="${pageContext.request.contextPath}/images/ad300x100.jpg"></div>
+        <div class="ad"></div>
       </div>
     </div>
   </article>
@@ -110,17 +78,17 @@
 	$(document).ready(function() {
 		//初始化类别信息
 		 initResource(1);
-		//初始化技术专栏的信息
-		/*initBlogListByPage(1,"none");
-		initBlogByLike();
-		initBlogByClick(); */
+		 initBlogByLike();
 	});
 	var initResource=function(pageNum){
+		var keyword=$("#keyword").val();
+		if(keyword=="请输入关键字")
+			keyword="";
 		 var params={
 				 pageSize: 12,
 		         page:pageNum,
-   				 title:$(".keyword").val(),
-   				 content:$(".keyword").val(),
+   				 title:keyword,
+   				 content:keyword,
    				 status:1    //1 表示已发布
    			 };
               	$.ajax({
@@ -216,6 +184,53 @@
 	},200);
 	};
 	
+	//初始化推荐
+	var initBlogByLike=function(){
+		var params ={
+				 pageSize: 5,
+		         page:1,
+		         isrecommend:1  //1 表示推荐
+		};
+		$.ajax({
+            url:'../admin/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var likeBlog='';
+            	var data=data.blogList;
+            	
+                for (var i = 0; i < data.length; i++) {
+                	 if(data[i].introduction.length>35){
+                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
+                	}
+                	var id=data[i].id.toString(8)*data[i].id;
+                	likeBlog+='<li><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
+                }
+                // 初始化数据
+                $(".paihang").find(".like").html(likeBlog);
+                var ad='<img src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
+				$(".ad").html(ad);
+				
+            },    
+		    error:function(){
+		    	layer.msg('出错啦', {icon: 2});
+		    }	
+        });
+	};
+	
+	var selectResource=function(){
+		var index ='';
+	     layer.ready(function(){
+	    	index=layer.load(2, {
+				  shade: [0.1,'#eee'] //0.1透明度的白色背景
+	    	});
+	    }); 
+	     initResource(1);
+		setTimeout(function () {
+			layer.close(index);
+		},200);
+	};
 	</script>
 </body>
 </html>
