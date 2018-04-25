@@ -468,11 +468,11 @@ public class BlogControllerAdmin {
 	 public Map selectBlogListByStatus() throws Exception{
 		 Map map=new HashMap();
 		 List list=blogService.selectBlogListByStatus();
-		 if(map.size()>0){
+		 if(list.size()>0){
 			 map.put("status", 200);
 		 }else{
 			 //500表示：返回值为Null
-			// map.put("status", 500);
+			map.put("status", 500);
 		 }
 		 map.put("list", list);
 		 return map;

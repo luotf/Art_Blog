@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">博客类别</a>
+								href="javascript:void(0);">博客类别</a>
 							<div class="space-25"></div>
 							<h5 class="tag-title">增加类别</h5>
 							<form role="form" class="form-inline" id="commentForm1">
@@ -159,7 +159,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	var circle = new Array("text-navy","text-danger"," text-info","text-primary","text-warning");
             	var label = new Array("label-primary","label-danger"," label-info","label-success","label-warning");
                 for (var i = 0; i < data.length; i++) {
-                	typeNameAndNum+='<li><a href="mail_compose.html#"> <i class="fa fa-circle '+circle[i%5]+'"></i> '+data[i].typename+'<span class="label '+label[i%5]+' pull-right">'+data[i].num+' 篇</span></a></li>'
+                	typeNameAndNum+='<li><a href="javascript:void(0);"> <i class="fa fa-circle '+circle[i%5]+'"></i> '+data[i].typename+'<span class="label '+label[i%5]+' pull-right">'+data[i].num+' 篇</span></a></li>'
                 }
                 // 初始化数据
                 $(".category-list").html(typeNameAndNum);
@@ -224,14 +224,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      align: 'center',
 		                      formatter:function(value,row,index){ 
 		                    	  var type="";
-		                    	  var typename=$(".search .form-control").val();
-		                    	  if(typename==""||typename==null){
-		                    		  type=row.typename;
-		                    	  }else if(row.typename.search(typename)!=-1){
+		                    	  var typename=$(".search .form-control").val().toLowerCase();
+		                    	  var typenameUpper=$(".search .form-control").val().toUpperCase();
+		                    	 if(row.typename.search(typename)!=-1||row.typename.search(typenameUpper)!=-1){
 		                    		  var strs= new Array();
 			                    	  strs=row.typename.split("");
 		                    		  var strStartIndex = row.typename.indexOf(typename);
 		                    		  var strEndIndex = strStartIndex+typename.length-1;
+		                    		  if(row.typename.search(typenameUpper)!=-1){
+		                    			  strStartIndex = row.typename.indexOf(typenameUpper);
+			                    		  strEndIndex = strStartIndex+typenameUpper.length-1;
+		                    		  }
 		                    		  for(var i=0;i<strs.length;i++){
 		                    			  if(i>=strStartIndex&&i<=strEndIndex){
 		                    				  type+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
@@ -239,6 +242,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    				  type+='<span >'+strs[i]+'</span>';
 		                    			  }
 		                    		  }
+		                    	  }else{
+		                    		  type=row.typename;
 		                    	  }
 		                    	  return type;
 			   	                }

@@ -124,9 +124,6 @@ public class ResourceController {
 		 if(resource.getContent()!=null&&resource.getContent()!=""){
 			 map.put("content", resource.getContent());
 		 }
-		 if(resource.getLink()!=null&&resource.getLink()!=""){
-			 map.put("link", resource.getLink());
-		 }
 		 if(resource.getStatus()!=null){
 			 map.put("status", resource.getStatus());
 		 }
@@ -144,6 +141,27 @@ public class ResourceController {
 		 returnMap.put("resourceList", resourceList);
 		 returnMap.put("pageInfo", pageInfo);
 		 return returnMap;
+	 }
+	 
+	 /**
+	  * 通过类别typeId查询博客信息
+	  * @param id
+	  * @return
+	  * @throws Exception
+	  */
+	 @RequestMapping(value = "/selectResourceListByStatus",method = RequestMethod.POST)
+	 @ResponseBody
+	 public Map selectResourceListByStatus() throws Exception{
+		 Map map=new HashMap();
+		 List list=resourceService.selectResourceListByStatus();
+		 if(list.size()>0){
+			 map.put("status", 200);
+		 }else{
+			 //500表示：返回值为Null
+			map.put("status", 500);
+		 }
+		 map.put("list", list);
+		 return map;
 	 }
 	
 }

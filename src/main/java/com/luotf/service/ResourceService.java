@@ -22,6 +22,8 @@ public interface ResourceService {
 	     */
 	    List<RResource> selectLikeResourceListByPage(Map<String, Object> map);
 	    
+	    
+	    List  selectResourceListByStatus();
 	    int updateByPrimaryKeySelective(RResource record);
 	    
 	    int updateByPrimaryKey(RResource record);

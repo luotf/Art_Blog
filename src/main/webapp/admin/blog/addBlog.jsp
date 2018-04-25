@@ -60,12 +60,12 @@
 							<div class="space-25"></div>
 							<h5>博客状态</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-								<li><a href="mailbox.html"> <i class="fa fa-inbox "></i>发表<span
+								<li><a href="javascript:void(0);"> <i class="fa fa-inbox "></i>发表<span
 										class="s-1 label label-info pull-right">0 篇</span></a></li>
-								<li><a href="mailbox.html"> <i
+								<li><a href="javascript:void(0);"> <i
 										class="fa fa-file-text-o "></i>草稿<span
 										class="s-2 label label-warning pull-right">0 篇</span></a></li>
-								<li><a href="mailbox.html"> <i class="fa fa-trash-o "></i>垃圾箱<span
+								<li><a href="javascript:void(0);"> <i class="fa fa-trash-o "></i>垃圾箱<span
 										class="s-3 label label-danger pull-right">0 篇</span></a></li>
 							</ul>
 							<h5>博客分类</h5>
@@ -75,35 +75,35 @@
 
 							<h5 class="tag-title">标签</h5>
 							<ul class="tag-list" style="padding: 0">
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										I/O
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>MySQL
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>MySQL
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>Struts2
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>Struts2
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										Spring
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										Hibernate
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										Mybatis
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										SpringMVC
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										基础框架
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										JVM
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										多线程
 								</a></li>
-								<li><a href="mail_compose.html"> <i class="fa fa-tag"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
 										高并发
 								</a></li>
 							</ul>
@@ -178,7 +178,7 @@
 							<button id="prev2"  type="button" style="display:none"
 							onclick="prevBlog()" data-target="#myModal" data-toggle="modal">
 							</button>
-							<button id="add_draft" type="button" 
+							<button id="add_draft2" type="button" 
 								class="btn btn-white btn-sm" data-toggle="tooltip"
 								data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
@@ -195,7 +195,8 @@
 					<div class="modal-content animated fadeInUp">
 						<button type="button" class="close" style="margin-right:7px"
 							data-dismiss="modal">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							<span aria-hidden="true">&times;</span>
+							<span class="sr-only">Close</span>
 						</button>
 						<div class="infos" style="margin:0px;">
 							<div class="newsview" style="padding-top:0px;">
@@ -253,21 +254,12 @@
 		$(document)
 				.ready(
 						function() {
-
 							//初始化博客数目
 							$.ajax({
 								url : '../selectBlogListByStatus',
 								type : 'post',
-								data : params,
 								dataType : 'json',
 								success : function(data) {
-									var blogStatusList = '';
-									var blogStatus = '';
-									var icon = new Array("fa-inbox",
-											"fa-file-text-o", " fa-trash-o");
-									var label = new Array("label-primary",
-											"label-danger", " label-info",
-											"label-success", "label-warning");
 									for (var i = 0; i < data.list.length; i++) {
 										if (data.list[i].status == -1) {
 											$(".s-2").html(
@@ -315,7 +307,7 @@
 												typeName += '<option value="' + data[i].id + '">'
 														+ data[i].typename
 														+ '</option>';
-												typeNameAndNum += '<li><a href="mail_compose.html#"> <i class="fa fa-circle '
+												typeNameAndNum += '<li><a href="javascript:void(0);"> <i class="fa fa-circle '
 														+ circle[i % 5]
 														+ '"></i> '
 														+ data[i].typename
@@ -404,10 +396,10 @@
 					var strs = new Array();
 					strs = inputKeyword.split(";");
 					for (var i = 0; i < strs.length && strs[i] != ''; i++) {
-						keyword += '<a href="#">' + strs[i] + '</a>';
+						keyword += '<a href="javascript:void(0);">' + strs[i] + '</a>';
 					}
 				} else {
-					keyword = '<a href="#">' + inputKeyword + '</a>';
+					keyword = '<a href="javascript:void(0);">' + inputKeyword + '</a>';
 				}
 			}
 			$(".newsview").find(".tags").append(keyword);
@@ -461,7 +453,7 @@
 		};
 		
 		//只有验证通过才能执行 添加
-		$("#add_draft").click(function(){
+		$("#add_draft,#add_draft2").click(function(){
 		    if($("#commentForm").valid()){
 		    	addBlog(-1);
 		     }

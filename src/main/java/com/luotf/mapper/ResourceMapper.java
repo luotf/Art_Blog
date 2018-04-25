@@ -22,6 +22,12 @@ public interface ResourceMapper {
      */
     List<RResource> selectLikeResourceListByPage(Map<String, Object> map);
     
+    /**
+ 	 *  获取资源信息，根据状态分组查询
+ 	 * @return
+ 	 */
+ 	List  selectResourceListByStatus();
+    
     int updateByPrimaryKeySelective(RResource record);
     
     int updateByPrimaryKey(RResource record);

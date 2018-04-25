@@ -45,10 +45,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">资源管理</a>
+								href="javascript:void(0);">资源管理</a>
 							<div class="space-25"></div>
+							<h5>博客状态</h5>
+							<ul class="folder-list m-b-md" style="padding: 0">
+								<li class="share" value="0"><a href="javascript:void(0);"> <i class="fa fa-inbox "></i>总共<span
+										class="a-1 label label-info pull-right">0 条</span></a></li>
+								<li class="share" value="1"><a href="javascript:void(0);"> <i
+										class="fa fa-file-text-o "></i>已上架<span
+										class="a-2 label label-warning pull-right">0 条</span></a></li>
+								<li class="share" value="-1"><a href="javascript:void(0);"> <i class="fa fa-trash-o "></i>下架<span
+										class="a-3 label label-danger pull-right">0 条</span></a></li>
+							</ul>
+							
 							<h5 class="tag-title">增加资源</h5>
-							<form role="form"  id="commentForm1">
+							<form role="form">
 								<div class="form-group" >
 									<div class="input-group m-b">
 										<span class="input-group-addon">名称</span>
@@ -78,8 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<button onclick="addResource()" class="btn btn-white pull-right" type="button"
 										>提交</button>
-							</form>
-							
+							   </form>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -88,9 +98,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="col-sm-9">
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
-						<h2>博客类别</h2>
+						<h2>资源信息</h2>
 
-						<table id="allBlogType" data-mobile-responsive="true">
+						<table id="allResource" data-mobile-responsive="true">
 
 						</table>
 					</div>
@@ -103,20 +113,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="row">
-                            <h3 class="m-t-none m-b">修改类别名称</h3>
-
-                            <form role="form" id="commentForm2">
-                                <div class="form-group">
-                                    <label>原始名称：</label><span id="oldTypeName"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" placeholder="新名称" required="" aria-required="true" class="form-control" id="newTypeName">
-                                </div>
-                                <span class="tip2" style="color:#a94442"></span>
+                            <h3 class="m-t-none m-b">修改资源信息</h3>
+                           
+                            <form role="form" class="form-horizontal">
+                            		<div class="input-group m-b">
+										<span class="input-group-addon">名称</span>
+										<input type="text" id="newTitle"  class="form-control">
+									</div>
+                            		<div class="input-group m-b">
+										<span class="input-group-addon">内容</span>
+										<textarea id="newContent"  class="form-control"></textarea>
+									</div>
+                            		<div class="input-group m-b">
+										<span class="input-group-addon">链接</span>
+										<input type="text" id="newLink"  class="form-control">
+									</div>
+									<div class="input-group m-b">
+										<span class="input-group-addon">密码</span>
+										<input type="text" id="newPassword"  class="form-control">
+									</div>
+                              
                                 <div id="update">
                                     
                                 </div>
                             </form>
+                            
                         </div>
                 </div>
             </div>
@@ -149,14 +170,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
         
 	$(document).ready(function() {
-		//selectResource();
+		initResourceCount();
+		selectResource();
 			});
 	
+		var initResourceCount=function(){
+			$.ajax({
+				url : '../selectResourceListByStatus',
+				type : 'post',
+				dataType : 'json',
+				success : function(data) {
+					var count=0;
+					for (var i = 0; i < data.list.length; i++) {
+						count+=data.list[i].count;
+						
+						if (data.list[i].status == 1) {
+							$(".a-2").html(
+									data.list[i].count + '条');
+						} else if (data.list[i].status == -1) {
+							$(".a-3").html(
+									data.list[i].count + '条');
+						}
+					}
+					$(".a-1").html(
+							count + '条');
+				},
+				error : function() {
+					swal("初始化资源数目错误", "请重新操作", "error");
+				}
+			});
+			
+		}
+	
+		//草稿/发布...按钮绑定查询事件  
+	    $(".share").click(function() { 
+	 		var statu=$(this).val();
+	        var params = $('#allResource').bootstrapTable('getOptions');
+	        params.queryParams = function(params) {  
+	         return{
+	            pageSize: params.limit,
+	            page:(params.offset)/params.limit+1,
+	            title:$(".search .form-control").val(),
+	            status:statu,
+	    		}
+	        };
+	        $('#allResource').bootstrapTable('refresh',params);
+	    }); 
+		
+		
 	 //初始化表格数据
 	  var selectResource=function(){
-		  $('#allBlogType').bootstrapTable({
+		  $('#allResource').bootstrapTable({
 				method: 'post',  
-				url: "../selectBlogTypeListByPage", 
+				url: "../selectLikeResourceListByPage", 
 				dataType: "json",  
 				striped: false,     //使表格带有条纹  
 				pagination: true, //在表格底部显示分页工具栏  
@@ -193,69 +259,137 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                 };
 	            },
 			    columns: [
-			             
 		                  {
 		                      title: 'ID',
 		                      field: 'id',
 		                      align: 'center',
 		                      valign: 'middle',
+		                      width:'5%',
 		                  }, 
 		                  {
-		                      title: '类别',
-		                      field: 'typename',
+		                      title: '名称',
+		                      field: 'title',
 		                      align: 'center',
+		                      width:'15%',
 		                      formatter:function(value,row,index){ 
-		                    	  var type="";
-		                    	  var typename=$(".search .form-control").val();
-		                    	  if(typename==""||typename==null){
-		                    		  type=row.typename;
-		                    	  }else if(row.typename.search(typename)!=-1){
+		                    	  var title="";
+		                    	  var resoureName=$(".search .form-control").val().toLowerCase();
+		                    	  var resoureNameUpper=$(".search .form-control").val().toUpperCase();
+		                    	  if(row.title.search(resoureName)!=-1||row.title.search(resoureNameUpper)!=-1){
 		                    		  var strs= new Array();
-			                    	  strs=row.typename.split("");
-		                    		  var strStartIndex = row.typename.indexOf(typename);
-		                    		  var strEndIndex = strStartIndex+typename.length-1;
+			                    	  strs=row.title.split("");
+			                    	  var strStartIndex=row.title.indexOf(resoureName);
+			                    	  var strEndIndex = strStartIndex+resoureName.length-1;
+			                    	  if(row.title.search(resoureNameUpper)!=-1){
+			                    		  strStartIndex = row.title.indexOf(resoureNameUpper);
+			                    		  strEndIndex = strStartIndex+resoureNameUpper.length-1;
+			                    	  }
 		                    		  for(var i=0;i<strs.length;i++){
 		                    			  if(i>=strStartIndex&&i<=strEndIndex){
-		                    				  type+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
+		                    				  title+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
 		                    			  }else{
-		                    				  type+='<span >'+strs[i]+'</span>';
+		                    				  title+='<span >'+strs[i]+'</span>';
 		                    			  }
 		                    		  }
+		                    	  }else{
+		                    		  title=row.title;
 		                    	  }
-		                    	  return type;
+		                    	  return title;
 			   	                }
 		                  },
 		                  
 		                  {
-		                      title: '数量',
-		                      field: 'num',
+		                      title: '内容',
+		                      field: 'content',
 		                      align: 'center',
-		                      
+		                      width:'30%',
+		                      formatter:function(value,row,index){ 
+		                    	  var content="";
+		                    	  var resoureName=$(".search .form-control").val().toLowerCase();
+		                    	  var resoureNameUpper=$(".search .form-control").val().toUpperCase();
+		                    	  if(row.content.search(resoureName)!=-1||row.content.search(resoureNameUpper)!=-1){
+		                    		  var strs= new Array();
+			                    	  strs=row.content.split("");
+			                    	  var strStartIndex=row.content.indexOf(resoureName);
+			                    	  var strEndIndex = strStartIndex+resoureName.length-1;
+			                    	  if(row.content.search(resoureNameUpper)!=-1){
+			                    		  strStartIndex = row.content.indexOf(resoureNameUpper);
+			                    		  strEndIndex = strStartIndex+resoureNameUpper.length-1;
+			                    	  }
+		                    		  for(var i=0;i<strs.length;i++){
+		                    			  if(i>=strStartIndex&&i<=strEndIndex){
+		                    				  content+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
+		                    			  }else{
+		                    				  content+='<span >'+strs[i]+'</span>';
+		                    			  }
+		                    		  }
+		                    	  }else{
+		                    		  content=row.content;
+		                    	  }
+		                    	  return content;
+			   	                }
 		                  },
-		                  
+		                  /* {
+		                      title: '链接',
+		                      field: 'link',
+		                      align: 'center',
+		                      width:'25%',
+		                      
+		                  }, */
+		                  /* {
+		                      title: '密码',
+		                      field: 'password',
+		                      align: 'center',
+		                      width: '8%',
+		                  }, */
 		                  {
+		                      title: '状态',
+		                      field: 'status',
+		                      align: 'center',
+		                      width:'5%',
+		                      formatter:function(value,row,index){  
+		   	                  if(row.status==-1){
+		   	                	return '<button class="btn-xs btn-warning">下架</button> ';  
+		   	                  	}else if(row.status==1){
+		   	                  	return '<button class="btn-xs btn-info">上架</button> '; 
+		   	                  	}
+		   	                  	 
+		   	                    } 
+		                  },
+		                  /* {
 		                      title: '发表时间',
 		                      field: 'addTime',
 		                      align: 'center',
-		                      
+		                      width:'15%',
 		                      formatter:function(value,row,index){  
 		                    	 return Format(row.addTime,"yyyy-MM-dd hh:mm:ss");
 			   	                 } 
-		                  },
+		                  }, */
 		                  {
 		                      title: '操作',
 		                      field: 'id',
 		                      align: 'center',
+		                      width:'15%',
 		                      formatter:function(value,row,index){
-			                   var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectBlogTypeById('+row.id+')"><i class="fa fa-edit" ></i>编辑</a> ';  
-			                   var b = '<a  class=" btn-sm btn-danger"   onclick="deleteBlogType('+ row.id + ')"><i class="fa fa-trash-o" ></i>删除</a> '; 
-		                   	 return a+b;  
+			                   //编辑
+		                       var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectResourceById('+row.id+')"><i class="fa fa-edit" ></i>编辑</a> ';  
+		                       //删除
+		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteResource('+ row.id + ')"><i class="fa fa-trash-o" ></i>删除</a> '; 
+			                   //下架
+		                       var c = '<a  class=" btn-sm btn-danger"   onclick="updateResource('+ row.id + ',-1)"><i class="fa fa-hand-o-down" ></i>下架</a> '; 
+		                       //上架
+		                       var d = '<a  class=" btn-sm btn-primary"   onclick="updateResource('+ row.id + ',1)"><i class="fa fa-hand-o-up" ></i>上架</a> '; 
+		                   	 	if(row.status==-1){
+		                   	 	  return d+b;  
+		                   	 	}else if(row.status==1){
+		                   	 	  return a+c;  
+		                   	 	}
+		                       return a+b;  
 		                    } 
 		                  }
 		              ]
 		      });
 	  }
-	
 	
 			//传参数到后台
 		function queryParams(params){
@@ -263,23 +397,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            //每页多少条数据
 	            pageSize: params.limit,
 	            page:(params.offset)/params.limit+1,
-	            typename:$(".search .form-control").val(),
+	            title:$(".search .form-control").val(),
+	            status:1,
 	        };
 	    }
-	
-		var selectBlogTypeById=function(id){
+		var selectResourceById=function(id){
 			var params ={
 				id:id
 				};
 			$.ajax({
-                   url:'../selectBlogTypeById',    
+                   url:'../selectResourcecById',    
                    type:'post',
                    data:params,
                    dataType:'json',    
                    success:function (data) { 
                     if(data.status==200){
-                    	$("#oldTypeName").html(data.blogType.typename);
-                    	var updateButton=' <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="updateBlogType('+data.blogType.id+')" type="button"><strong>提交</strong></button>'
+                    	$("#newTitle").val(data.resource.title);
+                    	$("#newContent").val(data.resource.content);
+                    	$("#newLink").val(data.resource.link);
+                    	$("#newPassword").val(data.resource.password);
+                    	var updateButton=' <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="updateResource('+data.resource.id+',null)" type="button"><strong>提交</strong></button>'
                     	$("#update").html(updateButton);
                     }else if(data.status==0){
                     	swal("查询失败", "不存在该类别信息", "error");
@@ -292,43 +429,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 		};
 		
-	 	var updateBlogType=function(id){
-	 		var params ={
+	 	var updateResource=function(id,status){
+	 		var params={
 	 				'id':id,
-        			'typename':$("#newTypeName").val(),
+        			'title':$("#newTitle").val(),
+        			'content':$("#newContent").val(),
+        			'link':$("#newLink").val(),
+        			'password':$("#newPassword").val(),
         	};
-	 		if($("#commentForm2").valid()){
+	 		if(status!=null&&status!=""){
+	 			params ={
+	 					'id':id,
+	        			'status':status,
+	        	};
+	 		}
 	 			 $.ajax({
-	                 url:'../updateBlogType',    
+	                 url:'../updateResource',    
 	                 type:'post',
 	                 data:params,
 	                 dataType:'json',    
 	                 success:function (data) { 
 	                  if(data.status==200){
+	                	initResourceCount();
 	                	$("#modal-form").modal('hide');
-	                  	initType();
-	                  	$("#allBlogType").bootstrapTable('refresh');
-	                  	$(".tip2").html("");
-	                  	$("#newTypeName").val(""); 
+	                  	$("#allResource").bootstrapTable('refresh');
 	                  	swal("更新成功", "", "success");
-	                  }else if(data.status==2){
-	                  	$(".tip2").html("该类别已经存在");
+	                  }else if(data.status==0){
+	                	  swal("更新失败", "", "error");
 	                  }	
 	                  },    
 	      		    error:function(){
 	      		    	swal("更新错误", "请重新操作", "error");
 	      		    }	
 	              });	
-			     }
 	 		
 	 	}
 		
-		var deleteBlogType=function(id){
+		var deleteResource=function(id){
 			var params ={
 	 				'id':id,
         	};
 			swal({
-	             title: "确定要删除该类别吗",
+	             title: "确定要删除该资源吗",
 	             text: "删除后将无法恢复，请谨慎操作！",
 	             type: "warning",
 	             showCancelButton: true,
@@ -338,17 +480,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         }, function () {
 	        	 
 	        	 $.ajax({
-	                 url:'../deleteBlogType',    
+	                 url:'../deleteResource',    
 	                 type:'post',
 	                 data:params,
 	                 dataType:'json',    
 	                 success:function (data) { 
 	                  if(data.status==200){
-	                	  $("#allBlogType").bootstrapTable('refresh');
-	                	  initType();
+	                	  $("#allResource").bootstrapTable('refresh');
+	                	  initResourceCount();
 	                	  swal("删除成功！", "", "success");
-	                  }else if(data.status==2){
-	                	  swal("删除失败", "该类别下有博客,不能删除", "error");
 	                  }else{
 	                	  swal("删除失败", "请重新操作", "error");
 	                  }	
@@ -376,6 +516,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    dataType:'json',    
                    success:function (data) { 
                     if(data.status==200){
+                    	$("#allResource").bootstrapTable('refresh');
+                    	initResourceCount();
+                    	$("#title").val("");
+                    	$("#content").val("");
+                    	$("#link").val("");
+                    	$("#password").val("");
                     	swal("添加成功", "", "success");
                     }	
                     },    
@@ -384,7 +530,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		    }	
                 }); 
             };
-          //格式化时间
+            //格式化时间
         	function Format(datetime, fmt) {
         	    if (parseInt(datetime) == datetime) {
         	        if (datetime.length == 10) {

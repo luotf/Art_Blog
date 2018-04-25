@@ -58,4 +58,10 @@ public class ResourceServiceImpl implements ResourceService {
 		return resourceMapper.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public List selectResourceListByStatus() {
+		// TODO Auto-generated method stub
+		return resourceMapper.selectResourceListByStatus();
+	}
+
 }

@@ -289,14 +289,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'15%',
 		                      formatter:function(value,row,index){ 
 		                    	  var title="";
-		                    	  var content=$(".form-control").val();
-		                    	  if(content==""||content==null){
-		                    		  title=row.title;
-		                    	  }else if(row.title.search(content)!=-1){
+		                    	  var content=$(".form-control").val().toLowerCase();
+		                    	  var contentUpper=$(".form-control").val().toUpperCase();
+		                    	   if(row.title.search(content)!=-1||row.title.search(contentUpper)!=-1){
 		                    		  var strs= new Array();
 			                    	  strs=row.title.split("");
 		                    		  var strStartIndex = row.title.indexOf(content);
 		                    		  var strEndIndex = strStartIndex+content.length-1;
+		                    		  if(row.title.search(contentUpper)!=-1){
+		                    			  strStartIndex = row.title.indexOf(contentUpper);
+			                    		  strEndIndex = strStartIndex+contentUpper.length-1;
+		                    		  }
 		                    		  for(var i=0;i<strs.length;i++){
 		                    			  if(i>=strStartIndex&&i<=strEndIndex){
 		                    				  title+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
@@ -304,6 +307,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    				  title+='<span >'+strs[i]+'</span>';
 		                    			  }
 		                    		  }
+		                    	  }else{
+		                    		  title=row.title;
 		                    	  }
 		                    	  return title;
 			   	                } 
@@ -344,7 +349,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'5%',
 		                      
 		                  },
-		                  {
+		                  /* {
 		                      title: '评论量',
 		                      field: 'commentnum',
 		                      align: 'center',
@@ -357,7 +362,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      align: 'center',
 		                      width:'5%',
 		                      
-		                  },
+		                  }, */	
 		                  {
 		                      title: '博主推荐',
 		                      field: 'isrecommend',
@@ -391,7 +396,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '发表时间',
 		                      field: 'addtime',
 		                      align: 'center',
-		                      width:'14%',
+		                      width:'15%',
 		                      
 		                      formatter:function(value,row,index){  
 		                    	 return Format(row.addtime,"yyyy-MM-dd hh:mm:ss");
@@ -403,24 +408,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      align: 'center',
 		                      width:'20%',
 		                      formatter:function(value,row,index){
-		                    	
+		                   //查看	
 		                   var a = '<a  class=" btn-sm btn-info" href="#" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</a> ';  
+		                   //编辑
 		                   var b = '<a  class=" btn-sm btn-primary"  href="../blog/updateBlog.jsp?id='+row.id+'"><i class="fa fa-edit" ></i>编辑</a> ';  
-		                   var c = '<a  class=" btn-sm btn-danger"  onclick="operationBlog('+ row.id + ',1,null)"><i class="fa fa-file-o" ></i>还原</a> '; 
+		                   //从回收站还原
+		                   var c = '<a  class=" btn-sm btn-danger"  onclick="operationBlog('+ row.id + ',1,null,null)"><i class="fa fa-file-o" ></i>还原</a> '; 
 		                   //取消推荐
-		                   var d = '<a  class=" btn-sm btn-warning"  onclick="operationBlog('+ row.id + ',null,0)"><i class="fa fa-hand-o-down" ></i>推荐</a> ';
+		                   var d = '<a  class=" btn-sm btn-warning"  onclick="operationBlog('+ row.id + ',null,0,null)"><i class="fa fa-hand-o-down" ></i>推荐</a> ';
 		                   //发布
-		                   var e = '<a  class=" btn-sm btn-danger"  onclick="operationBlog('+ row.id + ',1,null)"><i class="fa fa-check-square-o" ></i>发表</a> ';  
-		                   
+		                   var e = '<a  class=" btn-sm btn-danger"  onclick="operationBlog('+ row.id + ',1,null,null)"><i class="fa fa-check-square-o" ></i>发表</a> ';  
+		                   //取消置顶
+		                   var f = '<a  class=" btn-sm btn-warning"  onclick="operationBlog('+ row.id + ',null,null,0)"><i class="fa fa-hand-o-down" ></i>置顶</a> ';  
 		                   if(row.status==2){
 		                	   return a+c;
 		                   } else if(row.status==1){
 		                	   if(row.isrecommend==1){
 		                		   return a+d;
+		                	   }else if(row.istop==1){
+		                		   return a+f;  
 		                	   }else{
 		                		   return a+b;  
 		                	   }
-		                	 
 		                   }else if(row.status==-1)
 		                	   return a+e;  
 		                    } 
@@ -466,19 +475,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	
 	//博客的操作
-	var operationBlog=function(idArray,status,isrecommend){
+	var operationBlog=function(idArray,status,isrecommend,isTop){
 		var param='';
 		if(status!=null){
 			 param={
 					 'id':idArray,
 					 'status':status,
-			}
+			};
 		}
 		if(isrecommend!=null){
 			param={
 					 'id':idArray,
 					 'isrecommend':isrecommend,
-			}
+			};
+		}
+		if(isTop!=null){
+			param={
+					 'id':idArray,
+					 'istop':isTop,
+			};
 		}
 		console.log(param);  
 		$.ajax({
@@ -489,8 +504,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             success:function (data) {
             	//查询成功
             	if(data.status==200){
-            		//delTable(idArray);
-            	    //alert("删除成功");
             		$("#allBlog").bootstrapTable('refresh');
             	}
             },    

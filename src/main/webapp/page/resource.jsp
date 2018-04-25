@@ -121,7 +121,6 @@
 		         page:pageNum,
    				 title:$(".keyword").val(),
    				 content:$(".keyword").val(),
-   				 link:$(".keyword").val(),
    				 status:1    //1 表示已发布
    			 };
               	$.ajax({

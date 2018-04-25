@@ -20,6 +20,15 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
  
+ <select id="selectResourceListByStatus" resultType="map">
+		  SELECT 
+		    status,
+		    COUNT(*) AS count
+		  FROM
+		    t_resource
+		  GROUP BY status
+	</select>
+ 
   <select id="selectLikeResourceListByPage" parameterType="Map" resultMap="BaseResultMap">
 	select 
 	<include refid="Base_Column_List" />
@@ -29,7 +38,7 @@
 		 		and status=#{status}
 		 	</if>
 		 	<if test="title!=null and title!=''">
-		 	and ( title like CONCAT(CONCAT('%', #{title}), '%') or content like CONCAT(CONCAT('%', #{content}), '%') or link like CONCAT(CONCAT('%', #{link}), '%'))
+		 	and ( title like CONCAT(CONCAT('%', #{title}), '%') or content like CONCAT(CONCAT('%', #{content}), '%'))
 		 	</if>
 		 	
 		 </where>

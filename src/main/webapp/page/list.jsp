@@ -218,7 +218,7 @@
             				 break;
             			 }
             			 if(page.pageNum==i){
-            				 num='<a href="javascript:void(0);"><b>'+i+'</b></a>&nbsp;'
+            				 num='<a href="javascript:void(0);"><b>'+i+'</b></a>&nbsp;';
             			 }else{
             				 num='<a href="javascript:void(0);" onclick="pageNav('+i+')">'+i+'</a>&nbsp;';
             			 }
@@ -359,8 +359,9 @@
             success:function (data) {
             	var likeBlog='';
             	var data=data.blogList;
+            	
                 for (var i = 0; i < data.length; i++) {
-                	if(data[i].introduction.length>35){
+                	 if(data[i].introduction.length>35){
                 		data[i].introduction=data[i].introduction.substring(0,34)+"...";
                 	}
                 	var id=data[i].id.toString(8)*data[i].id;
