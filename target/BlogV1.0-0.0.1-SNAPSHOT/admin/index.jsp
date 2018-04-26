@@ -122,8 +122,8 @@
 							class="nav-label">资源模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							
-							<li><a class="J_menuItem" href="table_bootstrap.html">Bootstrap
-									Table <span class="label label-danger pull-right">推荐</span>
+							<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/resource/resource.jsp">资源管理
+									<span class="label label-danger pull-right">推荐</span>
 							</a></li>
 						</ul></li>
 					<li><a href="#"><i class="fa fa-picture-o"></i> <span

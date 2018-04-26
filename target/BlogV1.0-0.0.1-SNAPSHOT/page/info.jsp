@@ -17,37 +17,7 @@
 	<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 </head>
 <body>
-	<header>
-		<div id="mnav">
-			<h2>
-				<span class="navicon"></span>
-			</h2>
-			<ul>
-				<li><a href="${pageContext.request.contextPath}/page/index.jsp">网站首页</a></li>
-				<li><a href="${pageContext.request.contextPath}/page/list.jsp">技术博客</a></li>
-				<li><a href="${pageContext.request.contextPath}/page/list.jsp">面试汇总</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/page/project.jsp">项目案例</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/page/resource.jsp">资源分享</a></li>
-				<li><a href="${pageContext.request.contextPath}/page/about.jsp">关于我</a></li>
-				<li><a href="/">留言</a></li>
-			</ul>
-		</div>
-		<nav>
-			<ul>
-				<li><a href="${pageContext.request.contextPath}/page/index.jsp">网站首页</a></li>
-				<li><a href="${pageContext.request.contextPath}/page/list.jsp">技术博客</a></li>
-				<li><a href="${pageContext.request.contextPath}/page/list.jsp">面试汇总</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/page/project.jsp">项目案例</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/page/resource.jsp">资源分享</a></li>
-				<li><a href="${pageContext.request.contextPath}/page/about.jsp">关于我</a></li>
-				<li><a href="/">留言</a></li>
-			</ul>
-		</nav>
-	</header>
+	<%@ include file="top.jsp" %>
 	<article>
 		<div class="leftbox">
 			<div class="infos">
@@ -154,11 +124,7 @@
 		</div>
 	</article>
 
-	<footer>
-		<p>
-			Design by <a href="/">XXX个人博客</a> <a href="/">蜀ICP备11002373号-1</a>
-		</p>
-	</footer>
+	<%@ include file="fonter.jsp" %>
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
@@ -174,11 +140,11 @@
 		$(document).ready(function() {
 			var index ='';
 				
-			     layer.ready(function(){
+			     /* layer.ready(function(){
 			    	index=layer.load(2, {
 						  shade: [0.1,'#eee'] //0.1透明度的白色背景
 			    	});
-			    }); 
+			    });  */
 				 Format();
 				 Tags(); 
 			setTimeout(function () {
@@ -190,7 +156,7 @@
 				initBlogByClick(); 
 				setTimeout(function () {
 					$(".pl_paihang").css("display","block");
-					layer.close(index);
+					//layer.close(index);
 				},200);    
 			 }, 200);
 			

@@ -152,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<button id="prev2"  type="button" style="display:none"
 							onclick="prevBlog()" data-target="#myModal" data-toggle="modal">
 							</button>
-							<button id="add_draft" type="button" 
+							<button id="add_draft2" type="button" 
 								class="btn btn-white btn-sm" data-toggle="tooltip"
 								data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
@@ -450,7 +450,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	}
       
     	//只有验证通过才能执行 添加
-		$("#add_draft").click(function(){
+		$("#add_draft,#add_draft2").click(function(){
 		    if($("#commentForm").valid()){
 		    	updateBlog(-1);
 		     }
