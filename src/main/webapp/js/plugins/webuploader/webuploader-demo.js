@@ -1,6 +1,6 @@
 jQuery(function() {
     var $ = jQuery,    // just in case. Make sure it's not an other libaray.
-
+    
         $wrap = $('#uploader'),
 
         // 图片容器
@@ -389,8 +389,39 @@ jQuery(function() {
     uploader.on('uploadSuccess',function(file,response){
     	$(".imagePath").val(response.path);
     	swal("上传成功", response.path, "success");
+    	common_getPicFileList();
     });
     
+    function common_getPicFileList() {
+        var params = "E:\\Apache-tomcat-8.0.50\\webapps\\BlogV1.0\\upload";
+        $.ajax({
+            //此处使用的是自己封装的JAVA类
+            url: "../getFileList",
+            type: "POST",
+            data: {params: params},//图片文件夹路径作为参数传入java类
+            success: function (data) {
+                if (data.status==0) {
+                	swal("服务器图库为空", "请上传", "error");
+                } else {
+                 var pics='';
+                 var path='';
+                 var arr=new Array();
+                 var image='';
+                for(var i=0;i<data.fileList.length;i++){
+                	arr=data.fileList[i].split("webapps\\");
+                	path="http://localhost:8080/"+arr[1];
+                	image=path.replace(/\\/g,'/');
+                	pics+='<a class="fancybox" href="'+image+'" title="图片16"><img style="width: 254px; height: 143px;margin-right:5px;" alt="image" src="'+image+'" /></a>'
+                	}
+                }
+				$(".pics").html(pics);
+            },
+            error: function (e) {
+                console.log(e);
+                console.log("获取文件list数组失败，请检查接口服务");
+            }
+        });
+    };
     uploader.on( 'all', function( type ) {
         var stats;
         switch( type ) {

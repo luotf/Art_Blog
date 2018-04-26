@@ -117,7 +117,7 @@
 							class="nav-label">评论模块</span></a>
 						</li>
 					
-					<li><a href="options.jsp" class="J_menuItem"><i class="fa fa-picture-o"></i> <span
+					<li><a href="${pageContext.request.contextPath}/admin/pics/pics.jsp" class="J_menuItem"><i class="fa fa-picture-o"></i> <span
 							class="nav-label">本地图库</span></a>
 						</li>
 					<li><a href="#"><i class="fa fa-cutlery"></i> <span

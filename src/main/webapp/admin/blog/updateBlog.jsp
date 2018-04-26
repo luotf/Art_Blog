@@ -239,7 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
  
- <!-- Web Uploader -->
+ 	<!-- Web Uploader -->
     <script type="text/javascript">
         // 添加全局站点信息
         var BASE_URL = '${pageContext.request.contextPath}/js/plugins/webuploader';
