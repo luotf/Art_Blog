@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="2.324" errors="0" skipped="0" tests="4" name="com.luotf.mapper.tset.BlogTest">
+<testsuite failures="0" time="0.644" errors="0" skipped="0" tests="4" name="com.luotf.mapper.tset.BlogTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\bin"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="F:\java code\BlogV1.0"/>
+    <property name="user.dir" value="F:\java code\Blog"/>
     <property name="java.runtime.version" value="1.7.0_45-b18"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\endorsed"/>
@@ -27,9 +27,9 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 8"/>
-    <property name="classworlds.conf" value="F:\java code\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3607270927043496993.tmp"/>
+    <property name="classworlds.conf" value="F:\java code\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf6248846393917952407.tmp"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.library.path" value="E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;E:\Python;E:\Python\Library\mingw-w64\bin;E:\Python\Library\usr\bin;E:\Python\Library\bin;E:\Python\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;E:\Java\JDK 1.8\bin;E:\Java\JDK 1.8\jre\bin;E:\Apache-maven-3.5.3\bin;E:\Apache-tomcat-8.0.50\lib;E:\Apache-tomcat-8.0.50\bin;E:\Git\Git\cmd;C:\Users\Luotf\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\Luotf\AppData\Local\Programs\Python\Python36\;E:\VS Code\Microsoft VS Code\bin;."/>
+    <property name="java.library.path" value="E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;E:\Python;E:\Python\Library\mingw-w64\bin;E:\Python\Library\usr\bin;E:\Python\Library\bin;E:\Python\Scripts;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;E:\Java\JDK 1.8\bin;E:\Java\JDK 1.8\jre\bin;E:\Apache-maven-3.5.3\bin;E:\Apache-tomcat-8.0.50\lib;E:\Apache-tomcat-8.0.50\bin;E:\Git\Git\cmd;C:\Users\Luotf\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\Luotf\AppData\Local\Programs\Python\Python36\;E:\VS Code\Microsoft VS Code\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="51.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -50,7 +50,7 @@
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.7.0_45"/>
-    <property name="java.ext.dirs" value="E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
+    <property name="java.ext.dirs" value="E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
     <property name="sun.boot.class.path" value="E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\resources.jar;E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\rt.jar;E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\sunrsasign.jar;E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\jsse.jar;E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\jce.jar;E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\charsets.jar;E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\lib\jfr.jar;E:\MyEclipse 2014\binary\com.sun.java.jdk7.win32.x86_64_1.7.0.u45\jre\classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="maven.home" value="E:\Apache-maven-3.5.3"/>
@@ -62,8 +62,8 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="2.129" classname="com.luotf.mapper.tset.BlogTest" name="selectByExample"/>
-  <testcase time="0.195" classname="com.luotf.mapper.tset.BlogTest" name="subString"/>
+  <testcase time="0.412" classname="com.luotf.mapper.tset.BlogTest" name="selectByExample"/>
+  <testcase time="0.229" classname="com.luotf.mapper.tset.BlogTest" name="subString"/>
   <testcase time="0" classname="com.luotf.mapper.tset.BlogTest" name="BlogIdToSafe"/>
-  <testcase time="0" classname="com.luotf.mapper.tset.BlogTest" name="deleteBlog"/>
+  <testcase time="0.003" classname="com.luotf.mapper.tset.BlogTest" name="deleteBlog"/>
 </testsuite>

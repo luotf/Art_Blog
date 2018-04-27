@@ -44,7 +44,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
 	rel="stylesheet">
-
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
+    <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
 </head>
 
 <body class="gray-bg">
@@ -67,10 +68,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										class="fa fa-commenting-o"></i> 评论量 <span
 										class="label label-success pull-right" id="commentnum"></span>
 								</a></li>
-								<li><a href="mailbox.html"> <i
-										class="fa fa-thumbs-o-up"></i> 点赞量 <span
-										class="label label-primary pull-right" id="agreenum"></span>
-								</a></li>
 								<li><a href="mailbox.html"> <i class="fa fa-level-up"></i>
 										&nbsp;置顶<span class="label label-danger pull-right" id="istop"></span>
 								</a></li>
@@ -80,8 +77,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</a></li>
 							</ul>
 
-							<h5 class="tag-title">标签</h5>
-
+							<h5 class="tag-title">封面</h5>
+								<div class="images" style="width:100%">
+								
+								</div>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -137,6 +136,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											name="keyword" value=""> <p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
 									</div>
 								</div>
+							<div class="form-group">
+								<div id="uploader" class="wu-example" style="margin:0px 5.6% 0  5.6%;">
+                                <div class="queueList">
+                                    <div id="dndArea" class="placeholder">
+                                        <div id="filePicker"></div>
+                                        <p>或将照片拖到这里，单次最多可选300张</p>
+                                    </div>
+                                </div>
+                                <div class="statusBar" style="display:none;">
+                                    <div class="progress">
+                                        <span class="text">0%</span>
+                                        <span class="percentage"></span>
+                                    </div>
+                                    <div class="info"></div>
+                                    <div class="btns">
+                                        <div id="filePicker2"></div>
+                                        <input type="hidden" value="" class="imagePath">
+                                        <div class="uploadBtn">开始上传</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
 							</form>
 						</div>
 						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
@@ -204,7 +225,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 
-
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	<script
@@ -218,7 +238,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
-
+ 
+ 	<!-- Web Uploader -->
+    <script type="text/javascript">
+        // 添加全局站点信息
+        var BASE_URL = '${pageContext.request.contextPath}/js/plugins/webuploader';
+    </script>
+    <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader.min.js"></script>
+   <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo.js"></script>
 
 	<!-- SUMMERNOTE -->
 	<script
@@ -247,13 +274,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	  $("#introduction").val(data.blog.introduction);
 	            	  $("#summernote").code(data.blog.content);
 	            	  $("#keyword").val(data.blog.keyword);
+	            	  var img='<img src="'+data.blog.images+'" style="width:100%">';
+	            	  $(".images").html(img);
 	            	  //加载编辑页面预览的  时间和浏览量
 	            	  $(".newsview").find(".au02").html(Format(data.blog.addtime,"yyyy-MM-dd hh:mm:ss"));
 	           	  	  $(".au03").find('b').html(data.blog.clicknum);
 	            	  
 	            	  $("#clicknum").html(data.blog.clicknum);
-	            	  $("#commentnum").html(data.blog.commentnum);
-	            	  $("#agreenum").html(data.blog.agreenum);
+	            	 
 	            	  var istop='否';
 	            	  if(data.blog.istop==1){
 	            		  istop='是';
@@ -274,7 +302,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    }	
 	        });
 	
-		
+			var p={
+      				 client_id:'cytzg9rLH',
+      				 topic_source_id:url_param
+      			 };
+                $.ajax({
+   	            url:'http://changyan.sohu.com/api/2/topic/count',    
+   	            type:'get',
+   	            data:p,
+   	            dataType:'jsonp',    
+   	            success:function (pl) {
+   	             $("#commentnum").html(pl.result[url_param].comments);
+   	            },
+   			    error:function(){
+   			    	swal("获取评论数错误", "请重试操作", "error");
+   			    }	
+   	        });
 			//查询出文章类别
 			//设置参数，表示查询所有的类别
 			var params ={
@@ -384,6 +427,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'title':$("#title").val(),
         			'introduction':$("#introduction").val(),
         			'type.id':$("#typeName").val(),
+        			'images':$(".imagePath").val(),
         			'keyword':$("#keyword").val(),
         			'content':$("#summernote").code(),
         			'status':id

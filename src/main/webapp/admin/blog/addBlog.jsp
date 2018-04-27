@@ -75,40 +75,6 @@
 
 							</ul>
 
-							<h5 class="tag-title">标签</h5>
-							<ul class="tag-list" style="padding: 0">
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										I/O
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>MySQL
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>Struts2
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										Spring
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										Hibernate
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										Mybatis
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										SpringMVC
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										基础框架
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										JVM
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										多线程
-								</a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-tag"></i>
-										高并发
-								</a></li>
-							</ul>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -133,6 +99,15 @@
 					<div class="mail-box">
 						<div class="mail-body">
 							<form class="form-horizontal" method="post" id="commentForm">
+							<div class="form-group">
+							<label class="col-sm-2 control-label">封面：</label>
+								<div class="col-sm-10">
+								  <a class="fancybox picPath" href="#pic" data-toggle="modal" onclick="findPicList()">
+									<img class="picPath animated fadeInRight"  style="width: 190px; height: 115px;" alt="封面" title="点击更换封面" src="${pageContext.request.contextPath}/images/p1.jpg" />
+								</a>
+								</div>
+								</div>
+								<input type="hidden" value="" class="imagePath">
 								<div class="form-group">
 									<label class="col-sm-2 control-label">标题：</label>
 									<div class="col-sm-10">
@@ -163,30 +138,6 @@
 											<p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
 									</div>
 								</div>
-								<div class="form-group">
-								<div id="uploader" class="wu-example" style="margin:0px 5.6% 0  5.6%;">
-                                <div class="queueList">
-                                    <div id="dndArea" class="placeholder">
-                                        <div id="filePicker"></div>
-                                        <p>或将照片拖到这里，单次最多可选300张</p>
-                                    </div>
-                                </div>
-                                <div class="statusBar" style="display:none;">
-                                    <div class="progress">
-                                        <span class="text">0%</span>
-                                        <span class="percentage"></span>
-                                    </div>
-                                    <div class="info"></div>
-                                    <div class="btns">
-                                        <div id="filePicker2"></div>
-                                        <input type="hidden" value="" class="imagePath">
-                                        <div class="uploadBtn">开始上传</div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-								
-								
 							</form>
 						</div>
 						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
@@ -200,6 +151,7 @@
 								 data-placement="top" title="预览">
 								<i class="fa fa-reply"></i> 预览
 							</button>
+							
 							<button id="prev2"  type="button" style="display:none"
 							onclick="prevBlog()" data-target="#myModal" data-toggle="modal">
 							</button>
@@ -221,7 +173,6 @@
 						<button type="button" class="close" style="margin-right:7px"
 							data-dismiss="modal">
 							<span aria-hidden="true">&times;</span>
-							<span class="sr-only">Close</span>
 						</button>
 						<div class="infos" style="margin:0px;">
 							<div class="newsview" style="padding-top:0px;">
@@ -246,6 +197,41 @@
 			</div>
 
 
+			<div class="modal inmodal" id="pic" tabindex="-1" 
+				aria-hidden="true">
+				<div class="modal-dialog" style="width:79.3%;margin-top:-1%;">
+					<div class="modal-content animated fadeInUp">
+						<button type="button" class="close" style="margin-right:7px"
+							data-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+						</button> 
+								<div id="uploader" class="wu-example" style="margin:0px 5.6% 0  5.6%;">
+                                <div class="queueList">
+                                    <div id="dndArea" class="placeholder" style="min-height: 110px;padding-top: 0px;background:none">
+                                        <div id="filePicker"></div>
+                                        <p>或将照片拖到这里，单次最多可选300张</p>
+                                    </div>
+                                </div>
+                                <div class="statusBar" style="display:none;">
+                                    <div class="progress">
+                                        <span class="text">0%</span>
+                                        <span class="percentage"></span>
+                                    </div>
+                                    <div class="info"></div>
+                                    <div class="btns">
+                                        <div id="filePicker2"></div>
+                                        <div class="uploadBtn">开始上传</div>
+                                    </div>
+                                </div>
+						</div>
+						<div class="modal-body picsList" style="height:260px;overflow:scroll; padding: 0px 30px 0px 30px;">
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 
@@ -266,7 +252,7 @@
         var BASE_URL = '${pageContext.request.contextPath}/js/plugins/webuploader';
     </script>
     <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo.js"></script>
+   <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo2.js"></script>
 
 <!-- jQuery Validation plugin javascript-->
     <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
@@ -417,6 +403,38 @@
 			});
 		}
 
+		//弹出模态框 选择图片
+		var selectImgPath=function(img){
+			$("#pic").modal('hide');
+			var imgPath='<img class="picPath animated fadeInRight"  style="width: 190px; height: 115px;" alt="封面" title="点击更换封面" src="'+img.src+'" />';
+			$(".picPath").html(imgPath)
+			$(".imagePath").val(img.src);
+		};
+		
+		//查找服务器图库
+		var findPicList=function(){
+			 $.ajax({
+	                //此处使用的是自己封装的JAVA类
+	                url: "../getFileList",
+	                type: "POST",
+	                success: function (data) {
+	                    if (data.status==0) {
+	                    	swal("服务器图库为空", "请上传", "error");
+	                    } else {
+	                     var pics='';
+	                    for(var i=0;i<data.fileList.length;i++){
+	                    	pics+='<a class="fancybox" href="javascript:void(0);"><img onclick="selectImgPath(this)" style="width: 190px; height: 115px;float:left;margin-right:3px;" alt="image" src="'+data.fileList[i]+'" /></a>'
+	                    	}
+	                    }
+						$(".picsList").html(pics);
+	                },
+	                error: function (e) {
+	                	swal("获取图片错误", "请检查接口服务", "error");
+	                }
+	            });
+		};
+		
+		
 		var prevBlog = function() {
 			$(".newsview").find(".news_title").html($("#title").val());
 			$(".news_about").find(".news_intr").html($("#introduction").val());
@@ -424,7 +442,10 @@
 			var inputKeyword = $("#keyword").val();
 			$(".newsview").find(".tags").html("");
 			if (inputKeyword != '' && inputKeyword != null) {
-				if (inputKeyword.search(';') != -1) {
+				if (inputKeyword.search(';') != -1||inputKeyword.search('；') != -1) {
+					if(inputKeyword.search('；') != -1){
+						inputKeyword=inputKeyword.replace(/；/g,";");
+					}
 					var strs = new Array();
 					strs = inputKeyword.split(";");
 					for (var i = 0; i < strs.length && strs[i] != ''; i++) {

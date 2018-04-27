@@ -149,32 +149,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         });
         
         function common_getPicFileList() {
-            var params = "E:\\Apache-tomcat-8.0.50\\webapps\\BlogV1.0\\upload";
             $.ajax({
                 //此处使用的是自己封装的JAVA类
                 url: "../getFileList",
                 type: "POST",
-                data: {params: params},//图片文件夹路径作为参数传入java类
                 success: function (data) {
                     if (data.status==0) {
                     	swal("服务器图库为空", "请上传", "error");
                     } else {
                      var pics='';
-                     var path='';
-                     var arr=new Array();
-                     var image='';
                     for(var i=0;i<data.fileList.length;i++){
-                    	arr=data.fileList[i].split("webapps\\");
-                    	path="http://localhost:8080/"+arr[1];
-                    	image=path.replace(/\\/g,'/');
-                    	pics+='<a class="fancybox" href="'+image+'" title="图片16"><img style="width: 254px; height: 143px;margin-right:5px;" alt="image" src="'+image+'" /></a>'
+                    	pics+='<a class="fancybox" href="'+data.fileList[i]+'"><img style="width: 254px; height: 143px;margin-right:5px;" alt="image" src="'+data.fileList[i]+'" /></a>'
                     	}
                     }
 					$(".pics").html(pics);
                 },
                 error: function (e) {
-                    console.log(e);
-                    console.log("获取文件list数组失败，请检查接口服务");
+                	swal("获取图片错误", "请检查接口服务", "error");
                 }
             });
         }

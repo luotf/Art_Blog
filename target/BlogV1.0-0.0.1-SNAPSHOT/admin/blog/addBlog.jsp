@@ -46,6 +46,8 @@
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
+    <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
 </head>
 
 <body class="gray-bg">
@@ -161,6 +163,29 @@
 											<p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
 									</div>
 								</div>
+								<div class="form-group">
+								<div id="uploader" class="wu-example" style="margin:0px 5.6% 0  5.6%;">
+                                <div class="queueList">
+                                    <div id="dndArea" class="placeholder">
+                                        <div id="filePicker"></div>
+                                        <p>或将照片拖到这里，单次最多可选300张</p>
+                                    </div>
+                                </div>
+                                <div class="statusBar" style="display:none;">
+                                    <div class="progress">
+                                        <span class="text">0%</span>
+                                        <span class="percentage"></span>
+                                    </div>
+                                    <div class="info"></div>
+                                    <div class="btns">
+                                        <div id="filePicker2"></div>
+                                        <input type="hidden" value="" class="imagePath">
+                                        <div class="uploadBtn">开始上传</div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+								
 								
 							</form>
 						</div>
@@ -235,6 +260,13 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
+<!-- Web Uploader -->
+    <script type="text/javascript">
+        // 添加全局站点信息
+        var BASE_URL = '${pageContext.request.contextPath}/js/plugins/webuploader';
+    </script>
+    <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader.min.js"></script>
+   <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo.js"></script>
 
 <!-- jQuery Validation plugin javascript-->
     <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
@@ -415,6 +447,7 @@
 				'type.id' : $("#typeName").val(),
 				'keyword' : $("#keyword").val(),
 				'content' : $("#summernote").code(),
+				'images':$(".imagePath").val(),
 				'status' : id
 			};
 			$.ajax({

@@ -60,11 +60,14 @@ jQuery(function() {
         throw new Error( 'WebUploader does not support the browser you are using.' );
     }
 
-    // 实例化
+    
+    
+    //以下是 单独的上传组件/不含模态框
+    
     uploader = WebUploader.create({
         pick: {
             id: '#filePicker',
-            label: '点击选择封面'
+            label: '点击上传封面'
         },
         dnd: '#uploader .queueList',
         paste: document.body,
@@ -87,7 +90,6 @@ jQuery(function() {
         fileSizeLimit: 5 * 1024 * 1024,    // 200 M
         fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
     });
-
     // 添加“添加文件”的按钮，
     uploader.addButton({
         id: '#filePicker2',
@@ -210,22 +212,7 @@ jQuery(function() {
                 });
             } else {
                 $wrap.css( 'filter', 'progid:DXImageTransform.Microsoft.BasicImage(rotation='+ (~~((file.rotation/90)%4 + 4)%4) +')');
-                // use jquery animate to rotation
-                // $({
-                //     rotation: rotation
-                // }).animate({
-                //     rotation: file.rotation
-                // }, {
-                //     easing: 'linear',
-                //     step: function( now ) {
-                //         now = now * Math.PI / 180;
-
-                //         var cos = Math.cos( now ),
-                //             sin = Math.sin( now );
-
-                //         $wrap.css( 'filter', "progid:DXImageTransform.Microsoft.Matrix(M11=" + cos + ",M12=" + (-sin) + ",M21=" + sin + ",M22=" + cos + ",SizingMethod='auto expand')");
-                //     }
-                // });
+                
             }
 
 
@@ -388,40 +375,31 @@ jQuery(function() {
     //上传成功后
     uploader.on('uploadSuccess',function(file,response){
     	$(".imagePath").val(response.path);
-    	swal("上传成功", response.path, "success");
+    	swal("上传成功", "", "success");
     	common_getPicFileList();
     });
     
     function common_getPicFileList() {
-        var params = "E:\\Apache-tomcat-8.0.50\\webapps\\BlogV1.0\\upload";
         $.ajax({
             //此处使用的是自己封装的JAVA类
             url: "../getFileList",
             type: "POST",
-            data: {params: params},//图片文件夹路径作为参数传入java类
             success: function (data) {
                 if (data.status==0) {
                 	swal("服务器图库为空", "请上传", "error");
                 } else {
                  var pics='';
-                 var path='';
-                 var arr=new Array();
-                 var image='';
                 for(var i=0;i<data.fileList.length;i++){
-                	arr=data.fileList[i].split("webapps\\");
-                	path="http://localhost:8080/"+arr[1];
-                	image=path.replace(/\\/g,'/');
-                	pics+='<a class="fancybox" href="'+image+'" title="图片16"><img style="width: 254px; height: 143px;margin-right:5px;" alt="image" src="'+image+'" /></a>'
+                	pics+='<a class="fancybox" href="'+data.fileList[i]+'"><img style="width: 254px; height: 143px;margin-right:5px;" alt="image" src="'+data.fileList[i]+'" /></a>'
                 	}
                 }
 				$(".pics").html(pics);
             },
             error: function (e) {
-                console.log(e);
-                console.log("获取文件list数组失败，请检查接口服务");
+            	swal("获取图片错误", "请检查接口服务", "error");
             }
         });
-    };
+    }
     uploader.on( 'all', function( type ) {
         var stats;
         switch( type ) {

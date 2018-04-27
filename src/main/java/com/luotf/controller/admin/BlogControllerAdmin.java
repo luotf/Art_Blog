@@ -60,14 +60,14 @@ public class BlogControllerAdmin {
 						 String fileExt=fileName.substring(fileName.lastIndexOf(".")+1).toUpperCase();
 						 SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 						 String newFileName=df.format(new Date());
-						 String fileNames=newFileName+new Random().nextInt(1000)+"."+fileExt;
-						 String filePath=request.getSession().getServletContext().getRealPath("/")+"\\upload\\"+newFileName+"\\"+fileNames;
+						 String fileNames=newFileName+new Random().nextInt(1000000)+"."+fileExt;
+						 String filePath="c:\\upload\\"+newFileName+"\\"+fileNames;
 						 File localFile=new File(filePath);
 						 if(!localFile.exists()){
 							 localFile.mkdirs();
 						 }
 						 file.transferTo(localFile);
-						 fileNames="http://localhost:8080/BlogV1.0/upload/"+newFileName+"/"+fileNames;
+						 fileNames="/upload/"+newFileName+"/"+fileNames;
 						 map.put("name",fileBaseName);
 						 map.put("path",fileNames);
 						 map.put("status",200);

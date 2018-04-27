@@ -43,7 +43,7 @@
   <div class="rightbox">
     <div class="aboutme">
       <h2 class="ab_title ">关于我</h2>
-      <div class="avatar animated fadeInDown"><img src="${pageContext.request.contextPath}/images/my.jpeg" /></div>
+      <div class="avatar animated fadeInDown"><img src="${pageContext.request.contextPath}/images/my.jpeg"/></div>
       <div class="ab_con animated fadeInDown">
         <p>网名：我倾尽一生,囚你无期 | Luotf</p>
         <p>职业：Java开发工程师 | 全栈 </p>

@@ -102,7 +102,7 @@
 	            	var data=date.resourceList;
 	            	if(data.length>0){
 	            		for (var i = 0; i < data.length; i++) {
-	            			resourceList+='<div class="col-sm-4 animated fadeInDown" ><div class="panel panel-info"><div class="panel-heading">'+data[i].title+'</div><div class="panel-body"><p style="word-break:break-word;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-danger pull-right">Go</span></a> </div></div></div>';
+	            			resourceList+='<div class="col-sm-4 animated fadeInDown" ><div class="panel panel-info"><div class="panel-heading">'+data[i].title+'</div><div class="panel-body"><p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-danger pull-right">Go</span></a> </div></div></div>';
 	            		}
 	            	}else{
 	            		resourceList="无查询结果";

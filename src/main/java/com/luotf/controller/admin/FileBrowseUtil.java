@@ -45,9 +45,10 @@ public class FileBrowseUtil {
     @RequestMapping("/getFileList")
     @ResponseBody
     protected Map CalculateGeoServlet(HttpServletRequest req,
-            HttpServletResponse resp,String params) throws ServletException, IOException,
+            HttpServletResponse resp) throws ServletException, IOException,
             MalformedURLException {
         ArrayList<String> fileList=new ArrayList<String>();
+        String params="c:\\upload";
         fileList=getFiles(params,fileList);
         Map map=new HashMap();
         if(fileList.size()>0){
@@ -65,19 +66,22 @@ public class FileBrowseUtil {
      */
     public static ArrayList<String> getFiles(String filePath,ArrayList<String> fileList) {
         ArrayList<String> fileListAll =fileList;
+        //System.out.println("访问的路径为："+filePath);
         File root = new File(filePath);
         File[] files = root.listFiles();
+        String[] arr=new String[10];
+        String path="";
         for (File file : files) {
             if (file.isDirectory()) {
                 /*
                  * 递归调用
                  */
-                getFiles(file.getPath(),fileListAll);
+            	arr=file.getAbsolutePath().split(":");
+                getFiles(arr[1].replace("\\","/"),fileListAll);
                 //fileList.add(file.getAbsolutePath());
             } else {
-                String picPathStr = file.getPath();
-                fileList.add(picPathStr);
-                //System.out.println("显示"+filePath+"下所有子目录"+file.getAbsolutePath());
+            	arr=file.getAbsolutePath().split(":");
+                fileList.add(arr[1].replace("\\","/"));
             }
         }
        /* for(String str:fileList){

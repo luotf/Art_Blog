@@ -70,7 +70,7 @@
 
 					<li><a class="J_menuItem"
 								href="${pageContext.request.contextPath}/admin/options.jsp"><i class="fa fa-envelope"></i>
-					<span class="nav-label">专栏设置</span></a>
+					<span class="nav-label">专栏设置</span></a></li>
 					
 					<li><a href="#"><i class="fa fa-edit"></i> <span
 							class="nav-label">数据图表</span><span class="fa arrow"></span></a>
@@ -104,21 +104,8 @@
 							</li>
 
 						</ul></li>
-					<li><a href="#"><i class="fa fa-flask"></i> <span
-							class="nav-label">项目模块</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							
-							<li><a href="#">字体图标 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem" href="fontawesome.html">Font
-											Awesome</a></li>
-									
-								</ul></li>
-							
-							<li><a class="J_menuItem" href="buttons.html">按钮</a></li>
-							
-						</ul></li>
-					<li><a href="#"><i class="fa fa-table"></i> <span
+						
+						<li><a href="#"><i class="fa fa-table"></i> <span
 							class="nav-label">资源模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							
@@ -126,15 +113,13 @@
 									<span class="label label-danger pull-right">推荐</span>
 							</a></li>
 						</ul></li>
-					<li><a href="#"><i class="fa fa-picture-o"></i> <span
-							class="nav-label">评论模块</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="basic_gallery.html">基本图库</a>
-							</li>
-							
-						</ul></li>
-					<li><a class="J_menuItem" href="css_animation.html"><i
-							class="fa fa-magic"></i> <span class="nav-label">留言模块</span></a></li>
+					<li><a href="http://changyan.kuaizhan.com/" class="J_menuItem"><i class="fa fa-flask"></i> <span
+							class="nav-label">评论模块</span></a>
+						</li>
+					
+					<li><a href="${pageContext.request.contextPath}/admin/pics/pics.jsp" class="J_menuItem"><i class="fa fa-picture-o"></i> <span
+							class="nav-label">本地图库</span></a>
+						</li>
 					<li><a href="#"><i class="fa fa-cutlery"></i> <span
 							class="nav-label">前台页面 </span></a>
 

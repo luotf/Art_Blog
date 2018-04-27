@@ -1988,7 +1988,7 @@
 			};
 		}
 
-		if ( $.support.fixedPosition === undefined ) {
+		/*if ( $.support.fixedPosition === undefined ) {
 			$.support.fixedPosition = (function() {
 				var elem  = $('<div style="position:fixed;top:20px;"></div>').appendTo('body'),
 					fixed = ( elem[0].offsetTop === 20 || elem[0].offsetTop === 15 );
@@ -1997,7 +1997,7 @@
 
 				return fixed;
 			}());
-		}
+		}*/
 
 		$.extend(F.defaults, {
 			scrollbarWidth : $.scrollbarWidth(),

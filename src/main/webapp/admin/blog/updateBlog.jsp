@@ -402,10 +402,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      	  var inputKeyword=$("#keyword").val();
 	      	  $(".newsview").find(".tags").html("");
 	      	  if(inputKeyword!=''&&inputKeyword!=null){
-	      		  if(inputKeyword.search(';')!=-1){
-	      			 var strs= new Array();
-	      		     strs=inputKeyword.split(";");
-	                   for (var i = 0; i < strs.length&&strs[i]!=''; i++) {
+	      		if (inputKeyword.search(';') != -1||inputKeyword.search('；') != -1) {
+					if(inputKeyword.search('；') != -1){
+						inputKeyword=inputKeyword.replace(/；/g,";");
+					}
+					var strs = new Array();
+					strs = inputKeyword.split(";");
+	                  for (var i = 0; i < strs.length&&strs[i]!=''; i++) {
 	              	   keyword +='<a href="#">'+strs[i]+'</a>';
 	                }
 	      	    }else{
