@@ -58,7 +58,7 @@
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">写博客</a>
+								href="javascript:void(0);">写博客</a>
 							<div class="space-25"></div>
 							<h5>博客状态</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
