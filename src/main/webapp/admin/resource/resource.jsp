@@ -181,9 +181,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				dataType : 'json',
 				success : function(data) {
 					var count=0;
+					$(".a-2").html('0条');
+					$(".a-3").html('0条');
 					for (var i = 0; i < data.list.length; i++) {
 						count+=data.list[i].count;
-						
 						if (data.list[i].status == 1) {
 							$(".a-2").html(
 									data.list[i].count + '条');

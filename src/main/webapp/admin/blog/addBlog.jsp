@@ -269,83 +269,10 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote-zh-CN.js"></script>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							//初始化博客数目
-							$.ajax({
-								url : '../selectBlogListByStatus',
-								type : 'post',
-								dataType : 'json',
-								success : function(data) {
-									for (var i = 0; i < data.list.length; i++) {
-										if (data.list[i].status == -1) {
-											$(".s-2").html(
-													data.list[i].count + '篇');
-										} else if (data.list[i].status == 1) {
-											$(".s-1").html(
-													data.list[i].count + '篇');
-										} else if (data.list[i].status == 2) {
-											$(".s-3").html(
-													data.list[i].count + '篇');
-										}
-									}
-								},
-								error : function() {
-									swal("初始化博客状态错误", "请重新操作", "error");
-								}
-							});
+		$(document).ready(function() {
+			initBlogCountBystatus();	
+			initBlogType();			
 							
-							//查询出文章类别
-							//设置参数，表示查询所有的类别
-							var params = {
-								"data" : "all"
-							};
-							$
-									.ajax({
-										url : '../selectBlogType',
-										type : 'post',
-										data : params,
-										dataType : 'json',
-										success : function(data) {
-											var typeName = '';
-											var typeNameAndNum = '';
-											var circle = new Array("text-navy",
-													"text-danger",
-													" text-info",
-													"text-primary",
-													"text-warning");
-											var label = new Array(
-													"label-primary",
-													"label-danger",
-													" label-info",
-													"label-success",
-													"label-warning");
-											for (var i = 0; i < data.length; i++) {
-												typeName += '<option value="' + data[i].id + '">'
-														+ data[i].typename
-														+ '</option>';
-												typeNameAndNum += '<li><a href="javascript:void(0);"> <i class="fa fa-circle '
-														+ circle[i % 5]
-														+ '"></i> '
-														+ data[i].typename
-														+ '<span class="label '
-														+ label[i % 5]
-														+ ' pull-right">'
-														+ data[i].num
-														+ ' 篇</span></a></li>'
-											}
-											// 初始化数据
-											$(".form-horizontal").find(
-													'select[name=typeName]')
-													.append(typeName);
-											$(".category-list").html(
-													typeNameAndNum);
-										},
-										error : function() {
-											swal("初始化类别错误", "请重新操作", "error");
-										}
-									});
 
 							//初始化富文本
 							$('#summernote').summernote(
@@ -363,6 +290,86 @@
 									});
 						});
 
+		var initBlogType=function(){
+			//查询出文章类别
+			//设置参数，表示查询所有的类别
+			var params = {
+				"data" : "all"
+			};
+			$
+					.ajax({
+						url : '../selectBlogType',
+						type : 'post',
+						data : params,
+						dataType : 'json',
+						success : function(data) {
+							var typeName = '';
+							var typeNameAndNum = '';
+							var circle = new Array("text-navy",
+									"text-danger",
+									" text-info",
+									"text-primary",
+									"text-warning");
+							var label = new Array(
+									"label-primary",
+									"label-danger",
+									" label-info",
+									"label-success",
+									"label-warning");
+							for (var i = 0; i < data.length; i++) {
+								typeName += '<option value="' + data[i].id + '">'
+										+ data[i].typename
+										+ '</option>';
+								typeNameAndNum += '<li><a href="javascript:void(0);"> <i class="fa fa-circle '
+										+ circle[i % 5]
+										+ '"></i> '
+										+ data[i].typename
+										+ '<span class="label '
+										+ label[i % 5]
+										+ ' pull-right">'
+										+ data[i].num
+										+ ' 篇</span></a></li>'
+							}
+							// 初始化数据
+							$(".form-horizontal").find(
+									'select[name=typeName]')
+									.append(typeName);
+							$(".category-list").html(
+									typeNameAndNum);
+						},
+						error : function() {
+							swal("初始化类别错误", "请重新操作", "error");
+						}
+					});
+		}
+		
+		
+		var initBlogCountBystatus=function(){
+			//初始化博客数目
+			$.ajax({
+				url : '../selectBlogListByStatus',
+				type : 'post',
+				dataType : 'json',
+				success : function(data) {
+					for (var i = 0; i < data.list.length; i++) {
+						if (data.list[i].status == -1) {
+							$(".s-2").html(
+									data.list[i].count + '篇');
+						} else if (data.list[i].status == 1) {
+							$(".s-1").html(
+									data.list[i].count + '篇');
+						} else if (data.list[i].status == 2) {
+							$(".s-3").html(
+									data.list[i].count + '篇');
+						}
+					}
+				},
+				error : function() {
+					swal("初始化博客状态错误", "请重新操作", "error");
+				}
+			});
+		}
+		
 		//图片上传  
 		function sendFile(file, editor, $editable) {
 			var filename = false;
@@ -478,6 +485,8 @@
 				dataType : 'json',
 				success : function(data) {
 					if (data.status == 200) {
+						initBlogCountBystatus();	
+						initBlogType();	
 						$("#myModal").modal('hide');
 						if(id==1){
 						 swal("发布成功", "博客已在前端展示", "success");
