@@ -24,6 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.luotf.annotation.AccessLimit;
 import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
@@ -199,6 +200,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectLikeBlogListByPage",method = RequestMethod.POST)
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=13)
 	 public Map selectLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		 
@@ -255,6 +257,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectGroupLikeBlogListByPage")
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=13)
 	 public Map selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		// if(sort)
@@ -311,6 +314,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogListByPage",method = RequestMethod.POST)
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=13)
 	 public Map selectBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		 
@@ -373,6 +377,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogCount",method = RequestMethod.POST)
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=10)
 	 public Map selectBlogCount(Blog blog) throws Exception{
 		 Map map=new HashMap();
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
@@ -414,6 +419,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectPrevBlog",method = RequestMethod.POST)
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=5)
 	 public Map selectPrevBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
 		 Blog blog=blogService.selectPrevBlog(id);
@@ -436,6 +442,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectNextBlog",method = RequestMethod.POST)
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=5)
 	 public Map selectNextBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
 		 Blog blog=blogService.selectNextBlog(id);
@@ -458,6 +465,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogListByStatus",method = RequestMethod.POST)
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=10)
 	 public Map selectBlogListByStatus() throws Exception{
 		 Map map=new HashMap();
 		 List list=blogService.selectBlogListByStatus();

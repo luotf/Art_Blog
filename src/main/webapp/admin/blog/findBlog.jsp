@@ -34,12 +34,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
-	
+
 </head>
 
 <body class="gray-bg">
@@ -53,33 +55,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								href="mail_compose.html">博客查询</a>
 							<div class="space-25"></div>
 							<h5 class="tag-title">搜索</h5>
-							<form role="form" class="form-inline" >
-								<div class="form-group" >
-									<input type="text" onkeyup ="findBlogByKey()" placeholder="请输入关键字" id="blogname"
-										class="form-control" style="width:76%;">
-									<button id="findBlog" onclick ="findBlogByKey()" class="btn btn-white pull-right" type="button"
-										>搜索</button>
+							<form role="form" class="form-inline">
+								<div class="form-group">
+									<input type="text" onkeyup="findBlogByKey()"
+										placeholder="请输入关键字" id="blogname" class="form-control"
+										style="width:76%;">
+									<button id="findBlog" onclick="findBlogByKey()"
+										class="btn btn-white pull-right" type="button">搜索</button>
 								</div>
 							</form>
-							
+
 							<h5>博客列表</h5>
 							<div class="paihang">
-							<ul class="category-list" >
-                             
-							</ul>
-							<div class="pagelist" style="padding-top: 0px;">
-								<div class="pageNav"></div>
-								<div style="margin:15px 0 0 0;">
-									<span class="allTotal">共<b></b>条记录</span>&nbsp;&nbsp;
-									<span class="cPage">第<b></b>页</span>&nbsp;&nbsp;
-									<span class="allPage">共<b></b>页</span>
+								<ul class="category-list">
+
+								</ul>
+								<div class="pagelist" style="padding-top: 0px;">
+									<div class="pageNav"></div>
+									<div style="margin:15px 0 0 0;">
+										<span class="allTotal">共<b></b>条记录
+										</span>&nbsp;&nbsp; <span class="cPage">第<b></b>页
+										</span>&nbsp;&nbsp; <span class="allPage">共<b></b>页
+										</span>
+									</div>
 								</div>
+
 							</div>
-							
-							</div>
-							
+
 							<div class="clearfix"></div>
-							 
+
 						</div>
 					</div>
 				</div>
@@ -88,13 +92,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<h2>博客详情</h2>
-							<div class="infos" style="margin:0px auto;width: 91.2%;">
+						<div class="infos" style="margin:0px auto;width: 91.2%;">
 							<div class="newsview" style="padding-top:0px;">
 								<h3 class="news_title"></h3>
 								<div class="news_author">
 									<span class="au01">罗廷方</span><span class="au02"></span><span
-											class="au03">共<b></b>人围观
-										</span>
+										class="au03">共<b></b>人围观
+									</span>
 								</div>
 								<div class="tags"></div>
 								<div class="news_about">
@@ -102,18 +106,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="news_infos"></div>
 							</div>
-							 <div class="news_pl">
-							   <h2>文章评论</h2>
-								
+							<div class="news_pl">
+								<h2>文章评论</h2>
 
-							</div> 
+
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 
 
 
@@ -125,17 +129,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
-	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
-	
+
 	<!-- jQuery Validation plugin javascript-->
-    <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
-	
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
+
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -143,7 +151,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
+	<script charset="utf-8" type="text/javascript"
+		src="http://changyan.sohu.com/upload/changyan.js"></script>
 
 	<script>
 	  
@@ -177,10 +186,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             dataType:'json',    
             success:function (data) {
             	var blogList='';
-            	//console.log(data);
             	var page=data.pageInfo;
             	var data=data.blogList;
-            	//console.log(data);
             	var circle = new Array("text-navy","text-danger"," text-info","text-primary","text-warning");
             	for (var i = 0; i < data.length; i++) {
             		blogList+='<li style="margin: 0 0 5px 0"><a href="#" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
@@ -193,20 +200,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			 var next='<a href="#" title="下一页" onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-angle-right"></i></a>&nbsp;&nbsp;';
 			 var last='<a href="#" title="尾页" onclick="pageNav('+page.pages+','+page.pages+')"><i class="fa fa-angle-double-right"></i></a>';	
 			 pageNav=first+pre+next+last;
-			 
 			 $(".pageNav").html(pageNav);
-			 
              $(".category-list").html(blogList);
              $(".allTotal").find("b").html(page.total);
              $(".cPage").find("b").html(page.pageNum);
              $(".allPage").find("b").html(page.pages);
-            
-              //初始化右边详情内容
+              //初始化左边内容
              findBlogById(data[0].id);
              
             	},    
 		    error:function(){
-		    	alert("初始化失败");
+		    	swal("您的请求太快", "请重新操作", "error");
 		    }	
         });
 	};
@@ -259,7 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	  	$(".newsview").find(".news_infos").html(data.blog.content);
             	}, 
 		    error:function(){
-		    	alert("初始化失败");
+		    	swal("初始化内容失败", "请重新操作", "error");
 		    }	
         });
 		

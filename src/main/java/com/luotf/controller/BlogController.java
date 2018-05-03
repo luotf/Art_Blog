@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.luotf.annotation.AccessLimit;
 import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
@@ -62,6 +63,7 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectNextBlog")
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=4)
 	 public Map selectNextBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
 		 Blog blog=blogService.selectNextBlog(id);
@@ -83,6 +85,7 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectPrevBlog")
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=4)
 	 public Map selectPrevBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
 		 Blog blog=blogService.selectPrevBlog(id);
@@ -105,6 +108,7 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectLikeBlogListByPage")
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=10)
 	 public Map selectLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		// if(sort)

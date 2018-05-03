@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html>
@@ -8,47 +8,54 @@
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/font-awesome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/base.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/index.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/animate.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/font-awesome.css"
+	rel="stylesheet">
 </head>
 <body>
-<%@ include file="top.jsp" %>
-<article>
-  <div class="leftbox">
-    <div class="newblogs ">
-      <h2 class="hometitle">
-      <span class="tagTitle">
-      </span>技术专栏</h2>
-      <ul class="animated fadeInDown">
-      
-      </ul>
-      <div class="pagelist ">
-      
-      </div> 
-    </div>
-  </div>
-  <div class="rightbox">
-    <div class="search1">
-      <form action="" method="post" name="searchform" id="searchform">
-        <input name="keyword" id="keyword"  class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
-        <input name="Submit" class="input_submit" value="搜索" type="button" onclick="search()">
-      	<input type="hidden" class="type_id">
-      </form>
-     
-     <ul class="tag tag-list animated fadeIn" style="padding: 0;">
-		
-	</ul >
-	
-    </div>
-    
-      <div class="paihang " >
+	<%@ include file="top.jsp"%>
+	<article>
+		<div class="leftbox">
+			<div class="newblogs ">
+				<h2 class="hometitle">
+					<span class="tagTitle"> </span>技术专栏
+				</h2>
+				<ul class="animated fadeInDown">
+
+				</ul>
+				<div class="pagelist "></div>
+			</div>
+		</div>
+		<div class="rightbox">
+			<div class="search1">
+				<form action="" method="post" name="searchform" id="searchform">
+					<input name="keyword" id="keyword" class="input_text"
+						value="请输入关键字" style="color: rgb(153, 153, 153);"
+						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
+						type="text"> <input name="Submit" class="input_submit"
+						value="搜索" type="button" onclick="search()"> <input
+						type="hidden" class="type_id">
+				</form>
+
+				<ul class="tag tag-list animated fadeIn" style="padding: 0;">
+
+				</ul>
+
+			</div>
+
+			<div class="paihang ">
 				<h2 class="ab_title">
 					<a href="/">本栏推荐</a>
 				</h2>
-				<ul class="like animated fadeInDown" >
+				<ul class="like animated fadeInDown">
 
 				</ul>
 				<div class="ad"></div>
@@ -62,20 +69,21 @@
 				</ul>
 
 			</div>
-    
-    <div class="weixin">
-      <h2 class="ab_title">公众号</h2>
-      <ul class="animated fadeInDown">
-        
-      </ul>
-    </div>
-  </div>
-</article>
 
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
-<script id="cy_cmt_num" src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytzg9rLH"></script>
-<script>
+			<div class="weixin">
+				<h2 class="ab_title">公众号</h2>
+				<ul class="animated fadeInDown">
+
+				</ul>
+			</div>
+		</div>
+	</article>
+
+	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
+	<script id="cy_cmt_num"
+		src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytzg9rLH"></script>
+	<script>
 	$(document).ready(function() {
 		//初始化类别信息
 		initBlogType();
@@ -84,9 +92,7 @@
 		initBlogByLike();
 		initBlogByClick();
 	});
-	function ser(){
-		return 5; 
-	}
+	
 	var initBlogListByPage=function(pageNum,type_id){
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
@@ -155,7 +161,7 @@
 	        	            	}
 	        	            },
 	        			    error:function(){
-	        			    	alert("失败");
+	        			    	layer.msg('出错啦', {icon: 2});
 	        			    }	
 	        	        });
             		 
@@ -222,7 +228,7 @@
              
             	},    
 		    error:function(){
-		    	alert("初始化失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
@@ -297,7 +303,7 @@
                 $(".tagTitle").html(keyTitle);
             },    
 		    error:function(){
-		    	alert("初始化类别失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	}
@@ -348,7 +354,7 @@
 				
             },    
 		    error:function(){
-		    	layer.msg('出错啦', {icon: 2});
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
@@ -384,7 +390,7 @@
             	
             },    
 		    error:function(){
-		    	layer.msg('出错啦', {icon: 2});
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
