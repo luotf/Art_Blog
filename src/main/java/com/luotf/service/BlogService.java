@@ -88,7 +88,7 @@ public interface BlogService {
 	 * 
 	 * @return
 	 */
-	List selectBlogListByDate();
+	List selectBlogListByDate(Map<String, Object> map);
 
 	/**
 	 * 根据组合条件获取Blog条数

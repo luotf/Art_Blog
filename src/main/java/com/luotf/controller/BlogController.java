@@ -108,7 +108,7 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectLikeBlogListByPage")
 	 @ResponseBody
-	 @AccessLimit(seconds=1,maxCount=10)
+	 @AccessLimit(seconds=1,maxCount=13)
 	 public Map selectLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
 		// if(sort)

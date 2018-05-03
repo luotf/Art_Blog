@@ -257,10 +257,9 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectGroupLikeBlogListByPage")
 	 @ResponseBody
-	 @AccessLimit(seconds=1,maxCount=13)
+	 @AccessLimit(seconds=1,maxCount=15)
 	 public Map selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
-		// if(sort)
 		 map.put("sort", sort);
 		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
@@ -368,6 +367,35 @@ public class BlogControllerAdmin {
 		 return returnMap;
 	 }
 	 
+	 
+	 /**
+	  * 按照不同时间查询博客的发表数量
+	  * @param id
+	  * @return
+	  * @throws Exception
+	  */
+	 @RequestMapping(value = "/selectBlogListByDate",method = RequestMethod.POST)
+	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=10)
+	 public Map selectBlogListByDate(@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
+		 Map map=new HashMap();
+		 if(startTime!=""&&startTime!=null){
+			 map.put("startTime", startTime);
+		 }
+		 if(endTime!=""&&endTime!=null){
+			 map.put("endTime", endTime);
+		 }
+		 List<Map> list=blogService.selectBlogListByDate(map);
+		 Map returnMap=new HashMap();
+		 if(list.size()>0){
+			 returnMap.put("status", 200);
+		 }else{
+			 //500表示：返回值为Null
+			 returnMap.put("status", 500);
+		 }
+		 returnMap.put("list", list);
+		 return returnMap;
+	 }
 	 
 	 /**
 	  * 按照不同条件查询博客的数量

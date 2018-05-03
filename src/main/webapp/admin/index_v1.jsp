@@ -29,6 +29,9 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
+	<link
+	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -41,7 +44,7 @@
                         <h5>博客</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">1,200</h1>
+                        <h1 class="allBlog no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i>
                         </div>
                         <small>已发表</small>
@@ -51,11 +54,11 @@
             <div class="col-sm-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-danger pull-right">今天</span>
+                        <span class="label label-info pull-right">今天</span>
                         <h5>今日发表</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">7</h1>
+                        <h1 class="nowBlog no-margins" style="text-align: center;">7</h1>
                         <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
                         </div>
                         <small>已发表</small>
@@ -69,7 +72,7 @@
                         <h5>今日访客</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">20</h1>
+                        <h1 class="nowVisitors no-margins" style="text-align: center;">20</h1>
                         <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
                         </div>
                         <small>新访客</small>
@@ -79,11 +82,11 @@
             <div class="col-sm-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-info pull-right">历史</span>
+                        <span class="label label-success pull-right">历史</span>
                         <h5>访客</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">275,800</h1>
+                        <h1 class="visitors no-margins" style="text-align: center;">275,800</h1>
                         <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
                         </div>
                         <small>总访问量</small>
@@ -97,7 +100,7 @@
                         <h5>草稿箱</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">17</h1>
+                        <h1 class="draft no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
                         </div>
                         <small>未发表</small>
@@ -111,7 +114,7 @@
                         <h5>昨日发表</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">2</h1>
+                        <h1 class="yesBlog no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
                         </div>
                         <small>已发表</small>
@@ -126,7 +129,7 @@
                         <h5>今日评论</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">17</h1>
+                        <h1 class="nowRecommend no-margins" style="text-align: center;">17</h1>
                         <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
                         </div>
                         <small>新评论</small>
@@ -136,11 +139,11 @@
             <div class="col-sm-3">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <span class="label label-info pull-right">历史</span>
+                        <span class="label label-success pull-right">历史</span>
                         <h5>评论</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="no-margins" style="text-align: center;">891</h1>
+                        <h1 class="allRecommend no-margins" style="text-align: center;">891</h1>
                         <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
                         </div>
                         <small>总评论数</small>
@@ -213,6 +216,7 @@
     <script src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/plugins/echarts/echarts-all.js"></script>
+	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script>
     var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
@@ -264,27 +268,93 @@
                     ]
                 }
             },
-            	/* {
-                name:'最低气温',
-                type:'line',
-                data:[1, -10, 2, 5, 3, 2, 0],
-                markPoint : {
-                    data : [
-                        {name : '周最低', value : -10, xAxis: 1, yAxis: -1.5}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name : '平均值'}
-                    ]
-                }
-            } */
         ]
     };
     lineChart.setOption(lineoption);
     $(window).resize(lineChart.resize);
     </script>
 
+	<script type="text/javascript">
+	$(document).ready(function() {
+		initBlogCountByStatus();//初始化博客数目
+		initBlogCountByDate();
+	});
+	
+	
+	var initBlogCountByStatus=function(){
+		//初始化博客数目
+		$.ajax({
+			url : 'selectBlogListByStatus',
+			type : 'post',
+			dataType : 'json',
+			success : function(data) {
+				for (var i = 0; i < data.list.length; i++) {
+					//草稿
+					if (data.list[i].status == -1) {
+						$(".draft").html(
+								data.list[i].count );
+						//已发表
+					} else if (data.list[i].status == 1) {
+						$(".allBlog").html(data.list[i].count );
+					}
+				}
+			},
+			error : function() {
+				swal("初始化博客状态错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	var initBlogCountByDate=function(){
+		var date=new Date();
+		var startTime = Format(new Date(date.getTime() -  24*60*60*1000),"yyyy-MM-dd");
+		var endTime=Format(date,"yyyy-MM-dd");
+		var params={
+			startTime:startTime,
+			endTime:endTime,
+		 };
+		$.ajax({
+			url : 'selectBlogListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+						$(".yesBlog").html(data.list[0].count );
+						$(".nowBlog").html(data.list[1].count );
+			},
+			error : function() {
+				swal("初始化博客状态错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	 //格式化时间
+	function Format(datetime, fmt) {
+	    if (parseInt(datetime) == datetime) {
+	        if (datetime.length == 10) {
+	            datetime = parseInt(datetime) * 1000;
+	        } else if (datetime.length == 13) {
+	            datetime = parseInt(datetime);
+	        }
+	    }
+	    datetime = new Date(datetime);
+	    var o = {
+	        "M+": datetime.getMonth() + 1,                 //月份   
+	        "d+": datetime.getDate(),                    //日   
+	        "h+": datetime.getHours(),                   //小时   
+	        "m+": datetime.getMinutes(),                 //分   
+	        "s+": datetime.getSeconds(),                 //秒   
+	        "q+": Math.floor((datetime.getMonth() + 3) / 3), //季度   
+	        "S": datetime.getMilliseconds()             //毫秒   
+	    };
+	    if (/(y+)/.test(fmt))
+	        fmt = fmt.replace(RegExp.$1, (datetime.getFullYear() + "").substr(4 - RegExp.$1.length));
+	    for (var k in o)
+	        if (new RegExp("(" + k + ")").test(fmt))
+	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	    return fmt;
+	}   	
+	</script>
 
 </body>
 </html>

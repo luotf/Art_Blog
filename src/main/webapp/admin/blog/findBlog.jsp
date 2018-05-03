@@ -106,11 +106,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 								<div class="news_infos"></div>
 							</div>
-							<div class="news_pl">
-								<h2>文章评论</h2>
-
-
-							</div>
+							
+							
 						</div>
 					</div>
 				</div>

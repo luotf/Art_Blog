@@ -26,6 +26,10 @@
     
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
+  
+  <!-- <resultMap id="dateMap" type="com.luotf.model.Blog">
+     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap> -->
   <sql id="Base_Column_List">
     id, title, introduction, keyword, images, clickNum, commentNum, agreeNum, isTop, 
     isRecommend, updateTime, addTime, status, type_id
@@ -58,14 +62,19 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   
-  	<select id="selectBlogListByDate" resultType="map">
+  	<select id="selectBlogListByDate" resultType="map" parameterType="Map">
 		  SELECT 
-		    DATE_FORMAT(addTime,'%Y-%m-%d') AS addTime,
 		    COUNT(*) AS count
 		  FROM
 		    t_blog 
+		   <where>
+		 	<if test="startTime!=null and startTime!=''">
+		 	and DATE_FORMAT(addTime,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
+		 		<!-- and DATE_FORMAT(addTime,'%Y-%m-%d')=#{startTime} -->
+		 	</if>
+		 </where>
 		  GROUP BY DATE_FORMAT(addTime,'%Y-%m-%d')
-		  ORDER BY addTime DESC
+		  <!-- ORDER BY addTime DESC -->
 	</select>
 	
 	<select id="selectBlogListByStatus" resultType="map">

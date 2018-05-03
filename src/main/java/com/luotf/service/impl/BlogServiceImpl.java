@@ -104,9 +104,9 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public List selectBlogListByDate() {
+	public List selectBlogListByDate(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return null;
+		return blogMapper.selectBlogListByDate(map);
 	}
 
 	@Override

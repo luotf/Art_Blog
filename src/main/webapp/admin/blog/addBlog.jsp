@@ -285,8 +285,6 @@
 		$(document).ready(function() {
 			initBlogCountBystatus();	
 			initBlogType();			
-							
-
 							//初始化富文本
 							$('#summernote').summernote(
 									{
@@ -309,31 +307,30 @@
 			var params = {
 				"data" : "all"
 			};
-			$
-					.ajax({
-						url : '../selectBlogType',
-						type : 'post',
-						data : params,
-						dataType : 'json',
-						success : function(data) {
-							var typeName = '';
-							var typeNameAndNum = '';
-							var circle = new Array("text-navy",
+			$.ajax({
+				url : '../selectBlogType',
+				type : 'post',
+				data : params,
+				dataType : 'json',
+				success : function(data) {
+					var typeName = '';
+					var typeNameAndNum = '';
+					var circle = new Array("text-navy",
 									"text-danger",
 									" text-info",
 									"text-primary",
 									"text-warning");
-							var label = new Array(
+					var label = new Array(
 									"label-primary",
 									"label-danger",
 									" label-info",
 									"label-success",
 									"label-warning");
-							for (var i = 0; i < data.length; i++) {
-								typeName += '<option value="' + data[i].id + '">'
+					for (var i = 0; i < data.length; i++) {
+						typeName += '<option value="' + data[i].id + '">'
 										+ data[i].typename
 										+ '</option>';
-								typeNameAndNum += '<li><a href="javascript:void(0);"> <i class="fa fa-circle '
+						typeNameAndNum += '<li><a href="javascript:void(0);"> <i class="fa fa-circle '
 										+ circle[i % 5]
 										+ '"></i> '
 										+ data[i].typename
@@ -344,16 +341,16 @@
 										+ ' 篇</span></a></li>'
 							}
 							// 初始化数据
-							$(".form-horizontal").find(
+					$(".form-horizontal").find(
 									'select[name=typeName]')
 									.append(typeName);
-							$(".category-list").html(
+					$(".category-list").html(
 									typeNameAndNum);
-						},
-						error : function() {
-							swal("初始化类别错误", "请重新操作", "error");
-						}
-					});
+				},
+				error : function() {
+					swal("初始化类别错误", "请重新操作", "error");
+				}
+			});
 		}
 		
 		
@@ -381,7 +378,7 @@
 					swal("初始化博客状态错误", "请重新操作", "error");
 				}
 			});
-		}
+		};
 		
 		//图片上传  
 		function sendFile(file, editor, $editable) {

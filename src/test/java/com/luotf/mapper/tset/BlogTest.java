@@ -55,10 +55,10 @@ public class BlogTest{
     	System.out.println("当前页数量："+p.getSize());
     	
     	
-    	List<Map> list=blogMapper.selectBlogListByDate();
+    	/*List<Map> list=blogMapper.selectBlogListByDate();
     	for(Map map1:list){
     		System.out.println(map1);
-    	}
+    	}*/
     	
     	
     }
@@ -83,15 +83,10 @@ public class BlogTest{
 
     @Test
     public  void BlogIdToSafe(){
-		int id=2279;
-    	int bId=0;
-    	System.out.println(Integer.toOctalString(id));
-		for(int i=2;i<id;i++){
-			if((Integer.parseInt(Integer.toOctalString(i))*i)==id){
-				bId=i;
-				break;
-			}
-		}
-		System.out.println("bid:"+bId);
+    	Map map=new HashMap();
+    	map.put("startTime", "2018-05-01");
+    	map.put("endTime", "2018-05-03");
+    	List blogList=blogService.selectBlogListByDate(map);
+    		System.out.println(blogList);
 	}
 }
