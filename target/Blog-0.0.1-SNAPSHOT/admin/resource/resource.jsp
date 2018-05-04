@@ -34,7 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -49,47 +51,55 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="space-25"></div>
 							<h5>博客状态</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-								<li class="share" value="0"><a href="javascript:void(0);"> <i class="fa fa-inbox "></i>总共<span
-										class="a-1 label label-info pull-right">0 条</span></a></li>
-								<li class="share" value="1"><a href="javascript:void(0);"> <i
-										class="fa fa-file-text-o "></i>已上架<span
-										class="a-2 label label-warning pull-right">0 条</span></a></li>
-								<li class="share" value="-1"><a href="javascript:void(0);"> <i class="fa fa-trash-o "></i>下架<span
-										class="a-3 label label-danger pull-right">0 条</span></a></li>
+								<li class="share" value="0"><a href="javascript:void(0);">
+										<i class="fa fa-inbox "></i>总共<span
+										class="a-1 label label-info pull-right">0 条</span>
+								</a></li>
+								<li class="share" value="1"><a href="javascript:void(0);">
+										<i class="fa fa-file-text-o "></i>已上架<span
+										class="a-2 label label-warning pull-right">0 条</span>
+								</a></li>
+								<li class="share" value="-1"><a href="javascript:void(0);">
+										<i class="fa fa-trash-o "></i>下架<span
+										class="a-3 label label-danger pull-right">0 条</span>
+								</a></li>
 							</ul>
-							
+
 							<h5 class="tag-title">增加资源</h5>
 							<form role="form">
-								<div class="form-group" >
+								<div class="form-group">
 									<div class="input-group m-b">
-										<span class="input-group-addon">名称</span>
-										<input type="text" id="title" name="title" placeholder="请输入名称" class="form-control">
+										<span class="input-group-addon">名称</span> <input type="text"
+											id="title" name="title" placeholder="请输入名称"
+											class="form-control">
 									</div>
 								</div>
-								<div class="form-group" >
+								<div class="form-group">
 									<div class="input-group m-b">
 										<span class="input-group-addon">内容</span>
 										<!-- <input type="text" placeholder="请输入内容" class="form-control"> -->
-									<textarea id="content" name="content" class="form-control"></textarea>
+										<textarea id="content" name="content" class="form-control"></textarea>
 									</div>
 								</div>
-								<div class="form-group" >
+								<div class="form-group">
 									<div class="input-group m-b">
-										<span class="input-group-addon">链接</span>
-										<input type="text" id="link" name="link" placeholder="请输入链接" class="form-control">
+										<span class="input-group-addon">链接</span> <input type="text"
+											id="link" name="link" placeholder="请输入链接"
+											class="form-control">
 									</div>
 								</div>
-								<div class="form-group" >
-								<div class="col-md-9" style="padding:0px">
-									<div class="input-group m-b">
-										<span class="input-group-addon">密码</span>
-										<input type="text" id="password" name="password" placeholder="请输入密码" class="form-control">
+								<div class="form-group">
+									<div class="col-md-9" style="padding:0px">
+										<div class="input-group m-b">
+											<span class="input-group-addon">密码</span> <input type="text"
+												id="password" name="password" placeholder="请输入密码"
+												class="form-control">
 										</div>
 									</div>
 								</div>
-								<button onclick="addResource()" class="btn btn-white pull-right" type="button"
-										>提交</button>
-							   </form>
+								<button onclick="addResource()" class="btn btn-white pull-right"
+									type="button">提交</button>
+							</form>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -109,40 +119,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 	<div id="modal-form" class="modal fade" aria-hidden="true">
-        <div class="modal-dialog" style="width: 25%;">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="row">
-                            <h3 class="m-t-none m-b">修改资源信息</h3>
-                           
-                            <form role="form" class="form-horizontal">
-                            		<div class="input-group m-b">
-										<span class="input-group-addon">名称</span>
-										<input type="text" id="newTitle"  class="form-control">
-									</div>
-                            		<div class="input-group m-b">
-										<span class="input-group-addon">内容</span>
-										<textarea id="newContent"  class="form-control"></textarea>
-									</div>
-                            		<div class="input-group m-b">
-										<span class="input-group-addon">链接</span>
-										<input type="text" id="newLink"  class="form-control">
-									</div>
-									<div class="input-group m-b">
-										<span class="input-group-addon">密码</span>
-										<input type="text" id="newPassword"  class="form-control">
-									</div>
-                              
-                                <div id="update">
-                                    
-                                </div>
-                            </form>
-                            
-                        </div>
-                </div>
-            </div>
-        </div>
-    </div>
+		<div class="modal-dialog" style="width: 25%;">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="row">
+						<h3 class="m-t-none m-b">修改资源信息</h3>
+
+						<form role="form" class="form-horizontal">
+							<div class="input-group m-b">
+								<span class="input-group-addon">名称</span> <input type="text"
+									id="newTitle" class="form-control">
+							</div>
+							<div class="input-group m-b">
+								<span class="input-group-addon">内容</span>
+								<textarea id="newContent" class="form-control"></textarea>
+							</div>
+							<div class="input-group m-b">
+								<span class="input-group-addon">链接</span> <input type="text"
+									id="newLink" class="form-control">
+							</div>
+							<div class="input-group m-b">
+								<span class="input-group-addon">密码</span> <input type="text"
+									id="newPassword" class="form-control">
+							</div>
+
+							<div id="update"></div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
@@ -154,12 +162,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
-	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
-	
+
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -181,9 +190,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				dataType : 'json',
 				success : function(data) {
 					var count=0;
+					$(".a-2").html('0条');
+					$(".a-3").html('0条');
 					for (var i = 0; i < data.list.length; i++) {
 						count+=data.list[i].count;
-						
 						if (data.list[i].status == 1) {
 							$(".a-2").html(
 									data.list[i].count + '条');
@@ -351,7 +361,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   	                  if(row.status==-1){
 		   	                	return '<button class="btn-xs btn-warning">下架</button> ';  
 		   	                  	}else if(row.status==1){
-		   	                  	return '<button class="btn-xs btn-info">上架</button> '; 
+		   	                  	return '<button class="btn-xs btn-info" >上架</button> '; 
 		   	                  	}
 		   	                  	 
 		   	                    } 
@@ -376,9 +386,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                       //删除
 		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteResource('+ row.id + ')"><i class="fa fa-trash-o" ></i>删除</a> '; 
 			                   //下架
-		                       var c = '<a  class=" btn-sm btn-danger"   onclick="updateResource('+ row.id + ',-1)"><i class="fa fa-hand-o-down" ></i>下架</a> '; 
+		                       var c = '<a  class=" btn-sm btn-danger"  title="下架后前台将无法展示" onclick="updateResource('+ row.id + ',-1)"><i class="fa fa-hand-o-down" ></i>下架</a> '; 
 		                       //上架
-		                       var d = '<a  class=" btn-sm btn-primary"   onclick="updateResource('+ row.id + ',1)"><i class="fa fa-hand-o-up" ></i>上架</a> '; 
+		                       var d = '<a  class=" btn-sm btn-primary"  title="上架后将在前台展示" onclick="updateResource('+ row.id + ',1)"><i class="fa fa-hand-o-up" ></i>上架</a> '; 
 		                   	 	if(row.status==-1){
 		                   	 	  return d+b;  
 		                   	 	}else if(row.status==1){

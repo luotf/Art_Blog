@@ -46,8 +46,10 @@
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
-    <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
 </head>
 
 <body class="gray-bg">
@@ -58,16 +60,18 @@
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">写博客</a>
+								href="javascript:void(0);">写博客</a>
 							<div class="space-25"></div>
 							<h5>博客状态</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-								<li><a href="javascript:void(0);"> <i class="fa fa-inbox "></i>发表<span
+								<li><a href="javascript:void(0);"> <i
+										class="fa fa-inbox "></i>发表<span
 										class="s-1 label label-info pull-right">0 篇</span></a></li>
 								<li><a href="javascript:void(0);"> <i
 										class="fa fa-file-text-o "></i>草稿<span
 										class="s-2 label label-warning pull-right">0 篇</span></a></li>
-								<li><a href="javascript:void(0);"> <i class="fa fa-trash-o "></i>垃圾箱<span
+								<li><a href="javascript:void(0);"> <i
+										class="fa fa-trash-o "></i>垃圾箱<span
 										class="s-3 label label-danger pull-right">0 篇</span></a></li>
 							</ul>
 							<h5>博客分类</h5>
@@ -84,9 +88,8 @@
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
 						<div class="pull-right tooltip-demo">
-							<button id="add_draft" type="button" 
-								class="btn btn-white btn-sm" data-toggle="tooltip"
-								data-placement="top" title="存为草稿">
+							<button id="add_draft" type="button" class="btn btn-white btn-sm"
+								data-toggle="tooltip" data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
 							</button>
 							<button type="button" onclick="" class="btn btn-danger btn-sm"
@@ -99,13 +102,16 @@
 					<div class="mail-box">
 						<div class="mail-body">
 							<form class="form-horizontal" method="post" id="commentForm">
-							<div class="form-group">
-							<label class="col-sm-2 control-label">封面：</label>
-								<div class="col-sm-10">
-								  <a class="fancybox picPath" href="#pic" data-toggle="modal" onclick="findPicList()">
-									<img class="picPath animated fadeInRight"  style="width: 190px; height: 115px;" alt="封面" title="点击更换封面" src="${pageContext.request.contextPath}/images/p1.jpg" />
-								</a>
-								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">封面：</label>
+									<div class="col-sm-10">
+										<a class="fancybox picPath" href="#pic" data-toggle="modal"
+											onclick="findPicList()"> <img
+											class="picPath animated fadeInRight"
+											style="width: 190px; height: 115px;" alt="封面" title="点击更换封面"
+											src="${pageContext.request.contextPath}/images/p1.jpg" />
+										</a>
+									</div>
 								</div>
 								<input type="hidden" value="" class="imagePath">
 								<div class="form-group">
@@ -133,9 +139,11 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label">关键字：</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" id="keyword" required="" aria-required="true"
-											name="keyword" value=""> 
-											<p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
+										<input type="text" class="form-control" id="keyword"
+											required="" aria-required="true" name="keyword" value="">
+										<p class="help-block m-b-none">
+											<i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔
+										</p>
 									</div>
 								</div>
 							</form>
@@ -145,17 +153,16 @@
 							<div class="clearfix"></div>
 						</div>
 						<div class="mail-body text-right tooltip-demo">
-						
-							<button id="prev1" type="button" 
-								class="btn btn-sm btn-primary"
-								 data-placement="top" title="预览">
+
+							<button id="prev1" type="button" class="btn btn-sm btn-primary"
+								data-placement="top" title="预览">
 								<i class="fa fa-reply"></i> 预览
 							</button>
-							
-							<button id="prev2"  type="button" style="display:none"
-							onclick="prevBlog()" data-target="#myModal" data-toggle="modal">
+
+							<button id="prev2" type="button" style="display:none"
+								onclick="prevBlog()" data-target="#myModal" data-toggle="modal">
 							</button>
-							<button id="add_draft2" type="button" 
+							<button id="add_draft2" type="button"
 								class="btn btn-white btn-sm" data-toggle="tooltip"
 								data-placement="top" title="存为草稿">
 								<i class="fa fa-pencil"></i> 存为草稿
@@ -197,36 +204,37 @@
 			</div>
 
 
-			<div class="modal inmodal" id="pic" tabindex="-1" 
-				aria-hidden="true">
+			<div class="modal inmodal" id="pic" tabindex="-1" aria-hidden="true">
 				<div class="modal-dialog" style="width:79.3%;margin-top:-1%;">
 					<div class="modal-content animated fadeInUp">
 						<button type="button" class="close" style="margin-right:7px"
 							data-dismiss="modal">
 							<span aria-hidden="true">&times;</span>
-						</button> 
-								<div id="uploader" class="wu-example" style="margin:0px 5.6% 0  5.6%;">
-                                <div class="queueList">
-                                    <div id="dndArea" class="placeholder" style="min-height: 110px;padding-top: 0px;background:none">
-                                        <div id="filePicker"></div>
-                                        <p>或将照片拖到这里，单次最多可选300张</p>
-                                    </div>
-                                </div>
-                                <div class="statusBar" style="display:none;">
-                                    <div class="progress">
-                                        <span class="text">0%</span>
-                                        <span class="percentage"></span>
-                                    </div>
-                                    <div class="info"></div>
-                                    <div class="btns">
-                                        <div id="filePicker2"></div>
-                                        <div class="uploadBtn">开始上传</div>
-                                    </div>
-                                </div>
+						</button>
+						<div id="uploader" class="wu-example"
+							style="margin:0px 5.6% 0  5.6%;">
+							<div class="queueList">
+								<div id="dndArea" class="placeholder"
+									style="min-height: 110px;padding-top: 0px;background:none">
+									<div id="filePicker"></div>
+									<p>或将照片拖到这里，单次最多可选300张</p>
+								</div>
+							</div>
+							<div class="statusBar" style="display:none;">
+								<div class="progress">
+									<span class="text">0%</span> <span class="percentage"></span>
+								</div>
+								<div class="info"></div>
+								<div class="btns">
+									<div id="filePicker2"></div>
+									<div class="uploadBtn">开始上传</div>
+								</div>
+							</div>
 						</div>
-						<div class="modal-body picsList" style="height:260px;overflow:scroll; padding: 0px 30px 0px 30px;">
-							
-							
+						<div class="modal-body picsList"
+							style="height:260px;overflow:scroll; padding: 0px 30px 0px 30px;">
+
+
 						</div>
 					</div>
 				</div>
@@ -246,18 +254,23 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-<!-- Web Uploader -->
-    <script type="text/javascript">
+	<!-- Web Uploader -->
+	<script type="text/javascript">
         // 添加全局站点信息
         var BASE_URL = '${pageContext.request.contextPath}/js/plugins/webuploader';
     </script>
-    <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo2.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo2.js"></script>
 
-<!-- jQuery Validation plugin javascript-->
-    <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
+	<!-- jQuery Validation plugin javascript-->
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
 
 	<!-- iCheck -->
 	<script
@@ -269,84 +282,9 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote-zh-CN.js"></script>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							//初始化博客数目
-							$.ajax({
-								url : '../selectBlogListByStatus',
-								type : 'post',
-								dataType : 'json',
-								success : function(data) {
-									for (var i = 0; i < data.list.length; i++) {
-										if (data.list[i].status == -1) {
-											$(".s-2").html(
-													data.list[i].count + '篇');
-										} else if (data.list[i].status == 1) {
-											$(".s-1").html(
-													data.list[i].count + '篇');
-										} else if (data.list[i].status == 2) {
-											$(".s-3").html(
-													data.list[i].count + '篇');
-										}
-									}
-								},
-								error : function() {
-									swal("初始化博客状态错误", "请重新操作", "error");
-								}
-							});
-							
-							//查询出文章类别
-							//设置参数，表示查询所有的类别
-							var params = {
-								"data" : "all"
-							};
-							$
-									.ajax({
-										url : '../selectBlogType',
-										type : 'post',
-										data : params,
-										dataType : 'json',
-										success : function(data) {
-											var typeName = '';
-											var typeNameAndNum = '';
-											var circle = new Array("text-navy",
-													"text-danger",
-													" text-info",
-													"text-primary",
-													"text-warning");
-											var label = new Array(
-													"label-primary",
-													"label-danger",
-													" label-info",
-													"label-success",
-													"label-warning");
-											for (var i = 0; i < data.length; i++) {
-												typeName += '<option value="' + data[i].id + '">'
-														+ data[i].typename
-														+ '</option>';
-												typeNameAndNum += '<li><a href="javascript:void(0);"> <i class="fa fa-circle '
-														+ circle[i % 5]
-														+ '"></i> '
-														+ data[i].typename
-														+ '<span class="label '
-														+ label[i % 5]
-														+ ' pull-right">'
-														+ data[i].num
-														+ ' 篇</span></a></li>'
-											}
-											// 初始化数据
-											$(".form-horizontal").find(
-													'select[name=typeName]')
-													.append(typeName);
-											$(".category-list").html(
-													typeNameAndNum);
-										},
-										error : function() {
-											swal("初始化类别错误", "请重新操作", "error");
-										}
-									});
-
+		$(document).ready(function() {
+			initBlogCountBystatus();	
+			initBlogType();			
 							//初始化富文本
 							$('#summernote').summernote(
 									{
@@ -363,6 +301,85 @@
 									});
 						});
 
+		var initBlogType=function(){
+			//查询出文章类别
+			//设置参数，表示查询所有的类别
+			var params = {
+				"data" : "all"
+			};
+			$.ajax({
+				url : '../selectBlogType',
+				type : 'post',
+				data : params,
+				dataType : 'json',
+				success : function(data) {
+					var typeName = '';
+					var typeNameAndNum = '';
+					var circle = new Array("text-navy",
+									"text-danger",
+									" text-info",
+									"text-primary",
+									"text-warning");
+					var label = new Array(
+									"label-primary",
+									"label-danger",
+									" label-info",
+									"label-success",
+									"label-warning");
+					for (var i = 0; i < data.length; i++) {
+						typeName += '<option value="' + data[i].id + '">'
+										+ data[i].typename
+										+ '</option>';
+						typeNameAndNum += '<li><a href="javascript:void(0);"> <i class="fa fa-circle '
+										+ circle[i % 5]
+										+ '"></i> '
+										+ data[i].typename
+										+ '<span class="label '
+										+ label[i % 5]
+										+ ' pull-right">'
+										+ data[i].num
+										+ ' 篇</span></a></li>'
+							}
+							// 初始化数据
+					$(".form-horizontal").find(
+									'select[name=typeName]')
+									.append(typeName);
+					$(".category-list").html(
+									typeNameAndNum);
+				},
+				error : function() {
+					swal("初始化类别错误", "请重新操作", "error");
+				}
+			});
+		}
+		
+		
+		var initBlogCountBystatus=function(){
+			//初始化博客数目
+			$.ajax({
+				url : '../selectBlogListByStatus',
+				type : 'post',
+				dataType : 'json',
+				success : function(data) {
+					for (var i = 0; i < data.list.length; i++) {
+						if (data.list[i].status == -1) {
+							$(".s-2").html(
+									data.list[i].count + '篇');
+						} else if (data.list[i].status == 1) {
+							$(".s-1").html(
+									data.list[i].count + '篇');
+						} else if (data.list[i].status == 2) {
+							$(".s-3").html(
+									data.list[i].count + '篇');
+						}
+					}
+				},
+				error : function() {
+					swal("初始化博客状态错误", "请重新操作", "error");
+				}
+			});
+		};
+		
 		//图片上传  
 		function sendFile(file, editor, $editable) {
 			var filename = false;
@@ -478,6 +495,8 @@
 				dataType : 'json',
 				success : function(data) {
 					if (data.status == 200) {
+						initBlogCountBystatus();	
+						initBlogType();	
 						$("#myModal").modal('hide');
 						if(id==1){
 						 swal("发布成功", "博客已在前端展示", "success");

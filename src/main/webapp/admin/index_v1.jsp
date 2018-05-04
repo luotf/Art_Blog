@@ -58,7 +58,7 @@
                         <h5>今日发表</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="nowBlog no-margins" style="text-align: center;">7</h1>
+                        <h1 class="nowBlog no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
                         </div>
                         <small>已发表</small>
@@ -72,7 +72,7 @@
                         <h5>今日访客</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="nowVisitors no-margins" style="text-align: center;">20</h1>
+                        <h1 class="nowVisitors no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
                         </div>
                         <small>新访客</small>
@@ -83,10 +83,10 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">历史</span>
-                        <h5>访客</h5>
+                        <h5>历史访客</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="visitors no-margins" style="text-align: center;">275,800</h1>
+                        <h1 class="visitors no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
                         </div>
                         <small>总访问量</small>
@@ -129,7 +129,7 @@
                         <h5>今日评论</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="nowRecommend no-margins" style="text-align: center;">17</h1>
+                        <h1 class="nowRecommend no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
                         </div>
                         <small>新评论</small>
@@ -140,10 +140,10 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">历史</span>
-                        <h5>评论</h5>
+                        <h5>历史评论</h5>
                     </div>
                     <div class="ibox-content">
-                        <h1 class="allRecommend no-margins" style="text-align: center;">891</h1>
+                        <h1 class="allRecommend no-margins" style="text-align: center;">0</h1>
                         <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
                         </div>
                         <small>总评论数</small>
@@ -276,8 +276,10 @@
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		initBlogCountByStatus();//初始化博客数目
-		initBlogCountByDate();
+		initBlogCountByStatus();//初始化已发表/草稿箱博客数目
+		initBlogCountByDate();//初始化昨日/今日博客发表数目
+		initVisitCount("now");  //初始化今日访客
+		initVisitCount("history");  //初始化历史访客
 	});
 	
 	
@@ -300,7 +302,7 @@
 				}
 			},
 			error : function() {
-				swal("初始化博客状态错误", "请重新操作", "error");
+				swal("博客总数错误", "请重新操作", "error");
 			}
 		});
 	};
@@ -319,11 +321,56 @@
 			data:params,
 			dataType : 'json',
 			success : function(data) {
-						$(".yesBlog").html(data.list[0].count );
-						$(".nowBlog").html(data.list[1].count );
+				if(data.list.length>=1){
+					$(".yesBlog").html(data.list[0].count );
+				}
+				if(data.list.length>=2){
+					$(".nowBlog").html(data.list[1].count );
+				}
+						
 			},
 			error : function() {
-				swal("初始化博客状态错误", "请重新操作", "error");
+				swal("博客发表数错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	//今日访客
+	var initVisitCount=function(e){
+		 params="";
+		var date=null;
+		var startTime=null;
+		if(e=="now"){
+			date=new Date();
+			startTime=Format(date,"yyyy-MM-dd");
+		}else if(e=="history"){
+			startTime="";
+		}
+		var params={
+				startTime:startTime,
+				endTime:startTime,
+			 };
+		$.ajax({
+			url : 'selectVisitListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+				if(data.list.length>=1){
+					if(e=="now"){
+						$(".nowVisitors").html(data.list[0].count );
+					}else if(e=="history"){
+						var count=0;
+						for(var i=0;i<data.list.length;i++){
+							count+=data.list[i].count;
+						}
+						$(".visitors").html(count );
+					}
+					
+				}
+			},
+			error : function() {
+				swal("今日访客数错误", "请重新操作", "error");
 			}
 		});
 	};

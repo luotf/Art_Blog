@@ -1,5 +1,8 @@
 package com.luotf.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +63,12 @@ public class VisitServiceImpl implements VisitService {
 	public Long findVisitTimes(Visit visit) {
 		// TODO Auto-generated method stub
 		return visitMapper.findVisitTimes(visit);
+	}
+
+	@Override
+	public List selectVisitListByDate(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return visitMapper.selectVisitListByDate(map);
 	}
 
 }

@@ -56,22 +56,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">修改博客</a>
+								href="javascript:void(0);">修改博客</a>
 							<div class="space-25"></div>
 							<h5>数据信息</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-
-								<li><a href="mailbox.html"> <i class="fa fa-eye"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-eye"></i>
 										浏览量 <span class="label label-info pull-right" id="clicknum"></span>
 								</a></li>
-								<li><a href="mailbox.html"> <i
+								<li><a href="javascript:void(0);"> <i
 										class="fa fa-commenting-o"></i> 评论量 <span
 										class="label label-success pull-right" id="commentnum"></span>
 								</a></li>
-								<li><a href="mailbox.html"> <i class="fa fa-level-up"></i>
+								<li><a href="javascript:void(0);"> <i class="fa fa-level-up"></i>
 										&nbsp;置顶<span class="label label-danger pull-right" id="istop"></span>
 								</a></li>
-								<li><a href="mailbox.html"> <i
+								<li><a href="javascript:void(0);"> <i
 										class="fa fa-hand-pointer-o"></i> 博主推荐 <span
 										class="label label-warning pull-right" id="isrecommend"></span>
 								</a></li>

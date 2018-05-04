@@ -75,10 +75,7 @@ public class BlogTest{
     }  
     @Test
     public void deleteBlog() throws Exception{
-		 Map map=new HashMap();
-		 List list=blogService.selectBlogListByStatus();
 		 
-		System.out.println(list);
 	 }
 
     @Test

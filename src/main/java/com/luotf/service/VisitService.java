@@ -1,5 +1,8 @@
 package com.luotf.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.luotf.model.Visit;
 
 public interface VisitService {
@@ -15,6 +18,12 @@ public interface VisitService {
     Visit selectVisitByIp(String ip);
     
     Long findVisitTimes(Visit visit);
+    
+    /**
+   	 *  根据日期月份分组查询
+   	 * @return
+   	 */
+   	List  selectVisitListByDate(Map<String, Object> map);
     
     int updateByPrimaryKeySelective(Visit record);
 

@@ -33,7 +33,7 @@ import com.luotf.util.subString;
 public class FileBrowseUtil {
 	
 	/**
-     * 通过ajax请求获取传入的文件路径里边的文件fileList数组
+     * 获取服务器的所有图片
      * @param req
      * @param resp
      * @param params 文件夹路径参数

@@ -165,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 $(".category-list").html(typeNameAndNum);
             },    
 		    error:function(){
-		    	alert("初始化类别失败");
+		    	swal("初始化类别错误", "请重新操作", "error");
 		    }	
         });
 	}

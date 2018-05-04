@@ -42,6 +42,9 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
+  <listener>
+		<listener-class>com.luotf.listener.VisitTimesListener</listener-class>
+	</listener>
   <welcome-file-list>
     <welcome-file>/index.html</welcome-file>
     <welcome-file>/index.htm</welcome-file>

@@ -385,7 +385,7 @@ public class BlogControllerAdmin {
 		 if(endTime!=""&&endTime!=null){
 			 map.put("endTime", endTime);
 		 }
-		 List<Map> list=blogService.selectBlogListByDate(map);
+		 List list=blogService.selectBlogListByDate(map);
 		 Map returnMap=new HashMap();
 		 if(list.size()>0){
 			 returnMap.put("status", 200);

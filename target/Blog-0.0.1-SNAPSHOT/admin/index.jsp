@@ -78,6 +78,9 @@
 							<li><a class="J_menuItem"
 								href="${pageContext.request.contextPath}/admin/table/blogTable.jsp">博客数据</a>
 							</li>
+							<li><a class="J_menuItem"
+								href="${pageContext.request.contextPath}/admin/table/eCharts.jsp">统计图表</a>
+							</li>
 						</ul></li>
 					<li><a href="#"><i class="fa fa-desktop"></i> <span
 							class="nav-label">博客模块</span><span class="fa arrow"></span></a>

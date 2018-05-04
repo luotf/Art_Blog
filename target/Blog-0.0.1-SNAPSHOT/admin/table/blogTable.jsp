@@ -201,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   $(".btn-group").find(".dropdown-menu").append(typeName);
               },    
   		    error:function(){
-  		    	alert("上传失败");
+  		    	swal("上传错误", "请重新操作", "error");
   		    }	
           });
 	  }
@@ -508,7 +508,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	}
             },    
 		    error:function(){
-		    	alert("删除错误");
+		    	swal("删除错误", "请重新操作", "error");
 		    }	
         });
 	}
@@ -578,7 +578,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	}
             },    
 		    error:function(){
-		    	alert("查询失败");
+		    	swal("查询错误", "请重新操作", "error");
 		    }	
         });
 	}

@@ -5,6 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="browserType" jdbcType="VARCHAR" property="browserType" />
+    <result column="platformType" jdbcType="VARCHAR" property="platformType" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -33,6 +35,12 @@
 		 	<if test="url!=null and url!=''">
 		 		and url =#{url}
 		 	</if>
+		 	<if test="browserType!=null and browserType!=''">
+		 		and browserType =#{browserType}
+		 	</if>
+		 	<if test="platformType!=null and platformType!=''">
+		 		and browserType =#{browserType}
+		 	</if>
 		 	<if test="time!=null ">
 		 	and TO_DAYS(DATE_FORMAT(time,'%Y-%m-%d')) = TO_DAYS(#{time}) 
 		 		<!-- and TO_DAYS(DATE_FORMAT(time,'%Y-%m-%d')) = TO_DAYS(#{time})  -->
@@ -40,14 +48,27 @@
 		 </where>
 	</select>
   
+  	<select id="selectVisitListByDate" resultType="map" parameterType="Map">
+		  SELECT 
+		    COUNT(*) AS count
+		  FROM
+		    t_visit 
+		   <where>
+		 	<if test="startTime!=null and startTime!=''">
+		 	and DATE_FORMAT(time,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
+		 	</if>
+		 </where>
+		  GROUP BY DATE_FORMAT(time,'%Y-%m-%d')
+	</select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_visit
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.luotf.model.Visit">
-    insert into t_visit (id, ip, url, 
+    insert into t_visit (id, ip, url,browserType,platformType,
       time)
-    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{browserType,jdbcType=VARCHAR},#{platformType,jdbcType=VARCHAR},
       #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.luotf.model.Visit">
@@ -61,6 +82,12 @@
       </if>
       <if test="url != null">
         url,
+      </if>
+       <if test="url != null">
+        browserType,
+      </if>
+       <if test="url != null">
+        platformType,
       </if>
       <if test="time != null">
         time,
@@ -76,6 +103,12 @@
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
       </if>
+      <if test="url != null">
+        #{browserType,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{platformType,jdbcType=VARCHAR},
+      </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
       </if>
@@ -90,6 +123,12 @@
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
+      <if test="url != null">
+        browserType = #{browserType,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        platformType = #{platformType,jdbcType=VARCHAR},
+      </if>
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
@@ -100,6 +139,8 @@
     update t_visit
     set ip = #{ip,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
+      browserType = #{browserType,jdbcType=VARCHAR},
+      platformType = #{platformType,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>

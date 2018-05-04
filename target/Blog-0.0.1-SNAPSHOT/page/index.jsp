@@ -78,6 +78,7 @@
 <%@ include file="fonter.jsp" %>
 <!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 <script>
 window.onload = function (){
 	var oH2 = document.getElementsByTagName("h2")[0];
@@ -119,7 +120,7 @@ window.onload = function (){
                 $(".pics").find("ul").html(topBlog);
             },    
 		    error:function(){
-		    	alert("初始化类别失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
@@ -148,7 +149,7 @@ window.onload = function (){
                 $(".tuijian").find("ul").html(likeBlog);
             },    
 		    error:function(){
-		    	alert("初始化类别失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
@@ -186,7 +187,7 @@ window.onload = function (){
                 $(".newblogs").find("ul").html(newBlog);
             },    
 		    error:function(){
-		    	alert("初始化类别失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
@@ -220,7 +221,7 @@ window.onload = function (){
                 $(".paihang").find("ul").html(clickBlog);
             },    
 		    error:function(){
-		    	alert("初始化类别失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};

@@ -12,9 +12,22 @@ public class Visit {
 
     private String url;
     
+    private String browserType;//浏览器类型  
+    
+    
+    private String platformType;//平台类型  
+    
+    
     @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date time;
 
+    public Visit(){}  
+    
+    public Visit(String browserType, String platformType){  
+        this.browserType = browserType;  
+        this.platformType = platformType;  
+    } 
+    
     public Integer getId() {
         return id;
     }
@@ -45,4 +58,20 @@ public class Visit {
     public void setTime(Date time) {
         this.time = time;
     }
+	public String getBrowserType() {
+		return browserType;
+	}
+	public void setBrowserType(String browserType) {
+		this.browserType = browserType;
+	}
+	
+	public String getPlatformType() {
+		return platformType;
+	}
+	public void setPlatformType(String platformType) {
+		this.platformType = platformType;
+	}
+	
+	
+    
 }
