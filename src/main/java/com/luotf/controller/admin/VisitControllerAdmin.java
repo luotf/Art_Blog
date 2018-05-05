@@ -40,7 +40,7 @@ public class VisitControllerAdmin {
 		 if(endTime!=""&&endTime!=null){
 			 map.put("endTime", endTime);
 		 }
-		 List list=visitService.selectVisitListByDate(map);
+		 List<Map> list=visitService.selectVisitListByDate(map);
 		 Map returnMap=new HashMap();
 		 if(list.size()>0){
 			 returnMap.put("status", 200);

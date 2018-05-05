@@ -49,7 +49,7 @@
 	</select>
   
   	<select id="selectVisitListByDate" resultType="map" parameterType="Map">
-		  SELECT 
+		  SELECT time,
 		    COUNT(*) AS count
 		  FROM
 		    t_visit 

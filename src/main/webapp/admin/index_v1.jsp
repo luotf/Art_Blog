@@ -158,8 +158,8 @@
                         <h5>访问量</h5>
                         <div class="pull-right">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-xs btn-white active">天</button>
-                                <button type="button" class="btn btn-xs btn-white">月</button>
+                                <button type="button" onclick="initVisitCountByWeek(7);" class="btn btn-xs btn-white active">天</button>
+                                <button type="button" onclick="initVisitCountByWeek(30);" class="btn btn-xs btn-white">月</button>
                                 <button type="button" class="btn btn-xs btn-white">年</button>
                             </div>
                         </div>
@@ -219,69 +219,80 @@
 	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script>
-    var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
-    var lineoption = {
-        title : {
-            text: '网站访问人数'
-        },
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['近7日访问人数']
-        },
-        grid:{
-            x:40,
-            x2:40,
-            y2:24
-        },
-        xAxis : [
-            {
-                type : 'category',
-                boundaryGap : true,
-                data : ['04/24','04/25','04/26','04/27','04/28','04/29','04/30']
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                axisLabel : {
-                    formatter: '{value}'
-                },
-                
-            }
-        ],
-        series : [
-            {
-                name:'近7日访问人数',
-                type:'line',
-                data:[11, 11, 15, 13, 6, 13, 10,17],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name: '平均值'}
-                    ]
-                }
-            },
-        ]
-    };
-    lineChart.setOption(lineoption);
-    $(window).resize(lineChart.resize);
+    
     </script>
 
 	<script type="text/javascript">
 	$(document).ready(function() {
+		var days=new Array();
+		var counts=new Array(5,5,5,5,5,5,5);
+		var date=new Date();
+		for(var i=6,j=0;i>=0;i--,j++){
+			days[j]=Format(new Date(date.getTime() -  i*24*60*60*1000),"yyyy-MM-dd");
+		}
+		initEcharts(days,counts);
 		initBlogCountByStatus();//初始化已发表/草稿箱博客数目
 		initBlogCountByDate();//初始化昨日/今日博客发表数目
 		initVisitCount("now");  //初始化今日访客
 		initVisitCount("history");  //初始化历史访客
+		initVisitCountByWeek(7);  //初始化num日访客
 	});
 	
+	var initEcharts=function(days,counts){
+    	var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
+        var lineoption = {
+            title : {
+                text: '网站访问人数'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['近'+days.length+'日访问人数']
+            },
+            grid:{
+                x:40,
+                x2:40,
+                y2:24
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : days
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value}'
+                    },
+                    
+                }
+            ],
+            series : [
+                {
+                    name:'近'+days.length+'日访问人数',
+                    type:'line',
+                    data:counts,
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name: '平均值'}
+                        ]
+                    }
+                },
+            ]
+        };
+        lineChart.setOption(lineoption);
+        $(window).resize(lineChart.resize);
+    };
 	
 	var initBlogCountByStatus=function(){
 		//初始化博客数目
@@ -370,6 +381,50 @@
 					}
 					
 				}
+			},
+			error : function() {
+				swal("今日访客数错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	//最近的num日访客
+	var initVisitCountByWeek=function(num){
+		var date=new Date();
+		var startTime="";
+		var endTime="";
+			startTime = Format(new Date(date.getTime() -  (num-1)*24*60*60*1000),"yyyy-MM-dd");
+			endTime=Format(date,"yyyy-MM-dd");
+		var params={
+			startTime:startTime,
+			endTime:endTime,
+		 };
+		$.ajax({
+			url : 'selectVisitListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+				console.log(data);
+				var days=new Array();
+				var counts=new Array();
+				for(var i=num-1,j=0;i>=0;i--,j++){
+					days[j]=Format(new Date(date.getTime() -  i*24*60*60*1000),"yyyy-MM-dd");
+				}
+				for(var j=0;j<days.length;j++){
+					for(var i=0;i<data.list.length;i++){
+						var time=Format(data.list[i].time,"yyyy-MM-dd");
+						if(days[j]==time){
+							counts[j]=data.list[i].count;
+						}
+					}
+				}
+				if(num>10){
+					for(var i=num-1,j=0;i>=0;i--,j++){
+						days[j]=Format(days[j],"MM/dd");
+					}
+				}
+				initEcharts(days,counts); 
 			},
 			error : function() {
 				swal("今日访客数错误", "请重新操作", "error");
