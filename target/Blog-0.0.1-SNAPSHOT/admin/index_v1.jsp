@@ -83,7 +83,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">历史</span>
-                        <h5>访客</h5>
+                        <h5>历史访客</h5>
                     </div>
                     <div class="ibox-content">
                         <h1 class="visitors no-margins" style="text-align: center;">0</h1>
@@ -140,7 +140,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <span class="label label-success pull-right">历史</span>
-                        <h5>评论</h5>
+                        <h5>历史评论</h5>
                     </div>
                     <div class="ibox-content">
                         <h1 class="allRecommend no-margins" style="text-align: center;">0</h1>
@@ -276,8 +276,10 @@
 
 	<script type="text/javascript">
 	$(document).ready(function() {
-		initBlogCountByStatus();//初始化博客数目
-		initBlogCountByDate();
+		initBlogCountByStatus();//初始化已发表/草稿箱博客数目
+		initBlogCountByDate();//初始化昨日/今日博客发表数目
+		initVisitCount("now");  //初始化今日访客
+		initVisitCount("history");  //初始化历史访客
 	});
 	
 	
@@ -300,7 +302,7 @@
 				}
 			},
 			error : function() {
-				swal("初始化博客状态错误", "请重新操作", "error");
+				swal("博客总数错误", "请重新操作", "error");
 			}
 		});
 	};
@@ -328,7 +330,47 @@
 						
 			},
 			error : function() {
-				swal("初始化博客状态错误", "请重新操作", "error");
+				swal("博客发表数错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	//今日访客
+	var initVisitCount=function(e){
+		 params="";
+		var date=null;
+		var startTime=null;
+		if(e=="now"){
+			date=new Date();
+			startTime=Format(date,"yyyy-MM-dd");
+		}else if(e=="history"){
+			startTime="";
+		}
+		var params={
+				startTime:startTime,
+				endTime:startTime,
+			 };
+		$.ajax({
+			url : 'selectVisitListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+				if(data.list.length>=1){
+					if(e=="now"){
+						$(".nowVisitors").html(data.list[0].count );
+					}else if(e=="history"){
+						var count=0;
+						for(var i=0;i<data.list.length;i++){
+							count+=data.list[i].count;
+						}
+						$(".visitors").html(count );
+					}
+					
+				}
+			},
+			error : function() {
+				swal("今日访客数错误", "请重新操作", "error");
 			}
 		});
 	};

@@ -83,7 +83,12 @@ public class BlogTest{
     	Map map=new HashMap();
     	map.put("startTime", "2018-05-01");
     	map.put("endTime", "2018-05-03");
-    	List blogList=blogService.selectBlogListByDate(map);
-    		System.out.println(blogList);
+    	List<Map> blogList=blogService.selectBlogListByDate(map);
+    	Map map1=new HashMap();
+    		for (Map map2 : blogList) {
+    			Object time=map2.get("addTime");
+    			map1.put(time,map2.get("count"));
+			}
+				System.out.println(map1);
 	}
 }

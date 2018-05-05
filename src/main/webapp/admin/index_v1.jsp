@@ -321,13 +321,15 @@
 			data:params,
 			dataType : 'json',
 			success : function(data) {
-				if(data.list.length>=1){
-					$(".yesBlog").html(data.list[0].count );
+				for(var i=0;i<data.list.length;i++){
+					var time=Format(data.list[i].addTime,"yyyy-MM-dd");
+					if(time==startTime){
+						$(".yesBlog").html(data.list[i].count );
+					}
+					if(time==endTime){
+						$(".nowBlog").html(data.list[i].count );
+					}
 				}
-				if(data.list.length>=2){
-					$(".nowBlog").html(data.list[1].count );
-				}
-						
 			},
 			error : function() {
 				swal("博客发表数错误", "请重新操作", "error");

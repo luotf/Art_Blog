@@ -63,7 +63,7 @@
   </delete>
   
   	<select id="selectBlogListByDate" resultType="map" parameterType="Map">
-		  SELECT 
+		  SELECT addTime,
 		    COUNT(*) AS count
 		  FROM
 		    t_blog 
@@ -74,7 +74,6 @@
 		 	</if>
 		 </where>
 		  GROUP BY DATE_FORMAT(addTime,'%Y-%m-%d')
-		  <!-- ORDER BY addTime DESC -->
 	</select>
 	
 	<select id="selectBlogListByStatus" resultType="map">
