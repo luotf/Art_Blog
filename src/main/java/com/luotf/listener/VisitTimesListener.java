@@ -42,7 +42,7 @@ public class VisitTimesListener implements ServletRequestListener {
 		try {
 			visitServiceImpl = (VisitService) applicationContext
 					.getBean("visitServiceImpl");
-			if (!session.isNew()) {
+			if (session.isNew()) {
 				log.debug("-------applicationContext--------");
 				log.debug("begin- " + applicationContext + " -end");
 				log.debug("-----begin-----");
