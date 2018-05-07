@@ -70,7 +70,6 @@
 		   <where>
 		 	<if test="startTime!=null and startTime!=''">
 		 	and DATE_FORMAT(addTime,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
-		 		<!-- and DATE_FORMAT(addTime,'%Y-%m-%d')=#{startTime} -->
 		 	</if>
 		 </where>
 		  GROUP BY DATE_FORMAT(addTime,'%Y-%m-%d')

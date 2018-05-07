@@ -58,7 +58,23 @@
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<span class="label label-info pull-right">今天</span>
+						<span class="label label-danger pull-right">历史</span>
+						<h5>草稿箱</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="draft no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-info">
+							20% <i class="fa fa-level-up"></i>
+						</div>
+						<small>未发表</small>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-warning pull-right">今天</span>
 						<h5>今日发表</h5>
 					</div>
 					<div class="ibox-content">
@@ -73,7 +89,7 @@
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<span class="label label-primary pull-right">今天</span>
+						<span class="label label-info pull-right">今天</span>
 						<h5>今日访客</h5>
 					</div>
 					<div class="ibox-content">
@@ -88,15 +104,15 @@
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<span class="label label-success pull-right">历史</span>
-						<h5>历史访客</h5>
+						<span class="label label-success pull-right">总数</span>
+						<h5>资源</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="visitors no-margins" style="text-align: center;">0</h1>
+						<h1 class="allRecommend no-margins" style="text-align: center;">67</h1>
 						<div class="stat-percent font-bold text-info">
 							20% <i class="fa fa-level-up"></i>
 						</div>
-						<small>总访问量</small>
+						<small>已发表</small>
 					</div>
 				</div>
 			</div>
@@ -104,17 +120,18 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
 						<span class="label label-danger pull-right">历史</span>
-						<h5>草稿箱</h5>
+						<h5>垃圾箱</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="draft no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-info">
-							20% <i class="fa fa-level-up"></i>
+						<h1 class="nowRecommend no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-navy">
+							44% <i class="fa fa-level-up"></i>
 						</div>
-						<small>未发表</small>
+						<small>已删除</small>
 					</div>
 				</div>
 			</div>
+			
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
@@ -130,37 +147,28 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<span class="label label-primary pull-right">今天</span>
-						<h5>今日评论</h5>
+						<span class="label label-info pull-right">历史</span>
+						<h5>历史访客</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="nowRecommend no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-navy">
-							44% <i class="fa fa-level-up"></i>
-						</div>
-						<small>新评论</small>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-3">
-				<div class="ibox float-e-margins">
-					<div class="ibox-title">
-						<span class="label label-success pull-right">历史</span>
-						<h5>历史评论</h5>
-					</div>
-					<div class="ibox-content">
-						<h1 class="allRecommend no-margins" style="text-align: center;">0</h1>
+						<h1 class="visitors no-margins" style="text-align: center;">0</h1>
 						<div class="stat-percent font-bold text-info">
 							20% <i class="fa fa-level-up"></i>
 						</div>
-						<small>总评论数</small>
+						<small>总访问量</small>
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			
+
+			
+			
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
@@ -171,9 +179,9 @@
 							<div class="btn-group">
 								<button type="button" onclick="initVisitCountByWeek(7);"
 									class="btn btn-xs btn-white active">天</button>
-								<button type="button" onclick="initVisitCountByWeek(30);"
+								<button type="button" onclick="initVisitCountByMonth(12);"
 									class="btn btn-xs btn-white">月</button>
-								<button type="button" class="btn btn-xs btn-white">年</button>
+								<button type="button" class="btn btn-xs btn-white" onclick="initVisitCountByYear(6);">年</button>
 							</div>
 						</div>
 					</div>
@@ -201,21 +209,21 @@
 									</li>
 								</ul>
 								<h5 style="text-align: center;">
-									近<span class="num" style="font-size:20px">30</span>日访问人数
+									近<span class="num" style="font-size:20px">0</span><span class="md"></span>访问人数
 								</h5>
-								<div class="col-sm-4">
+								<div class="col-sm-4" style="padding-right: 0px;padding-left: 0px;">
 									<div class="ibox-content">
 										<h2 class="all no-margins" style="text-align: center;">0</h2>
 										<span class="label label-success">总数</span>
 									</div>
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-4" style="padding-right: 0px;padding-left: 0px;">
 									<div class="ibox-content">
 										<h2 class="high no-margins" style="text-align: center;">0</h2>
-										<span class="label label-success">最高</span>
+										<span class="label label-primary">最高</span>
 									</div>
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-4" style="padding-right: 0px;padding-left: 0px;">
 									<div class="ibox-content">
 										<h2 class="low no-margins" style="text-align: center;">0</h2>
 										<span class="label label-info ">最低</span>
@@ -250,6 +258,7 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#end").val(Format(new Date(),"yyyy-MM-dd"));
+		$("#start").val(Format(new Date().getTime() -  6*24*60*60*1000,"yyyy-MM-dd"));
 		var days=new Array();
 		var counts=new Array(5,5,5,5,5,5,5);
 		var date=new Date();
@@ -263,7 +272,6 @@
 		initVisitCount("history");  //初始化历史访客
 		initVisitCountByWeek(7);  //初始化num日访客
 	});
-	
 		$('#start').datepicker({
             keyboardNavigation: false,
             forceParse: false,
@@ -300,6 +308,12 @@
         })
 	
 	var initEcharts=function(days,counts){
+		var md="日";
+		if(days[days.length-1]==Format(new Date(),"yyyy-MM")||days[days.length-1]==Format(new Date(),"yyyy/MM")){
+			md="月";
+		}else if(days[days.length-1]==Format(new Date(),"yyyy")){
+			md="年";
+		}
     	var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
         var lineoption = {
             title : {
@@ -309,7 +323,7 @@
                 trigger: 'axis'
             },
             legend: {
-                data:['近'+days.length+'日访问人数']
+                data:['近'+days.length+''+md+'访问人数']
             },
             toolbox: {
                 show: true,
@@ -346,7 +360,7 @@
             ],
             series : [
                 {
-                    name:'近'+days.length+'日访问人数',
+                    name:'近'+days.length+''+md+'访问人数',
                     type:'line',
                     data:counts,
                     markPoint : {
@@ -380,9 +394,9 @@
 	        		max = counts[i]; 
 	        	} 
         	}
-        
-        $(".date").html(days[0]+"——"+days[days.length-1]);
+        $(".date").html('<span class="label label-danger ">'+days[0]+"——"+days[days.length-1]+'</span>');
         $(".num").html(days.length);
+        $(".md").html(md);
         $(".high").html(max);
         $(".low").html(min);
         $(".all").html(all);
@@ -456,6 +470,7 @@
 		var params={
 				startTime:startTime,
 				endTime:startTime,
+				format:"day",
 			 };
 		$.ajax({
 			url : 'selectVisitListByDate',
@@ -492,6 +507,7 @@
 		var params={
 			startTime:startTime,
 			endTime:endTime,
+			format:"day",
 		 };
 		$.ajax({
 			url : 'selectVisitListByDate',
@@ -533,6 +549,7 @@
 		 var params={
 			startTime:startTime,
 			endTime:endTime,
+			format:"day",
 		 };
 		$.ajax({
 			url : 'selectVisitListByDate',
@@ -557,7 +574,7 @@
 					}
 				}
 				if(num>10){
-					for(var i=num-1,j=0;i>=0;i--,j++){
+					for(var j=0;j<days.length;j++){
 						days[j]=Format(days[j],"MM/dd");
 					}
 				}
@@ -569,6 +586,120 @@
 		}); 
 	};
 	
+	var initVisitCountByMonth=function(num){
+		var arr=new Array();
+		arr=dataMonth(num);
+		var startTime=arr[0];
+		var endTime=arr[arr.length-1];
+		var params={
+			startTime:startTime,
+			endTime:endTime,
+			format:"month",
+		 };
+		$.ajax({
+			url : 'selectVisitListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+				var counts=Array.apply(null, Array(arr.length)).map(function(item, i) {
+				    return 0;
+				});
+				for(var j=0;j<arr.length;j++){
+					for(var i=0;i<data.list.length;i++){
+						var time=Format(data.list[i].time,"yyyy-MM");
+						if(arr[j]==time){
+							counts[j]=data.list[i].count;
+						}
+					}
+				}
+				if(num>10){
+					for(var j=0;j<arr.length;j++){
+						arr[j]=Format(arr[j],"yyyy/MM");
+					}
+				}
+				initEcharts(arr,counts); 
+			},
+			error : function() {
+				swal("近日访客初始化错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	var initVisitCountByYear=function(num){
+		var arr=new Array();
+		arr=dataYear(num);
+		console.log(arr);
+		var startTime=arr[0];
+		var endTime=arr[arr.length-1];
+		var params={
+			startTime:startTime,
+			endTime:endTime,
+			format:"year",
+		 };
+		$.ajax({
+			url : 'selectVisitListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+				var counts=Array.apply(null, Array(arr.length)).map(function(item, i) {
+				    return 0;
+				});
+				for(var j=0;j<arr.length;j++){
+					for(var i=0;i<data.list.length;i++){
+						var time=Format(data.list[i].time,"yyyy");
+						if(arr[j]==time){
+							counts[j]=data.list[i].count;
+						}
+					}
+				}
+					
+				initEcharts(arr,counts); 
+			},
+			error : function() {
+				swal("近日访客初始化错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	
+	//获取前num个月的日期
+	var dataMonth=function(num){  
+        //创建现在的时间  
+        var data=new Date();  
+        //获取年  
+        var year=data.getFullYear();  
+        //获取月  
+        var mon=data.getMonth()+2;  
+        var arry=new Array();  
+        for(var i=num-1;i>=0;i--){  
+            mon=mon-1;  
+            if(mon<=0){  
+                year=year-1;  
+                mon=mon+12;  
+            }  
+            if(mon<10){  
+                mon="0"+mon;  
+            }  
+            arry[i]=year+"-"+mon;  
+        }  
+        return arry;  
+    }
+	
+	//获取前num年的日期
+	var dataYear=function(num){  
+        //创建现在的时间  
+        var data=new Date();  
+        //获取年  
+        var year=data.getFullYear()+1;  
+        var arry=new Array();  
+        for(var i=num-1;i>=0;i--){  
+        	year=year-1; 
+            arry[i]=year;  
+        }  
+        return arry;  
+    }
 	
 	 //格式化时间
 	function Format(datetime, fmt) {

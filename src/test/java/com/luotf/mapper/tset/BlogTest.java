@@ -19,6 +19,7 @@ import com.luotf.mapper.BlogTypeMapper;
 import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
+import com.luotf.service.VisitService;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 表示继承了SpringJUnit4ClassRunner类 
 @ContextConfiguration(locations = {"classpath:spring/applicationContext-*.xml" }) 
@@ -28,6 +29,7 @@ public class BlogTest{
 	
 	@Autowired
 	private BlogService blogService;
+	private VisitService visitService;
 	@Autowired
 	private BlogTypeMapper blogTypeMapper;
 	@Autowired
@@ -78,17 +80,19 @@ public class BlogTest{
 		 
 	 }
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public  void BlogIdToSafe(){
     	Map map=new HashMap();
+    	map.put("format", "day");
     	map.put("startTime", "2018-05-01");
     	map.put("endTime", "2018-05-03");
-    	List<Map> blogList=blogService.selectBlogListByDate(map);
-    	Map map1=new HashMap();
-    		for (Map map2 : blogList) {
-    			Object time=map2.get("addTime");
+    	List<Map> blogList=visitService.selectVisitListByDate(map);
+    	//Map map1=new HashMap();
+    		/*for (Map map2 : blogList) {
+    			Object time=map2.get("time");
     			map1.put(time,map2.get("count"));
-			}
-				System.out.println(map1);
+			}*/
+				System.out.println(blogList);
 	}
 }

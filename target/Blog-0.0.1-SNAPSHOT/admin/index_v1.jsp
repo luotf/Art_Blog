@@ -29,259 +29,364 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
-	<link
+<link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"
 	rel="stylesheet">
 </head>
 
 <body class="gray-bg">
-    <div class="wrapper wrapper-content">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-success pull-right">总数</span>
-                        <h5>博客</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="allBlog no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i>
-                        </div>
-                        <small>已发表</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-info pull-right">今天</span>
-                        <h5>今日发表</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="nowBlog no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
-                        </div>
-                        <small>已发表</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">今天</span>
-                        <h5>今日访客</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="nowVisitors no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
-                        </div>
-                        <small>新访客</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-success pull-right">历史</span>
-                        <h5>历史访客</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="visitors no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
-                        </div>
-                        <small>总访问量</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-danger pull-right">历史</span>
-                        <h5>草稿箱</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="draft no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
-                        </div>
-                        <small>未发表</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-warning pull-right">昨天</span>
-                        <h5>昨日发表</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="yesBlog no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
-                        </div>
-                        <small>已发表</small>
-                    </div>
-                </div>
-            </div>
-          
-          <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">今天</span>
-                        <h5>今日评论</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="nowRecommend no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-navy">44% <i class="fa fa-level-up"></i>
-                        </div>
-                        <small>新评论</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <span class="label label-success pull-right">历史</span>
-                        <h5>历史评论</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="allRecommend no-margins" style="text-align: center;">0</h1>
-                        <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
-                        </div>
-                        <small>总评论数</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>访问量</h5>
-                        <div class="pull-right">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-xs btn-white active">天</button>
-                                <button type="button" class="btn btn-xs btn-white">月</button>
-                                <button type="button" class="btn btn-xs btn-white">年</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-sm-9">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="echarts-line-chart"></div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <ul class="stat-list">
-                                    <li>
-                                        <h2 class="no-margins">2,346</h2>
-                                        <small>订单总数</small>
-                                        <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i>
-                                        </div>
-                                        <div class="progress progress-mini">
-                                            <div style="width: 48%;" class="progress-bar"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h2 class="no-margins ">4,422</h2>
-                                        <small>最近一个月订单</small>
-                                        <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i>
-                                        </div>
-                                        <div class="progress progress-mini">
-                                            <div style="width: 60%;" class="progress-bar"></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <h2 class="no-margins ">9,180</h2>
-                                        <small>最近一个月销售额</small>
-                                        <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i>
-                                        </div>
-                                        <div class="progress progress-mini">
-                                            <div style="width: 22%;" class="progress-bar"></div>
-                                        </div>
-                                    </li>
-                            </div>
-                        </div>
-                    </div>
+	<div class="wrapper wrapper-content">
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-success pull-right">总数</span>
+						<h5>博客</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="allBlog no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-success">
+							98% <i class="fa fa-bolt"></i>
+						</div>
+						<small>已发表</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-info pull-right">今天</span>
+						<h5>今日发表</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="nowBlog no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-danger">
+							38% <i class="fa fa-level-down"></i>
+						</div>
+						<small>已发表</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-primary pull-right">今天</span>
+						<h5>今日访客</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="nowVisitors no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-navy">
+							44% <i class="fa fa-level-up"></i>
+						</div>
+						<small>新访客</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-success pull-right">历史</span>
+						<h5>历史访客</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="visitors no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-info">
+							20% <i class="fa fa-level-up"></i>
+						</div>
+						<small>总访问量</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-danger pull-right">历史</span>
+						<h5>草稿箱</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="draft no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-info">
+							20% <i class="fa fa-level-up"></i>
+						</div>
+						<small>未发表</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-warning pull-right">昨天</span>
+						<h5>昨日发表</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="yesBlog no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-info">
+							20% <i class="fa fa-level-up"></i>
+						</div>
+						<small>已发表</small>
+					</div>
+				</div>
+			</div>
 
-                </div>
-            </div>
-        </div>
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-primary pull-right">今天</span>
+						<h5>今日评论</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="nowRecommend no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-navy">
+							44% <i class="fa fa-level-up"></i>
+						</div>
+						<small>新评论</small>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<span class="label label-success pull-right">历史</span>
+						<h5>历史评论</h5>
+					</div>
+					<div class="ibox-content">
+						<h1 class="allRecommend no-margins" style="text-align: center;">0</h1>
+						<div class="stat-percent font-bold text-info">
+							20% <i class="fa fa-level-up"></i>
+						</div>
+						<small>总评论数</small>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+						<h5>访问量</h5>
+						<div class="pull-right">
+							<div class="btn-group">
+								<button type="button" onclick="initVisitCountByWeek(7);"
+									class="btn btn-xs btn-white active">天</button>
+								<button type="button" onclick="initVisitCountByWeek(30);"
+									class="btn btn-xs btn-white">月</button>
+								<button type="button" class="btn btn-xs btn-white">年</button>
+							</div>
+						</div>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-sm-9">
+								<div class="flot-chart">
+									<div class="flot-chart-content" id="echarts-line-chart"></div>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<ul class="stat-list">
+									<li>
+										<h3>指定日期查询</h3> <!-- <small>指定日期</small> -->
+										<div class="input-daterange input-group" id="datepicker">
+											<span class="input-group-addon"><i
+												class="fa fa-calendar"></i></span> <input type="text"
+												class="input-sm form-control" id="start" /> <span
+												class="input-group-addon">到</span> <input type="text"
+												class="input-sm form-control" id="end" />
+										</div>
+									</li>
+									<li>
+										<h4 style="text-align: center;" class="date"></h4>
+									</li>
+								</ul>
+								<h5 style="text-align: center;">
+									近<span class="num" style="font-size:20px">30</span>日访问人数
+								</h5>
+								<div class="col-sm-4">
+									<div class="ibox-content">
+										<h2 class="all no-margins" style="text-align: center;">0</h2>
+										<span class="label label-success">总数</span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="ibox-content">
+										<h2 class="high no-margins" style="text-align: center;">0</h2>
+										<span class="label label-success">最高</span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="ibox-content">
+										<h2 class="low no-margins" style="text-align: center;">0</h2>
+										<span class="label label-info ">最低</span>
+									</div>
+										
+								</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 
-        </div>
-    </div>
+	</div>
+	</div>
 
-    <!-- 全局js -->
-    <script src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/plugins/echarts/echarts-all.js"></script>
-	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
+	<!-- 全局js -->
+	<script
+		src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/echarts/echarts.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-    <script>
-    var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
-    var lineoption = {
-        title : {
-            text: '网站访问人数'
-        },
-        tooltip : {
-            trigger: 'axis'
-        },
-        legend: {
-            data:['近7日访问人数']
-        },
-        grid:{
-            x:40,
-            x2:40,
-            y2:24
-        },
-        xAxis : [
-            {
-                type : 'category',
-                boundaryGap : true,
-                data : ['04/24','04/25','04/26','04/27','04/28','04/29','04/30']
-            }
-        ],
-        yAxis : [
-            {
-                type : 'value',
-                axisLabel : {
-                    formatter: '{value}'
-                },
-                
-            }
-        ],
-        series : [
-            {
-                name:'近7日访问人数',
-                type:'line',
-                data:[11, 11, 15, 13, 6, 13, 10,17],
-                markPoint : {
-                    data : [
-                        {type : 'max', name: '最大值'},
-                        {type : 'min', name: '最小值'}
-                    ]
-                },
-                markLine : {
-                    data : [
-                        {type : 'average', name: '平均值'}
-                    ]
-                }
-            },
-        ]
-    };
-    lineChart.setOption(lineoption);
-    $(window).resize(lineChart.resize);
-    </script>
+	<!-- Data picker -->
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 	<script type="text/javascript">
 	$(document).ready(function() {
+		$("#end").val(Format(new Date(),"yyyy-MM-dd"));
+		var days=new Array();
+		var counts=new Array(5,5,5,5,5,5,5);
+		var date=new Date();
+		for(var i=6,j=0;i>=0;i--,j++){
+			days[j]=Format(new Date(date.getTime() -  i*24*60*60*1000),"yyyy-MM-dd");
+		}
+		initEcharts(days,counts);
 		initBlogCountByStatus();//初始化已发表/草稿箱博客数目
 		initBlogCountByDate();//初始化昨日/今日博客发表数目
 		initVisitCount("now");  //初始化今日访客
 		initVisitCount("history");  //初始化历史访客
+		initVisitCountByWeek(7);  //初始化num日访客
 	});
 	
+		$('#start').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'mm/dd/yyyy',
+            todayHighlight: true,    
+            endDate: new Date(),
+        }).on('changeDate',function(ev){
+        	var start=ev.date.valueOf();
+        	$('#start').val(Format(start,"yyyy-MM-dd"));
+        	if($('#end').val()!=""&&$('#start').val()>$('#end').val()){
+        		swal("指定日期范围出错", "请重新检查", "error");
+        	}else if($('#start').val()!=""&&$('#end').val()!=""){
+        		initVisitCountByRange($('#start').val(),$('#end').val());
+        	}
+        });
+	
+		$('#end').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'mm/dd/yyyy',
+            todayHighlight: true,    
+            endDate: new Date(),
+        }).on('changeDate',function(ev){
+        	var end=ev.date.valueOf();
+        	$('#end').val(Format(end,"yyyy-MM-dd"));
+        	if($('#start').val()!=""&&$('#start').val()>$('#end').val()){
+        		swal("指定日期范围出错", "请重新检查", "error");
+        	}else if($('#start').val()!=""&&$('#end').val()!=""){
+        		initVisitCountByRange($('#start').val(),$('#end').val());
+        	}
+        	
+        })
+	
+	var initEcharts=function(days,counts){
+    	var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
+        var lineoption = {
+            title : {
+                text: '网站访问人数'
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['近'+days.length+'日访问人数']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            grid:{
+                x:40,
+                x2:40,
+                y2:24
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : days
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLabel : {
+                        formatter: '{value}'
+                    },
+                    
+                }
+            ],
+            series : [
+                {
+                    name:'近'+days.length+'日访问人数',
+                    type:'line',
+                    data:counts,
+                    markPoint : {
+                        data : [
+                            {type : 'max', name: '最大值'},
+                            {type : 'min', name: '最小值'}
+                        ]
+                    },
+                    markLine : {
+                        data : [
+                            {type : 'average', name: '平均值'}
+                        ]
+                    }
+                },
+            ]
+        };
+        lineChart.setOption(lineoption);
+        	var min = counts[0];
+        	var max = counts[0];
+        	var all=0;
+        	for(var i=0;i<counts.length;i++){
+        		all+=counts[i];
+        	}
+        	for (var i = 1; i < counts.length; i++){ 
+	        	if (counts[i] < min){ 
+	        		min = counts[i];
+	        	} 
+        	}
+        	for (var i = 1; i < counts.length; i++){ 
+	        	if (counts[i] > max){ 
+	        		max = counts[i]; 
+	        	} 
+        	}
+        
+        $(".date").html(days[0]+"——"+days[days.length-1]);
+        $(".num").html(days.length);
+        $(".high").html(max);
+        $(".low").html(min);
+        $(".all").html(all);
+    };
 	
 	var initBlogCountByStatus=function(){
 		//初始化博客数目
@@ -321,13 +426,15 @@
 			data:params,
 			dataType : 'json',
 			success : function(data) {
-				if(data.list.length>=1){
-					$(".yesBlog").html(data.list[0].count );
+				for(var i=0;i<data.list.length;i++){
+					var time=Format(data.list[i].addTime,"yyyy-MM-dd");
+					if(time==startTime){
+						$(".yesBlog").html(data.list[i].count );
+					}
+					if(time==endTime){
+						$(".nowBlog").html(data.list[i].count );
+					}
 				}
-				if(data.list.length>=2){
-					$(".nowBlog").html(data.list[1].count );
-				}
-						
 			},
 			error : function() {
 				swal("博客发表数错误", "请重新操作", "error");
@@ -374,6 +481,94 @@
 			}
 		});
 	};
+	
+	//最近的num日访客
+	var initVisitCountByWeek=function(num){
+		var date=new Date();
+		var startTime="";
+		var endTime="";
+			startTime = Format(new Date(date.getTime() -  (num-1)*24*60*60*1000),"yyyy-MM-dd");
+			endTime=Format(date,"yyyy-MM-dd");
+		var params={
+			startTime:startTime,
+			endTime:endTime,
+		 };
+		$.ajax({
+			url : 'selectVisitListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+				var days=new Array();
+				var counts=new Array();
+				for(var i=num-1,j=0;i>=0;i--,j++){
+					days[j]=Format(new Date(date.getTime() -  i*24*60*60*1000),"yyyy-MM-dd");
+				}
+				for(var j=0;j<days.length;j++){
+					for(var i=0;i<data.list.length;i++){
+						var time=Format(data.list[i].time,"yyyy-MM-dd");
+						if(days[j]==time){
+							counts[j]=data.list[i].count;
+						}
+					}
+				}
+				if(num>10){
+					for(var i=num-1,j=0;i>=0;i--,j++){
+						days[j]=Format(days[j],"MM/dd");
+					}
+				}
+				initEcharts(days,counts); 
+			},
+			error : function() {
+				swal("近日访客初始化错误", "请重新操作", "error");
+			}
+		});
+	};
+	
+	//指定日期初始化访客人数
+	var initVisitCountByRange=function(startTime,endTime){
+		var start=Date.parse(new Date(startTime));
+		var end=Date.parse(new Date(endTime));
+		var num=Math.abs(parseInt((end - start)/1000/3600/24));
+		 var params={
+			startTime:startTime,
+			endTime:endTime,
+		 };
+		$.ajax({
+			url : 'selectVisitListByDate',
+			type : 'post',
+			data:params,
+			dataType : 'json',
+			success : function(data) {
+				var days=new Array();
+				for(var i=num,j=0;i>=0;i--,j++){
+					days[j]=Format(new Date(end -  i*24*60*60*1000),"yyyy-MM-dd");
+				}
+				//快速初始化一个 大小为days的数组 并初始化全为0
+				var counts=Array.apply(null, Array(days.length)).map(function(item, i) {
+				    return 0;
+				});
+				for(var j=0;j<days.length;j++){
+					for(var i=0;i<data.list.length;i++){
+						var time=Format(data.list[i].time,"yyyy-MM-dd");
+						if(days[j]==time){
+							counts[j]=data.list[i].count;
+						}
+					}
+				}
+				if(num>10){
+					for(var i=num-1,j=0;i>=0;i--,j++){
+						days[j]=Format(days[j],"MM/dd");
+					}
+				}
+				initEcharts(days,counts); 
+			},
+			error : function() {
+				swal("指定日期访客初始化错误", "请重新操作", "error");
+			}
+		}); 
+	};
+	
 	
 	 //格式化时间
 	function Format(datetime, fmt) {

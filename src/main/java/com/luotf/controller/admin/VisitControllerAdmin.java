@@ -32,8 +32,11 @@ public class VisitControllerAdmin {
 	 @RequestMapping(value = "/selectVisitListByDate",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogListByDate(@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
+	 public Map selectBlogListByDate(@RequestParam(value="format") String format,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
 		 Map map=new HashMap();
+		 if(format!=""&&format!=null){
+			 map.put("format", format);
+		 }
 		 if(startTime!=""&&startTime!=null){
 			 map.put("startTime", startTime);
 		 }

@@ -278,6 +278,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		var url = window.location.href;
 		var url_param = url.split("=")[1];
+		console.log(url);
+		console.log(url_param);
 		   //编辑博客
 			var param={
 					id:url_param

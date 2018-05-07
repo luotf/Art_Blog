@@ -313,6 +313,9 @@
 				data : params,
 				dataType : 'json',
 				success : function(data) {
+					$(".form-horizontal").find(
+					'select[name=typeName]')
+					.html("");
 					var typeName = '';
 					var typeNameAndNum = '';
 					var circle = new Array("text-navy",

@@ -54,12 +54,28 @@
 		  FROM
 		    t_visit 
 		   <where>
-		 	<if test="startTime!=null and startTime!=''">
-		 	and DATE_FORMAT(time,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
+		 	<if test="startTime!=null and startTime!='' and format=='day'">
+		 		and DATE_FORMAT(time,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
+		 	</if>
+		 	<if test="startTime!=null and startTime!='' and format=='month'">
+		 		and DATE_FORMAT(time,'%Y-%m') BETWEEN #{startTime} AND #{endTime}
+		 	</if>
+		 	<if test="startTime!=null and startTime!='' and format=='year'">
+		 		and DATE_FORMAT(time,'%Y') BETWEEN #{startTime} AND #{endTime}
 		 	</if>
 		 </where>
-		  GROUP BY DATE_FORMAT(time,'%Y-%m-%d')
+		 <if test="format=='day'">
+		 	 GROUP BY DATE_FORMAT(time,'%Y-%m-%d')
+		 </if>
+		 <if test="format=='month'">
+		 	 GROUP BY DATE_FORMAT(time,'%Y-%m')
+		 </if>
+		 <if test="format=='year'">
+		 	 GROUP BY DATE_FORMAT(time,'%Y')
+		 </if> 
 	</select>
+  
+  
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_visit
