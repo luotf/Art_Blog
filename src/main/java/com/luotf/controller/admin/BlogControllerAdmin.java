@@ -377,8 +377,11 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectBlogListByDate",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogListByDate(@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
+	 public Map selectBlogListByDate(@RequestParam(value="status") String status,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
 		 Map map=new HashMap();
+		 if(status!=""&&status!=null){
+			 map.put("status", status);
+		 }
 		 if(startTime!=""&&startTime!=null){
 			 map.put("startTime", startTime);
 		 }

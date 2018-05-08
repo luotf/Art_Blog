@@ -71,6 +71,9 @@
 		 	<if test="startTime!=null and startTime!=''">
 		 	and DATE_FORMAT(addTime,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
 		 	</if>
+		 	<if test="status!=null and status!=''">
+		 		and status=#{status}
+		 	</if>
 		 </where>
 		  GROUP BY DATE_FORMAT(addTime,'%Y-%m-%d')
 	</select>

@@ -48,9 +48,8 @@
 					</div>
 					<div class="ibox-content">
 						<h1 class="allBlog no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-success">
-							98% <i class="fa fa-bolt"></i>
-						</div>
+						<div class="allBlogPercent stat-percent font-bold text-navy">
+							0%</div>
 						<small>已发表</small>
 					</div>
 				</div>
@@ -58,19 +57,18 @@
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<span class="label label-danger pull-right">历史</span>
+						<span class="label label-danger pull-right">总数</span>
 						<h5>草稿箱</h5>
 					</div>
 					<div class="ibox-content">
 						<h1 class="draft no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-info">
-							20% <i class="fa fa-level-up"></i>
-						</div>
+						<div class="draftPercent stat-percent font-bold text-warning">
+							0%</div>
 						<small>未发表</small>
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
@@ -79,10 +77,9 @@
 					</div>
 					<div class="ibox-content">
 						<h1 class="nowBlog no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-danger">
-							38% <i class="fa fa-level-down"></i>
-						</div>
-						<small>已发表</small>
+						<div class="nowBlogPercent stat-percent font-bold text-danger">
+							0%</div>
+						<small>较昨日</small>
 					</div>
 				</div>
 			</div>
@@ -94,10 +91,10 @@
 					</div>
 					<div class="ibox-content">
 						<h1 class="nowVisitors no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-navy">
-							44% <i class="fa fa-level-up"></i>
-						</div>
-						<small>新访客</small>
+						<div
+							class="nowVisitorsPercent stat-percent font-bold text-success">
+							0%</div>
+						<small>较昨日</small>
 					</div>
 				</div>
 			</div>
@@ -108,10 +105,9 @@
 						<h5>资源</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="allRecommend no-margins" style="text-align: center;">67</h1>
-						<div class="stat-percent font-bold text-info">
-							20% <i class="fa fa-level-up"></i>
-						</div>
+						<h1 class="resource no-margins" style="text-align: center;">0</h1>
+						<div class="resourcePercent stat-percent font-bold text-navy">
+							0%</div>
 						<small>已发表</small>
 					</div>
 				</div>
@@ -119,19 +115,18 @@
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<span class="label label-danger pull-right">历史</span>
+						<span class="label label-danger pull-right">总数</span>
 						<h5>垃圾箱</h5>
 					</div>
 					<div class="ibox-content">
-						<h1 class="nowRecommend no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-navy">
-							44% <i class="fa fa-level-up"></i>
-						</div>
+						<h1 class="delete no-margins " style="text-align: center;">0</h1>
+						<div class="deletePercent stat-percent font-bold text-warning">
+							0%</div>
 						<small>已删除</small>
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
@@ -140,10 +135,9 @@
 					</div>
 					<div class="ibox-content">
 						<h1 class="yesBlog no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-info">
-							20% <i class="fa fa-level-up"></i>
-						</div>
-						<small>已发表</small>
+						<div class="yesBlogPercent stat-percent font-bold text-danger">
+							0%</div>
+						<small>较昨日</small>
 					</div>
 				</div>
 			</div>
@@ -155,20 +149,14 @@
 					</div>
 					<div class="ibox-content">
 						<h1 class="visitors no-margins" style="text-align: center;">0</h1>
-						<div class="stat-percent font-bold text-info">
-							20% <i class="fa fa-level-up"></i>
+						<div class=" stat-percent font-bold text-success">
+							100% <i class="fa fa-bolt"></i>
 						</div>
 						<small>总访问量</small>
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
 
-			
-			
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
@@ -181,7 +169,8 @@
 									class="btn btn-xs btn-white active">天</button>
 								<button type="button" onclick="initVisitCountByMonth(12);"
 									class="btn btn-xs btn-white">月</button>
-								<button type="button" class="btn btn-xs btn-white" onclick="initVisitCountByYear(6);">年</button>
+								<button type="button" class="btn btn-xs btn-white"
+									onclick="initVisitCountByYear(6);">年</button>
 							</div>
 						</div>
 					</div>
@@ -209,34 +198,38 @@
 									</li>
 								</ul>
 								<h5 style="text-align: center;">
-									近<span class="num" style="font-size:20px">0</span><span class="md"></span>访问人数
+									近<span class="num" style="font-size:20px">0</span><span
+										class="md"></span>访问人数
 								</h5>
-								<div class="col-sm-4" style="padding-right: 0px;padding-left: 0px;">
+								<div class="col-sm-4"
+									style="padding-right: 0px;padding-left: 0px;">
 									<div class="ibox-content">
 										<h2 class="all no-margins" style="text-align: center;">0</h2>
 										<span class="label label-success">总数</span>
 									</div>
 								</div>
-								<div class="col-sm-4" style="padding-right: 0px;padding-left: 0px;">
+								<div class="col-sm-4"
+									style="padding-right: 0px;padding-left: 0px;">
 									<div class="ibox-content">
 										<h2 class="high no-margins" style="text-align: center;">0</h2>
 										<span class="label label-primary">最高</span>
 									</div>
 								</div>
-								<div class="col-sm-4" style="padding-right: 0px;padding-left: 0px;">
+								<div class="col-sm-4"
+									style="padding-right: 0px;padding-left: 0px;">
 									<div class="ibox-content">
 										<h2 class="low no-margins" style="text-align: center;">0</h2>
 										<span class="label label-info ">最低</span>
 									</div>
-										
+
 								</div>
+							</div>
 						</div>
 					</div>
-				</div>
 
+				</div>
 			</div>
 		</div>
-	</div>
 
 
 	</div>
@@ -267,6 +260,7 @@
 		}
 		initEcharts(days,counts);
 		initBlogCountByStatus();//初始化已发表/草稿箱博客数目
+		initResourceCountByStatus();//初始化已发表资源数目
 		initBlogCountByDate();//初始化昨日/今日博客发表数目
 		initVisitCount("now");  //初始化今日访客
 		initVisitCount("history");  //初始化历史访客
@@ -401,7 +395,27 @@
         $(".low").html(min);
         $(".all").html(all);
     };
-	
+    
+    var initResourceCountByStatus=function(){
+		//初始化资源数目
+		$.ajax({
+			url : 'selectResourceListByStatus',
+			type : 'post',
+			dataType : 'json',
+			success : function(data) {
+				for (var i = 0; i < data.list.length; i++) {
+					//已发表
+					 if (data.list[i].status == 1) {
+						$(".resource").html(data.list[i].count );
+					} 
+				}
+			},
+			error : function() {
+				swal("博客总数错误", "请重新操作", "error");
+			}
+		});
+	};
+    
 	var initBlogCountByStatus=function(){
 		//初始化博客数目
 		$.ajax({
@@ -409,16 +423,29 @@
 			type : 'post',
 			dataType : 'json',
 			success : function(data) {
+				var allCount=0;
+				for (var i = 0; i < data.list.length; i++) {
+					allCount+=data.list[i].count;
+				}
 				for (var i = 0; i < data.list.length; i++) {
 					//草稿
 					if (data.list[i].status == -1) {
-						$(".draft").html(
-								data.list[i].count );
+						$(".draft").html(data.list[i].count );
+						var draftPercent=Math.round(data.list[i].count / allCount * 100) / 1.00 + '%<i class="fa fa-bolt"></i>';
+						$(".draftPercent").html(draftPercent);
 						//已发表
 					} else if (data.list[i].status == 1) {
 						$(".allBlog").html(data.list[i].count );
+						var allBlogPercent=Math.round(data.list[i].count / allCount * 100) / 1.00 + '%<i class="fa fa-bolt"></i>';
+						$(".allBlogPercent").html(allBlogPercent);
+						//垃圾箱
+					} else if(data.list[i].status == 2){
+						$(".delete").html(data.list[i].count );
+						var deletePercent=Math.round(data.list[i].count / allCount * 100) / 1.00 + '%<i class="fa fa-bolt"></i>';
+						$(".deletePercent").html(deletePercent);
 					}
 				}
+				
 			},
 			error : function() {
 				swal("博客总数错误", "请重新操作", "error");
@@ -428,11 +455,13 @@
 	
 	var initBlogCountByDate=function(){
 		var date=new Date();
-		var startTime = Format(new Date(date.getTime() -  24*60*60*1000),"yyyy-MM-dd");
+		var startTime = Format(new Date(date.getTime() -  2*24*60*60*1000),"yyyy-MM-dd");
+		var startTimePre = Format(new Date(date.getTime() -  24*60*60*1000),"yyyy-MM-dd");
 		var endTime=Format(date,"yyyy-MM-dd");
 		var params={
 			startTime:startTime,
 			endTime:endTime,
+			status:"1"
 		 };
 		$.ajax({
 			url : 'selectBlogListByDate',
@@ -440,15 +469,30 @@
 			data:params,
 			dataType : 'json',
 			success : function(data) {
+				var now=0;
+				var yes=0;
+				var yes2=0;
 				for(var i=0;i<data.list.length;i++){
 					var time=Format(data.list[i].addTime,"yyyy-MM-dd");
-					if(time==startTime){
+					if(time==startTimePre){
+						yes=data.list[i].count;
 						$(".yesBlog").html(data.list[i].count );
 					}
 					if(time==endTime){
+						now=data.list[i].count;
 						$(".nowBlog").html(data.list[i].count );
 					}
+					if(time==startTime){
+						yes2=data.list[i].count;
+					}
 				}
+				
+				var nowBlogPercent=level(now,yes);
+				$(".nowBlogPercent").html(nowBlogPercent);
+				
+				var yesBlogPercent=level(yes,yes2);
+				$(".yesBlogPercent").html(yesBlogPercent);
+				
 			},
 			error : function() {
 				swal("博客发表数错误", "请重新操作", "error");
@@ -456,20 +500,37 @@
 		});
 	};
 	
+	//根据今天/昨天 计算出 增长率/下降率
+	var level=function(now,yes){
+		var pm=now - yes;
+		var level='<i class="fa fa-level-up"></i>';
+		if(pm<0){
+			pm=-pm;
+			level='<i class="fa fa-level-down"></i>';
+		}
+		if(yes==0){
+			return Math.round( pm  * 100) / 1.00 + '%'+level;
+		}
+		return Math.round( pm / yes * 100) / 1.00 + '%'+level;
+	}
+	
 	//今日访客
 	var initVisitCount=function(e){
 		 params="";
 		var date=null;
 		var startTime=null;
+		var endTime=null;
 		if(e=="now"){
 			date=new Date();
-			startTime=Format(date,"yyyy-MM-dd");
+			startTime=Format(new Date(date.getTime() -  24*60*60*1000),"yyyy-MM-dd");
+			nowTime=Format(date,"yyyy-MM-dd");
 		}else if(e=="history"){
 			startTime="";
+			endTime="";
 		}
 		var params={
 				startTime:startTime,
-				endTime:startTime,
+				endTime:nowTime,
 				format:"day",
 			 };
 		$.ajax({
@@ -478,17 +539,27 @@
 			data:params,
 			dataType : 'json',
 			success : function(data) {
-				if(data.list.length>=1){
-					if(e=="now"){
-						$(".nowVisitors").html(data.list[0].count );
-					}else if(e=="history"){
-						var count=0;
-						for(var i=0;i<data.list.length;i++){
-							count+=data.list[i].count;
+				if(e=="now"){
+					var now=0;
+					var yes=0;
+					for(var i=0;i<data.list.length;i++){
+						var time=Format(data.list[i].time,"yyyy-MM-dd");
+						if(time==nowTime){
+							now=data.list[i].count;
+							$(".nowVisitors").html(data.list[i].count );
 						}
-						$(".visitors").html(count );
+						if(time==startTime){
+							yes=data.list[i].count;
+						}
 					}
-					
+					var nowVisitorsPercent=level(now,yes);
+					$(".nowVisitorsPercent").html(nowVisitorsPercent);
+				}else if(e=="history"){
+					var count=0;
+					for(var i=0;i<data.list.length;i++){
+						count+=data.list[i].count;
+					}
+					$(".visitors").html(count );
 				}
 			},
 			error : function() {
