@@ -116,6 +116,21 @@
 									<span class="label label-danger pull-right">推荐</span>
 							</a></li>
 						</ul></li>
+						<li><a href="#"><i class="fa fa-flask"></i> <span
+							class="nav-label">访客模块</span><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							
+							<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/visit/visit.jsp">访客记录
+							</a></li>
+							<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/visit/visitTable.jsp">访客统计
+							</a></li>
+							<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/visit/black.jsp">黑名单
+							</a></li>
+						</ul>	
+							
+							
+						</li>
+						
 					<li><a href="http://changyan.kuaizhan.com/" class="J_menuItem"><i class="fa fa-flask"></i> <span
 							class="nav-label">评论模块</span></a>
 						</li>

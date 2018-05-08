@@ -283,16 +283,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'15%',
 		                      formatter:function(value,row,index){ 
 		                    	  var title="";
-		                    	  var resoureName=$(".search .form-control").val().toLowerCase();
-		                    	  var resoureNameUpper=$(".search .form-control").val().toUpperCase();
-		                    	  if(row.title.search(resoureName)!=-1||row.title.search(resoureNameUpper)!=-1){
+		                    	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
+		                    	  var resoureName=$(".search .form-control").val();
+		                    	  if(row.title.search(resoureName)!=-1||row.title.toLowerCase().search(resoureNameLow)!=-1){
 		                    		  var strs= new Array();
 			                    	  strs=row.title.split("");
 			                    	  var strStartIndex=row.title.indexOf(resoureName);
 			                    	  var strEndIndex = strStartIndex+resoureName.length-1;
-			                    	  if(row.title.search(resoureNameUpper)!=-1){
-			                    		  strStartIndex = row.title.indexOf(resoureNameUpper);
-			                    		  strEndIndex = strStartIndex+resoureNameUpper.length-1;
+			                    	  if(row.title.toLowerCase().search(resoureNameLow)!=-1){
+			                    		  strStartIndex = row.title.toLowerCase().indexOf(resoureNameLow);
+			                    		  strEndIndex = strStartIndex+resoureNameLow.length-1;
 			                    	  }
 		                    		  for(var i=0;i<strs.length;i++){
 		                    			  if(i>=strStartIndex&&i<=strEndIndex){
@@ -315,16 +315,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'30%',
 		                      formatter:function(value,row,index){ 
 		                    	  var content="";
-		                    	  var resoureName=$(".search .form-control").val().toLowerCase();
-		                    	  var resoureNameUpper=$(".search .form-control").val().toUpperCase();
-		                    	  if(row.content.search(resoureName)!=-1||row.content.search(resoureNameUpper)!=-1){
+		                    	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
+		                    	  var resoureName=$(".search .form-control").val();
+		                    	  if(row.content.search(resoureName)!=-1||row.content.toLowerCase().search(resoureNameLow)!=-1){
 		                    		  var strs= new Array();
 			                    	  strs=row.content.split("");
 			                    	  var strStartIndex=row.content.indexOf(resoureName);
 			                    	  var strEndIndex = strStartIndex+resoureName.length-1;
-			                    	  if(row.content.search(resoureNameUpper)!=-1){
-			                    		  strStartIndex = row.content.indexOf(resoureNameUpper);
-			                    		  strEndIndex = strStartIndex+resoureNameUpper.length-1;
+			                    	  if(row.content.toLowerCase().search(resoureNameLow)!=-1){
+			                    		  strStartIndex = row.content.toLowerCase().indexOf(resoureNameLow);
+			                    		  strEndIndex = strStartIndex+resoureNameLow.length-1;
 			                    	  }
 		                    		  for(var i=0;i<strs.length;i++){
 		                    			  if(i>=strStartIndex&&i<=strEndIndex){
@@ -408,6 +408,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            pageSize: params.limit,
 	            page:(params.offset)/params.limit+1,
 	            title:$(".search .form-control").val(),
+	            content:$(".search .form-control").val(),
 	            status:1,
 	        };
 	    }

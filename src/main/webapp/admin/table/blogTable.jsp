@@ -289,16 +289,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'15%',
 		                      formatter:function(value,row,index){ 
 		                    	  var title="";
-		                    	  var content=$(".form-control").val().toLowerCase();
-		                    	  var contentUpper=$(".form-control").val().toUpperCase();
-		                    	   if(row.title.search(content)!=-1||row.title.search(contentUpper)!=-1){
+		                    	  var content=$(".form-control").val();
+		                    	  var contentLow=$(".form-control").val().toLowerCase();
+		                    	   if(row.title.search(content)!=-1||row.title.toLowerCase().search(contentLow)!=-1){
 		                    		  var strs= new Array();
 			                    	  strs=row.title.split("");
 		                    		  var strStartIndex = row.title.indexOf(content);
 		                    		  var strEndIndex = strStartIndex+content.length-1;
-		                    		  if(row.title.search(contentUpper)!=-1){
-		                    			  strStartIndex = row.title.indexOf(contentUpper);
-			                    		  strEndIndex = strStartIndex+contentUpper.length-1;
+		                    		  if(row.title.toLowerCase().search(contentLow)!=-1){
+		                    			  strStartIndex = row.title.toLowerCase().indexOf(contentLow);
+			                    		  strEndIndex = strStartIndex+contentLow.length-1;
 		                    		  }
 		                    		  for(var i=0;i<strs.length;i++){
 		                    			  if(i>=strStartIndex&&i<=strEndIndex){

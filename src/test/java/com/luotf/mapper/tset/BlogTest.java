@@ -29,6 +29,7 @@ public class BlogTest{
 	
 	@Autowired
 	private BlogService blogService;
+	@Autowired
 	private VisitService visitService;
 	@Autowired
 	private BlogTypeMapper blogTypeMapper;
@@ -40,23 +41,17 @@ public class BlogTest{
     	//意思是从第1页开始，每页显示3条记录
     	
     	Map map=new HashMap();
-    	map.put("title", "罗");
+    	map.put("ip", "7");
     //	map.put("addTime", "2018-03-28");
     	//map.put(key, value)
     	PageHelper.startPage(1, 3);
-    	List<Blog> blogList=blogService.selectBlogListByPage(map);
+    	List<Map> blogList=visitService.selectLikeVisitListGroupByIp(map);
     	//分页的信息
-    	PageInfo<Blog> p=new PageInfo<Blog>(blogList);
-    	for(Blog b:blogList){
-    		System.out.println(b);
-    	}
-    	System.out.println("总记录数："+p.getTotal());
-    	System.out.println("总页数："+p.getPages());
-    	System.out.println("当前页："+p.getPageNum());
-    	System.out.println("每页的数量："+p.getPageSize());
-    	System.out.println("当前页数量："+p.getSize());
-    	
-    	
+    	PageInfo p=new PageInfo(blogList);
+    	for (Map map2 : blogList) {
+    		System.out.println(map2);
+		}
+    	System.out.println(p);
     	/*List<Map> list=blogMapper.selectBlogListByDate();
     	for(Map map1:list){
     		System.out.println(map1);
@@ -83,16 +78,16 @@ public class BlogTest{
     @SuppressWarnings("unchecked")
 	@Test
     public  void BlogIdToSafe(){
-    	Map map=new HashMap();
+    	/*Map map=new HashMap();
     	map.put("format", "day");
     	map.put("startTime", "2018-05-01");
     	map.put("endTime", "2018-05-03");
-    	List<Map> blogList=visitService.selectVisitListByDate(map);
+    	List<Map> blogList=visitService.selectVisitListByDate(map);*/
     	//Map map1=new HashMap();
     		/*for (Map map2 : blogList) {
     			Object time=map2.get("time");
     			map1.put(time,map2.get("count"));
 			}*/
-				System.out.println(blogList);
+				//System.out.println(blogList);
 	}
 }

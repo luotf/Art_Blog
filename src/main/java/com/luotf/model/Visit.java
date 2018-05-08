@@ -9,7 +9,11 @@ public class Visit {
     private Integer id;
     
     private String ip;
-
+    
+    private String userAgent;
+    
+    private String city;
+    
     private String url;
     
     private String browserType;//浏览器类型  
@@ -42,8 +46,25 @@ public class Visit {
     public void setIp(String ip) {
         this.ip = ip == null ? null : ip.trim();
     }
+    
+   
+	public String getUserAgent() {
+		return userAgent;
+	}
 
-    public String getUrl() {
+	public void setUserAgent(String userAgent) {
+		this.userAgent = userAgent;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getUrl() {
         return url;
     }
 
@@ -71,7 +92,5 @@ public class Visit {
 	public void setPlatformType(String platformType) {
 		this.platformType = platformType;
 	}
-	
-	
-    
+
 }

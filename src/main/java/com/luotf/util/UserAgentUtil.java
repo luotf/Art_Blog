@@ -98,24 +98,44 @@ public class UserAgentUtil {
             	return judgeBrowser(userAgent, "iPhone");
               }
             else if (userAgent.contains("iPad")) {  
-                return judgeBrowser(userAgent, "iPad");//判断浏览器  
+                return judgeBrowser(userAgent, "iPad");//判断系统 
+            }else{
+            	return judgeBrowser(userAgent, "Mac");//判断系统 
             }
         }else if(userAgent.contains("Android")){
-        	return judgeBrowser(userAgent, "Android");//判断浏览器  
+        	return judgeBrowser(userAgent, "Android");//判断系统
+        }else if(userAgent.contains("Linux")){
+        	return judgeBrowser(userAgent, "Linux");//判断系统
+        }else if(userAgent.contains("FreeBSD")){
+        	return judgeBrowser(userAgent, "FreeBSD");//判断系统
+        }else if(userAgent.contains("Solaris")){
+        	return judgeBrowser(userAgent, "Solaris");//判断系统
         }
         return judgeBrowser(userAgent, "其他"); 
     }  
       
     private static Visit judgeBrowser(String userAgent, String platformType) {  
-        if (userAgent.contains("Chrome")) {  
+    	if (userAgent.contains("Edge")) {
+            return new Visit("Microsoft Edge", platformType);  
+        }else if(userAgent.contains("QQBrowser")){
+        	return new Visit("腾讯浏览器", platformType);
+        }else if (userAgent.contains("Chrome")&&userAgent.contains("Safari")) {
             return new Visit("Chrome", platformType);  
-        } else if (userAgent.contains("Firefox")) {  
+        } else if (userAgent.contains("Firefox")) {
             return new Visit("Firefox",platformType);  
-        }else if (userAgent.contains("QQBrowser")) {//Internet Explorer 6  
-            return new Visit("QQ Browser", platformType);
         }else if (userAgent.contains("360")) {//Internet Explorer 6  
-            return new Visit("360", platformType);
-        } else if (userAgent.contains("MSIE")) {
+            return new Visit("360浏览器", platformType);
+        }else if (userAgent.contains("Opera")) {//Internet Explorer 6  
+            return new Visit("Opera", platformType);
+        }else if (userAgent.contains("Safari")&&!userAgent.contains("Chrome")) {//Internet Explorer 6  
+            return new Visit("Safari", platformType);
+        }else if (userAgent.contains("MetaSr1.0")) {//Internet Explorer 6 
+            return new Visit("搜狗浏览器", platformType);
+        }else if (userAgent.contains("TencentTraveler")) {//Internet Explorer 6  
+            return new Visit("腾讯浏览器", platformType);
+        }else if (userAgent.contains("UC")) {//Internet Explorer 6  
+            return new Visit("UC浏览器", platformType);
+        }else if (userAgent.contains("MSIE")) {
             if (userAgent.contains("MSIE 10.0")) {//Internet Explorer 10  
                 return new Visit("IE 10", platformType);  
             } else if (userAgent.contains("MSIE 9.0")) {//Internet Explorer 9  

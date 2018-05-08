@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.luotf.mapper.ResourceMapper;
 import com.luotf.mapper.VisitMapper;
 import com.luotf.model.Visit;
 import com.luotf.service.VisitService;
@@ -69,6 +68,25 @@ public class VisitServiceImpl implements VisitService {
 	public List selectVisitListByDate(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return visitMapper.selectVisitListByDate(map);
+	}
+
+
+	@Override
+	public List<Visit> selectLikeVisitListByPage(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return visitMapper.selectLikeVisitListByPage(map);
+	}
+
+	@Override
+	public List selectVisitListByIp(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return visitMapper.selectVisitListByIp(map);
+	}
+
+	@Override
+	public List selectLikeVisitListGroupByIp(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return visitMapper.selectLikeVisitListGroupByIp(map);
 	}
 
 }
