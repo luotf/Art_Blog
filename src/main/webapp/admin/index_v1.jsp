@@ -166,11 +166,11 @@
 						<div class="pull-right">
 							<div class="btn-group">
 								<button type="button" onclick="initVisitCountByWeek(7);"
-									class="btn btn-xs btn-white active">天</button>
+									class="day btn btn-xs btn-white ">天</button>
 								<button type="button" onclick="initVisitCountByMonth(12);"
-									class="btn btn-xs btn-white">月</button>
-								<button type="button" class="btn btn-xs btn-white"
-									onclick="initVisitCountByYear(6);">年</button>
+									class="month btn btn-xs btn-white">月</button>
+								<button type="button" class="year btn btn-xs btn-white"
+									onclick=" initVisitCountByYear(6);">年</button>
 							</div>
 						</div>
 					</div>
@@ -570,6 +570,9 @@
 	
 	//最近的num日访客
 	var initVisitCountByWeek=function(num){
+		$(".year").removeClass("active");
+		$(".month").removeClass("active");
+		$(".day").addClass("active");
 		var date=new Date();
 		var startTime="";
 		var endTime="";
@@ -658,6 +661,9 @@
 	};
 	
 	var initVisitCountByMonth=function(num){
+		$(".year").removeClass("active");
+		$(".day").removeClass("active");
+		$(".month").addClass("active");
 		var arr=new Array();
 		arr=dataMonth(num);
 		var startTime=arr[0];
@@ -698,6 +704,9 @@
 	};
 	
 	var initVisitCountByYear=function(num){
+		$(".month").removeClass("active");
+		$(".day").removeClass("active");
+		$(".year").addClass("active");
 		var arr=new Array();
 		arr=dataYear(num);
 		console.log(arr);
