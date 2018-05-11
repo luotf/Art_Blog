@@ -280,78 +280,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '名称',
 		                      field: 'title',
 		                      align: 'center',
-		                      width:'15%',
-		                      formatter:function(value,row,index){ 
-		                    	  var title="";
-		                    	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
-		                    	  var resoureName=$(".search .form-control").val();
-		                    	  if(row.title.search(resoureName)!=-1||row.title.toLowerCase().search(resoureNameLow)!=-1){
-		                    		  var strs= new Array();
-			                    	  strs=row.title.split("");
-			                    	  var strStartIndex=row.title.indexOf(resoureName);
-			                    	  var strEndIndex = strStartIndex+resoureName.length-1;
-			                    	  if(row.title.toLowerCase().search(resoureNameLow)!=-1){
-			                    		  strStartIndex = row.title.toLowerCase().indexOf(resoureNameLow);
-			                    		  strEndIndex = strStartIndex+resoureNameLow.length-1;
-			                    	  }
-		                    		  for(var i=0;i<strs.length;i++){
-		                    			  if(i>=strStartIndex&&i<=strEndIndex){
-		                    				  title+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
-		                    			  }else{
-		                    				  title+='<span >'+strs[i]+'</span>';
-		                    			  }
-		                    		  }
-		                    	  }else{
-		                    		  title=row.title;
-		                    	  }
-		                    	  return title;
-			   	                }
+		                      width:'10%',
+		                      cellStyle:formatTableUnit,
+		                      formatter:operateOpinionFormatter
 		                  },
-		                  
 		                  {
 		                      title: '内容',
 		                      field: 'content',
 		                      align: 'center',
-		                      width:'30%',
-		                      formatter:function(value,row,index){ 
-		                    	  var content="";
-		                    	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
-		                    	  var resoureName=$(".search .form-control").val();
-		                    	  if(row.content.search(resoureName)!=-1||row.content.toLowerCase().search(resoureNameLow)!=-1){
-		                    		  var strs= new Array();
-			                    	  strs=row.content.split("");
-			                    	  var strStartIndex=row.content.indexOf(resoureName);
-			                    	  var strEndIndex = strStartIndex+resoureName.length-1;
-			                    	  if(row.content.toLowerCase().search(resoureNameLow)!=-1){
-			                    		  strStartIndex = row.content.toLowerCase().indexOf(resoureNameLow);
-			                    		  strEndIndex = strStartIndex+resoureNameLow.length-1;
-			                    	  }
-		                    		  for(var i=0;i<strs.length;i++){
-		                    			  if(i>=strStartIndex&&i<=strEndIndex){
-		                    				  content+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
-		                    			  }else{
-		                    				  content+='<span >'+strs[i]+'</span>';
-		                    			  }
-		                    		  }
-		                    	  }else{
-		                    		  content=row.content;
-		                    	  }
-		                    	  return content;
-			   	                }
+		                      width:'15%',
+		                      cellStyle:formatTableUnit,
+		                      formatter:operateOpinionFormatterContent
 		                  },
-		                  /* {
-		                      title: '链接',
-		                      field: 'link',
-		                      align: 'center',
-		                      width:'25%',
-		                      
-		                  }, */
-		                  /* {
-		                      title: '密码',
-		                      field: 'password',
-		                      align: 'center',
-		                      width: '8%',
-		                  }, */
+		                  
 		                  {
 		                      title: '状态',
 		                      field: 'status',
@@ -366,15 +307,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   	                  	 
 		   	                    } 
 		                  },
-		                  /* {
+		                  {
 		                      title: '发表时间',
-		                      field: 'addTime',
+		                      field: 'addtime',
 		                      align: 'center',
 		                      width:'15%',
 		                      formatter:function(value,row,index){  
-		                    	 return Format(row.addTime,"yyyy-MM-dd hh:mm:ss");
+		                    	 return Format(row.addtime,"yyyy-MM-dd hh:mm:ss");
 			   	                 } 
-		                  }, */
+		                  },
 		                  {
 		                      title: '操作',
 		                      field: 'id',
@@ -382,13 +323,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      width:'15%',
 		                      formatter:function(value,row,index){
 			                   //编辑
-		                       var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectResourceById('+row.id+')"><i class="fa fa-edit" ></i>编辑</a> ';  
+		                       var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectResourceById('+row.id+')"><i class="fa fa-edit" ></i> 编辑</a> ';  
 		                       //删除
-		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteResource('+ row.id + ')"><i class="fa fa-trash-o" ></i>删除</a> '; 
+		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteResource('+ row.id + ')"><i class="fa fa-trash-o" ></i> 删除</a> '; 
 			                   //下架
-		                       var c = '<a  class=" btn-sm btn-danger"  title="下架后前台将无法展示" onclick="updateResource('+ row.id + ',-1)"><i class="fa fa-hand-o-down" ></i>下架</a> '; 
+		                       var c = '<a  class=" btn-sm btn-danger"  title="下架后前台将无法展示" onclick="updateResource('+ row.id + ',-1)"><i class="fa fa-hand-o-down" ></i> 下架</a> '; 
 		                       //上架
-		                       var d = '<a  class=" btn-sm btn-primary"  title="上架后将在前台展示" onclick="updateResource('+ row.id + ',1)"><i class="fa fa-hand-o-up" ></i>上架</a> '; 
+		                       var d = '<a  class=" btn-sm btn-primary"  title="上架后将在前台展示" onclick="updateResource('+ row.id + ',1)"><i class="fa fa-hand-o-up" ></i> 上架</a> '; 
 		                   	 	if(row.status==-1){
 		                   	 	  return d+b;  
 		                   	 	}else if(row.status==1){
@@ -412,6 +353,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            status:1,
 	        };
 	    }
+			
+		
+			
 		var selectResourceById=function(id){
 			var params ={
 				id:id
@@ -439,6 +383,103 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 }); 
 			
 		};
+		
+		//设置 字数不超过宽度限制
+		  var operateOpinionFormatter=function(value,row,index){ 
+			  var title="";
+        	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
+        	  var resoureName=$(".search .form-control").val();
+        	  var strStartIndex="";
+        	  var strEndIndex="";
+        	  if(value.search(resoureName)!=-1||value.toLowerCase().search(resoureNameLow)!=-1){
+        		  var strs= new Array();
+            	  strs=value.split("");
+            	  strStartIndex=value.indexOf(resoureName);
+            	  strEndIndex = strStartIndex+resoureName.length-1;
+            	  if(value.toLowerCase().search(resoureNameLow)!=-1){
+            		  strStartIndex = value.toLowerCase().indexOf(resoureNameLow);
+            		  strEndIndex = strStartIndex+resoureNameLow.length-1;
+            	  }
+        		  for(var i=0;i<strs.length;i++){
+        			  if(i>=strStartIndex&&i<=strEndIndex){
+        				  title+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
+        			  }else{
+        				  title+='<span >'+strs[i]+'</span>';
+        			  }
+        		  }
+        	  }else{
+        		  title=value;
+        	  }
+        	  if(value.length>15){
+          		  var num=strEndIndex-strStartIndex;
+          		  var index=strStartIndex-4;
+          		  if(index<0){
+          			  index=0;
+          		  }
+          		  if(resoureName==""){
+          			  return "<a href='"+row.link+"'><span  title='密码:"+row.password+"'>"+title.substring(0,150)+"..."+"</span></a>"; 
+          		  }else{
+          			  return "<a href='"+row.link+"'><span  title='密码:"+row.password+"'>"+title.substring(15*index,(15*index)+(num+1)*51+(9-num)*15)+"..."+"</span></a>"; 
+          		  }
+          	  }else{
+          		  return  "<a href='"+row.link+"'><span  title='密码:"+row.password+"'>"+title.substring(0,title.length)+"</span></a>"; 
+          	  }
+	        }
+		  
+		//设置 字数不超过宽度限制
+		  var operateOpinionFormatterContent=function(value,row,index){ 
+			  var title="";
+        	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
+        	  var resoureName=$(".search .form-control").val();
+        	  var strStartIndex="";
+        	  var strEndIndex="";
+        	  if(value.search(resoureName)!=-1||value.toLowerCase().search(resoureNameLow)!=-1){
+        		  var strs= new Array();
+            	  strs=value.split("");
+            	  strStartIndex=value.indexOf(resoureName);
+            	  strEndIndex = strStartIndex+resoureName.length-1;
+            	  if(value.toLowerCase().search(resoureNameLow)!=-1){
+            		  strStartIndex = value.toLowerCase().indexOf(resoureNameLow);
+            		  strEndIndex = strStartIndex+resoureNameLow.length-1;
+            	  }
+        		  for(var i=0;i<strs.length;i++){
+        			  if(i>=strStartIndex&&i<=strEndIndex){
+        				  title+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
+        			  }else{
+        				  title+='<span >'+strs[i]+'</span>';
+        			  }
+        		  }
+        	  }else{
+        		  title=value;
+        	  }
+        	  if(value.length>15){
+          		  var num=strEndIndex-strStartIndex;
+          		  var index=strStartIndex-4;
+          		  if(index<0){
+          			  index=0;
+          		  }
+          		  if(resoureName==""){
+          			  return "<span title='"+value+"'>"+title.substring(0,150)+"..."+"</span>"; 
+          		  }else{
+          			  return "<span title='"+value+"'>"+title.substring(15*index,(15*index)+(num+1)*51+(9-num)*15)+"..."+"</span>"; 
+          		  }
+          	  }else{
+          		  return  "<span  title='"+value+"'>"+title.substring(0,title.length)+"</span>"; 
+          	  }
+	        }
+		
+		
+		var formatTableUnit=function (value, row, index) {
+		  return {
+		      css: {
+		          "overflow": 'hidden',
+		          "text-overflow":'ellipsis',
+		          "white-space":'nowrap'
+		      }
+			};
+		};
+		
+		
 		
 	 	var updateResource=function(id,status){
 	 		var params={

@@ -61,7 +61,7 @@
 										class="a-1 label label-info pull-right">0 </span>
 								</a></li>
 								<li  ><a href="${pageContext.request.contextPath}/admin/visit/visitTable.jsp">
-										<i class="fa fa-unlock "></i>用户数<span
+										<i class="fa fa-user "></i>用户数<span
 										class="a-2 label label-warning pull-right">0 </span>
 								</a></li>
 								<li ><a href="${pageContext.request.contextPath}/admin/visit/black.jsp">
@@ -572,28 +572,37 @@
 					browsertype:browserType,
 					platformtype:platformType,
 				}; 
-				$.ajax({
-					url : '../addBlackIp',
-					type : 'post',
-					data : params,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status==2){
-							swal("添加失败", "该IP已在黑名单中", "error");
-						}else if (data.status == 200) {
-							initVisitCount();
-							initBlackIpCount();
-							$("#allVisit").bootstrapTable('refresh');
-							swal("添加成功", "", "success");
-						} else if (data.status == 0) {
-							swal("添加失败", "", "error");
+			 swal({
+	             title: "确定添加到黑名单吗",
+	             text: "放入黑名单,该IP将无法访问网站！",
+	             type: "warning",
+	             showCancelButton: true,
+	             confirmButtonColor: "#DD6B55",
+	             confirmButtonText: "确定",
+	             closeOnConfirm: false
+	         }, function () {
+					$.ajax({
+						url : '../addBlackIp',
+						type : 'post',
+						data : params,
+						dataType : 'json',
+						success : function(data) {
+							if(data.status==2){
+								swal("添加失败", "该IP已在黑名单中", "error");
+							}else if (data.status == 200) {
+								initVisitCount();
+								initBlackIpCount();
+								$("#allVisit").bootstrapTable('refresh');
+								swal("添加成功", "", "success");
+							} else if (data.status == 0) {
+								swal("添加失败", "", "error");
+							}
+						},
+						error : function() {
+							swal("添加错误", "请重新操作", "error");
 						}
-					},
-					error : function() {
-						swal("添加错误", "请重新操作", "error");
-					}
-				});
-
+					});
+	         });
 		}
 		
 		//格式化时间

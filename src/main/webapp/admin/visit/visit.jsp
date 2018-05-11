@@ -61,7 +61,7 @@
 										class="a-1 label label-info pull-right">0 </span>
 								</a></li>
 								<li  ><a href="${pageContext.request.contextPath}/admin/visit/visitTable.jsp">
-										<i class="fa fa-unlock "></i>用户数<span
+										<i class="fa fa-user "></i>用户数<span
 										class="a-2 label label-warning pull-right">0 </span>
 								</a></li>
 								<li ><a href="${pageContext.request.contextPath}/admin/visit/black.jsp">

@@ -72,16 +72,9 @@
 								href="${pageContext.request.contextPath}/admin/options.jsp"><i class="fa fa-envelope"></i>
 					<span class="nav-label">专栏设置</span></a></li>
 					
-					<li><a href="#"><i class="fa fa-edit"></i> <span
-							class="nav-label">数据图表</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/table/blogTable.jsp">博客数据</a>
-							</li>
-							<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/table/eCharts.jsp">统计图表</a>
-							</li>
-						</ul></li>
+					<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/charts/eCharts.jsp"><i class="fa fa-edit"></i> <span
+							class="nav-label">统计图表</span></a>
+						</li>
 					<li><a href="#"><i class="fa fa-desktop"></i> <span
 							class="nav-label">博客模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
@@ -94,17 +87,22 @@
 										href="${pageContext.request.contextPath}/admin/blog/addBlog.jsp">增加类别</a>
 									</li>
 								</ul></li> --%>
+								
 								<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/blog/blogType.jsp">类别</a>
+								href="${pageContext.request.contextPath}/admin/blog/blogTable.jsp">博客管理</a>
 							</li>
 								
 							<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/blog/findBlog.jsp">查询博客</a>
-							</li>
-
-							<li><a class="J_menuItem"
 								href="${pageContext.request.contextPath}/admin/blog/addBlog.jsp">写博客</a>
 							</li>
+							
+							<li><a class="J_menuItem"
+								href="${pageContext.request.contextPath}/admin/blog/findBlog.jsp">查询博客</a>
+							</li>
+							<li><a class="J_menuItem"
+								href="${pageContext.request.contextPath}/admin/blog/blogType.jsp">类别</a>
+							</li>
+							
 
 						</ul></li>
 						
@@ -273,7 +271,7 @@
 			</div>
 			<div class="footer">
 				<div class="pull-right">
-					&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's
+					&copy; 2018 <a href="http://www.luotf.com/" target="_blank">luotf
 						blog</a>
 				</div>
 			</div>

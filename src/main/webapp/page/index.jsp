@@ -102,7 +102,8 @@ window.onload = function (){
 		var params ={
 				 pageSize: 3,
 		         page:1,
-		         istop:1  //1 表示置顶
+		         istop:1,  //1 表示置顶
+		         status:1
 		};
 		$.ajax({
             url:'../admin/selectGroupLikeBlogListByPage',    
@@ -131,7 +132,8 @@ window.onload = function (){
 		var params ={
 				 pageSize: 6,
 		         page:1,
-		         isrecommend:1  //1 表示置顶
+		         isrecommend:1,  //1 表示置顶
+		         status:1
 		};
 		$.ajax({
             url:'../admin/selectGroupLikeBlogListByPage',    
@@ -160,6 +162,7 @@ window.onload = function (){
 		var params ={
 				 pageSize: 5,
 		         page:1,
+		         status:1
 		};
 		$.ajax({
             url:'../admin/selectGroupLikeBlogListByPage',    
@@ -199,6 +202,7 @@ window.onload = function (){
 				 pageSize: 5,
 		         page:1,
 		         sort:"clickNum",   //按点击量排序,默认按时间
+		         status:1,
 		};
 		$.ajax({
             url:'../admin/selectGroupLikeBlogListByPage',    
