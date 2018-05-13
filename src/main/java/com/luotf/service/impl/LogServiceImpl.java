@@ -1,5 +1,8 @@
 package com.luotf.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +50,12 @@ public class LogServiceImpl implements LogService {
 	public int updateByPrimaryKey(Log record) {
 		// TODO Auto-generated method stub
 		return logMapper.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<Log> selectLogListByDate(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return logMapper.selectLogListByDate(map);
 	}
 
 }

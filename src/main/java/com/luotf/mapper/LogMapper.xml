@@ -11,7 +11,6 @@
     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    
     id, userType,ip, description, param,addTime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -20,6 +19,23 @@
     from t_log
     where id = #{id,jdbcType=INTEGER}
   </select>
+  
+  <select id="selectLogListByDate" resultType="map"
+		parameterType="Map">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM
+		t_log
+		<where>
+			<if test="startTime!=null and startTime!=''">
+				and DATE_FORMAT(addTime,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
+			</if>
+		</where>
+		
+		order by addTime desc
+	</select>
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_log
     where id = #{id,jdbcType=INTEGER}

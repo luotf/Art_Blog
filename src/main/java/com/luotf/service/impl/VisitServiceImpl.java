@@ -65,7 +65,7 @@ public class VisitServiceImpl implements VisitService {
 	}
 
 	@Override
-	public List selectVisitListByDate(Map<String, Object> map) {
+	public List<?> selectVisitListByDate(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return visitMapper.selectVisitListByDate(map);
 	}
@@ -78,13 +78,13 @@ public class VisitServiceImpl implements VisitService {
 	}
 
 	@Override
-	public List selectVisitListByIp(Map<String, Object> map) {
+	public List<?> selectVisitListByIp(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return visitMapper.selectVisitListByIp(map);
 	}
 
 	@Override
-	public List selectLikeVisitListGroupByIp(Map<String, Object> map) {
+	public List<?> selectLikeVisitListGroupByIp(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return visitMapper.selectLikeVisitListGroupByIp(map);
 	}

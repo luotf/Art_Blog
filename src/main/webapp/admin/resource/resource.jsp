@@ -355,7 +355,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            status:1,
 	        };
 	    }
-			
 		
 			
 		var selectResourceById=function(id){
@@ -363,7 +362,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				id:id
 				};
 			$.ajax({
-                   url:'../selectResourcecById',    
+                   url:'../selectResourceById',    
                    type:'post',
                    data:params,
                    dataType:'json',    
@@ -490,12 +489,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'content':$("#newContent").val(),
         			'link':$("#newLink").val(),
         			'password':$("#newPassword").val(),
-        			 prarm:'更新了资源“'+title+'”',
+        			 prarm:'更新了资源<span class="text-info">#'+$("#newTitle").val()+'#</span>',
         	};
 	 		if(status!=null&&status!=""){
-	 			var p='将资源“'+title+'”上架';
+	 			var p='将资源<span class="text-info">#'+title+'#</span>上架';
 	 			if(status==-1){
-	 				p='将资源“'+title+'”下架';
+	 				p='将资源<span class="text-info">#'+title+'#</span>下架';
 	 			}
 	 			params ={
 	 					'id':id,
@@ -528,7 +527,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var deleteResource=function(id,title){
 			var params ={
 	 				'id':id,
-	 				 prarm:'删除的资源为“'+title+'”'
+	 				 prarm:'删除的资源为<span class="text-info">#'+title+'#</span>'
         	};
 			swal({
 	             title: "确定要删除该资源吗",
@@ -569,7 +568,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			content:$("#content").val(),
         			link:$("#link").val(),
         			password:$("#password").val(),
-        			prarm:'新增的资源名称为“'+$("#title").val()+'”',
+        			prarm:'新增的资源名称为<span class="text-info">#'+$("#title").val()+'#</span>',
         	};
             $.ajax({
                    url:'../addResource',    

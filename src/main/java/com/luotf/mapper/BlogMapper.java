@@ -35,15 +35,15 @@ public interface BlogMapper {
  	 *  获取博客信息，根据日期月份分组查询
  	 * @return
  	 */
- 	List  selectBlogListByDate(Map<String, Object> map);
+ 	List<?>  selectBlogListByDate(Map<String, Object> map);
 
  	/**
  	 *  获取博客信息，根据状态分组查询
  	 * @return
  	 */
- 	List  selectBlogListByStatus();
+ 	List<?>  selectBlogListByStatus();
  	
- 	List selectBlogByClick();
+ 	List<?> selectBlogByClick();
  	
  	/**
  	 * 按不同条件组合 分页查询博客

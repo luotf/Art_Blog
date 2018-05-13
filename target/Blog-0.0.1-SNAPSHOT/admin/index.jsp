@@ -69,54 +69,37 @@
 					</a></li>
 
 					<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/options.jsp"><i class="fa fa-envelope"></i>
-					<span class="nav-label">专栏设置</span></a></li>
+								href="${pageContext.request.contextPath}/admin/log.jsp"><i class="fa fa-hourglass-2"></i>
+					<span class="nav-label">操作日志</span></a></li>
 					
-					<li><a href="#"><i class="fa fa-edit"></i> <span
-							class="nav-label">数据图表</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/table/blogTable.jsp">博客数据</a>
-							</li>
-							<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/table/eCharts.jsp">统计图表</a>
-							</li>
-						</ul></li>
-					<li><a href="#"><i class="fa fa-desktop"></i> <span
+					<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/charts/eCharts.jsp"><i class="fa fa-bar-chart"></i><span
+							class="nav-label">统计图表</span></a>
+						</li>
+					<li><a href="#"><i class="fa fa-book"></i> <span
 							class="nav-label">博客模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
-							<%-- <li><a href="#">类别 <span class="fa arrow"></span></a>
-								<ul class="nav nav-third-level">
-									<li><a class="J_menuItem"
-										href="${pageContext.request.contextPath}/admin/table/blogType.jsp">类别</a>
-									</li>
-									<li><a class="J_menuItem"
-										href="${pageContext.request.contextPath}/admin/blog/addBlog.jsp">增加类别</a>
-									</li>
-								</ul></li> --%>
 								<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/blog/blogType.jsp">类别</a>
+								href="${pageContext.request.contextPath}/admin/blog/blogTable.jsp">博客管理</a>
 							</li>
 								
 							<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/blog/findBlog.jsp">查询博客</a>
-							</li>
-
-							<li><a class="J_menuItem"
 								href="${pageContext.request.contextPath}/admin/blog/addBlog.jsp">写博客</a>
 							</li>
+							
+							<li><a class="J_menuItem"
+								href="${pageContext.request.contextPath}/admin/blog/findBlog.jsp">查询博客</a>
+							</li>
+							<li><a class="J_menuItem"
+								href="${pageContext.request.contextPath}/admin/blog/blogType.jsp">类别</a>
+							</li>
+							
 
 						</ul></li>
 						
-						<li><a href="#"><i class="fa fa-table"></i> <span
-							class="nav-label">资源模块</span><span class="fa arrow"></span></a>
-						<ul class="nav nav-second-level">
-							
-							<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/resource/resource.jsp">资源管理
-									<span class="label label-danger pull-right">推荐</span>
-							</a></li>
-						</ul></li>
-						<li><a href="#"><i class="fa fa-flask"></i> <span
+						<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/resource/resource.jsp"><i class="fa fa-table"></i> <span
+							class="nav-label">资源模块</span></a>
+						</li>
+						<li><a href="#"><i class="fa fa-street-view"></i> <span
 							class="nav-label">访客模块</span><span class="fa arrow"></span></a>
 						<ul class="nav nav-second-level">
 							
@@ -131,14 +114,14 @@
 							
 						</li>
 						
-					<li><a href="http://changyan.kuaizhan.com/" class="J_menuItem"><i class="fa fa-flask"></i> <span
+					<li><a href="http://changyan.kuaizhan.com/" class="J_menuItem"><i class="fa fa-commenting-o"></i> <span
 							class="nav-label">评论模块</span></a>
 						</li>
 					
 					<li><a href="${pageContext.request.contextPath}/admin/pics/pics.jsp" class="J_menuItem"><i class="fa fa-picture-o"></i> <span
 							class="nav-label">本地图库</span></a>
 						</li>
-					<li><a href="#"><i class="fa fa-cutlery"></i> <span
+					<li><a href="#"><i class="fa fa-desktop"></i> <span
 							class="nav-label">前台页面 </span></a>
 
 				</ul>
@@ -273,7 +256,7 @@
 			</div>
 			<div class="footer">
 				<div class="pull-right">
-					&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's
+					&copy; 2018 <a href="http://www.luotf.com/" target="_blank">luotf
 						blog</a>
 				</div>
 			</div>

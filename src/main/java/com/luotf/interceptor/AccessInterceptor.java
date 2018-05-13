@@ -1,8 +1,5 @@
 package com.luotf.interceptor;
 
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,9 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.luotf.annotation.AccessLimit;
 import com.luotf.model.RequestIp;
 import com.luotf.util.UserIpUtil;
@@ -45,10 +40,7 @@ public class AccessInterceptor implements HandlerInterceptor {
 	            return true;
 	        }
 		
-		PrintWriter out = null;// 返回给页面显示
 		response.setCharacterEncoding("UTF-8"); 
-		ObjectMapper mapper=null;
-		Map<String, Object> resultMap = new HashMap<String, Object>();
 		// 取用户的真实IP
 		String ip =UserIpUtil.getIp(request);
 		// 取session中的IP对象

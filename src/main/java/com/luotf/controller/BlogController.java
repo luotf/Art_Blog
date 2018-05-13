@@ -1,7 +1,5 @@
 package com.luotf.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,17 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.luotf.annotation.AccessLimit;
 import com.luotf.annotation.SystemLog;
 import com.luotf.model.Blog;
-import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
 import com.luotf.util.BlogIdSafeUtil;
 import com.luotf.util.ConstantUtil;
@@ -41,7 +36,6 @@ public class BlogController {
 	 @SystemLog(description = ConstantUtil.BLOG_SELECT,userType=ConstantUtil.USERTYPE_USER) 
 	 public String selectBlogById(@PathVariable Integer id,Model model) throws Exception {
 		 int sId=BlogIdSafeUtil.BlogIdToSafe(id);
-		// System.out.println("sid:"+ BlogIdSafe.BlogIdToSafe(id));
 		 if(id==null||id<=0){
 			//0表示查询 错误
 			model.addAttribute("status", 0);
@@ -67,8 +61,8 @@ public class BlogController {
 	 @RequestMapping(value = "/selectNextBlog")
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=4)
-	 public Map selectNextBlog(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectNextBlog(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 Blog blog=blogService.selectNextBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
@@ -89,8 +83,8 @@ public class BlogController {
 	 @RequestMapping(value = "/selectPrevBlog")
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=5)
-	 public Map selectPrevBlog(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectPrevBlog(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 Blog blog=blogService.selectPrevBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
@@ -113,8 +107,8 @@ public class BlogController {
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=13)
 	 @SystemLog(description = ConstantUtil.BLOG_FINDKEY,userType=ConstantUtil.USERTYPE_USER) 
-	 public Map selectLikeBlogListByPage(String param,Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectLikeBlogListByPage(String param,Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 map.put("sort", sort);
 		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
@@ -147,7 +141,7 @@ public class BlogController {
 		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectLikeBlogListByPageWithBlobs(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
 		 }else{

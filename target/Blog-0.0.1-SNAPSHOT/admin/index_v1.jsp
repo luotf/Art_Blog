@@ -162,15 +162,15 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<h5>访问量</h5>
+						<h5> <i class="fa fa-bar-chart"></i> 访问量</h5>
 						<div class="pull-right">
 							<div class="btn-group">
 								<button type="button" onclick="initVisitCountByWeek(7);"
-									class="btn btn-xs btn-white active">天</button>
+									class="day btn btn-xs btn-white ">天</button>
 								<button type="button" onclick="initVisitCountByMonth(12);"
-									class="btn btn-xs btn-white">月</button>
-								<button type="button" class="btn btn-xs btn-white"
-									onclick="initVisitCountByYear(6);">年</button>
+									class="month btn btn-xs btn-white">月</button>
+								<button type="button" class="year btn btn-xs btn-white"
+									onclick=" initVisitCountByYear(6);">年</button>
 							</div>
 						</div>
 					</div>
@@ -198,7 +198,7 @@
 									</li>
 								</ul>
 								<h5 style="text-align: center;">
-									近<span class="num" style="font-size:20px">0</span><span
+									近  <span class="num" style="font-size:20px">0</span><span
 										class="md"></span>访问人数
 								</h5>
 								<div class="col-sm-4"
@@ -570,6 +570,9 @@
 	
 	//最近的num日访客
 	var initVisitCountByWeek=function(num){
+		$(".year").removeClass("active");
+		$(".month").removeClass("active");
+		$(".day").addClass("active");
 		var date=new Date();
 		var startTime="";
 		var endTime="";
@@ -587,10 +590,14 @@
 			dataType : 'json',
 			success : function(data) {
 				var days=new Array();
-				var counts=new Array();
 				for(var i=num-1,j=0;i>=0;i--,j++){
 					days[j]=Format(new Date(date.getTime() -  i*24*60*60*1000),"yyyy-MM-dd");
 				}
+				//快速初始化一个 大小为days的数组 并初始化全为0
+				var counts=Array.apply(null, Array(days.length)).map(function(item, i) {
+				    return 0;
+				});
+				
 				for(var j=0;j<days.length;j++){
 					for(var i=0;i<data.list.length;i++){
 						var time=Format(data.list[i].time,"yyyy-MM-dd");
@@ -658,6 +665,9 @@
 	};
 	
 	var initVisitCountByMonth=function(num){
+		$(".year").removeClass("active");
+		$(".day").removeClass("active");
+		$(".month").addClass("active");
 		var arr=new Array();
 		arr=dataMonth(num);
 		var startTime=arr[0];
@@ -698,6 +708,9 @@
 	};
 	
 	var initVisitCountByYear=function(num){
+		$(".month").removeClass("active");
+		$(".day").removeClass("active");
+		$(".year").addClass("active");
 		var arr=new Array();
 		arr=dataYear(num);
 		console.log(arr);

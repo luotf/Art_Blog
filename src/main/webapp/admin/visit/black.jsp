@@ -368,7 +368,7 @@
 		var deleteBlackIp=function(id,ip){
 			 var params = {
 					id : id,
-					prarm:'将ip为“'+ip+'”的用户移出黑名单',
+					prarm:'将ip为<span class="text-info">#'+ip+'#</span>的用户<span class="text-success">移出黑名单</span>',
 				}; 
 				$.ajax({
 					url : '../deleteBlackIp',

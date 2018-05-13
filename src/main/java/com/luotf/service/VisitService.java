@@ -23,14 +23,14 @@ public interface VisitService {
    	 *  根据日期月份分组查询
    	 * @return
    	 */
-   	List  selectVisitListByDate(Map<String, Object> map);
+   	List<?>  selectVisitListByDate(Map<String, Object> map);
     
    	/**
      * 模糊查询  and 分组显示
      * @param map
      * @return
      */
-    List selectLikeVisitListGroupByIp(Map<String, Object> map);
+    List<?> selectLikeVisitListGroupByIp(Map<String, Object> map);
    	
    	
     List<Visit> selectLikeVisitListByPage(Map<String, Object> map);
@@ -43,5 +43,5 @@ public interface VisitService {
  	 *  根据IP分组查询
  	 * @return
  	 */
- 	List  selectVisitListByIp(Map<String, Object> map);
+ 	List<?>  selectVisitListByIp(Map<String, Object> map);
 }

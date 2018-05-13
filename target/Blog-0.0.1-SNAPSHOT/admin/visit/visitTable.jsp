@@ -61,7 +61,7 @@
 										class="a-1 label label-info pull-right">0 </span>
 								</a></li>
 								<li  ><a href="${pageContext.request.contextPath}/admin/visit/visitTable.jsp">
-										<i class="fa fa-unlock "></i>用户数<span
+										<i class="fa fa-user "></i>用户数<span
 										class="a-2 label label-warning pull-right">0 </span>
 								</a></li>
 								<li ><a href="${pageContext.request.contextPath}/admin/visit/black.jsp">
@@ -289,239 +289,41 @@
 								},
 								columns : [
 										{
-											title : 'ID',
-											field : 'id',
-											align : 'center',
-											valign : 'middle',
-											width : '5%',
-										},
+						                      title: '序号',
+						                      align: 'center',
+						                      valign: 'middle',
+						                      width: '5%',
+						                      formatter: function (value, row, index) {  
+						                          return index+1;  
+						                      }  
+						                  }, 
 										{
 											title : 'IP',
 											field : 'ip',
 											align : 'center',
 											width : '15%',
-											formatter : function(value, row,
-													index) {
-												var ip = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.ip.search(visitName) != -1
-														|| row.ip
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.ip.split("");
-													var strStartIndex = row.ip
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.ip
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.ip
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															ip += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															ip += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													ip = row.ip;
-												}
-												return ip;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '地区',
 											field : 'city',
 											align : 'center',
 											width : '18%',
-											formatter : function(value, row,
-													index) {
-												var city = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.city.search(visitName) != -1
-														|| row.city
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.city.split("");
-													var strStartIndex = row.city
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.city
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.city
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															city += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															city += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													city = row.city;
-												}
-												return city;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '浏览器',
 											field : 'browserType',
 											align : 'center',
 											width : '12%',
-											formatter : function(value, row,
-													index) {
-												var browserType = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.browserType
-														.search(visitName) != -1
-														|| row.browserType
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.browserType
-															.split("");
-													var strStartIndex = row.browserType
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.browserType
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.browserType
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															browserType += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															browserType += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													browserType = row.browserType;
-												}
-												return browserType;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '系统',
 											field : 'platformType',
 											align : 'center',
 											width : '12%',
-											formatter : function(value, row,
-													index) {
-												var platformType = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.platformType
-														.search(visitName) != -1
-														|| row.platformType
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.platformType
-															.split("");
-													var strStartIndex = row.platformType
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.platformType
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.platformType
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															platformType += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															platformType += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													platformType = row.platformType;
-												}
-												return platformType;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '访问次数',
@@ -571,30 +373,72 @@
 					city : city,
 					browsertype:browserType,
 					platformtype:platformType,
+					prarm:'将ip为“'+ip+'”的用户添加进黑名单'
 				}; 
-				$.ajax({
-					url : '../addBlackIp',
-					type : 'post',
-					data : params,
-					dataType : 'json',
-					success : function(data) {
-						if(data.status==2){
-							swal("添加失败", "该IP已在黑名单中", "error");
-						}else if (data.status == 200) {
-							initVisitCount();
-							initBlackIpCount();
-							$("#allVisit").bootstrapTable('refresh');
-							swal("添加成功", "", "success");
-						} else if (data.status == 0) {
-							swal("添加失败", "", "error");
+			 swal({
+	             title: "确定添加到黑名单吗",
+	             text: "放入黑名单,该IP将无法访问网站！",
+	             type: "warning",
+	             showCancelButton: true,
+	             confirmButtonColor: "#DD6B55",
+	             confirmButtonText: "确定",
+	             closeOnConfirm: false
+	         }, function () {
+					$.ajax({
+						url : '../addBlackIp',
+						type : 'post',
+						data : params,
+						dataType : 'json',
+						success : function(data) {
+							if(data.status==2){
+								swal("添加失败", "该IP已在黑名单中", "error");
+							}else if (data.status == 200) {
+								initVisitCount();
+								initBlackIpCount();
+								$("#allVisit").bootstrapTable('refresh');
+								swal("添加成功", "", "success");
+							} else if (data.status == 0) {
+								swal("添加失败", "", "error");
+							}
+						},
+						error : function() {
+							swal("添加错误", "请重新操作", "error");
 						}
-					},
-					error : function() {
-						swal("添加错误", "请重新操作", "error");
-					}
-				});
+					});
+	         });
+		};
+		
 
-		}
+		//设置 字数不超过宽度限制
+		  var operateOpinionFormatter=function(value,row,index){ 
+			  var title = "";
+				var visitName = $(".search .form-control").val();
+				var visitNameLow = $(".search .form-control").val().toLowerCase();
+				if (value.search(visitName) != -1|| value.toLowerCase().search(visitNameLow) != -1) {
+					var strs = new Array();
+					strs = value.split("");
+					var strStartIndex = value.indexOf(visitName);
+					var strEndIndex = strStartIndex+ visitName.length- 1;
+					if (value.toLowerCase().search(visitNameLow) != -1) {
+						strStartIndex = value.toLowerCase().indexOf(visitNameLow);
+						strEndIndex = strStartIndex+ visitNameLow.length- 1;
+					}
+					for (var i = 0; i < strs.length; i++) {
+						if (i >= strStartIndex&& i <= strEndIndex) {
+							title += '<span style="color:#000;font-weight:bold;">'
+									+ strs[i]
+									+ '</span>';
+						} else {
+							title += '<span >'+ strs[i]+ '</span>';
+						}
+					}
+				} else {
+					title = value;
+				}
+				return title;
+	        }
+		
+		
 		
 		//格式化时间
 		function Format(datetime, fmt) {

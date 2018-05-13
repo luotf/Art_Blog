@@ -1,5 +1,8 @@
 package com.luotf.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.luotf.model.Log;
 
 public interface LogService {
@@ -15,4 +18,6 @@ public interface LogService {
     int updateByPrimaryKeySelective(Log record);
 
     int updateByPrimaryKey(Log record);
+    
+    List<Log> selectLogListByDate(Map<String, Object> map);
 }

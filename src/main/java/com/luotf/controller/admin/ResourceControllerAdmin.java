@@ -38,8 +38,8 @@ public class ResourceControllerAdmin {
 	 @RequestMapping(value = "/addResource",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.RESOURCE_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map addResource(String prarm,RResource resource) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> addResource(String prarm,RResource resource) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 resource.setAddtime(new Date());
 		 if(resourceService.insert(resource)!=0){
 			 map.put("status", 200);
@@ -59,8 +59,8 @@ public class ResourceControllerAdmin {
 	 @RequestMapping(value = "/updateResource",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.RESOURCE_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map updateResource(String prarm,RResource resource) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> updateResource(String prarm,RResource resource) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(resourceService.updateByPrimaryKeySelective(resource)!=0){
 			 map.put("status", 200);
 		 }else{
@@ -79,8 +79,8 @@ public class ResourceControllerAdmin {
 	 @RequestMapping(value = "/deleteResource",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.RESOURCE_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map deleteResource(String prarm, Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> deleteResource(String prarm, Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(resourceService.deleteByPrimaryKey(id)!=0){
 			 map.put("status", 200);
 		 }else{
@@ -96,10 +96,10 @@ public class ResourceControllerAdmin {
 	  * @return
 	  * @throws Exception
 	  */
-	 @RequestMapping(value = "/selectResourcecById",method = RequestMethod.POST)
+	 @RequestMapping(value = "/selectResourceById",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectResourceById(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectResourceById(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 RResource resource=resourceService.selectByPrimaryKey(id);
 		 if(resource!=null){
 			 map.put("status", 200);
@@ -111,18 +111,17 @@ public class ResourceControllerAdmin {
 		 return map;
 	 }
 	 
-	 
-	 
+	
 	 /**
 	  * 模糊组合分页查询资源信息
 	  * @param id，resource
-	  * @return
+	  * @return 管理端
 	  * @throws Exception
 	  */
-	 @RequestMapping(value = "/selectLikeResourceListByPage")
+	 @RequestMapping(value = "/selectLikeResourceListByPage",method=RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectLikeResourceListByPage(RResource resource,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectLikeResourceListByPage(String prarm,RResource resource,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(resource.getTitle()!=null&&resource.getTitle()!=""){
 			 map.put("title", resource.getTitle());
 		 }
@@ -136,7 +135,7 @@ public class ResourceControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<RResource> resourceList=resourceService.selectLikeResourceListByPage(map);
 		 PageInfo<RResource> pageInfo=new PageInfo<RResource>(resourceList);
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(resourceList.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -148,6 +147,8 @@ public class ResourceControllerAdmin {
 		 return returnMap;
 	 }
 	 
+	 
+	 
 	 /**
 	  * 通过状态查询资源信息
 	  * @param id
@@ -156,9 +157,9 @@ public class ResourceControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectResourceListByStatus",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectResourceListByStatus() throws Exception{
-		 Map map=new HashMap();
-		 List list=resourceService.selectResourceListByStatus();
+	 public Map<String, Object> selectResourceListByStatus() throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 List<?> list=resourceService.selectResourceListByStatus();
 		 if(list.size()>0){
 			 map.put("status", 200);
 		 }else{
@@ -169,4 +170,6 @@ public class ResourceControllerAdmin {
 		 return map;
 	 }
 	
+	 
+	 
 }

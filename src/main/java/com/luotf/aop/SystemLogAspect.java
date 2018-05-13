@@ -45,7 +45,7 @@ public class SystemLogAspect {
 			log.setParam(joinPoint.getArgs()[0].toString());
 			log.setDescription(getDescription(joinPoint));
 			log.setAddtime(new Date());
-			if(!log.getParam().equals("搜索了关键字为“”的博客")){
+			if(!log.getParam().equals("none")){
 				logService.insert(log);
 			}
 			
@@ -66,7 +66,7 @@ public class SystemLogAspect {
 		String targetName = joinPoint.getTarget().getClass().getName();
 		String methodName = joinPoint.getSignature().getName();
 		Object[] arguments = joinPoint.getArgs();
-		Class targetClass = Class.forName(targetName);
+		Class<?> targetClass = Class.forName(targetName);
 		Method[] methods = targetClass.getMethods();
 		String description = "";
 		for (Method method : methods) {
@@ -95,7 +95,7 @@ public class SystemLogAspect {
 		String targetName = joinPoint.getTarget().getClass().getName();
 		String methodName = joinPoint.getSignature().getName();
 		Object[] arguments = joinPoint.getArgs();
-		Class targetClass = Class.forName(targetName);
+		Class<?> targetClass = Class.forName(targetName);
 		Method[] methods = targetClass.getMethods();
 		String userType = "";
 		for (Method method : methods) {
@@ -110,14 +110,5 @@ public class SystemLogAspect {
 		}
 		return userType;
 	}
-	
-/*	private String getServiceMthodParams(JoinPoint joinPoint)  
-            throws Exception {  
-       Object[] arguments = joinPoint.getArgs();  
-       String params = JacksonUtil.toJSon(arguments);  
-       return params;  
-   }  
-  
-} */
 	
 }

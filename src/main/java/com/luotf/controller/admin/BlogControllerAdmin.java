@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,7 +26,6 @@ import com.github.pagehelper.PageInfo;
 import com.luotf.annotation.AccessLimit;
 import com.luotf.annotation.SystemLog;
 import com.luotf.model.Blog;
-import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
 import com.luotf.util.ConstantUtil;
 import com.luotf.util.subStringUtil;
@@ -48,9 +46,9 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/uploadImages",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.UPLOAD_IMAGES,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map uploadImage(HttpServletRequest request) throws Exception {
+	 public Map<String, Object> uploadImage(HttpServletRequest request) throws Exception {
 		 CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
-		 Map map=new HashMap();
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(multipartResolver.isMultipart(request)){
 			 MultipartHttpServletRequest mreq=(MultipartHttpServletRequest) request;
 			 Iterator<String> fileNamesIter=mreq.getFileNames();
@@ -91,8 +89,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/addBlog",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.BLOG_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map addBlog(Blog blog) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> addBlog(String prarm,Blog blog) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 
 		 //将中文的分号转换成英文的分号
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
@@ -118,8 +116,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/deleteBlog",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.BLOG_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map deleteBlog(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> deleteBlog(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(blogService.deleteBlogById(id)!=0){
 			 map.put("status", 200);
 		 }else{
@@ -139,8 +137,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/updateBlog",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.BLOG_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map updateBlog(Blog blog) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> updateBlog(String prarm,Blog blog) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		
 		 //将中文的分号转换成英文的分号
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
@@ -164,8 +162,8 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogById",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectBlogById(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectBlogById(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 Blog blog=blogService.selectBlogById(id);
 		 if(blog!=null){
 			 map.put("status", 200);
@@ -185,8 +183,8 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectBlogByTypeId",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectBlogByTypeId(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectBlogByTypeId(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 List<Blog> blogList=blogService.selectBlogByTypeId(id);
 		 if(blogList.size()>0){
 			 map.put("status", 200);
@@ -207,8 +205,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectLikeBlogListByPage",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=13)
-	 public Map selectLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectLikeBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 
 		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
@@ -241,7 +239,7 @@ public class BlogControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectLikeBlogListByPage(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
 			 
@@ -264,8 +262,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectGroupLikeBlogListByPage")
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=15)
-	 public Map selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 map.put("sort", sort);
 		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
@@ -298,8 +296,7 @@ public class BlogControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectGroupLikeBlogListByPage(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
-		 //System.out.println("type_id:"+blog.getType().getId());
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -320,8 +317,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectBlogListByPage",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=13)
-	 public Map selectBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectBlogListByPage(Blog blog,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 
 		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
@@ -354,7 +351,7 @@ public class BlogControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectBlogListByPage(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);
@@ -378,8 +375,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectBlogListByDate",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogListByDate(@RequestParam(value="status") String status,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectBlogListByDate(@RequestParam(value="status") String status,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(status!=""&&status!=null){
 			 map.put("status", status);
 		 }
@@ -389,8 +386,8 @@ public class BlogControllerAdmin {
 		 if(endTime!=""&&endTime!=null){
 			 map.put("endTime", endTime);
 		 }
-		 List<Map> list=blogService.selectBlogListByDate(map);
-		 Map returnMap=new HashMap();
+		 List<?> list=blogService.selectBlogListByDate(map);
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(list.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -410,8 +407,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectBlogCount",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogCount(Blog blog) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectBlogCount(Blog blog) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 map.put("keyword", blog.getKeyword());
 		 }
@@ -428,7 +425,7 @@ public class BlogControllerAdmin {
 			 map.put("addTime", blog.getAddtime());
 		 }
 		 Long count=blogService.selectBlogCount(map);
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(count>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -449,8 +446,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectPrevBlog",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=5)
-	 public Map selectPrevBlog(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectPrevBlog(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 Blog blog=blogService.selectPrevBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
@@ -472,8 +469,8 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectNextBlog",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=5)
-	 public Map selectNextBlog(Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectNextBlog(Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 Blog blog=blogService.selectNextBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
@@ -495,9 +492,9 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectBlogListByStatus",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogListByStatus() throws Exception{
-		 Map map=new HashMap();
-		 List list=blogService.selectBlogListByStatus();
+	 public Map<String, Object> selectBlogListByStatus() throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 List<?> list=blogService.selectBlogListByStatus();
 		 if(list.size()>0){
 			 map.put("status", 200);
 		 }else{
@@ -516,9 +513,9 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/selectBlogByClick",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogByClick() throws Exception{
-		 Map map=new HashMap();
-		 List list=blogService.selectBlogByClick();
+	 public Map<String, Object> selectBlogByClick() throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 List<?> list=blogService.selectBlogByClick();
 		 if(list.size()>0){
 			 map.put("status", 200);
 		 }else{

@@ -478,6 +478,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var updateBlog=function(id){
         	var url = window.location.href;
     		var url_param = url.split("=")[1];
+    		var prarm='将ID为<span class="text-info">'+url_param+'</span>的博客<span class="text-success">发表</span>';
+			if(id==-1){
+				prarm='将ID为<span class="text-info">'+url_param+'</span>的博客放入<span class="text-navy">草稿箱</span>';
+			}
           var params ={
         		    'id':url_param,
         			'title':$("#title").val(),
@@ -486,7 +490,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'images':$(".imagePath").val(),
         			'keyword':$("#keyword").val(),
         			'content':$("#summernote").code(),
-        			'status':id
+        			'status':id,
+        			 prarm:prarm
         	};
             $.ajax({
                    url:'../updateBlog',    

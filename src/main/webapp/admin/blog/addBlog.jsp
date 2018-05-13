@@ -483,6 +483,10 @@
 		};
 
 		var addBlog = function(id) {
+			var prarm='新增了一篇博客';
+			if(id==-1){
+				prarm='将博客放入<span class="text-navy">草稿箱</span>';
+			}
 			var params = {
 				'title' : $("#title").val(),
 				'introduction' : $("#introduction").val(),
@@ -490,6 +494,7 @@
 				'keyword' : $("#keyword").val(),
 				'content' : $("#summernote").code(),
 				'images':$(".imagePath").val(),
+				 prarm:prarm,
 				'status' : id
 			};
 			$.ajax({

@@ -3,7 +3,6 @@ package com.luotf.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 
 public interface BlogTypeMapper {

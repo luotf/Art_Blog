@@ -52,7 +52,6 @@ public class AddressUtil {
 			}else{
 				city=city+"市";
 			}
-			String county = "";
 			String isp = (temp[7].split(":"))[1].replaceAll("\"", "");
 			isp = decodeUnicode(isp);// ISP
 			if(isp.equals("XX")||isp==""){

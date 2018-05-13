@@ -84,6 +84,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="col-sm-9">
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
@@ -155,7 +156,7 @@
 						<div class="mail-body text-right tooltip-demo">
 
 							<button id="prev1" type="button" class="btn btn-sm btn-primary"
-								data-placement="top" title="预览">
+								data-placement="top" title="预览" data-toggle="tooltip">
 								<i class="fa fa-reply"></i> 预览
 							</button>
 

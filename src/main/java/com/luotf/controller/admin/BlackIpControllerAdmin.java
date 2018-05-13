@@ -38,8 +38,8 @@ public class BlackIpControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectLikeBlackIpListByPage")
 	 @ResponseBody
-	 public Map selectLikeBlackIpListByPage(BlackIp blackIp,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectLikeBlackIpListByPage(BlackIp blackIp,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(startTime!=""&&startTime!=null){
 			 map.put("startTime", startTime);
 		 }
@@ -62,7 +62,7 @@ public class BlackIpControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<BlackIp> blackIpList=blackIpService.selectLikeBlackIpListByPage(map);
 		 PageInfo<BlackIp> pageInfo=new PageInfo<BlackIp>(blackIpList);
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(blackIpList.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -84,8 +84,8 @@ public class BlackIpControllerAdmin {
 	  */
 	 @RequestMapping(value = "/updateBlackIp",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map updateBlackIp(BlackIp blackIp) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> updateBlackIp(BlackIp blackIp) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(blackIpService.updateByPrimaryKeySelective(blackIp)!=0){
 			 map.put("status", 200);
 		 }else{
@@ -104,8 +104,8 @@ public class BlackIpControllerAdmin {
 	 @RequestMapping(value = "/addBlackIp",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.BACKIP_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map addBlackIp(String prarm,BlackIp blackIp) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> addBlackIp(String prarm,BlackIp blackIp) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		
 		 if(blackIpService.selectBlackIpByIp(blackIp.getIp())!=null){
 			// 已经存在该IP
@@ -131,8 +131,8 @@ public class BlackIpControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectAllBlackIpCount",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectAllBlackIpCount() throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectAllBlackIpCount() throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 Long count=blackIpService.selectAllBlackIpCount();
 		 if(count>=0){
 			 map.put("status", 200);
@@ -154,8 +154,8 @@ public class BlackIpControllerAdmin {
 	 @RequestMapping(value = "/deleteBlackIp",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.BACKIP_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map deleteBlackIp(String prarm,Integer id) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> deleteBlackIp(String prarm,Integer id) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(blackIpService.deleteByPrimaryKey(id)!=0){
 			 map.put("status", 200);
 		 }else{

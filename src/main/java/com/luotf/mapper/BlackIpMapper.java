@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.luotf.model.BlackIp;
-import com.luotf.model.Visit;
 
 public interface BlackIpMapper {
 	

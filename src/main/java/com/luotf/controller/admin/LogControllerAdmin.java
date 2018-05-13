@@ -58,50 +58,38 @@ public class LogControllerAdmin {
 	 
 	
 	 
-	/* *//**
+	 /**
 	  * 模糊组合分页查询访客信息
 	  * @param id，resource
 	  * @return
 	  * @throws Exception
-	  *//*
-	 @RequestMapping(value = "/selectLikeVisitListGroupByIp")
+	  */
+	 @RequestMapping(value = "/selectLogListByDate")
 	 @ResponseBody
-	 public Map selectLikeVisitListGroupByIp(Visit visit,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String,Object> selectLogListByDate(Log log,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
+		 Map<String,Object> map=new HashMap<String,Object>();
 		 if(startTime!=""&&startTime!=null){
 			 map.put("startTime", startTime);
 		 }
 		 if(endTime!=""&&endTime!=null){
 			 map.put("endTime", endTime);
 		 }
-		 if(visit.getIp()!=null&&visit.getIp()!=""){
-			 map.put("ip", visit.getIp());
-		 }
-		 if(visit.getCity()!=null&&visit.getCity()!=""){
-			 map.put("city", visit.getCity());
-		 }
-		 if(visit.getPlatformType()!=null&&visit.getPlatformType()!=""){
-			 map.put("platformType", visit.getPlatformType());
-		 }
-		 if(visit.getBrowserType()!=null&&visit.getBrowserType()!=""){
-			 map.put("browserType", visit.getBrowserType());
-		 }
 		 //分页显示：第1页开始，每页显示9条记录
 		 PageHelper.startPage(page, pageSize);
-		 List visitList=visitService.selectLikeVisitListGroupByIp(map);
-		 PageInfo pageInfo=new PageInfo(visitList);
-		 Map returnMap=new HashMap();
-		 if(visitList.size()>0){
+		 List<Log> logList=logService.selectLogListByDate(map);
+		 PageInfo<Log> pageInfo=new PageInfo<Log>(logList);
+		 Map<String,Object>  returnMap=new HashMap<String,Object> ();
+		 if(logList.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
 			 //500表示：返回值为Null
 			 returnMap.put("status", 500);
 		 }
-		 returnMap.put("visitList", visitList);
+		 returnMap.put("logList", logList);
 		 returnMap.put("pageInfo", pageInfo);
 		 return returnMap;
 	 }
-	 */
+	 
 	 
 	 
 	 /**

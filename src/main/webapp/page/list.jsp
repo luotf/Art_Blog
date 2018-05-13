@@ -25,8 +25,8 @@
 		<div class="leftbox">
 			<div class="newblogs ">
 				<h2 class="hometitle">
-					<span class="tagTitle"> </span>技术专栏
-				</h2>
+					<span class="tagTitle"> 
+					</span>技术专栏</h2>
 				<ul class="animated fadeInDown">
 
 				</ul>
@@ -88,19 +88,24 @@
 		//初始化类别信息
 		initBlogType();
 		//初始化技术专栏的信息
-		initBlogListByPage(1,"none");
+		initBlogListByPage(1,"none",null);
 		initBlogByLike();
 		initBlogByClick();
 	});
 	
-	var initBlogListByPage=function(pageNum,type_id){
+	var initBlogListByPage=function(pageNum,type_id,typename){
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
 		var params="";
+		var prarm="";
 		if(type_id=="none"){
 			var keyword=$("#keyword").val();
-			if(keyword=="请输入关键字")
+			if(keyword=="请输入关键字"){
 				keyword="";
+				prarm='none'
+			}else{
+				prarm='搜索关键字为<span class="text-info">#'+keyword+'#</span>的博客'
+			}
 			 params ={
 					pageSize: 8,
 		            page:pageNum,
@@ -108,7 +113,7 @@
 		            content:keyword,
 		            introduction:keyword,
 		            keyword:keyword,
-		            param:'搜索了关键字为“'+keyword+'”的博客',
+		            param:prarm,
 		           	status:1  //1 表示已发布
 			};
 		}else {
@@ -116,6 +121,7 @@
 					pageSize: 8,
 		            page:pageNum,
 		            'type.id':type_id,
+		            param:'搜索类别为<span class="text-info">#'+typename+'#</span>的博客列表',
 		           	status:1  //1 表示已发布
 			};
 		}
@@ -144,7 +150,7 @@
                       			keyword=data[i].keyword;
                       		}
                       	}
-                      	blogList+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a class='+data[i].id+' href="javascript:void(0);"></a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
+                      	blogList+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span class="lm f_l"><a href="javascript:void(0);">'+data[i].type.typename+'</a></span><span style="float:left;padding:0;color: #38485a"><i class="fa fa-tags" style="color: #88827dcc;"></i>&nbsp;'+keyword+'</span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a class='+data[i].id+' href="javascript:void(0);"></a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
             		 };
             		
             		 var p={
@@ -171,7 +177,6 @@
             		blogList="无查询结果";
             	}
             	 $(".newblogs").find("ul").html(blogList);
-            	// $(".plNum").html('<span id = "sourceId::54" class = "cy_cmt_count" ></span>');
             	//初始化分页、总数>10显示分页栏
             	 if(page.total>8){
             		 var allTotal='<a title="Total record">&nbsp;<b>'+page.total+'</b> </a>&nbsp;&nbsp;';
@@ -248,7 +253,7 @@
 		    });
 		  }); 
 		    
-		initBlogListByPage(pageNum,type);
+		initBlogListByPage(pageNum,type,null);
 		setTimeout(function () {
 		 window.scrollTo(0,0);   //滑动到浏览器顶部
 		 layer.close(index);
@@ -265,7 +270,7 @@
 				  shade: [0.1,'#eee'] //0.1透明度的白色背景
 	    	});
 	    }); 
-	     initBlogListByPage(1,"none");
+	     initBlogListByPage(1,"none",null);
 		setTimeout(function () {
 			layer.close(index);
 		},200);
@@ -286,7 +291,7 @@
             success:function (data) {
             	var typeName='';
                 for (var i = 0; i < data.length; i++) {
-                	typeName+='<li><a style="padding: 5px;margin-right: 3px;border: none; background-color: #f1f1f1;" onclick="searchType('+data[i].id+')" href="javascript:void(0);"> <i class="fa fa-tag"></i>'+data[i].typename+'</a></li>'
+                	typeName+='<li><a style="padding: 5px;margin-right: 3px;border: none; background-color: #f1f1f1;" onclick="searchType('+data[i].id+',\''+data[i].typename+'\')" href="javascript:void(0);"> <i class="fa fa-tag"></i>'+data[i].typename+'</a></li>'
                 }
                 var length='';
                 var keyTitle='';
@@ -296,7 +301,7 @@
                 	length=data.length;
                 }
                 for (var i = 0; i < length; i++) {
-                	keyTitle+='<a href="javascript:void(0);" onclick="searchType('+data[i].id+')">'+data[i].typename+'</a>'
+                	keyTitle+='<a href="javascript:void(0);" onclick="searchType('+data[i].id+',\''+data[i].typename+'\')">'+data[i].typename+'</a>'
                 }
                 
                 // 初始化数据
@@ -309,7 +314,7 @@
         });
 	}
 	
-	var searchType=function(type_id){
+	var searchType=function(type_id,typename){
 		$(".type_id").val(type_id);
 		var index ='';
 	     layer.ready(function(){
@@ -317,7 +322,7 @@
 				  shade: [0.1,'#eee'] //0.1透明度的白色背景
 	    	});
 	    }); 
-	     initBlogListByPage(1,type_id);
+	     initBlogListByPage(1,type_id,typename);
 		setTimeout(function () {
 			layer.close(index);
 		},200);

@@ -1,7 +1,5 @@
 package com.luotf.util;
 
-import com.luotf.model.Blog;
-
 public class subStringUtil {
 	
 	/**

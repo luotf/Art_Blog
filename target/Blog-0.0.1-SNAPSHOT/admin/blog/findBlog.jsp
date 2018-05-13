@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 								</ul>
 								<div class="pagelist" style="padding-top: 0px;">
-									<div class="pageNav"></div>
+									<div class="pageNav tooltip-demo"></div>
 									<div style="margin:15px 0 0 0;">
 										<span class="allTotal">共<b></b>条记录
 										</span>&nbsp;&nbsp; <span class="cPage">第<b></b>页
@@ -192,10 +192,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              var pageNav='';
              var prePage=page.pageNum-1;
              var nextPage=page.pageNum+1;
-             var first='<a href="#" title="首页" onclick="pageNav(1,'+page.pages+')"><i class="fa fa-angle-double-left"></i></a>&nbsp;&nbsp;';
-			 var pre='<a href="#" title="上一页" onclick="pageNav('+prePage+','+page.pages+')"><i class="fa fa-angle-left" ></i></a>&nbsp;&nbsp;';
-			 var next='<a href="#" title="下一页" onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-angle-right"></i></a>&nbsp;&nbsp;';
-			 var last='<a href="#" title="尾页" onclick="pageNav('+page.pages+','+page.pages+')"><i class="fa fa-angle-double-right"></i></a>';	
+             var first='<a href="#" data-toggle="tooltip" data-placement="top" title="首页" onclick="pageNav(1,'+page.pages+')"><i class="fa fa-angle-double-left"></i></a>&nbsp;&nbsp;';
+			 var pre='<a href="#" data-toggle="tooltip" data-placement="top" title="上一页" onclick="pageNav('+prePage+','+page.pages+')"><i class="fa fa-angle-left" ></i></a>&nbsp;&nbsp;';
+			 var next='<a href="#" data-toggle="tooltip" data-placement="top" title="下一页" onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-angle-right"></i></a>&nbsp;&nbsp;';
+			 var last='<a href="#" data-toggle="tooltip" data-placement="top" title="尾页" onclick="pageNav('+page.pages+','+page.pages+')"><i class="fa fa-angle-double-right"></i></a>';	
 			 pageNav=first+pre+next+last;
 			 $(".pageNav").html(pageNav);
              $(".category-list").html(blogList);

@@ -104,7 +104,7 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public List selectBlogListByDate(Map<String, Object> map) {
+	public List<?> selectBlogListByDate(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return blogMapper.selectBlogListByDate(map);
 	}
@@ -128,7 +128,7 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public List selectBlogListByStatus() {
+	public List<?> selectBlogListByStatus() {
 		// TODO Auto-generated method stub
 		return blogMapper.selectBlogListByStatus();
 	}
@@ -140,7 +140,7 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public List selectBlogByClick() {
+	public List<?> selectBlogByClick() {
 		// TODO Auto-generated method stub
 		return blogMapper.selectBlogByClick();
 	}

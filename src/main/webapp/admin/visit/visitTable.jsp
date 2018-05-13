@@ -373,7 +373,7 @@
 					city : city,
 					browsertype:browserType,
 					platformtype:platformType,
-					prarm:'将ip为“'+ip+'”的用户添加进黑名单'
+					prarm:'将ip为<span class="text-info">#'+ip+'#</span>的用户<span class="text-danger">添加黑名单</span>'
 				}; 
 			 swal({
 	             title: "确定添加到黑名单吗",

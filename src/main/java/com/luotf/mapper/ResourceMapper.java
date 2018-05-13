@@ -26,7 +26,7 @@ public interface ResourceMapper {
  	 *  获取资源信息，根据状态分组查询
  	 * @return
  	 */
- 	List  selectResourceListByStatus();
+ 	List<?>  selectResourceListByStatus();
     
     int updateByPrimaryKeySelective(RResource record);
     

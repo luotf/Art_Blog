@@ -105,8 +105,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             
             
-            
-            
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
@@ -825,8 +823,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	  } 
 	            	  $(".newsview").find(".tags").append(keyword);
 	            	  $(".newsview").find(".news_infos").html(data.blog.content);
-	            	  var update='<a  class="J_menuItem btn btn-white" href="../blog/updateBlog.jsp?id='+data.blog.id+'">编辑</a>';
-	            	  $(".modal-footer").find(".update").html(update);
 	            	}
 	            },    
 			    error:function(){

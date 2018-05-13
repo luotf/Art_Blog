@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.luotf.annotation.SystemLog;
-import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogTypeService;
 import com.luotf.util.ConstantUtil;
-import com.luotf.util.subStringUtil;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -35,7 +32,7 @@ public class BlogTypeControllerAdmin {
 	public List<BlogType> selectBlogType(
 			@RequestParam(value = "data", required = false) String data)
 			throws Exception {
-		Map map = new HashMap();
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (data == "all") {
 			map = null;
 		}
@@ -46,8 +43,8 @@ public class BlogTypeControllerAdmin {
 
 	@RequestMapping(value = "/selectBlogTypeById", method = RequestMethod.POST)
 	@ResponseBody
-	public Map selectBlogType(Integer id) throws Exception {
-		Map map = new HashMap();
+	public Map<String, Object> selectBlogType(Integer id) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		BlogType blogType = blogTypeService.selectBlogTypeById(id);
 		if (blogType != null) {
 			map.put("status", 200);
@@ -61,8 +58,8 @@ public class BlogTypeControllerAdmin {
 	@RequestMapping(value = "/deleteBlogType", method = RequestMethod.POST)
 	@ResponseBody
 	@SystemLog(description = ConstantUtil.BLOGTYPE_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
-	public Map deleteBlogType(String prarm,BlogType blogType) throws Exception {
-		Map map = new HashMap();
+	public Map<String, Object> deleteBlogType(String prarm,BlogType blogType) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		//查询该类别下是否有博客
 		if (blogTypeService.selectBlogTypeById(blogType.getId()).getNum()!=0) {
 			// 该类别下有博客  不能删除
@@ -80,8 +77,8 @@ public class BlogTypeControllerAdmin {
 	@RequestMapping(value = "/addBlogType", method = RequestMethod.POST)
 	@ResponseBody
 	@SystemLog(description = ConstantUtil.BLOGTYPE_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
-	public Map addBlogType(String prarm,BlogType blogType) throws Exception {
-		Map map = new HashMap();
+	public Map<String, Object> addBlogType(String prarm,BlogType blogType) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (blogTypeService.selectBlogTypeByName(blogType.getTypename())!=null) {
 			// 已经存在该类别
 			map.put("status", 2);
@@ -106,7 +103,7 @@ public class BlogTypeControllerAdmin {
 	 */
 	@RequestMapping(value = "/selectBlogTypeListByPage", method = RequestMethod.POST)
 	@ResponseBody
-	public Map selectLikeBlogListByPage(
+	public Map<String, Object> selectLikeBlogListByPage(
 			BlogType blogType,
 			@RequestParam(value = "page", required = true, defaultValue = "1") Integer page,
 			@RequestParam(value = "pageSize", required = true, defaultValue = "10") Integer pageSize)
@@ -146,8 +143,8 @@ public class BlogTypeControllerAdmin {
 	@RequestMapping(value = "/updateBlogType", method = RequestMethod.POST)
 	@ResponseBody
 	@SystemLog(description = ConstantUtil.BLOGTYPE_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
-	public Map updateBlogType(String prarm,BlogType blogType) throws Exception {
-		Map map = new HashMap();
+	public Map<String, Object> updateBlogType(String prarm,BlogType blogType) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
 		if (blogTypeService.selectBlogTypeByName(blogType.getTypename())!=null) {
 			// 已经存在该类别
 			map.put("status", 2);

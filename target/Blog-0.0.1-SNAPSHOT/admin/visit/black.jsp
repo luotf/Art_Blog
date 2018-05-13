@@ -61,7 +61,7 @@
 										class="a-1 label label-info pull-right">0 </span>
 								</a></li>
 								<li  ><a href="${pageContext.request.contextPath}/admin/visit/visitTable.jsp">
-										<i class="fa fa-unlock "></i>用户数<span
+										<i class="fa fa-user "></i>用户数<span
 										class="a-2 label label-warning pull-right">0 </span>
 								</a></li>
 								<li ><a href="javascript:void(0);">
@@ -289,245 +289,47 @@
 								},
 								columns : [
 										{
-											title : 'ID',
-											field : 'id',
-											align : 'center',
-											valign : 'middle',
-											width : '5%',
-										},
+						                      title: '序号',
+						                      align: 'center',
+						                      valign: 'middle',
+						                      width: '5%',
+						                      formatter: function (value, row, index) {  
+						                          return index+1;  
+						                      }  
+						                  }, 
 										{
 											title : 'IP',
 											field : 'ip',
 											align : 'center',
 											width : '15%',
-											formatter : function(value, row,
-													index) {
-												var ip = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.ip.search(visitName) != -1
-														|| row.ip
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.ip.split("");
-													var strStartIndex = row.ip
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.ip
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.ip
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															ip += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															ip += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													ip = row.ip;
-												}
-												return ip;
-											}
+											formatter : operateOpinionFormatter
 										},
 										{
 											title : '地区',
 											field : 'city',
 											align : 'center',
 											width : '18%',
-											formatter : function(value, row,
-													index) {
-												var city = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.city.search(visitName) != -1
-														|| row.city
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.city.split("");
-													var strStartIndex = row.city
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.city
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.city
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															city += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															city += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													city = row.city;
-												}
-												return city;
-											}
+											formatter : operateOpinionFormatter
 										},
 										{
 											title : '浏览器',
-											field : 'browserType',
+											field : 'browsertype',
 											align : 'center',
-											width : '12%',
-											formatter : function(value, row,
-													index) {
-												var browsertype = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.browsertype
-														.search(visitName) != -1
-														|| row.browsertype
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.browsertype
-															.split("");
-													var strStartIndex = row.browsertype
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.browsertype
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.browsertype
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															browsertype += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															browsertype += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													browsertype = row.browsertype;
-												}
-												return browsertype;
-											}
+											width : '13%',
+											formatter : operateOpinionFormatter
 										},
 										{
 											title : '系统',
 											field : 'platformtype',
 											align : 'center',
 											width : '12%',
-											formatter : function(value, row,
-													index) {
-												var platformtype = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.platformtype
-														.search(visitName) != -1
-														|| row.platformtype
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.platformtype
-															.split("");
-													var strStartIndex = row.platformtype
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.platformtype
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.platformtype
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															platformtype += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															platformtype += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													platformtype = row.platformtype;
-												}
-												return platformtype;
-											}
+											formatter : operateOpinionFormatter
 										},
 										{
 											title : '加入时间',
 											field : 'time',
 											align : 'center',
-											width : '20%',
+											width : '17%',
 											formatter : function(value, row,
 													index) {
 												return Format(row.time,
@@ -541,7 +343,7 @@
 											width : '15%',
 											formatter : function(value, row, index) {
 												var id = row.vid;
-												var b = '<a  class=" btn-sm btn-info" onclick="deleteBlackIp('+id+')"><i class="fa  fa-share" ></i> 移出黑名单</a> ';
+												var b = '<a  class=" btn-sm btn-info" onclick="deleteBlackIp('+id+',\''+row.ip+'\')"><i class="fa  fa-share-square-o" ></i> 移出黑名单</a> ';
 												return b;
 											}
 								  } ]
@@ -563,9 +365,10 @@
 			};
 		}
 		
-		var deleteBlackIp=function(id){
+		var deleteBlackIp=function(id,ip){
 			 var params = {
-					id : id
+					id : id,
+					prarm:'将ip为“'+ip+'”的用户移出黑名单',
 				}; 
 				$.ajax({
 					url : '../deleteBlackIp',
@@ -588,6 +391,37 @@
 				});
 
 		}
+		
+		//设置 字数不超过宽度限制
+		  var operateOpinionFormatter=function(value,row,index){ 
+			  var title = "";
+				var visitName = $(".search .form-control").val();
+				var visitNameLow = $(".search .form-control").val().toLowerCase();
+				if (value.search(visitName) != -1|| value.toLowerCase().search(visitNameLow) != -1) {
+					var strs = new Array();
+					strs = value.split("");
+					var strStartIndex = value.indexOf(visitName);
+					var strEndIndex = strStartIndex+ visitName.length- 1;
+					if (value.toLowerCase().search(visitNameLow) != -1) {
+						strStartIndex = value.toLowerCase().indexOf(visitNameLow);
+						strEndIndex = strStartIndex+ visitNameLow.length- 1;
+					}
+					for (var i = 0; i < strs.length; i++) {
+						if (i >= strStartIndex&& i <= strEndIndex) {
+							title += '<span style="color:#000;font-weight:bold;">'
+									+ strs[i]
+									+ '</span>';
+						} else {
+							title += '<span >'+ strs[i]+ '</span>';
+						}
+					}
+				} else {
+					title = value;
+				}
+				return title;
+	        }
+		
+		
 		
 		//格式化时间
 		function Format(datetime, fmt) {

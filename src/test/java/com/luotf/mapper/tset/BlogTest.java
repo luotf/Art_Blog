@@ -16,10 +16,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.luotf.mapper.BlogMapper;
 import com.luotf.mapper.BlogTypeMapper;
-import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
 import com.luotf.service.VisitService;
+
+
 
 @RunWith(SpringJUnit4ClassRunner.class) // 表示继承了SpringJUnit4ClassRunner类 
 @ContextConfiguration(locations = {"classpath:spring/applicationContext-*.xml" }) 
@@ -45,10 +46,10 @@ public class BlogTest{
     //	map.put("addTime", "2018-03-28");
     	//map.put(key, value)
     	PageHelper.startPage(1, 3);
-    	List<Map> blogList=visitService.selectLikeVisitListGroupByIp(map);
+    	List<?> blogList= visitService.selectLikeVisitListGroupByIp(map);
     	//分页的信息
     	PageInfo p=new PageInfo(blogList);
-    	for (Map map2 : blogList) {
+    	for (Object map2 : blogList) {
     		System.out.println(map2);
 		}
     	System.out.println(p);

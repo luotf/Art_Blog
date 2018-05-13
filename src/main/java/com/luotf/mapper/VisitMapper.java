@@ -3,7 +3,6 @@ package com.luotf.mapper;
 import java.util.List;
 import java.util.Map;
 
-import com.luotf.model.RResource;
 import com.luotf.model.Visit;
 
 public interface VisitMapper {
@@ -33,20 +32,20 @@ public interface VisitMapper {
     * @param map
     * @return
     */
-   List selectLikeVisitListGroupByIp(Map<String, Object> map);
+   List<?> selectLikeVisitListGroupByIp(Map<String, Object> map);
    
     /**
  	 *  根据日期月份分组查询
  	 * @return
  	 */
- 	List  selectVisitListByDate(Map<String, Object> map);
+ 	List<?>  selectVisitListByDate(Map<String, Object> map);
  	
  	
  	/**
  	 *  根据IP分组查询
  	 * @return
  	 */
- 	List  selectVisitListByIp(Map<String, Object> map);
+ 	List<?>  selectVisitListByIp(Map<String, Object> map);
  	
  	
     int updateByPrimaryKeySelective(Visit record);

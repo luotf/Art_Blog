@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.luotf.annotation.AccessLimit;
-import com.luotf.model.RResource;
 import com.luotf.model.Visit;
 import com.luotf.service.VisitService;
 
@@ -33,8 +32,8 @@ public class VisitControllerAdmin {
 	 @RequestMapping(value = "/selectVisitListByDate",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogListByDate(@RequestParam(value="format") String format,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectBlogListByDate(@RequestParam(value="format") String format,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(format!=""&&format!=null){
 			 map.put("format", format);
 		 }
@@ -44,8 +43,8 @@ public class VisitControllerAdmin {
 		 if(endTime!=""&&endTime!=null){
 			 map.put("endTime", endTime);
 		 }
-		 List<Map> list=visitService.selectVisitListByDate(map);
-		 Map returnMap=new HashMap();
+		 List<?> list=visitService.selectVisitListByDate(map);
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(list.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -64,8 +63,8 @@ public class VisitControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectLikeVisitListByPage")
 	 @ResponseBody
-	 public Map selectLikeVisitListByPage(Visit visit,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectLikeVisitListByPage(Visit visit,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(startTime!=""&&startTime!=null){
 			 map.put("startTime", startTime);
 		 }
@@ -88,7 +87,7 @@ public class VisitControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<Visit> visitList=visitService.selectLikeVisitListByPage(map);
 		 PageInfo<Visit> pageInfo=new PageInfo<Visit>(visitList);
-		 Map returnMap=new HashMap();
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(visitList.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -109,8 +108,8 @@ public class VisitControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectLikeVisitListGroupByIp")
 	 @ResponseBody
-	 public Map selectLikeVisitListGroupByIp(Visit visit,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> selectLikeVisitListGroupByIp(Visit visit,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(startTime!=""&&startTime!=null){
 			 map.put("startTime", startTime);
 		 }
@@ -131,9 +130,9 @@ public class VisitControllerAdmin {
 		 }
 		 //分页显示：第1页开始，每页显示9条记录
 		 PageHelper.startPage(page, pageSize);
-		 List visitList=visitService.selectLikeVisitListGroupByIp(map);
-		 PageInfo pageInfo=new PageInfo(visitList);
-		 Map returnMap=new HashMap();
+		 List<?> visitList=visitService.selectLikeVisitListGroupByIp(map);
+		PageInfo pageInfo=new PageInfo(visitList);
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(visitList.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -153,9 +152,9 @@ public class VisitControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectVisitListByIp",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map selectVisitListByIp() throws Exception{
-		 Map map=new HashMap();
-		 List list=visitService.selectVisitListByIp(map);
+	 public Map<String, Object> selectVisitListByIp() throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 List<?> list=visitService.selectVisitListByIp(map);
 		 if(list.size()>0){
 			 map.put("status", 200);
 		 }else{
@@ -174,8 +173,8 @@ public class VisitControllerAdmin {
 	  */
 	 @RequestMapping(value = "/updateVisit",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map updateVisit(Visit visit) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String, Object> updateVisit(Visit visit) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(visitService.updateByPrimaryKeySelective(visit)!=0){
 			 map.put("status", 200);
 		 }else{

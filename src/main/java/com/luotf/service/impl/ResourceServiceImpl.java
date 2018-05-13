@@ -59,7 +59,7 @@ public class ResourceServiceImpl implements ResourceService {
 	}
 
 	@Override
-	public List selectResourceListByStatus() {
+	public List<?> selectResourceListByStatus() {
 		// TODO Auto-generated method stub
 		return resourceMapper.selectResourceListByStatus();
 	}

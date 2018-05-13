@@ -69,7 +69,7 @@
 					</a></li>
 
 					<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/log.jsp"><i class="fa fa-hourglass-2"></i>
+								href="${pageContext.request.contextPath}/admin/log/log.jsp"><i class="fa fa-hourglass-2"></i>
 					<span class="nav-label">操作日志</span></a></li>
 					
 					<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/charts/eCharts.jsp"><i class="fa fa-bar-chart"></i><span

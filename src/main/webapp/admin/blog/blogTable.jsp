@@ -209,7 +209,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   $(".btn-group").find(".dropdown-menu").append(typeName);
               },    
   		    error:function(){
-  		    	swal("上传错误", "请重新操作", "error");
+  		    	swal("初始化类别错误", "请重新操作", "error");
   		    }	
           });
 	  }
@@ -545,22 +545,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//博客的操作
 	var operationBlog=function(idArray,status,isrecommend,isTop){
 		var param='';
+		var prarm='';
 		if(status!=null){
+			if(status==1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-success">发表</span>'
+			}else if(status==-1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客放入<span class="text-navy">草稿箱</span>'
+			}else if(status==2){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客放入<span class="text-danger">垃圾箱</span>'
+			}
 			 param={
 					 'id':idArray,
 					 'status':status,
+					  prarm:prarm,
 			};
 		}
 		if(isrecommend!=null){
+			if(isrecommend==1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客置为<span class="text-success">推荐</span>'
+			}else{
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-navy">取消推荐</span>'
+			}
 			param={
 					 'id':idArray,
 					 'isrecommend':isrecommend,
+					  prarm:prarm,
 			};
 		}
 		if(isTop!=null){
+			if(isTop==1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-success">置顶</span>'
+			}else{
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-navy">取消置顶</span>'
+			}
 			param={
 					 'id':idArray,
 					 'istop':isTop,
+					 prarm:prarm,
 			};
 		}
 		$.ajax({

@@ -1,9 +1,6 @@
 package com.luotf.listener;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Date;
-import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRequestEvent;

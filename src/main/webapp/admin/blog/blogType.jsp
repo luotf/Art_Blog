@@ -323,7 +323,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		var params ={
 	 				'id':id,
         			'typename':$("#newTypeName").val(),
-        			 prarm:'将类别名称“'+typename+'”更新为“'+$("#newTypeName").val()+'”'
+        			 prarm:'将类别名称<span class="text-info">#'+typename+'#</span>更新为<span class="text-info">#'+$("#newTypeName").val()+'#</span>'
         	};
 	 		if($("#commentForm2").valid()){
 	 			 $.ajax({
@@ -354,7 +354,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var deleteBlogType=function(id,name){
 			var params ={
 	 				id:id,
-	 				prarm:'删除的博客类别为“'+name+'”',
+	 				prarm:'删除的博客类别为<span class="text-info">#'+name+'#</span>',
         	};
 			swal({
 	             title: "确定要删除该类别吗",
@@ -401,7 +401,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var addBlogType=function(){
           var params ={
         			'typename':$("#typename").val(),
-        			 prarm:'新增的博客类别为“'+$("#typename").val()+'”',
+        			 prarm:'新增的博客类别为<span class="text-info">#'+$("#typename").val()+'#</span>',
         	};
             $.ajax({
                    url:'../addBlogType',    

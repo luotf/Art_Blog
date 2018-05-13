@@ -64,7 +64,7 @@ public interface BlogService {
  	
  	List<Blog> selectLikeBlogListByPageWithBlobs(Map<String, Object> map);
  	
- 	List selectBlogByClick();
+ 	List<?> selectBlogByClick();
  	
 	List<Blog> selectBlogByTypeId(Integer id);
 
@@ -89,7 +89,7 @@ public interface BlogService {
 	 * 
 	 * @return
 	 */
-	List selectBlogListByDate(Map<String, Object> map);
+	List<?> selectBlogListByDate(Map<String, Object> map);
 
 	/**
 	 * 根据组合条件获取Blog条数
@@ -104,5 +104,5 @@ public interface BlogService {
  	 *  获取博客信息，根据状态分组查询
  	 * @return
  	 */
-	List  selectBlogListByStatus();
+	List<?>  selectBlogListByStatus();
 }

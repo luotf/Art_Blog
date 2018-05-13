@@ -6,7 +6,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="typeName" jdbcType="VARCHAR" property="typename" />
     <result column="num" jdbcType="INTEGER" property="num" />
-   <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
    
     <!-- 配置 一对多 关联关系 -->
     <collection property="blogs" javaType="ArrayList" column="id"
@@ -33,10 +33,7 @@
 		 	</if>
 		 </where>
 		  ORDER BY num DESC
-		 <!--  <if test="pageNow!=null and pageSize!=null">
-		 	limit #{pageNow},#{pageSize}
-		 </if>
-		 -->
+		 
 	</select>
   
   

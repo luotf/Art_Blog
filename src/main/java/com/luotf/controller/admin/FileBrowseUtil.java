@@ -4,29 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.luotf.model.Blog;
-import com.luotf.model.BlogType;
-import com.luotf.service.BlogTypeService;
-import com.luotf.util.subStringUtil;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -44,13 +31,13 @@ public class FileBrowseUtil {
      */
     @RequestMapping("/getFileList")
     @ResponseBody
-    protected Map CalculateGeoServlet(HttpServletRequest req,
+    protected Map<String, Object> CalculateGeoServlet(HttpServletRequest req,
             HttpServletResponse resp) throws ServletException, IOException,
             MalformedURLException {
         ArrayList<String> fileList=new ArrayList<String>();
         String params="c:\\upload";
         fileList=getFiles(params,fileList);
-        Map map=new HashMap();
+        Map<String, Object> map=new HashMap<String, Object>();
         if(fileList.size()>0){
         	map.put("status", 200);
         }else{
@@ -66,11 +53,9 @@ public class FileBrowseUtil {
      */
     public static ArrayList<String> getFiles(String filePath,ArrayList<String> fileList) {
         ArrayList<String> fileListAll =fileList;
-        //System.out.println("访问的路径为："+filePath);
         File root = new File(filePath);
         File[] files = root.listFiles();
         String[] arr=new String[10];
-        String path="";
         for (File file : files) {
             if (file.isDirectory()) {
                 /*
@@ -78,15 +63,11 @@ public class FileBrowseUtil {
                  */
             	arr=file.getAbsolutePath().split(":");
                 getFiles(arr[1].replace("\\","/"),fileListAll);
-                //fileList.add(file.getAbsolutePath());
             } else {
             	arr=file.getAbsolutePath().split(":");
                 fileList.add(arr[1].replace("\\","/"));
             }
         }
-       /* for(String str:fileList){
-            System.out.println(str);
-        }*/
         return fileListAll;
     }
 }

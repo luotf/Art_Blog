@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.luotf.listener.VisitTimesListener;
 import com.luotf.model.BlackIp;
 import com.luotf.service.BlackIpService;
 import com.luotf.util.UserIpUtil;

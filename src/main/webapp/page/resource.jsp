@@ -82,17 +82,23 @@
 	});
 	var initResource=function(pageNum){
 		var keyword=$("#keyword").val();
-		if(keyword=="请输入关键字")
+		var prarm='';
+		if(keyword=="请输入关键字"){
 			keyword="";
+			prarm='none'
+		}else{
+			prarm='搜索关键字为<span class="text-info">#'+keyword+'#</span>的资源'
+		}
 		 var params={
 				 pageSize: 12,
 		         page:pageNum,
    				 title:keyword,
    				 content:keyword,
+   				 prarm:prarm,
    				 status:1    //1 表示已发布
    			 };
               	$.ajax({
-	            url:'../admin/selectLikeResourceListByPage',    
+	            url:'selectLikeResourceListByPage',    
 	            type:'get',
 	            data:params,
 	            dataType:'json',    
@@ -102,7 +108,7 @@
 	            	var data=date.resourceList;
 	            	if(data.length>0){
 	            		for (var i = 0; i < data.length; i++) {
-	            			resourceList+='<div class="col-sm-4 animated fadeInDown" ><div class="panel panel-info"><div class="panel-heading">'+data[i].title+'</div><div class="panel-body"><p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-danger pull-right">Go</span></a> </div></div></div>';
+	            			resourceList+='<div class="col-sm-4 animated fadeInDown" ><div class="panel panel-default"><div class="panel-heading" style="border:none">'+data[i].title+'</div><div class="panel-body" style=" padding: 10px 15px;"> <p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-info pull-right" style="background-color: #748c8c;">Go</span></a> </div></div></div>';
 	            		}
 	            	}else{
 	            		resourceList="无查询结果";
