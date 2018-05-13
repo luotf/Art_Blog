@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.luotf.annotation.SystemLog;
 import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogTypeService;
-import com.luotf.util.subString;
+import com.luotf.util.ConstantUtil;
+import com.luotf.util.subStringUtil;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -58,7 +60,8 @@ public class BlogTypeControllerAdmin {
 
 	@RequestMapping(value = "/deleteBlogType", method = RequestMethod.POST)
 	@ResponseBody
-	public Map deleteBlogType(BlogType blogType) throws Exception {
+	@SystemLog(description = ConstantUtil.BLOGTYPE_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
+	public Map deleteBlogType(String prarm,BlogType blogType) throws Exception {
 		Map map = new HashMap();
 		//查询该类别下是否有博客
 		if (blogTypeService.selectBlogTypeById(blogType.getId()).getNum()!=0) {
@@ -76,7 +79,8 @@ public class BlogTypeControllerAdmin {
 
 	@RequestMapping(value = "/addBlogType", method = RequestMethod.POST)
 	@ResponseBody
-	public Map addBlogType(BlogType blogType) throws Exception {
+	@SystemLog(description = ConstantUtil.BLOGTYPE_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
+	public Map addBlogType(String prarm,BlogType blogType) throws Exception {
 		Map map = new HashMap();
 		if (blogTypeService.selectBlogTypeByName(blogType.getTypename())!=null) {
 			// 已经存在该类别
@@ -141,7 +145,8 @@ public class BlogTypeControllerAdmin {
 	 */
 	@RequestMapping(value = "/updateBlogType", method = RequestMethod.POST)
 	@ResponseBody
-	public Map updateBlogType(BlogType blogType) throws Exception {
+	@SystemLog(description = ConstantUtil.BLOGTYPE_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
+	public Map updateBlogType(String prarm,BlogType blogType) throws Exception {
 		Map map = new HashMap();
 		if (blogTypeService.selectBlogTypeByName(blogType.getTypename())!=null) {
 			// 已经存在该类别

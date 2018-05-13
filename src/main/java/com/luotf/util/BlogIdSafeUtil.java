@@ -1,6 +1,6 @@
 package com.luotf.util;
 
-public class BlogIdSafe {
+public class BlogIdSafeUtil {
 	
 	public static Integer BlogIdToSafe(Integer id){
 		int bId=0;

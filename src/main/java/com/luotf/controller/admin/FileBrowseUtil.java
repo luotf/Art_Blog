@@ -26,7 +26,7 @@ import com.github.pagehelper.PageInfo;
 import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogTypeService;
-import com.luotf.util.subString;
+import com.luotf.util.subStringUtil;
 
 @Controller
 @RequestMapping(value = "/admin")

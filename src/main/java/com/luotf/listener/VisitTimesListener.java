@@ -20,6 +20,7 @@ import com.luotf.model.Visit;
 import com.luotf.service.VisitService;
 import com.luotf.util.AddressUtil;
 import com.luotf.util.UserAgentUtil;
+import com.luotf.util.UserIpUtil;
 
 public class VisitTimesListener implements ServletRequestListener {
 	private Log log = LogFactory.getLog(getClass());
@@ -50,7 +51,7 @@ public class VisitTimesListener implements ServletRequestListener {
 				log.debug(applicationContext.getBean("visitServiceImpl"));
 				// 先判断当前ip当天是否已经访问过,如果没有则保存当前访问记录
 				visit = new Visit();
-				visit.setIp(getIp(request));
+				visit.setIp(UserIpUtil.getIp(request));
 				visit.setTime(new Date());
 				String userAgent = request.getHeader("user-agent");
 				visit.setUserAgent(userAgent);
@@ -71,44 +72,7 @@ public class VisitTimesListener implements ServletRequestListener {
 			e.printStackTrace();
 		}
 	}
-	// 获取IP
-	public String getIp(HttpServletRequest httpRequest) {
-		String ipAddress = httpRequest.getHeader("x-forwarded-for");
-		if (ipAddress == null || ipAddress.length() == 0
-				|| "unknown".equalsIgnoreCase(ipAddress)) {
-			ipAddress = httpRequest.getHeader("Proxy-Client-IP");
-		}
-		if (ipAddress == null || ipAddress.length() == 0
-				|| "unknown".equalsIgnoreCase(ipAddress)) {
-			ipAddress = httpRequest.getHeader("WL-Proxy-Client-IP");
-		}
-		if(null == ipAddress || 0 == ipAddress.length() || "unknown".equalsIgnoreCase(ipAddress)) {
-			ipAddress = httpRequest.getHeader("X-Real-IP");
-	    }
-		if (ipAddress == null || ipAddress.length() == 0
-				|| "unknown".equalsIgnoreCase(ipAddress)) {
-			ipAddress = httpRequest.getRemoteAddr();
-			if (ipAddress.equals("127.0.0.1")
-					|| ipAddress.equals("0:0:0:0:0:0:0:1")) {
-				// 根据网卡取本机配置的IP
-				InetAddress inet = null;
-				try {
-					inet = InetAddress.getLocalHost();
-				} catch (UnknownHostException e) {
-					e.printStackTrace();
-				}
-				ipAddress = inet.getHostAddress();
-			}
-		}
-		// 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-		if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
-															// = 15
-			if (ipAddress.indexOf(",") > 0) {
-				ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
-			}
-		}
-		return ipAddress;
-	}
+	
 
 	/*public String getLocalIp() throws UnknownHostException {
 		InetAddress ia = InetAddress.getLocalHost();

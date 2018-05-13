@@ -19,10 +19,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.luotf.listener.VisitTimesListener;
 import com.luotf.model.BlackIp;
 import com.luotf.service.BlackIpService;
+import com.luotf.util.UserIpUtil;
 
 public class IpFilter implements Filter {
 	private ApplicationContext applicationContext = null;
-	private VisitTimesListener vi=null;
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -33,11 +33,10 @@ public class IpFilter implements Filter {
 	public void doFilter(ServletRequest arg0, ServletResponse arg1,
 			FilterChain arg2) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		 vi=new VisitTimesListener();
 		 HttpServletRequest request = (HttpServletRequest) arg0;
 		 HttpServletResponse response = (HttpServletResponse) arg1;
 		 //获取到用户的IP
-		 String ip=vi.getIp(request);
+		 String ip=UserIpUtil.getIp(request);
 		 HttpSession session = request.getSession();
 		 ServletContext servletContext = session.getServletContext();
 			BlackIp blackIp = null;

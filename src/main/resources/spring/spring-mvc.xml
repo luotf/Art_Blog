@@ -36,7 +36,7 @@
         <!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->   
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />    
         <!-- 如果不定义 mvc:mapping path 将拦截所有的URL请求 -->  
-        <bean class="com.luotf.annotation.AccessInterceptor"></bean>  
+        <bean class="com.luotf.interceptor.AccessInterceptor"></bean>  
     </mvc:interceptors> 
 
 <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
@@ -83,24 +83,15 @@
     </property>  
 </bean>   
 
-	<!--自定义参数绑定组件 
-	<bean id="conversionService"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-		
-		<property name="converters">
-			<set>
-				
-				<bean class="com.luotf.controller.converter.CustomDateConverter" />
-			</set>
-		</property>
-	</bean>
--->
+	
 	<!--组件扫描，可以扫描 controller、Service、... 并注册添加到 spring 容器中 这里扫描 controller，指定controller的包 -->
 	<context:component-scan base-package="com.luotf.controller" />
-
-	<!--全局错误信息处理器 只要实现HandlerExceptionResolver接口就是全局异常处理器 
-	<bean class="com.system.exception.CustomExceptionResolver" />-->
-
+	
+	<!-- 启动对@AspectJ注解的支持  -->   
+	<aop:aspectj-autoproxy proxy-target-class="true" />  
+	<!-- 自动扫描包路径  --> 
+	<context:component-scan base-package="com.luotf.aop" />
+	
 	<!--视图解析器 -->
 	<!-- 需要配置解析jsp的视图解析器 jsp解析，默认使用jstl标签解析 -->
 	<bean

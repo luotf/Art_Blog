@@ -108,6 +108,7 @@
 		            content:keyword,
 		            introduction:keyword,
 		            keyword:keyword,
+		            param:'搜索了关键字为“'+keyword+'”的博客',
 		           	status:1  //1 表示已发布
 			};
 		}else {

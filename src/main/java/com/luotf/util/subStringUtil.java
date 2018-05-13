@@ -2,7 +2,7 @@ package com.luotf.util;
 
 import com.luotf.model.Blog;
 
-public class subString {
+public class subStringUtil {
 	
 	/**
 	 * 返回富文本中的第一个图片路径作为 博客封面

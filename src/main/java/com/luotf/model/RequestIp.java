@@ -1,4 +1,4 @@
-package com.luotf.annotation;
+package com.luotf.model;
 
 public class RequestIp{
 	

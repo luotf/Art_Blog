@@ -20,10 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.luotf.annotation.AccessLimit;
+import com.luotf.annotation.SystemLog;
 import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
-import com.luotf.util.BlogIdSafe;
+import com.luotf.util.BlogIdSafeUtil;
+import com.luotf.util.ConstantUtil;
 
 
 
@@ -36,8 +38,9 @@ public class BlogController {
 	
 	
 	 @RequestMapping(value = "/find/{id}.html")
+	 @SystemLog(description = ConstantUtil.BLOG_SELECT,userType=ConstantUtil.USERTYPE_USER) 
 	 public String selectBlogById(@PathVariable Integer id,Model model) throws Exception {
-		 int sId=BlogIdSafe.BlogIdToSafe(id);
+		 int sId=BlogIdSafeUtil.BlogIdToSafe(id);
 		// System.out.println("sid:"+ BlogIdSafe.BlogIdToSafe(id));
 		 if(id==null||id<=0){
 			//0表示查询 错误
@@ -85,7 +88,7 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectPrevBlog")
 	 @ResponseBody
-	 @AccessLimit(seconds=1,maxCount=4)
+	 @AccessLimit(seconds=1,maxCount=5)
 	 public Map selectPrevBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
 		 Blog blog=blogService.selectPrevBlog(id);
@@ -109,9 +112,9 @@ public class BlogController {
 	 @RequestMapping(value = "/selectLikeBlogListByPage")
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=13)
-	 public Map selectLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+	 @SystemLog(description = ConstantUtil.BLOG_FINDKEY,userType=ConstantUtil.USERTYPE_USER) 
+	 public Map selectLikeBlogListByPage(String param,Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map map=new HashMap();
-		// if(sort)
 		 map.put("sort", sort);
 		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
 			 map.put("title", blog.getTitle());
@@ -144,7 +147,6 @@ public class BlogController {
 		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectLikeBlogListByPageWithBlobs(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
-		 //System.out.println("type_id:"+blog.getType().getId());
 		 Map returnMap=new HashMap();
 		 if(blogList.size()>0){
 			 returnMap.put("status", 200);

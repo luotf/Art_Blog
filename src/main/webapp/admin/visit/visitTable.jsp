@@ -373,6 +373,7 @@
 					city : city,
 					browsertype:browserType,
 					platformtype:platformType,
+					prarm:'将ip为“'+ip+'”的用户添加进黑名单'
 				}; 
 			 swal({
 	             title: "确定添加到黑名单吗",
@@ -405,7 +406,7 @@
 						}
 					});
 	         });
-		}
+		};
 		
 
 		//设置 字数不超过宽度限制

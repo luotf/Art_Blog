@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.luotf.annotation.SystemLog;
 import com.luotf.model.BlackIp;
 import com.luotf.service.BlackIpService;
+import com.luotf.util.ConstantUtil;
 
 
 
@@ -27,36 +29,7 @@ public class BlackIpControllerAdmin {
 	@Resource(name = "blackIpServiceImpl")
 	private BlackIpService blackIpService;
 	
-	/*
-	  * 按照不同时间查询访客的数量
-	  */
-	/*
-	 @RequestMapping(value = "/selectBlackIpListByDate",method = RequestMethod.POST)
-	 @ResponseBody
-	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlackIpListByDate(@RequestParam(value="format") String format,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
-		 Map map=new HashMap();
-		 if(format!=""&&format!=null){
-			 map.put("format", format);
-		 }
-		 if(startTime!=""&&startTime!=null){
-			 map.put("startTime", startTime);
-		 }
-		 if(endTime!=""&&endTime!=null){
-			 map.put("endTime", endTime);
-		 }
-		 List<Map> list=visitService.selectVisitListByDate(map);
-		 Map returnMap=new HashMap();
-		 if(list.size()>0){
-			 returnMap.put("status", 200);
-		 }else{
-			 //500表示：返回值为Null
-			 returnMap.put("status", 500);
-		 }
-		 returnMap.put("list", list);
-		 return returnMap;
-	 }
-	 */
+	
 	 /**
 	  * 模糊组合分页查询访客信息
 	  * @param id，resource
@@ -130,7 +103,8 @@ public class BlackIpControllerAdmin {
 	  */
 	 @RequestMapping(value = "/addBlackIp",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map addBlackIp(BlackIp blackIp) throws Exception{
+	 @SystemLog(description = ConstantUtil.BACKIP_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 public Map addBlackIp(String prarm,BlackIp blackIp) throws Exception{
 		 Map map=new HashMap();
 		
 		 if(blackIpService.selectBlackIpByIp(blackIp.getIp())!=null){
@@ -179,12 +153,13 @@ public class BlackIpControllerAdmin {
 	  */
 	 @RequestMapping(value = "/deleteBlackIp",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map deleteBlackIp(Integer id) throws Exception{
+	 @SystemLog(description = ConstantUtil.BACKIP_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 public Map deleteBlackIp(String prarm,Integer id) throws Exception{
 		 Map map=new HashMap();
 		 if(blackIpService.deleteByPrimaryKey(id)!=0){
 			 map.put("status", 200);
 		 }else{
-			 //0表示：更新失败
+			 //0表示：失败
 			 map.put("status", 0);
 		 }
 		 return map;

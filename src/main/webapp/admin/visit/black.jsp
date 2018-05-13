@@ -343,7 +343,7 @@
 											width : '15%',
 											formatter : function(value, row, index) {
 												var id = row.vid;
-												var b = '<a  class=" btn-sm btn-info" onclick="deleteBlackIp('+id+')"><i class="fa  fa-share-square-o" ></i> 移出黑名单</a> ';
+												var b = '<a  class=" btn-sm btn-info" onclick="deleteBlackIp('+id+',\''+row.ip+'\')"><i class="fa  fa-share-square-o" ></i> 移出黑名单</a> ';
 												return b;
 											}
 								  } ]
@@ -365,9 +365,10 @@
 			};
 		}
 		
-		var deleteBlackIp=function(id){
+		var deleteBlackIp=function(id,ip){
 			 var params = {
-					id : id
+					id : id,
+					prarm:'将ip为“'+ip+'”的用户移出黑名单',
 				}; 
 				$.ajax({
 					url : '../deleteBlackIp',

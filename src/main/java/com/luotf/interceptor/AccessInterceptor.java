@@ -1,4 +1,4 @@
-package com.luotf.annotation;
+package com.luotf.interceptor;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -13,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.luotf.annotation.AccessLimit;
+import com.luotf.model.RequestIp;
+import com.luotf.util.UserIpUtil;
 
 public class AccessInterceptor implements HandlerInterceptor {
 
@@ -47,17 +50,7 @@ public class AccessInterceptor implements HandlerInterceptor {
 		ObjectMapper mapper=null;
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		// 取用户的真实IP
-		String ip = request.getHeader("x-forwarded-for");
-
-		if (ip == null || ip.length() == 0 || " unknown ".equalsIgnoreCase(ip)) {
-			ip = request.getHeader(" Proxy-Client-IP ");
-		}
-		if (ip == null || ip.length() == 0 || " unknown ".equalsIgnoreCase(ip)) {
-			ip = request.getHeader(" WL-Proxy-Client-IP ");
-		}
-		if (ip == null || ip.length() == 0 || " unknown ".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
+		String ip =UserIpUtil.getIp(request);
 		// 取session中的IP对象
 		RequestIp re = (RequestIp) request.getSession().getAttribute(ip);
 		// 第一次请求
@@ -70,11 +63,7 @@ public class AccessInterceptor implements HandlerInterceptor {
 		} else {
 			Long createTime = re.getCreateTime();
 			if (null == createTime) {
-				// 时间请求为空
-				 // resultMap.put("status", 503); 
-				 // resultMap.put("message","请求太快，请稍后再试！");
-				  //out = response.getWriter();
-				  //mapper = new ObjectMapper();
+				  // 时间请求为空
 				  //out.write("<script >layer.msg('请求太快，请稍后再试！', {icon: 2});</script>");
 			} else {
 				if (((System.currentTimeMillis() - createTime) / 1000) > accessLimit.seconds()) {
@@ -87,10 +76,6 @@ public class AccessInterceptor implements HandlerInterceptor {
 				} else {
 					// 小于3秒，并且3秒之内请求了10次，返回提示
 					if (re.getReCount() > accessLimit.maxCount()) {
-						  //resultMap.put("status", 503); 
-						  //resultMap.put("message","请求太快，请稍后再试！");
-						  //out = response.getWriter();
-						  //mapper = new ObjectMapper();  
 						  //out.write("<script>layer.msg('请求太快，请稍后再试！', {icon: 2});</script>");
 						 return false;
 					} else {

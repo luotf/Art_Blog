@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.luotf.annotation.SystemLog;
 import com.luotf.model.RResource;
 import com.luotf.service.ResourceService;
+import com.luotf.util.ConstantUtil;
 
 
 
@@ -35,7 +37,8 @@ public class ResourceControllerAdmin {
 	  */
 	 @RequestMapping(value = "/addResource",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map addResource(RResource resource) throws Exception{
+	 @SystemLog(description = ConstantUtil.RESOURCE_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 public Map addResource(String prarm,RResource resource) throws Exception{
 		 Map map=new HashMap();
 		 resource.setAddtime(new Date());
 		 if(resourceService.insert(resource)!=0){
@@ -55,7 +58,8 @@ public class ResourceControllerAdmin {
 	  */
 	 @RequestMapping(value = "/updateResource",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map updateResource(RResource resource) throws Exception{
+	 @SystemLog(description = ConstantUtil.RESOURCE_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 public Map updateResource(String prarm,RResource resource) throws Exception{
 		 Map map=new HashMap();
 		 if(resourceService.updateByPrimaryKeySelective(resource)!=0){
 			 map.put("status", 200);
@@ -74,7 +78,8 @@ public class ResourceControllerAdmin {
 	  */
 	 @RequestMapping(value = "/deleteResource",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map deleteResource(Integer id) throws Exception{
+	 @SystemLog(description = ConstantUtil.RESOURCE_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 public Map deleteResource(String prarm, Integer id) throws Exception{
 		 Map map=new HashMap();
 		 if(resourceService.deleteByPrimaryKey(id)!=0){
 			 map.put("status", 200);
@@ -144,7 +149,7 @@ public class ResourceControllerAdmin {
 	 }
 	 
 	 /**
-	  * 通过类别typeId查询博客信息
+	  * 通过状态查询资源信息
 	  * @param id
 	  * @return
 	  * @throws Exception

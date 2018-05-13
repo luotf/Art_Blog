@@ -25,10 +25,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.luotf.annotation.AccessLimit;
+import com.luotf.annotation.SystemLog;
 import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogService;
-import com.luotf.util.subString;
+import com.luotf.util.ConstantUtil;
+import com.luotf.util.subStringUtil;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -45,6 +47,7 @@ public class BlogControllerAdmin {
 	 */
 	 @RequestMapping(value = "/uploadImages",method = RequestMethod.POST)
 	 @ResponseBody
+	 @SystemLog(description = ConstantUtil.UPLOAD_IMAGES,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map uploadImage(HttpServletRequest request) throws Exception {
 		 CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
 		 Map map=new HashMap();
@@ -87,12 +90,13 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/addBlog",method = RequestMethod.POST)
 	 @ResponseBody
+	 @SystemLog(description = ConstantUtil.BLOG_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map addBlog(Blog blog) throws Exception{
 		 Map map=new HashMap();
 		 
 		 //将中文的分号转换成英文的分号
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
-			 blog.setKeyword(subString.subKeyword(blog.getKeyword()));
+			 blog.setKeyword(subStringUtil.subKeyword(blog.getKeyword()));
 		 }
 		 blog.setAddtime(new Date());
 		 if(blogService.insertBlog(blog)!=0){
@@ -113,6 +117,7 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/deleteBlog",method = RequestMethod.POST)
 	 @ResponseBody
+	 @SystemLog(description = ConstantUtil.BLOG_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map deleteBlog(Integer id) throws Exception{
 		 Map map=new HashMap();
 		 if(blogService.deleteBlogById(id)!=0){
@@ -133,12 +138,13 @@ public class BlogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/updateBlog",method = RequestMethod.POST)
 	 @ResponseBody
+	 @SystemLog(description = ConstantUtil.BLOG_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map updateBlog(Blog blog) throws Exception{
 		 Map map=new HashMap();
 		
 		 //将中文的分号转换成英文的分号
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
-			 blog.setKeyword(subString.subKeyword(blog.getKeyword()));
+			 blog.setKeyword(subStringUtil.subKeyword(blog.getKeyword()));
 		 }
 		 
 		 if(blogService.updateBlogSelective(blog)!=0){
@@ -348,11 +354,6 @@ public class BlogControllerAdmin {
 		 PageHelper.startPage(page, pageSize);
 		 List<Blog> blogList=blogService.selectBlogListByPage(map);
 		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
-		 	/*System.out.println("总记录数："+pageInfo.getTotal());
-	    	System.out.println("总页数："+pageInfo.getPages());
-	    	System.out.println("当前页："+pageInfo.getPageNum());
-	    	System.out.println("每页的数量："+pageInfo.getPageSize());
-	    	System.out.println("当前页数量："+pageInfo.getSize());*/
 		 Map returnMap=new HashMap();
 		 
 		 if(blogList.size()>0){
@@ -437,10 +438,7 @@ public class BlogControllerAdmin {
 		 returnMap.put("count", count);
 		 return returnMap;
 	 }
-	 
-	 
-	 
-	 
+	 	 
 	 
 	 /**
 	  * 查询前一篇博客信息

@@ -327,11 +327,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                   //编辑
 		                       var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectResourceById('+row.id+')"><i class="fa fa-edit" ></i> 编辑</a> ';  
 		                       //删除
-		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteResource('+ row.id + ')"><i class="fa fa-trash-o" ></i> 删除</a> '; 
+		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteResource('+ row.id + ',\''+ row.title + '\')"><i class="fa fa-trash-o" ></i> 删除</a> '; 
 			                   //下架
-		                       var c = '<a  class=" btn-sm btn-danger"  title="下架后前台将无法展示" onclick="updateResource('+ row.id + ',-1)"><i class="fa fa-hand-o-down" ></i> 下架</a> '; 
+		                       var c = '<a  class=" btn-sm btn-danger"  title="下架后前台将无法展示" onclick="updateResource('+ row.id + ',\''+ row.title + '\',-1)"><i class="fa fa-hand-o-down" ></i> 下架</a> '; 
 		                       //上架
-		                       var d = '<a  class=" btn-sm btn-primary"  title="上架后将在前台展示" onclick="updateResource('+ row.id + ',1)"><i class="fa fa-hand-o-up" ></i> 上架</a> '; 
+		                       var d = '<a  class=" btn-sm btn-primary"  title="上架后将在前台展示" onclick="updateResource('+ row.id + ',\''+ row.title + '\',1)"><i class="fa fa-hand-o-up" ></i> 上架</a> '; 
 		                   	 	if(row.status==-1){
 		                   	 	  return d+b;  
 		                   	 	}else if(row.status==1){
@@ -373,7 +373,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	$("#newContent").val(data.resource.content);
                     	$("#newLink").val(data.resource.link);
                     	$("#newPassword").val(data.resource.password);
-                    	var updateButton=' <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="updateResource('+data.resource.id+',null)" type="button"><strong>提交</strong></button>'
+                    	var updateButton=' <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="updateResource('+data.resource.id+',\''+data.resource.title+'\',null)" type="button"><strong>提交</strong></button>'
                     	$("#update").html(updateButton);
                     }else if(data.status==0){
                     	swal("查询失败", "不存在该类别信息", "error");
@@ -483,18 +483,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		
-	 	var updateResource=function(id,status){
+	 	var updateResource=function(id,title,status){
 	 		var params={
 	 				'id':id,
         			'title':$("#newTitle").val(),
         			'content':$("#newContent").val(),
         			'link':$("#newLink").val(),
         			'password':$("#newPassword").val(),
+        			 prarm:'更新了资源“'+title+'”',
         	};
 	 		if(status!=null&&status!=""){
+	 			var p='将资源“'+title+'”上架';
+	 			if(status==-1){
+	 				p='将资源“'+title+'”下架';
+	 			}
 	 			params ={
 	 					'id':id,
 	        			'status':status,
+	        			 prarm:p,
 	        	};
 	 		}
 	 			 $.ajax({
@@ -519,9 +525,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		
 	 	}
 		
-		var deleteResource=function(id){
+		var deleteResource=function(id,title){
 			var params ={
 	 				'id':id,
+	 				 prarm:'删除的资源为“'+title+'”'
         	};
 			swal({
 	             title: "确定要删除该资源吗",
@@ -562,6 +569,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			content:$("#content").val(),
         			link:$("#link").val(),
         			password:$("#password").val(),
+        			prarm:'新增的资源名称为“'+$("#title").val()+'”',
         	};
             $.ajax({
                    url:'../addResource',    
