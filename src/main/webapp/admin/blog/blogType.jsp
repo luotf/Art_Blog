@@ -211,17 +211,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                 };
 	            },
 			    columns: [
-			             
 		                  {
-		                      title: 'ID',
-		                      field: 'id',
+		                      title: '序号',
 		                      align: 'center',
 		                      valign: 'middle',
+		                      width: '5%',
+		                      formatter: function (value, row, index) {  
+		                          return index+1;  
+		                      }  
 		                  }, 
 		                  {
 		                      title: '类别',
 		                      field: 'typename',
 		                      align: 'center',
+		                      width: '12%',
 		                      formatter:function(value,row,index){ 
 		                    	  var type="";
 		                    	  var typename=$(".search .form-control").val();
@@ -253,14 +256,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '数量',
 		                      field: 'num',
 		                      align: 'center',
-		                      
+		                      width: '8%',
 		                  },
 		                  
 		                  {
 		                      title: '发表时间',
 		                      field: 'addTime',
 		                      align: 'center',
-		                      
+		                      width: '15%',
 		                      formatter:function(value,row,index){  
 		                    	 return Format(row.addTime,"yyyy-MM-dd hh:mm:ss");
 			   	                 } 
@@ -269,9 +272,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '操作',
 		                      field: 'id',
 		                      align: 'center',
+		                      width: '12%',
 		                      formatter:function(value,row,index){
-			                   var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectBlogTypeById('+row.id+')"><i class="fa fa-edit" ></i>编辑</a> ';  
-			                   var b = '<a  class=" btn-sm btn-danger"   onclick="deleteBlogType('+ row.id + ')"><i class="fa fa-trash-o" ></i>删除</a> '; 
+			                   var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectBlogTypeById('+row.id+')"><i class="fa fa-edit" ></i> 编辑</a> ';  
+			                   var b = '<a  class=" btn-sm btn-danger"   onclick="deleteBlogType('+ row.id + ')"><i class="fa fa-trash-o" ></i> 删除</a> '; 
 		                   	 return a+b;  
 		                    } 
 		                  }

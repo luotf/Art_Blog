@@ -64,6 +64,7 @@ public interface BlogService {
  	
  	List<Blog> selectLikeBlogListByPageWithBlobs(Map<String, Object> map);
  	
+ 	List selectBlogByClick();
  	
 	List<Blog> selectBlogByTypeId(Integer id);
 

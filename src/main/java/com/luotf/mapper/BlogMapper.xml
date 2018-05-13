@@ -49,6 +49,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   
+  
   <select id="selectBlogByTypeId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -63,7 +64,7 @@
   </delete>
   
   	<select id="selectBlogListByDate" resultType="map" parameterType="Map">
-		  SELECT addTime,
+		  SELECT addTime,SUM(clickNum) AS clickNum,
 		    COUNT(*) AS count
 		  FROM
 		    t_blog 
@@ -88,6 +89,13 @@
 	</select>
 	
   
+  
+  <select id="selectBlogByClick" resultType="map">
+		  SELECT id,clickNum 
+		  FROM t_blog 
+		  ORDER BY clickNum 
+		  DESC LIMIT 7
+	</select>
   
   <select id="selectBlogCount" parameterType="Map" resultType="Long">
 		SELECT COUNT(*) from t_blog

@@ -289,239 +289,41 @@
 								},
 								columns : [
 										{
-											title : 'ID',
-											field : 'id',
-											align : 'center',
-											valign : 'middle',
-											width : '5%',
-										},
+						                      title: '序号',
+						                      align: 'center',
+						                      valign: 'middle',
+						                      width: '5%',
+						                      formatter: function (value, row, index) {  
+						                          return index+1;  
+						                      }  
+						                  }, 
 										{
 											title : 'IP',
 											field : 'ip',
 											align : 'center',
 											width : '15%',
-											formatter : function(value, row,
-													index) {
-												var ip = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.ip.search(visitName) != -1
-														|| row.ip
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.ip.split("");
-													var strStartIndex = row.ip
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.ip
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.ip
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															ip += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															ip += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													ip = row.ip;
-												}
-												return ip;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '地区',
 											field : 'city',
 											align : 'center',
 											width : '18%',
-											formatter : function(value, row,
-													index) {
-												var city = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.city.search(visitName) != -1
-														|| row.city
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.city.split("");
-													var strStartIndex = row.city
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.city
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.city
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															city += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															city += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													city = row.city;
-												}
-												return city;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '浏览器',
 											field : 'browserType',
 											align : 'center',
 											width : '12%',
-											formatter : function(value, row,
-													index) {
-												var browserType = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.browserType
-														.search(visitName) != -1
-														|| row.browserType
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.browserType
-															.split("");
-													var strStartIndex = row.browserType
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.browserType
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.browserType
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															browserType += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															browserType += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													browserType = row.browserType;
-												}
-												return browserType;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '系统',
 											field : 'platformType',
 											align : 'center',
 											width : '12%',
-											formatter : function(value, row,
-													index) {
-												var platformType = "";
-												var visitName = $(
-														".search .form-control")
-														.val();
-												var visitNameLow = $(
-														".search .form-control")
-														.val().toLowerCase();
-												if (row.platformType
-														.search(visitName) != -1
-														|| row.platformType
-																.toLowerCase()
-																.search(
-																		visitNameLow) != -1) {
-													var strs = new Array();
-													strs = row.platformType
-															.split("");
-													var strStartIndex = row.platformType
-															.indexOf(visitName);
-													var strEndIndex = strStartIndex
-															+ visitName.length
-															- 1;
-													if (row.platformType
-															.toLowerCase()
-															.search(
-																	visitNameLow) != -1) {
-														strStartIndex = row.platformType
-																.toLowerCase()
-																.indexOf(
-																		visitNameLow);
-														strEndIndex = strStartIndex
-																+ visitNameLow.length
-																- 1;
-													}
-													for (var i = 0; i < strs.length; i++) {
-														if (i >= strStartIndex
-																&& i <= strEndIndex) {
-															platformType += '<span style="color:#000;font-weight:bold;">'
-																	+ strs[i]
-																	+ '</span>';
-														} else {
-															platformType += '<span >'
-																	+ strs[i]
-																	+ '</span>';
-														}
-													}
-												} else {
-													platformType = row.platformType;
-												}
-												return platformType;
-											}
+											formatter:operateOpinionFormatter
 										},
 										{
 											title : '访问次数',
@@ -604,6 +406,38 @@
 					});
 	         });
 		}
+		
+
+		//设置 字数不超过宽度限制
+		  var operateOpinionFormatter=function(value,row,index){ 
+			  var title = "";
+				var visitName = $(".search .form-control").val();
+				var visitNameLow = $(".search .form-control").val().toLowerCase();
+				if (value.search(visitName) != -1|| value.toLowerCase().search(visitNameLow) != -1) {
+					var strs = new Array();
+					strs = value.split("");
+					var strStartIndex = value.indexOf(visitName);
+					var strEndIndex = strStartIndex+ visitName.length- 1;
+					if (value.toLowerCase().search(visitNameLow) != -1) {
+						strStartIndex = value.toLowerCase().indexOf(visitNameLow);
+						strEndIndex = strStartIndex+ visitNameLow.length- 1;
+					}
+					for (var i = 0; i < strs.length; i++) {
+						if (i >= strStartIndex&& i <= strEndIndex) {
+							title += '<span style="color:#000;font-weight:bold;">'
+									+ strs[i]
+									+ '</span>';
+						} else {
+							title += '<span >'+ strs[i]+ '</span>';
+						}
+					}
+				} else {
+					title = value;
+				}
+				return title;
+	        }
+		
+		
 		
 		//格式化时间
 		function Format(datetime, fmt) {

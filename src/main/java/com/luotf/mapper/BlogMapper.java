@@ -43,6 +43,8 @@ public interface BlogMapper {
  	 */
  	List  selectBlogListByStatus();
  	
+ 	List selectBlogByClick();
+ 	
  	/**
  	 * 按不同条件组合 分页查询博客
  	 * @param map
@@ -66,7 +68,6 @@ public interface BlogMapper {
  	 */
 
  	List<Blog> selectGroupLikeBlogListByPage(Map<String, Object> map);
- 	
  	
  	/**
  	 * 模糊分页组合查询博客 含内容

@@ -138,6 +138,12 @@ public class BlogServiceImpl implements BlogService{
 		// TODO Auto-generated method stub
 		return blogMapper.selectLikeBlogListByPageWithBlobs(map);
 	}
+
+	@Override
+	public List selectBlogByClick() {
+		// TODO Auto-generated method stub
+		return blogMapper.selectBlogByClick();
+	}
 	
 	
 }

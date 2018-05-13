@@ -509,4 +509,25 @@ public class BlogControllerAdmin {
 		 map.put("list", list);
 		 return map;
 	 }
+	 
+	 
+	 /**
+	  * @return
+	  * @throws Exception
+	  */
+	 @RequestMapping(value = "/selectBlogByClick",method = RequestMethod.POST)
+	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=10)
+	 public Map selectBlogByClick() throws Exception{
+		 Map map=new HashMap();
+		 List list=blogService.selectBlogByClick();
+		 if(list.size()>0){
+			 map.put("status", 200);
+		 }else{
+			 //500表示：返回值为Null
+			map.put("status", 500);
+		 }
+		 map.put("list", list);
+		 return map;
+	 }
 }

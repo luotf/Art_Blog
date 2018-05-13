@@ -270,11 +270,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            },
 			    columns: [
 		                  {
-		                      title: 'ID',
-		                      field: 'id',
+		                      title: '序号',
 		                      align: 'center',
 		                      valign: 'middle',
-		                      width:'5%',
+		                      width: '5%',
+		                      formatter: function (value, row, index) {  
+		                          return index+1;  
+		                      }  
 		                  }, 
 		                  {
 		                      title: '名称',
