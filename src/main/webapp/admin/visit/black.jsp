@@ -343,7 +343,7 @@
 											width : '15%',
 											formatter : function(value, row, index) {
 												var id = row.vid;
-												var b = '<a  class=" btn-sm btn-info" onclick="deleteBlackIp('+id+')"><i class="fa  fa-share" ></i> 移出黑名单</a> ';
+												var b = '<a  class=" btn-sm btn-info" onclick="deleteBlackIp('+id+')"><i class="fa  fa-share-square-o" ></i> 移出黑名单</a> ';
 												return b;
 											}
 								  } ]

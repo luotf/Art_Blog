@@ -372,11 +372,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                   //编辑
 		                   var b = '<a  class=" btn-sm btn-primary"  href="../blog/updateBlog.jsp?id='+row.id+'"><i class="fa fa-edit" ></i> 编辑</a> ';  
 		                   //从回收站还原
-		                   var c = '<a  class=" btn-sm btn-danger"  onclick="operation('+ row.id + ',\'还原\')"><i class="fa fa-share" ></i> 还原</a> '; 
+		                   var c = '<a  class=" btn-sm btn-danger"  onclick="operation('+ row.id + ',\'还原\')"><i class="fa fa-share-square-o" ></i> 还原</a> '; 
 		                   //取消推荐
 		                   var d = '<a  class=" btn-sm btn-primary"  onclick="operation('+ row.id + ',\'取推荐\')">取 推荐</a> ';
 		                   //从草稿还原
-		                   var e = '<a  class=" btn-sm btn-danger"  onclick="operation('+ row.id + ',\'发表\')"><i class="fa fa-share" ></i> 发表</a> ';  
+		                   var e = '<a  class=" btn-sm btn-danger"  onclick="operation('+ row.id + ',\'发表\')"><i class="fa fa-share-square-o" ></i> 发表</a> ';  
 		                   //取消置顶
 		                   var f = '<a  class=" btn-sm btn-success"  onclick="operation('+ row.id + ',\'取置顶\')">取 置顶</a> ';  
 		                   if(row.status==2){

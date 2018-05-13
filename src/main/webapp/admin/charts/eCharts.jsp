@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5> <i class="fa fa-bar-chart"></i> 访问量</h5>
+                        <h5> <i class="fa line-chart"></i> 访问量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="ibox-content">
                         <div class="echarts" id="echarts-line-blogClickSort"></div>
                     	<div style="margin:27px 0 0 15px">
-                    		<h5>注: 点击可以查看对应博客内容</h5>
+                    		<h5>注:  点击可以查看对应博客内容</h5>
                     	</div>
                     	
                     </div>
@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5> <i class="fa fa-bar-chart"></i> 博客浏览量</h5>
+                        <h5> <i class="fa line-chart"></i> 博客浏览量</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
