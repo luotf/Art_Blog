@@ -37,9 +37,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
+<div id="fakeloader"></div>
 	<div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
@@ -168,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -179,9 +181,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
         
 	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+	    }); 
+		
 		initResourceCount();
 		selectResource();
-			});
+	 });
 	
 		var initResourceCount=function(){
 			$.ajax({

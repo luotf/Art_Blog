@@ -28,6 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 <style type="text/css">
 	.input-group-addon{
 		color: #c23531;
@@ -35,13 +36,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </style>
 </head>
 <body class="gray-bg">
+<div id="fakeloader"></div>
    <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5> <i class="fa line-chart"></i> 访问量</h5>
-                        <div class="ibox-tools">
+                        <div class="ibox-tools ">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
@@ -225,9 +227,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/echarts/echarts.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
     <script>
     $(document).ready(function() {
+			$("#fakeloader").fakeLoader({
+		        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+		        zIndex:999, // Default zIndex
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", //Hex, RGB or RGBA colors
+		        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+		    }); 
     	var date=new Date();
     	var start=Format(new Date(date.getTime() -  6*24*60*60*1000),"yyyy-MM-dd");
     	var end=Format(date,"yyyy-MM-dd");

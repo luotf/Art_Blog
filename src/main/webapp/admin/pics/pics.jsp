@@ -27,9 +27,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
     <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
-	
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 <body class="gray-bg">
+<div id="fakeloader"></div>
     <div class="wrapper wrapper-content">
     <div class="row">
             <div class="col-sm-12">
@@ -124,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/plugins/peity/jquery.peity.min.js"></script>
 
  	<script src="${pageContext.request.contextPath}/js/plugins/fancybox/jquery.fancybox.js"></script>
-	
+	<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	
@@ -140,6 +141,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <script>
         $(document).ready(function () {
+        	$("#fakeloader").fakeLoader({
+    	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+    	        zIndex:999, // Default zIndex
+    	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+    	        bgColor:"#fff", //Hex, RGB or RGBA colors
+    	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+    	    }); 
+        	
             $('.fancybox').fancybox({
                 openEffect: 'none',
                 closeEffect: 'none'

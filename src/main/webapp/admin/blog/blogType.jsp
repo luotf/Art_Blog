@@ -34,11 +34,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
-	<div class="wrapper wrapper-content">
+<div id="fakeloader"></div>
+	<div class="wrapper wrapper-content" style="display:none">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -118,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
@@ -138,9 +140,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
         
 	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+	    }); 
+		
 		initType();
 		selectBlogType();
-			});
+		
+		setTimeout(function () {
+       		$('.wrapper').css('display','block');
+	},1200);
+	});
 	
 	
 	var initType=function(){
@@ -323,7 +337,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		var params ={
 	 				'id':id,
         			'typename':$("#newTypeName").val(),
-        			 prarm:'将类别名称<span class="text-info">#'+typename+'#</span>更新为<span class="text-info">#'+$("#newTypeName").val()+'#</span>'
+        			 prarm:'将类别名称<span class="text-info">#'+typename+'#</span>修改为<span class="text-info">#'+$("#newTypeName").val()+'#</span>'
         	};
 	 		if($("#commentForm2").valid()){
 	 			 $.ajax({

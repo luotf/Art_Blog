@@ -28,6 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	href="${pageContext.request.contextPath}/css/plugins/iCheck/custom.css"
 	rel="stylesheet">
 <link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
+	rel="stylesheet">
+<link
 	href="${pageContext.request.contextPath}/css/plugins/summernote/summernote.css"
 	rel="stylesheet">
 <link
@@ -49,7 +52,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body class="gray-bg">
-	<div class="wrapper wrapper-content">
+	<div id="fakeloader"></div>
+	 <div class="wrapper wrapper-content" style="display:none">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -258,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
- 
+ <script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
  	<!-- Web Uploader -->
     <script type="text/javascript">
         // 添加全局站点信息
@@ -275,7 +279,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
         
 	$(document).ready(function() { 
-		
+		$("#fakeloader").fakeLoader({
+	        timeToHide:800, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+	    }); 
 		var url = window.location.href;
 		var url_param = url.split("=")[1];
 		   //编辑博客
@@ -371,7 +381,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								sendFile(files[0],editor,$editable);  
 						}
 					});
-				});
+		    setTimeout(function () {
+	       		$('.wrapper').css('display','block');
+			},900);
+		});
 				
 			//图片上传  
 			function sendFile(file, editor, $editable){  
@@ -514,7 +527,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		    		timer: 1500,
         		    	 });
             			 setTimeout(function(){
-            				window.location.href ="../table/blogTable.jsp";
+            				window.location.href ="../blog/blogTable.jsp";
 						},1500); 
                     }else{
                     	swal("更新失败", "请重新操作", "error");

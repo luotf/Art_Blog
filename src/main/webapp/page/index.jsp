@@ -26,7 +26,7 @@
   
   <div class="leftbox ">
     <div class="tuijian" style="margin: 0px ">
-      <h2 class="hometitle "><span><a href="list.jsp">资源分享</a><a href="list.jsp">技术专栏</a><a href="/">面试宝典</a><a href="/">热门标签</a></span>特别推荐</h2>
+      <h2 class="hometitle "></span>特别推荐</h2>
       <ul class="animated fadeInDown">
         
       </ul>
@@ -132,7 +132,7 @@ window.onload = function (){
 		var params ={
 				 pageSize: 6,
 		         page:1,
-		         isrecommend:1,  //1 表示置顶
+		         isrecommend:1,  //1 表示推荐
 		         status:1
 		};
 		$.ajax({
@@ -145,7 +145,7 @@ window.onload = function (){
             	var data=data.blogList;
                 for (var i = 0; i < data.length; i++) {
                 	var id=data[i].id.toString(8)*data[i].id;
-                	likeBlog+='<li><div class="tpic"><img src="'+data[i].images+'"></div><b>'+data[i].title+'</b><span>'+data[i].introduction+'</span><a href="find/'+id+'.html" class="readmore">阅读原文</a></li>'
+                	likeBlog+='<li><a href="find/'+id+'.html" ><div class="tpic"><img src="'+data[i].images+'"></div><b>'+data[i].title+'</b><span>'+data[i].introduction+'</span><a href="find/'+id+'.html" class="readmore">阅读原文</a></a></li>'
                 }
                 // 初始化数据
                 $(".tuijian").find("ul").html(likeBlog);

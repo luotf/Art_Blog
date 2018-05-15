@@ -35,9 +35,13 @@
 <link
 	href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
+	rel="stylesheet">
 </head>
 
 <body class="gray-bg">
+ <div id="fakeloader"></div>
 	<div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
@@ -237,19 +241,28 @@
 
 	<!-- 全局js -->
 	<script
-		src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/echarts/echarts.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Data picker -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 	<script type="text/javascript">
-	$(document).ready(function() {
+		$(document).ready(function() {
+			$("#fakeloader").fakeLoader({
+		        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+		        zIndex:999, // Default zIndex
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", //Hex, RGB or RGBA colors
+		        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+		    }); 
+		
+		
 		$("#end").val(Format(new Date(),"yyyy-MM-dd"));
 		$("#start").val(Format(new Date().getTime() -  6*24*60*60*1000,"yyyy-MM-dd"));
 		var days=new Array();
@@ -265,6 +278,7 @@
 		initVisitCount("now");  //初始化今日访客
 		initVisitCount("history");  //初始化历史访客
 		initVisitCountByWeek(7);  //初始化num日访客
+		
 	});
 		$('#start').datepicker({
             keyboardNavigation: false,

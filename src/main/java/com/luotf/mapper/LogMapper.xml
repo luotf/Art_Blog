@@ -30,8 +30,10 @@
 			<if test="startTime!=null and startTime!=''">
 				and DATE_FORMAT(addTime,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
 			</if>
+			<if test="ip!=null and ip!=''">
+		 		and ( ip like CONCAT(CONCAT('%', #{ip}), '%') or userType like CONCAT(CONCAT('%', #{userType}), '%') or description like CONCAT(CONCAT('%', #{description}), '%')) 
+		 	</if>
 		</where>
-		
 		order by addTime desc
 	</select>
   

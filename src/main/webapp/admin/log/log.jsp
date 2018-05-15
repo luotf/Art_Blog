@@ -31,8 +31,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/loaders.css"
+	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
 	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"
@@ -42,9 +47,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body class="gray-bg">
-	<div class="wrapper wrapper-content">
+   <div id="fakeloader"></div>
+	 <div class="wrapper wrapper-content" style="display:none">
 		<div class="row">
-		
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content mailbox-content">
@@ -54,11 +59,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="space-25"></div>
 							<h5>用户类别</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-								<li ><a href="javascript:void(0);">
-										<i class="fa fa-file-text-o "></i>管理员
+								<li ><a href="javascript:void(0);" onclick="fastToSearch('管理员')">
+										<i class="fa fa-user "> </i>  管理员
 								</a></li>
-								<li ><a href="javascript:void(0);">
-										<i class="fa fa-trash-o "></i>普通用户
+								<li ><a href="javascript:void(0);" onclick="fastToSearch('普通用户')">
+										<i class="fa fa-user-plus "></i>普通用户
 								</a></li>
 							</ul>
 							<h5>指定日期查询</h5>
@@ -74,27 +79,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<h5>快捷查询-用户</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
                                
-                                <li><a href="#"><i class="fa fa-tag"></i> 普通用户</a>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('普通用户')"><i class="fa fa-user-plus"></i>普通用户</a>
                                 </li>
-                                 <li><a href="#"><i class="fa fa-tag"></i> 博客</a>
+                                 <li><a href="javascript:void(0)" onclick="fastToSearch('查看博客')"><i class="fa fa-tag"></i> 查看博客</a>
                                 </li>
-                                 <li><a href="#"><i class="fa fa-tag"></i> 博客类别列表</a>
+                                 <li><a href="javascript:void(0)" onclick="fastToSearch('关键字查询博客')"><i class="fa fa-tag"></i> 关键字搜索博客</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-tag"></i> 资源</a>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('关键字查询资源')"><i class="fa fa-tag"></i> 搜索资源</a>
                                 </li>
                                
                             </ul>
                             <h5>快捷查询-管理员</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
-							 <li><a href="#"><i class="fa fa-tag"></i> 管理员</a>
+							 <li><a href="javascript:void(0)" onclick="fastToSearch('管理员')"><i class="fa fa-user"></i> 管理员</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-tag"></i> 博客(增/删/改)</a>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('更新博客')"><i class="fa fa-tag"></i> 博客(增/删/改)</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-tag"></i> 博客类别(增/删/改)</a>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('修改博客类别')"><i class="fa fa-tag"></i> 博客类别(增/删/改)</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-tag"></i> 资源(增/删/改)</a>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('资源')"><i class="fa fa-tag"></i> 资源(增/删/改)</a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-tag"></i> 黑名单(增/删)</a>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('黑名单')"><i class="fa fa-tag"></i> 黑名单(增/删)</a>
                                 </li>
                             </ul>
 							<div class="clearfix"></div>
@@ -104,31 +109,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		
 			<div class="col-sm-9">
-				<div class="ibox float-e-margins">
+				<div class="ibox float-e-margins" style="margin-bottom:0px">
                     <div class="mail-box-header">
                         <h2>日志记录</h2>
                        <div class="mail-tools tooltip-demo m-t-md">
 		                   <form  class="pull-right mail-search">
 	                        <div class="input-group">
-	                            <input type="text" class="form-control input-sm" name="search" placeholder="搜索用户，ip等">
+	                            <input type="text" class="form-control input-sm keyword"  placeholder="搜索用户，ip等">
 	                            <div class="input-group-btn">
-	                                <button type="submit" class="btn btn-sm btn-primary">
+	                                <button type='button' onclick="selectLogByDate(1,null, null);" class="btn btn-sm btn-primary">
 	                                  		  搜索
 	                                </button>
 	                            </div>
 	                        </div>
 	                    </form>
-	                  <button class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="刷新日志列表"><i class="fa fa-refresh"></i> 刷新</button>
+	                  <button onclick="reset()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="刷新日志列表"><i class="fa fa-refresh"></i> 刷新</button>
                     </div>
                     </div>
-                    <div class="mail-box no-padding">
+                    <div class="mail-box no-padding" style="margin-bottom:0px">
                         <ul class="list-group logList">
-                           
-                            <li class="list-group-item">
-                            	 <p style="margin: 4px 0px;text-align:center"><a href="#"><i class="fa fa-arrow-down"></i> 加载更多</a></p>
-                            </li>
+                            
                         </ul>
-                        
+                        <ul class="list-group page">
+                            
+                        </ul>
                     </div>
                 </div>
 			</div>
@@ -167,10 +171,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 
-
+</body>
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
+	<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	
 	<!-- Data picker -->
 	<script
@@ -181,19 +187,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 	<script type="text/javascript">
+	var pageNext=1;
+	var isEnd=false;
+	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+	    }); 
+		selectLogByDate(pageNext,null,null);
+		setTimeout(function () {
+       		$('.wrapper').css('display','block');
+		},1200);
+	});
+	
+	$(window).scroll(function(){
+        if(isEnd == true){
+           return;
+       } 
+       if ($(document).scrollTop() + 0 >= $(document).height() - $(window).height()) {
+       	isEnd=true;
+       	setTimeout(function () {
+       		selectLogByDate(pageNext,null,null);
+		},500); 
+       	
+	   }
+   });
 	
 	var reset = function() {
+		var index ='';
+		 layer.ready(function(){
+		   index=layer.load(2, {
+			  shade: [0.1,'#eee'] //0.1透明度的白色背景
+		    });
+		  }); 
 		$('#start').val("");
 		$('#end').val("");
+		$('.keyword').val("");
+		selectLogByDate(1,null, null);
+		setTimeout(function () {
+			layer.close(index);
+		},500); 
 	};
+	
+	var fastToSearch=function(fastKey){
+		$(".keyword").val(fastKey);
+		selectLogByDate(1,null,null);
+	}
 	
 	//指定日期查询事件
 	var selectLogByDate = function(pageNum,startTime, endTime) {
+		var keyword=$(".keyword").val();
 		var params ={
 				startTime : startTime,
 				endTime : endTime,
-				pageSize: 20,
+				pageSize: 9,
 	            page:pageNum,
+	            ip:keyword,
+	            userType:keyword,
+	            description:keyword
 				};
 			$.ajax({
                    url:'../selectLogListByDate',    
@@ -205,26 +259,74 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	var page=data.pageInfo;
                     	var data=data.logList;
                     	var logList='';
+                    	var now=new Date().getTime();
+                    	var dateToAddTime='';
+                    	var minutes=1000*60;
+                    	var time='';
+                    	//var logList=new Array();
                     	for(var i=0;i<data.length;i++){
+                    		//计算现在时间与日志时间的差值
+                    		dateToAddTime=now-data[i].addTime;
+                    		time=parseInt(dateToAddTime/minutes);
+                    		if(time<60){
+                    			if(time==0){
+                    			  time='<span class="label label-danger"> 刚刚</span>';
+                    			}else{
+                    			  time='<span class="label label-info">'+time+'分钟前</span>';
+                    			}
+                    		}else if(time>=60){
+                    			time='<span class="label label-primary">'+parseInt(time/60)+'小时前</span>';
+                    			if(time>=24){
+                    				time='<span class="label label-success">'+parseInt(time/24)+'天前</span>';
+                    				if(time>=30){
+                    					time='<span class="label label-warning">'+parseInt(time/30)+'个月前</span>';
+                    				}
+                    			}
+                    		}
                     		if(data[i].userType=="管理员"){
                     			data[i].userType="管理员"+'&nbsp;&nbsp;&nbsp;&nbsp;';
                     		}
                     		if(data[i].description=="查看博客"){
                     			data[i].param='查看的博客ID为：<a class="text-info" title="点击查看对应博客"  data-toggle="modal" data-target="#myModal" onclick="selectBlogByVid('+data[i].param+')">'+data[i].param+'</a>';
                     		}
-                    		logList+='<li class="list-group-item"><p style="margin: 4px 0px;"><span class="label label-info"> 1分钟前 </span><strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>';
+                    		logList+='<li style="animation-delay:0.'+i+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+time+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
                     	}
-                    	$(".logList").html(logList);
+                    	 if(page.pageNum>=2){
+                    		$(".logList").append(logList);
+                    	}else{
+                    		$(".logList").html(logList);
+                    	} 
+                    	if(page.total>9){
+                    		if(page.pageNum==page.pages){
+                    			isEnd=true;
+                    			var pagenav='<li class="list-group-item"><p style="text-align:center"><a href="javascript:void(0);" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p></li>';
+                    		}else{
+                    			isEnd=false;
+                    			pageNext=page.pageNum+1;
+                    			var pagenav='<div style="margin:10px auto;width:10%;"><div class="loader-inner ball-pulse"><div style="background-color:#ed5565;"></div><div style="background-color:#ed5565;"></div><div style="background-color:#ed5565;"></div></div></div>';
+                    		}
+                    		$(".page").html(pagenav);
+                    	}else{
+                    		$(".page").html("");
+                    	}
                     }else if(data.status==500){
-                    	swal("查询失败", "不存在该日志信息", "error");
-                    }	
+                    		swal("查询失败", "不存在该日志信息", "error");
+                    		$('#start').val("");
+                    		$('#end').val("");
+                       }	
                     },    
         		    error:function(){
         		    	swal("查询错误", "请重新操作", "error");
+        		    	$('#start').val("");
+                		$('#end').val("");
         		    }	
                 }); 
 	};
 
+	var pageNav=function(page){
+		selectLogByDate(page,$('#start').val(),$('#end').val());
+	}
+	
 	$('#start').datepicker({
 		keyboardNavigation : false,
 		forceParse : false,
@@ -268,7 +370,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		var selectBlogByVid=function(vid){
 			var id;
-			for(var i=0;i<vid;i++){
+			for(var i=1;i<=vid;i++){
 				if(i*i.toString(8)==vid){
 					id=i;
 					break;

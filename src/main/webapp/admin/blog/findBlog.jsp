@@ -41,11 +41,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
-	<div class="wrapper wrapper-content">
+<div id="fakeloader"></div>
+	<div class="wrapper wrapper-content" style="display:none">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -122,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
@@ -148,23 +149,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script charset="utf-8" type="text/javascript"
-		src="http://changyan.sohu.com/upload/changyan.js"></script>
+	
 
 	<script>
 	  
 	$(document).ready(function() {
-		
-		(function(){ 
-			var appid = 'cytzg9rLH'; 
-			var conf = 'prod_230eb23e872ad7a4302e5802e6f91bf9'; 
-			var width = window.innerWidth || document.documentElement.clientWidth; 
-			if (width < 960) { 
-			window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
-		    
+		$("#fakeloader").fakeLoader({
+	        timeToHide:1000, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+	    }); 
 		
 		//参数1表示当前页为1
 		initBlog(1);
+		setTimeout(function () {
+       		$('.wrapper').css('display','block');
+	},1000);
+		
 	});
 	var initBlog=function(pageNum){
 		//查询出文章

@@ -74,6 +74,16 @@ public class LogControllerAdmin {
 		 if(endTime!=""&&endTime!=null){
 			 map.put("endTime", endTime);
 		 }
+		 if(log.getIp()!=null&&log.getIp()!=""){
+			 map.put("ip", log.getIp());
+		 }
+		 if(log.getUserType()!=null&&log.getUserType()!=""){
+			 map.put("userType", log.getUserType());
+		 }
+		 if(log.getDescription()!=null&&log.getDescription()!=""){
+			 map.put("description", log.getDescription());
+		 }
+		 
 		 //分页显示：第1页开始，每页显示9条记录
 		 PageHelper.startPage(page, pageSize);
 		 List<Log> logList=logService.selectLogListByDate(map);

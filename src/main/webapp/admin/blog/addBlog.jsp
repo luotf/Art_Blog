@@ -50,10 +50,13 @@
 	href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
+
 </head>
 
 <body class="gray-bg">
-	<div class="wrapper wrapper-content">
+<div id="fakeloader"></div>
+	<div class="wrapper wrapper-content" style="display:none">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -276,7 +279,7 @@
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- SUMMERNOTE -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote.min.js"></script>
@@ -284,23 +287,32 @@
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote-zh-CN.js"></script>
 	<script>
 		$(document).ready(function() {
+			$("#fakeloader").fakeLoader({
+		        timeToHide:1000, //Time in milliseconds for fakeLoader disappear
+		        zIndex:999, // Default zIndex
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", //Hex, RGB or RGBA colors
+		        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+		    }); 
+			
 			initBlogCountBystatus();	
 			initBlogType();			
 							//初始化富文本
-							$('#summernote').summernote(
-									{
-										height : 300,//初始化默认高度    
-										minHeight : null, //最小高度             
-										maxHeight : null, //最大高度
-										lang : 'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
-										placeholder : "请在这里写下您的内容",
-										onImageUpload : function(files, editor,
-												$editable) {
-											sendFile(files[0], editor,
-													$editable);
-										}
-									});
-						});
+				$('#summernote').summernote(
+					{
+						height : 300,//初始化默认高度    
+						minHeight : null, //最小高度             
+						maxHeight : null, //最大高度
+						lang : 'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
+						placeholder : "请在这里写下您的内容",
+						onImageUpload : function(files, editor,$editable) {
+						sendFile(files[0], editor,$editable);
+						}
+					});
+			setTimeout(function () {
+		       		$('.wrapper').css('display','block');
+			},1000);
+		});
 
 		var initBlogType=function(){
 			//查询出文章类别

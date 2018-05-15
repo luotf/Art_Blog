@@ -31,12 +31,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
-	
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 <link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
 <body class="gray-bg">
-	<div class="wrapper wrapper-content animated fadeInRight">
+<div id="fakeloader"></div>
+	<div class="wrapper wrapper-content" style="display:none">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h5>博客信息表格</h5>
@@ -144,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
  	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
- 	
+ 	<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -155,7 +156,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<script>
 	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+	    }); 
 		selectBlog();
+		
+		setTimeout(function () {
+       		$('.wrapper').css('display','block');
+	},1200);
 	}); 
 	
 	//草稿/发布...按钮绑定查询事件  
