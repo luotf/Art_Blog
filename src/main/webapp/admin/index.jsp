@@ -32,7 +32,7 @@
 	rel="stylesheet">
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg"
+<body class="fixed-sidebar full-height-layout white-bg"
 	style="overflow:hidden">
 	<div id="wrapper">
 		<!--左侧导航开始-->
@@ -129,7 +129,7 @@
 		</nav>
 		<!--左侧导航结束-->
 		<!--右侧部分开始-->
-		<div id="page-wrapper" class="gray-bg dashbard-1">
+		<div id="page-wrapper" class="white-bg dashbard-1">
 			<div class="row border-bottom">
 				<nav class="navbar navbar-static-top" role="navigation"
 					style="margin-bottom: 0">

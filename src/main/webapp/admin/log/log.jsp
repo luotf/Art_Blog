@@ -46,9 +46,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
 </head>
 
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
    <div id="fakeloader"></div>
-	 <div class="wrapper wrapper-content" style="display:none">
+	 <div class="wrapper wrapper-content" >
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -191,16 +191,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var isEnd=false;
 	$(document).ready(function() {
 		$("#fakeloader").fakeLoader({
-	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+	        timeToHide:1250, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
 	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 	        bgColor:"#fff", //Hex, RGB or RGBA colors
-	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
 	    }); 
-		selectLogByDate(pageNext,null,null);
 		setTimeout(function () {
-       		$('.wrapper').css('display','block');
-		},1200);
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},100);
+		
+		selectLogByDate(pageNext,null,null);
+		
 	});
 	
 	$(window).scroll(function(){
@@ -297,13 +299,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		$(".logList").html(logList);
                     	} 
                     	if(page.total>9){
+                    		var pagenav='';
                     		if(page.pageNum==page.pages){
                     			isEnd=true;
-                    			var pagenav='<li class="list-group-item"><p style="text-align:center"><a href="javascript:void(0);" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p></li>';
+                    			pagenav='<li class="list-group-item"><p style="text-align:center"><a href="javascript:void(0);" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p></li>';
                     		}else{
                     			isEnd=false;
                     			pageNext=page.pageNum+1;
-                    			var pagenav='<div style="margin:10px auto;width:10%;"><div class="loader-inner ball-pulse"><div style="background-color:#ed5565;"></div><div style="background-color:#ed5565;"></div><div style="background-color:#ed5565;"></div></div></div>';
+                    			pagenav='<div style="margin:10px auto;width:10%;"><div class="loader-inner ball-pulse"><div style="background-color:rgb(231, 76, 60)"></div><div style="background-color:rgb(231, 76, 60)"></div><div style="background-color:rgb(231, 76, 60)"></div></div></div>';
                     		}
                     		$(".page").html(pagenav);
                     	}else{

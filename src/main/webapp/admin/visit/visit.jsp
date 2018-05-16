@@ -42,10 +42,14 @@
 <link
 	href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
+	rel="stylesheet">
 </head>
 
-<body class="gray-bg">
-	<div class="wrapper wrapper-content">
+<body class="white-bg" style="opacity:0">
+	 <div id="fakeloader"></div>
+	 <div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -109,7 +113,7 @@
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
@@ -126,9 +130,21 @@
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$("#fakeloader").fakeLoader({
+		        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+		        zIndex:999, // Default zIndex
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", //Hex, RGB or RGBA colors
+		    }); 
+			setTimeout(function () {
+	       		$('body').css('opacity','1');
+	       		$('body').attr("class", "gray-bg") //添加样式
+			},100);
+			
 			initVisitCount();
 			selectVisit();
 			initBlackIpCount();
+			
 		});
 		var initVisitCount = function() {
 			$.ajax({
@@ -292,7 +308,9 @@
 						                      valign: 'middle',
 						                      width: '5%',
 						                      formatter: function (value, row, index) {  
-						                          return index+1;  
+						                    	  var index1=index+1;
+						                          var id='<span title="ID:'+row.id+'">'+index1+'</span>';
+						                    	  return id;   
 						                      }  
 						                  }, 
 										{

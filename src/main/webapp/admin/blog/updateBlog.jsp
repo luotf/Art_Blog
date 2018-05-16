@@ -51,9 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
 </head>
 
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
 	<div id="fakeloader"></div>
-	 <div class="wrapper wrapper-content" style="display:none">
+	 <div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -243,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		</div>
 	</div>
-
+</body>
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
@@ -280,12 +280,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         
 	$(document).ready(function() { 
 		$("#fakeloader").fakeLoader({
-	        timeToHide:800, //Time in milliseconds for fakeLoader disappear
+	        timeToHide:1000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
 	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 	        bgColor:"#fff", //Hex, RGB or RGBA colors
-	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
 	    }); 
+		setTimeout(function () {
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},300);
 		var url = window.location.href;
 		var url_param = url.split("=")[1];
 		   //编辑博客
@@ -381,9 +384,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								sendFile(files[0],editor,$editable);  
 						}
 					});
-		    setTimeout(function () {
-	       		$('.wrapper').css('display','block');
-			},900);
+			
 		});
 				
 			//图片上传  

@@ -35,9 +35,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 </style>
 </head>
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
 <div id="fakeloader"></div>
-   <div class="wrapper wrapper-content animated fadeInRight">
+   <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
@@ -235,8 +235,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        zIndex:999, // Default zIndex
 		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 		        bgColor:"#fff", //Hex, RGB or RGBA colors
-		        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
 		    }); 
+			setTimeout(function () {
+	       		$('body').css('opacity','1');
+	       		$('body').attr("class", "gray-bg") //添加样式
+			},100);
+			
     	var date=new Date();
     	var start=Format(new Date(date.getTime() -  6*24*60*60*1000),"yyyy-MM-dd");
     	var end=Format(date,"yyyy-MM-dd");
@@ -251,8 +255,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	$("#startBlogClick").val(start);
     	$("#endBlogClick").val(end);
     	initBlogClickByDate(start,end);  //初始化7日访客
-    	
     	initBlogClickSort();
+    	
     });
     
 	//访问量时间

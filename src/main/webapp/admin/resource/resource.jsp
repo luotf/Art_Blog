@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
 <div id="fakeloader"></div>
 	<div class="wrapper wrapper-content">
 		<div class="row">
@@ -186,8 +186,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        zIndex:999, // Default zIndex
 	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 	        bgColor:"#fff", //Hex, RGB or RGBA colors
-	        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
 	    }); 
+		setTimeout(function () {
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},100);
 		
 		initResourceCount();
 		selectResource();
@@ -285,7 +288,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      valign: 'middle',
 		                      width: '5%',
 		                      formatter: function (value, row, index) {  
-		                          return index+1;  
+		                    	  var index1=index+1;
+		                          var id='<span title="ID:'+row.id+'">'+index1+'</span>';
+		                    	  return id;  
 		                      }  
 		                  }, 
 		                  {
