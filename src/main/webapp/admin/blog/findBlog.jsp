@@ -71,14 +71,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<ul class="category-list">
 
 								</ul>
-								<div class="pagelist" style="padding-top: 0px;">
-									<div class="pageNav tooltip-demo"></div>
-									<div style="margin:15px 0 0 0;">
+								<div  style="padding-top: 0px;">
+									<div class="pageNav "></div>
+									<p style="margin:15px auto;text-align:center">
 										<span class="allTotal">共<b></b>条记录
 										</span>&nbsp;&nbsp; <span class="cPage">第<b></b>页
 										</span>&nbsp;&nbsp; <span class="allPage">共<b></b>页
 										</span>
-									</div>
+									</p>
 								</div>
 
 							</div>
@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="col-sm-9">
-				<div class="ibox float-e-margins">
+				<div class="ibox float-e-margins ">
 					<div class="mail-box-header">
 						<h2>博客详情</h2>
 						<div class="infos" style="margin:0px auto;width: 91.2%;">
@@ -173,7 +173,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
 		var params ={
-				pageSize: 10,
+				pageSize: 9,
 	            page:pageNum,
 	            title:$(".form-control").val(),
 	            keyword:$(".form-control").val(),
@@ -190,25 +190,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	var data=data.blogList;
             	var circle = new Array("text-navy","text-danger"," text-info","text-primary","text-warning");
             	for (var i = 0; i < data.length; i++) {
-            		blogList+='<li style="margin: 0 0 5px 0"><a href="#" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
+            		blogList+='<li class="animated fadeInDown" style="margin: 0 0 5px 0;animation-delay:0.'+i+'s""><a href="javascript:void(0);" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
             	}
-             var pageNav='';
-             var prePage=page.pageNum-1;
+            	if(page.pageNum>=2){
+             		$(".category-list").append(blogList);
+             	}else{
+             		$(".category-list").html(blogList);
+             		findBlogById(data[0].id);
+             		$(".allTotal").find("b").html(page.total);
+             		$(".allPage").find("b").html(page.pages);
+             	} 
              var nextPage=page.pageNum+1;
-             var first='<a href="#" data-toggle="tooltip" data-placement="top" title="首页" onclick="pageNav(1,'+page.pages+')"><i class="fa fa-angle-double-left"></i></a>&nbsp;&nbsp;';
-			 var pre='<a href="#" data-toggle="tooltip" data-placement="top" title="上一页" onclick="pageNav('+prePage+','+page.pages+')"><i class="fa fa-angle-left" ></i></a>&nbsp;&nbsp;';
-			 var next='<a href="#" data-toggle="tooltip" data-placement="top" title="下一页" onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-angle-right"></i></a>&nbsp;&nbsp;';
-			 var last='<a href="#" data-toggle="tooltip" data-placement="top" title="尾页" onclick="pageNav('+page.pages+','+page.pages+')"><i class="fa fa-angle-double-right"></i></a>';	
-			 pageNav=first+pre+next+last;
-			 $(".pageNav").html(pageNav);
-             $(".category-list").html(blogList);
-             $(".allTotal").find("b").html(page.total);
+			 var more='<p style="text-align:center"><a onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
+			 if(page.pageNum==page.pages){
+     			more='<p style="text-align:center"><a href="javascript:void(0);" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p>';
+     		}
+			 $(".pageNav").html(more);
              $(".cPage").find("b").html(page.pageNum);
-             $(".allPage").find("b").html(page.pages);
-              //初始化左边内容
-             findBlogById(data[0].id);
-             
-            	},    
+           },    
 		    error:function(){
 		    	swal("您的请求太快", "请重新操作", "error");
 		    }	
