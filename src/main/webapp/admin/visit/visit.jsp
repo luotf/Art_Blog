@@ -74,7 +74,7 @@
 								</a></li>
 							</ul>
 							<h5>指定日期查询</h5>
-							<div class="input-daterange input-group" id="datepicker">
+							<div style="margin-bottom:20px" class="input-daterange input-group" id="datepicker">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								<input type="text" class="input-sm form-control" id="start" />
 								<span class="input-group-addon">到</span> <input type="text"
@@ -82,7 +82,20 @@
 							</div>
 							<button id="reset" onclick="reset()"
 								class="btn-sm btn-outline btn-white pull-right"
-								style="margin-top:5px" type="button">重置</button>
+								style="margin-top:-15px" type="button">重置</button>
+							<h5>快捷查询</h5>
+							<ul class="folder-list m-b-md" style="padding: 0">
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('四川')"><i class="fa fa-tag"></i>四川地区</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('教育网')"><i class="fa fa-tag"></i>教育网</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('IE')"><i class="fa fa-tag"></i>IE </a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Chrome')"><i class="fa fa-tag"></i>Chrome </a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Windows')"><i class="fa fa-tag"></i>Windows</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Android')"><i class="fa fa-tag"></i>Android</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('iPhone')"><i class="fa fa-tag"></i>iPhone</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('iPad')"><i class="fa fa-tag"></i>iPad</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Mac')"><i class="fa fa-tag"></i>Mac</a></li>
+                            </ul>
+							
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -198,6 +211,25 @@
 			};
 			$('#allVisit').bootstrapTable('refresh', params);
 		};
+		
+		var fastToSearch=function(fastKey){
+			$(".search .form-control").val(fastKey);
+			var params = $('#allVisit').bootstrapTable('getOptions');
+			params.queryParams = function(params) {
+				return {
+					pageSize : params.limit,
+					page : (params.offset) / params.limit + 1,
+					ip : fastKey,
+					platformType : fastKey,
+					browserType : fastKey,
+					city : fastKey,
+					startTime : $('#start').val(),
+					endTime : $('#end').val(),
+				};
+			};
+			$('#allVisit').bootstrapTable('refresh', params);
+			
+		}
 
 		//指定日期查询事件
 		var selectVsitByDate = function(startTime, endTime) {

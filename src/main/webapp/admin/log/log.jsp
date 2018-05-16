@@ -191,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var isEnd=false;
 	$(document).ready(function() {
 		$("#fakeloader").fakeLoader({
-	        timeToHide:1250, //Time in milliseconds for fakeLoader disappear
+	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
 	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 	        bgColor:"#fff", //Hex, RGB or RGBA colors
@@ -209,7 +209,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         if(isEnd == true){
            return;
        } 
-       if ($(document).scrollTop() + 0 >= $(document).height() - $(window).height()) {
+       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
        	isEnd=true;
        	setTimeout(function () {
        		selectLogByDate(pageNext,null,null);
@@ -264,7 +264,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	var now=new Date().getTime();
                     	var dateToAddTime='';
                     	var minutes=1000*60;
-                    	var time='';
+                    	var time=0;
+                    	var timeStr='';
                     	//var logList=new Array();
                     	for(var i=0;i<data.length;i++){
                     		//计算现在时间与日志时间的差值
@@ -272,16 +273,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		time=parseInt(dateToAddTime/minutes);
                     		if(time<60){
                     			if(time==0){
-                    			  time='<span class="label label-danger"> 刚刚</span>';
+                    				timeStr='<span class="label label-danger"> 刚刚</span>';
                     			}else{
-                    			  time='<span class="label label-info">'+time+'分钟前</span>';
+                    				timeStr='<span class="label label-info">'+time+'分钟前</span>';
                     			}
-                    		}else if(time>=60){
-                    			time='<span class="label label-primary">'+parseInt(time/60)+'小时前</span>';
-                    			if(time>=24){
-                    				time='<span class="label label-success">'+parseInt(time/24)+'天前</span>';
-                    				if(time>=30){
-                    					time='<span class="label label-warning">'+parseInt(time/30)+'个月前</span>';
+                    		}else{
+                    			timeStr='<span class="label label-primary">'+parseInt(time/60)+'小时前</span>';
+                    			if(time>=1440){
+                    				timeStr='<span class="label label-warning">'+parseInt(time/1440)+'天前</span>';
+                    				if(time>=43200){
+                    					timeStr='<span class="label label-success">'+parseInt(time/43200)+'个月前</span>';
                     				}
                     			}
                     		}
@@ -291,7 +292,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		if(data[i].description=="查看博客"){
                     			data[i].param='查看的博客ID为：<a class="text-info" title="点击查看对应博客"  data-toggle="modal" data-target="#myModal" onclick="selectBlogByVid('+data[i].param+')">'+data[i].param+'</a>';
                     		}
-                    		logList+='<li style="animation-delay:0.'+i+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+time+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
+                    		logList+='<li style="animation-delay:0.'+i+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+timeStr+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
                     	}
                     	 if(page.pageNum>=2){
                     		$(".logList").append(logList);
