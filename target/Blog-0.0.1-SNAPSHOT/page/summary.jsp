@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html>
@@ -8,47 +8,54 @@
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/font-awesome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/base.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/index.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/animate.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/font-awesome.css"
+	rel="stylesheet">
 </head>
 <body>
-<%@ include file="top.jsp" %>
-<article>
-  <div class="leftbox">
-    <div class="newblogs ">
-      <h2 class="hometitle">
-      <span class="tagTitle">
-      </span>知识总结</h2>
-      <ul class="animated fadeInDown">
-      
-      </ul>
-      <div class="pagelist ">
-      
-      </div> 
-    </div>
-  </div>
-  <div class="rightbox">
-    <div class="search1">
-      <form action="" method="post" name="searchform" id="searchform">
-        <input name="keyword" id="keyword"  class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
-        <input name="Submit" class="input_submit" value="搜索" type="button" onclick="search()">
-      	<input type="hidden" class="type_id">
-      </form>
-     
-     <ul class="tag tag-list animated fadeIn" style="padding: 0;">
-		
-	</ul >
-	
-    </div>
-    
-      <div class="paihang " >
+	<%@ include file="top.jsp"%>
+	<article>
+		<div class="leftbox">
+			<div class="newblogs ">
+				<h2 class="hometitle">
+					<span class="tagTitle"> 
+					</span>知识总结</h2>
+				<ul class="animated fadeInDown">
+
+				</ul>
+				<div class="pagelist "></div>
+			</div>
+		</div>
+		<div class="rightbox">
+			<div class="search1">
+				<form action="" method="post" name="searchform" id="searchform">
+					<input name="keyword" id="keyword" class="input_text"
+						value="请输入关键字" style="color: rgb(153, 153, 153);"
+						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
+						type="text"> <input name="Submit" class="input_submit"
+						value="搜索" type="button" onclick="search()"> <input
+						type="hidden" class="type_id">
+				</form>
+
+				<ul class="tag tag-list animated fadeIn" style="padding: 0;">
+
+				</ul>
+
+			</div>
+
+			<div class="paihang ">
 				<h2 class="ab_title">
 					<a href="/">本栏推荐</a>
 				</h2>
-				<ul class="like animated fadeInDown" >
+				<ul class="like animated fadeInDown">
 
 				</ul>
 				<div class="ad"></div>
@@ -62,39 +69,42 @@
 				</ul>
 
 			</div>
-    
-    <div class="weixin">
-      <h2 class="ab_title">公众号</h2>
-      <ul class="animated fadeInDown">
-        
-      </ul>
-    </div>
-  </div>
-</article>
 
-<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
-<script id="cy_cmt_num" src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytzg9rLH"></script>
-<script>
+			<div class="weixin">
+				<h2 class="ab_title">公众号</h2>
+				<ul class="animated fadeInDown">
+
+				</ul>
+			</div>
+		</div>
+	</article>
+
+	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
+	<script id="cy_cmt_num"
+		src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytzg9rLH"></script>
+	<script>
 	$(document).ready(function() {
 		//初始化类别信息
 		initBlogType();
 		//初始化技术专栏的信息
-		initBlogListByPage(1,"none");
+		initBlogListByPage(1,"none",null);
 		initBlogByLike();
 		initBlogByClick();
 	});
-	function ser(){
-		return 5; 
-	}
-	var initBlogListByPage=function(pageNum,type_id){
+	
+	var initBlogListByPage=function(pageNum,type_id,typename){
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
 		var params="";
 		if(type_id=="none"){
 			var keyword=$("#keyword").val();
-			if(keyword=="请输入关键字")
+			if(keyword=="请输入关键字"){
 				keyword="";
+				prarm='none'
+			}else{
+				prarm='搜索关键字为<span class="text-info">#'+keyword+'#</span>的博客'
+			}
 			 params ={
 					pageSize: 8,
 		            page:pageNum,
@@ -102,6 +112,7 @@
 		            content:keyword,
 		            introduction:keyword,
 		            keyword:keyword,
+		            param:prarm,
 		           	status:1  //1 表示已发布
 			};
 		}else {
@@ -109,6 +120,7 @@
 					pageSize: 8,
 		            page:pageNum,
 		            'type.id':type_id,
+		            param:'搜索类别为<span class="text-info">#'+typename+'#</span>的博客列表',
 		           	status:1  //1 表示已发布
 			};
 		}
@@ -137,7 +149,7 @@
                       			keyword=data[i].keyword;
                       		}
                       	}
-                      	blogList+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a class='+data[i].id+' href="javascript:void(0);"></a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
+                      	blogList+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span class="lm f_l"><a href="javascript:void(0);">'+data[i].type.typename+'</a></span><span style="float:left;padding:0;color: #38485a"><i class="fa fa-tags" style="color: #88827dcc;"></i>&nbsp;'+keyword+'</span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a class='+data[i].id+' href="javascript:void(0);"></a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
             		 };
             		
             		 var p={
@@ -155,7 +167,7 @@
 	        	            	}
 	        	            },
 	        			    error:function(){
-	        			    	alert("失败");
+	        			    	layer.msg('出错啦', {icon: 2});
 	        			    }	
 	        	        });
             		 
@@ -164,7 +176,6 @@
             		blogList="无查询结果";
             	}
             	 $(".newblogs").find("ul").html(blogList);
-            	// $(".plNum").html('<span id = "sourceId::54" class = "cy_cmt_count" ></span>');
             	//初始化分页、总数>10显示分页栏
             	 if(page.total>8){
             		 var allTotal='<a title="Total record">&nbsp;<b>'+page.total+'</b> </a>&nbsp;&nbsp;';
@@ -222,7 +233,7 @@
              
             	},    
 		    error:function(){
-		    	alert("初始化失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
@@ -241,7 +252,7 @@
 		    });
 		  }); 
 		    
-		initBlogListByPage(pageNum,type);
+		initBlogListByPage(pageNum,type,null);
 		setTimeout(function () {
 		 window.scrollTo(0,0);   //滑动到浏览器顶部
 		 layer.close(index);
@@ -258,7 +269,7 @@
 				  shade: [0.1,'#eee'] //0.1透明度的白色背景
 	    	});
 	    }); 
-	     initBlogListByPage(1,"none");
+	     initBlogListByPage(1,"none",null);
 		setTimeout(function () {
 			layer.close(index);
 		},200);
@@ -279,7 +290,7 @@
             success:function (data) {
             	var typeName='';
                 for (var i = 0; i < data.length; i++) {
-                	typeName+='<li><a style="padding: 5px;margin-right: 3px;border: none; background-color: #f1f1f1;" onclick="searchType('+data[i].id+')" href="javascript:void(0);"> <i class="fa fa-tag"></i>'+data[i].typename+'</a></li>'
+                	typeName+='<li><a style="padding: 5px;margin-right: 3px;border: none; background-color: #f1f1f1;" onclick="searchType('+data[i].id+',\''+data[i].typename+'\')" href="javascript:void(0);"> <i class="fa fa-tag"></i>'+data[i].typename+'</a></li>'
                 }
                 var length='';
                 var keyTitle='';
@@ -289,7 +300,7 @@
                 	length=data.length;
                 }
                 for (var i = 0; i < length; i++) {
-                	keyTitle+='<a href="javascript:void(0);" onclick="searchType('+data[i].id+')">'+data[i].typename+'</a>'
+                	keyTitle+='<a href="javascript:void(0);" onclick="searchType('+data[i].id+',\''+data[i].typename+'\')">'+data[i].typename+'</a>'
                 }
                 
                 // 初始化数据
@@ -297,12 +308,12 @@
                 $(".tagTitle").html(keyTitle);
             },    
 		    error:function(){
-		    	alert("初始化类别失败");
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	}
 	
-	var searchType=function(type_id){
+	var searchType=function(type_id,typename){
 		$(".type_id").val(type_id);
 		var index ='';
 	     layer.ready(function(){
@@ -310,7 +321,7 @@
 				  shade: [0.1,'#eee'] //0.1透明度的白色背景
 	    	});
 	    }); 
-	     initBlogListByPage(1,type_id);
+	     initBlogListByPage(1,type_id,typename);
 		setTimeout(function () {
 			layer.close(index);
 		},200);
@@ -348,7 +359,7 @@
 				
             },    
 		    error:function(){
-		    	layer.msg('出错啦', {icon: 2});
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
@@ -384,7 +395,7 @@
             	
             },    
 		    error:function(){
-		    	layer.msg('出错啦', {icon: 2});
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};

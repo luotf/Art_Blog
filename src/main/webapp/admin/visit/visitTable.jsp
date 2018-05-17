@@ -143,23 +143,36 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
-		$(document).ready(function() {
+	var globalCount=0;
 			$("#fakeloader").fakeLoader({
-		        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+		        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 		        zIndex:999, // Default zIndex
 		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 		        bgColor:"#fff", //Hex, RGB or RGBA colors
 		        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
 		    }); 
+			
 			setTimeout(function () {
 	       		$('body').css('opacity','1');
 	       		$('body').attr("class", "gray-bg") //添加样式
 			},100);
+	
+		$(document).ready(function() {
 			
 			initVisitCount();
 			initBlackIpCount();
 			selectVisit();
+			
 		});
+		
+
+	    var returnAllCount=function(){
+			if(globalCount==3){
+				setTimeout(function () {
+					$('#fakeloader').css('display','none');
+				},500);
+			}
+		}
 
 		var initVisitCount = function() {
 			$.ajax({
@@ -179,7 +192,8 @@
 					swal("初始化资源数目错误", "请重新操作", "error");
 				}
 			});
-
+			globalCount++;
+			 returnAllCount();
 		};
 
 		var initBlackIpCount = function() {
@@ -195,7 +209,8 @@
 					swal("初始化资源数目错误", "请重新操作", "error");
 				}
 			});
-
+			globalCount++;
+			 returnAllCount();
 		};
 
 		var fastToSearch=function(fastKey){
@@ -399,6 +414,8 @@
 											}
 								  } ]
 							});
+			globalCount++;
+			 returnAllCount();
 		};
 
 		//传参数到后台

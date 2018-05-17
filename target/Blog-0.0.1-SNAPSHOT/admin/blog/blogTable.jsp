@@ -31,12 +31,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
-	
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 <link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 
-<body class="gray-bg">
-	<div class="wrapper wrapper-content animated fadeInRight">
+<body class="white-bg" style="opacity:0">
+<div id="fakeloader"></div>
+	<div class="wrapper wrapper-content">
 		<div class="ibox float-e-margins">
 			<div class="ibox-title">
 				<h5>博客信息表格</h5>
@@ -144,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
  	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
- 	
+ 	<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -155,7 +156,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<script>
 	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	    }); 
+		setTimeout(function () {
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},100);
+		
 		selectBlog();
+		$("#fakeloader").fakeLoader({
+		      timeToHide:300, 
+		      zIndex:999, 
+		      spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		      bgColor:"#fff", 
+		  }); 
+	
 	}); 
 	
 	//草稿/发布...按钮绑定查询事件  
@@ -209,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   $(".btn-group").find(".dropdown-menu").append(typeName);
               },    
   		    error:function(){
-  		    	swal("上传错误", "请重新操作", "error");
+  		    	swal("初始化类别错误", "请重新操作", "error");
   		    }	
           });
 	  }
@@ -255,7 +274,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				//showFullscreen:true,  //全屏按钮
 				//queryParamsType: "limit", //查询参数组织方式
 			    sidePagination: "server", //服务端处理分页
-			    //silent: true,  //刷新事件必须设置  
+			    silent: true,  //刷新事件必须设置  
 			    searchTimeOut:500, //设置搜索超时时间
 			    toolbarAlign:'left',//工具栏对齐方式
 			    buttonsAlign:'right',//按钮对齐方式
@@ -288,7 +307,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      valign: 'middle',
 		                      width: '5%',
 		                      formatter: function (value, row, index) {  
-		                          return index+1;  
+		                    	  var index1=index+1;
+		                          var id='<span title="ID:'+row.id+'">'+index1+'</span>';
+		                    	  return id;  
 		                      }  
 		                  }, 
 		                  {
@@ -545,22 +566,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	//博客的操作
 	var operationBlog=function(idArray,status,isrecommend,isTop){
 		var param='';
+		var prarm='';
 		if(status!=null){
+			if(status==1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-success">发表</span>'
+			}else if(status==-1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客放入<span class="text-navy">草稿箱</span>'
+			}else if(status==2){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客放入<span class="text-danger">垃圾箱</span>'
+			}
 			 param={
 					 'id':idArray,
 					 'status':status,
+					  prarm:prarm,
 			};
 		}
 		if(isrecommend!=null){
+			if(isrecommend==1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客置为<span class="text-success">推荐</span>'
+			}else{
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-navy">取消推荐</span>'
+			}
 			param={
 					 'id':idArray,
 					 'isrecommend':isrecommend,
+					  prarm:prarm,
 			};
 		}
 		if(isTop!=null){
+			if(isTop==1){
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-success">置顶</span>'
+			}else{
+				prarm='将ID为<span class="text-info">'+idArray+'</span>的博客<span class="text-navy">取消置顶</span>'
+			}
 			param={
 					 'id':idArray,
 					 'istop':isTop,
+					 prarm:prarm,
 			};
 		}
 		$.ajax({

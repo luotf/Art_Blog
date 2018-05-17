@@ -286,34 +286,42 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote-zh-CN.js"></script>
 	<script>
+		var globalCount=0;
+		$("#fakeloader").fakeLoader({
+	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	    }); 
+		setTimeout(function () {
+	   		$('body').css('opacity','1');
+	   		$('body').attr("class", "gray-bg") //添加样式
+		},100);
+		
 		$(document).ready(function() {
-			$("#fakeloader").fakeLoader({
-		        timeToHide:1000, //Time in milliseconds for fakeLoader disappear
-		        zIndex:999, // Default zIndex
-		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-		        bgColor:"#fff", //Hex, RGB or RGBA colors
-		    }); 
-			setTimeout(function () {
-	       		$('body').css('opacity','1');
-	       		$('body').attr("class", "gray-bg") //添加样式
-			},100);
-			
 			initBlogCountBystatus();	
 			initBlogType();			
 							//初始化富文本
-				$('#summernote').summernote(
-					{
-						height : 300,//初始化默认高度    
-						minHeight : null, //最小高度             
-						maxHeight : null, //最大高度
-						lang : 'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
-						placeholder : "请在这里写下您的内容",
-						onImageUpload : function(files, editor,$editable) {
-						sendFile(files[0], editor,$editable);
-						}
-					});
+			$('#summernote').summernote({
+				height : 300,//初始化默认高度    
+				minHeight : null, //最小高度             
+				maxHeight : null, //最大高度
+				lang : 'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
+				placeholder : "请在这里写下您的内容",
+				onImageUpload : function(files, editor,$editable) {
+				sendFile(files[0], editor,$editable);
+				}
+			});
 		});
 
+		var returnAllCount=function(){
+			if(globalCount==2){
+				setTimeout(function () {
+					$('#fakeloader').css('display','none');
+				},500);
+			}
+		}
+		
 		var initBlogType=function(){
 			//查询出文章类别
 			//设置参数，表示查询所有的类别
@@ -367,6 +375,8 @@
 					swal("初始化类别错误", "请重新操作", "error");
 				}
 			});
+			globalCount++;
+			returnAllCount();
 		}
 		
 		
@@ -394,6 +404,8 @@
 					swal("初始化博客状态错误", "请重新操作", "error");
 				}
 			});
+			globalCount++;
+			returnAllCount();
 		};
 		
 		//图片上传  

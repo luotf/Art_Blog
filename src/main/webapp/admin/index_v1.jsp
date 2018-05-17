@@ -41,8 +41,8 @@
 </head>
 
 <body class="white-bg" style="opacity:0">
- <div id="fakeloader"></div>
-	<div class="wrapper wrapper-content">
+	<div id="fakeloader"></div>
+	  <div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -253,38 +253,36 @@
 		src="${pageContext.request.contextPath}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#fakeloader").fakeLoader({
-		        timeToHide:1000, 
-		        zIndex:999, 
-		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-		        bgColor:"#fff", 
-		    }); 
-
-			setTimeout(function () {
-	       		$('body').css('opacity','1');
-	       		$('body').attr("class", "gray-bg") //添加样式
-			},100);
-			
+	var globalCount=0;
+	$("#fakeloader").fakeLoader({
+        timeToHide:10000, 
+        zIndex:999, 
+        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+        bgColor:"#fff", 
+    }); 
+		setTimeout(function () {
+	   		$('body').css('opacity','1');
+	   		$('body').attr("class", "gray-bg") //添加样式
+		},100); 
+		
+	$(document).ready(function() {
 		$("#end").val(Format(new Date(),"yyyy-MM-dd"));
 		$("#start").val(Format(new Date().getTime() -  6*24*60*60*1000,"yyyy-MM-dd"));
-		var days=new Array();
-		var counts=new Array(5,5,5,5,5,5,5);
-		var date=new Date();
-		for(var i=6,j=0;i>=0;i--,j++){
-			days[j]=Format(new Date(date.getTime() -  i*24*60*60*1000),"yyyy-MM-dd");
-		}
-		
-		initEcharts(days,counts);
-		initBlogCountByStatus();//初始化已发表/草稿箱博客数目
-		initResourceCountByStatus();//初始化已发表资源数目
-		initBlogCountByDate();//初始化昨日/今日博客发表数目
-		initVisitCount("now");  //初始化今日访客
-		initVisitCount("history");  //初始化历史访客
-		initVisitCountByWeek(7);  //初始化num日访客
-		
-		
+			initBlogCountByStatus(),//初始化已发表/草稿箱博客数目
+			initResourceCountByStatus()//初始化已发表资源数目
+			initBlogCountByDate()//初始化昨日/今日博客发表数目
+			initVisitCount("now")  //初始化今日访客
+			initVisitCount("history")  //初始化历史访客
+			initVisitCountByWeek(7)  //初始化num日访客 
 	});
+		var returnAllCount=function(){
+			if(globalCount==6){
+				setTimeout(function () {
+					$('#fakeloader').css('display','none');
+				},500);
+			}
+		}
+	
 		$('#start').datepicker({
             keyboardNavigation: false,
             forceParse: false,
@@ -317,7 +315,6 @@
         	}else if($('#start').val()!=""&&$('#end').val()!=""){
         		initVisitCountByRange($('#start').val(),$('#end').val());
         	}
-        	
         })
 	
 	var initEcharts=function(days,counts){
@@ -413,6 +410,8 @@
         $(".high").html(max);
         $(".low").html(min);
         $(".all").html(all);
+        globalCount++;
+		returnAllCount();
     };
     
     var initResourceCountByStatus=function(){
@@ -428,6 +427,8 @@
 						$(".resource").html(data.list[i].count );
 					} 
 				}
+				globalCount++;
+				 returnAllCount();
 			},
 			error : function() {
 				swal("博客总数错误", "请重新操作", "error");
@@ -464,7 +465,8 @@
 						$(".deletePercent").html(deletePercent);
 					}
 				}
-				
+				globalCount++;
+				 returnAllCount();
 			},
 			error : function() {
 				swal("博客总数错误", "请重新操作", "error");
@@ -511,7 +513,8 @@
 				
 				var yesBlogPercent=level(yes,yes2);
 				$(".yesBlogPercent").html(yesBlogPercent);
-				
+				globalCount++;
+				 returnAllCount();
 			},
 			error : function() {
 				swal("博客发表数错误", "请重新操作", "error");
@@ -545,7 +548,7 @@
 			nowTime=Format(date,"yyyy-MM-dd");
 		}else if(e=="history"){
 			startTime="";
-			endTime="";
+			nowTime="";
 		}
 		var params={
 				startTime:startTime,
@@ -574,12 +577,14 @@
 					var nowVisitorsPercent=level(now,yes);
 					$(".nowVisitorsPercent").html(nowVisitorsPercent);
 				}else if(e=="history"){
-					var count=0;
+					var sum=0;
 					for(var i=0;i<data.list.length;i++){
-						count+=data.list[i].count;
+						sum+=data.list[i].count;
 					}
-					$(".visitors").html(count );
+					$(".visitors").html(sum );
 				}
+				globalCount++;
+				 returnAllCount();
 			},
 			error : function() {
 				swal("今日访客数错误", "请重新操作", "error");
@@ -630,7 +635,7 @@
 						days[j]=Format(days[j],"MM/dd");
 					}
 				}
-				initEcharts(days,counts); 
+				initEcharts(days,counts);
 			},
 			error : function() {
 				swal("近日访客初始化错误", "请重新操作", "error");
@@ -831,6 +836,12 @@
 	    return fmt;
 	}   	
 	</script>
-
+	<script>
+	window.onload = function () {
+		
+    };
+</script>
 </body>
+
 </html>
+

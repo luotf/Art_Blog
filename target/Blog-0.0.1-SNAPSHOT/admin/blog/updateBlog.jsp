@@ -28,6 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	href="${pageContext.request.contextPath}/css/plugins/iCheck/custom.css"
 	rel="stylesheet">
 <link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
+	rel="stylesheet">
+<link
 	href="${pageContext.request.contextPath}/css/plugins/summernote/summernote.css"
 	rel="stylesheet">
 <link
@@ -48,8 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
 </head>
 
-<body class="gray-bg">
-	<div class="wrapper wrapper-content">
+<body class="white-bg" style="opacity:0">
+	<div id="fakeloader"></div>
+	 <div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -239,7 +243,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 		</div>
 	</div>
-
+</body>
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
@@ -258,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
- 
+ <script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
  	<!-- Web Uploader -->
     <script type="text/javascript">
         // 添加全局站点信息
@@ -275,7 +279,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
         
 	$(document).ready(function() { 
-		
+		$("#fakeloader").fakeLoader({
+	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	    }); 
+		setTimeout(function () {
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},100);
 		var url = window.location.href;
 		var url_param = url.split("=")[1];
 		   //编辑博客
@@ -371,7 +384,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								sendFile(files[0],editor,$editable);  
 						}
 					});
-				});
+		
+		    $("#fakeloader").fakeLoader({
+		        timeToHide:300, 
+		        zIndex:999, 
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", 
+		    }); 
+		    
+		});
 				
 			//图片上传  
 			function sendFile(file, editor, $editable){  
@@ -478,6 +499,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var updateBlog=function(id){
         	var url = window.location.href;
     		var url_param = url.split("=")[1];
+    		var prarm='将ID为<span class="text-info">'+url_param+'</span>的博客<span class="text-success">发表</span>';
+			if(id==-1){
+				prarm='将ID为<span class="text-info">'+url_param+'</span>的博客放入<span class="text-navy">草稿箱</span>';
+			}
           var params ={
         		    'id':url_param,
         			'title':$("#title").val(),
@@ -486,7 +511,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'images':$(".imagePath").val(),
         			'keyword':$("#keyword").val(),
         			'content':$("#summernote").code(),
-        			'status':id
+        			'status':id,
+        			 prarm:prarm
         	};
             $.ajax({
                    url:'../updateBlog',    
@@ -509,7 +535,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         		    		timer: 1500,
         		    	 });
             			 setTimeout(function(){
-            				window.location.href ="../table/blogTable.jsp";
+            				window.location.href ="../blog/blogTable.jsp";
 						},1500); 
                     }else{
                     	swal("更新失败", "请重新操作", "error");

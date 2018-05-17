@@ -41,10 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
+<div id="fakeloader"></div>
 	<div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
@@ -52,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">博客查询</a>
+								href="javascript:void(0);">博客查询</a>
 							<div class="space-25"></div>
 							<h5 class="tag-title">搜索</h5>
 							<form role="form" class="form-inline">
@@ -70,14 +71,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<ul class="category-list">
 
 								</ul>
-								<div class="pagelist" style="padding-top: 0px;">
-									<div class="pageNav tooltip-demo"></div>
-									<div style="margin:15px 0 0 0;">
+								<div  style="padding-top: 0px;">
+									<div class="pageNav "></div>
+									<p style="margin:15px auto;text-align:center">
 										<span class="allTotal">共<b></b>条记录
 										</span>&nbsp;&nbsp; <span class="cPage">第<b></b>页
 										</span>&nbsp;&nbsp; <span class="allPage">共<b></b>页
 										</span>
-									</div>
+									</p>
 								</div>
 
 							</div>
@@ -89,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<div class="col-sm-9">
-				<div class="ibox float-e-margins">
+				<div class="ibox float-e-margins ">
 					<div class="mail-box-header">
 						<h2>博客详情</h2>
 						<div class="infos" style="margin:0px auto;width: 91.2%;">
@@ -122,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
@@ -148,29 +149,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-	<script charset="utf-8" type="text/javascript"
-		src="http://changyan.sohu.com/upload/changyan.js"></script>
+	
 
 	<script>
 	  
 	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	    }); 
 		
-		(function(){ 
-			var appid = 'cytzg9rLH'; 
-			var conf = 'prod_230eb23e872ad7a4302e5802e6f91bf9'; 
-			var width = window.innerWidth || document.documentElement.clientWidth; 
-			if (width < 960) { 
-			window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })();
-		    
-		
+		setTimeout(function () {
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},100);
 		//参数1表示当前页为1
 		initBlog(1);
+		
+		$("#fakeloader").fakeLoader({
+	        timeToHide:300, 
+	        zIndex:999, 
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", 
+	    }); 
+		
 	});
 	var initBlog=function(pageNum){
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
 		var params ={
-				pageSize: 10,
+				pageSize: 9,
 	            page:pageNum,
 	            title:$(".form-control").val(),
 	            keyword:$(".form-control").val(),
@@ -187,25 +197,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	var data=data.blogList;
             	var circle = new Array("text-navy","text-danger"," text-info","text-primary","text-warning");
             	for (var i = 0; i < data.length; i++) {
-            		blogList+='<li style="margin: 0 0 5px 0"><a href="#" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
+            		var time=0.03*i;
+            		blogList+='<li class="animated fadeInDown" style="margin: 0 0 5px 0;animation-delay:'+time+'s""><a href="javascript:void(0);" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
             	}
-             var pageNav='';
-             var prePage=page.pageNum-1;
+            	if(page.pageNum>=2){
+             		$(".category-list").append(blogList);
+             	}else{
+             		$(".category-list").html(blogList);
+             		findBlogById(data[0].id);
+             		$(".allTotal").find("b").html(page.total);
+             		$(".allPage").find("b").html(page.pages);
+             	} 
              var nextPage=page.pageNum+1;
-             var first='<a href="#" data-toggle="tooltip" data-placement="top" title="首页" onclick="pageNav(1,'+page.pages+')"><i class="fa fa-angle-double-left"></i></a>&nbsp;&nbsp;';
-			 var pre='<a href="#" data-toggle="tooltip" data-placement="top" title="上一页" onclick="pageNav('+prePage+','+page.pages+')"><i class="fa fa-angle-left" ></i></a>&nbsp;&nbsp;';
-			 var next='<a href="#" data-toggle="tooltip" data-placement="top" title="下一页" onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-angle-right"></i></a>&nbsp;&nbsp;';
-			 var last='<a href="#" data-toggle="tooltip" data-placement="top" title="尾页" onclick="pageNav('+page.pages+','+page.pages+')"><i class="fa fa-angle-double-right"></i></a>';	
-			 pageNav=first+pre+next+last;
-			 $(".pageNav").html(pageNav);
-             $(".category-list").html(blogList);
-             $(".allTotal").find("b").html(page.total);
+			 var more='<p style="text-align:center"><a onclick="pageNav('+nextPage+','+page.pages+')"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
+			 if(page.pageNum==page.pages){
+     			more='<p style="text-align:center"><a href="javascript:void(0);" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p>';
+     		}
+			 $(".pageNav").html(more);
              $(".cPage").find("b").html(page.pageNum);
-             $(".allPage").find("b").html(page.pages);
-              //初始化左边内容
-             findBlogById(data[0].id);
-             
-            	},    
+           },    
 		    error:function(){
 		    	swal("您的请求太快", "请重新操作", "error");
 		    }	
@@ -224,7 +234,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	var findBlogByKey=function(){
-		initBlog(1);
+		if($(".form-group").find(".form-control").val()!=""){
+			initBlog(1);
+		}
+		
 	}
 	
 	

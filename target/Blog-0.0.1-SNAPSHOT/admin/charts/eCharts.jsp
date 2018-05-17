@@ -28,20 +28,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 <style type="text/css">
 	.input-group-addon{
 		color: #c23531;
 	}
 </style>
 </head>
-<body class="gray-bg">
-   <div class="wrapper wrapper-content animated fadeInRight">
+<body class="white-bg" style="opacity:0">
+<div id="fakeloader"></div>
+   <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5> <i class="fa line-chart"></i> 访问量</h5>
-                        <div class="ibox-tools">
+                        <div class="ibox-tools ">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
                             </a>
@@ -103,8 +105,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                 </div>
             </div>
-            
-            
             
             
             <div class="col-sm-6">
@@ -227,9 +227,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/echarts/echarts.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
     <script>
     $(document).ready(function() {
+			$("#fakeloader").fakeLoader({
+		        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+		        zIndex:999, // Default zIndex
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", //Hex, RGB or RGBA colors
+		    }); 
+		setTimeout(function () {
+        		$('body').css('opacity','1');
+        		$('body').attr("class", "gray-bg") //添加样式
+ 		},100);
+			
     	var date=new Date();
     	var start=Format(new Date(date.getTime() -  6*24*60*60*1000),"yyyy-MM-dd");
     	var end=Format(date,"yyyy-MM-dd");
@@ -244,8 +255,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	$("#startBlogClick").val(start);
     	$("#endBlogClick").val(end);
     	initBlogClickByDate(start,end);  //初始化7日访客
-    	
     	initBlogClickSort();
+    	
+    	 $("#fakeloader").fakeLoader({
+	        timeToHide:300, 
+	        zIndex:999, 
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", 
+	    }); 
     });
     
 	//访问量时间
@@ -825,8 +842,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	  } 
 	            	  $(".newsview").find(".tags").append(keyword);
 	            	  $(".newsview").find(".news_infos").html(data.blog.content);
-	            	  var update='<a  class="J_menuItem btn btn-white" href="../blog/updateBlog.jsp?id='+data.blog.id+'">编辑</a>';
-	            	  $(".modal-footer").find(".update").html(update);
 	            	}
 	            },    
 			    error:function(){

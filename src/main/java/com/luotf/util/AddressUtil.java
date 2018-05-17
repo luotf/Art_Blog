@@ -31,7 +31,7 @@ public class AddressUtil {
 			//System.out.println(returnStr);
 			String[] temp = returnStr.split(",");
 			if (temp.length < 3) {
-				return "未知城市";// 无效IP，局域网测试
+				return "未知城市";  // 无效IP，局域网测试
 			}
 			String province = (temp[4].split(":"))[1].replaceAll("\"", "");
 			province = decodeUnicode(province);// 省份
@@ -112,7 +112,7 @@ public class AddressUtil {
 				connection.disconnect();// 关闭连接
 			}
 		}
-		return null;
+		return "";
 	}
 
 	/**

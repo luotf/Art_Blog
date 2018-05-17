@@ -42,10 +42,14 @@
 <link
 	href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
+	rel="stylesheet">
 </head>
 
-<body class="gray-bg">
-	<div class="wrapper wrapper-content">
+<body class="white-bg" style="opacity:0">
+	 <div id="fakeloader"></div>
+	 <div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="ibox float-e-margins">
@@ -70,7 +74,7 @@
 								</a></li>
 							</ul>
 							<h5>指定日期查询</h5>
-							<div class="input-daterange input-group" id="datepicker">
+							<div style="margin-bottom:20px" class="input-daterange input-group" id="datepicker">
 								<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
 								<input type="text" class="input-sm form-control" id="start" />
 								<span class="input-group-addon">到</span> <input type="text"
@@ -78,7 +82,19 @@
 							</div>
 							<button id="reset" onclick="reset()"
 								class="btn-sm btn-outline btn-white pull-right"
-								style="margin-top:5px" type="button">重置</button>
+								style="margin-top:-15px" type="button">重置</button>
+							<h5>快捷查询</h5>
+							<ul class="folder-list m-b-md" style="padding: 0">
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('四川')"><i class="fa fa-tag"></i>四川地区</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('教育网')"><i class="fa fa-tag"></i>教育网</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('IE')"><i class="fa fa-tag"></i>IE </a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Chrome')"><i class="fa fa-tag"></i>Chrome </a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Windows')"><i class="fa fa-tag"></i>Windows</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Android')"><i class="fa fa-tag"></i>Android</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('iPhone')"><i class="fa fa-tag"></i>iPhone</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('iPad')"><i class="fa fa-tag"></i>iPad</a></li>
+                                <li><a href="javascript:void(0)" onclick="fastToSearch('Mac')"><i class="fa fa-tag"></i>Mac</a></li>
+                            </ul>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -116,7 +132,7 @@
 	<!-- Data picker -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -126,9 +142,30 @@
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
 		$(document).ready(function() {
+			$("#fakeloader").fakeLoader({
+		        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+		        zIndex:999, // Default zIndex
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", //Hex, RGB or RGBA colors
+		        //imagePath:"yourPath/customizedImage.gif" //If you want can you insert your custom image
+		    }); 
+			
+			setTimeout(function () {
+	       		$('body').css('opacity','1');
+	       		$('body').attr("class", "gray-bg") //添加样式
+			},100);
+			
 			initVisitCount();
 			initBlackIpCount();
 			selectVisit();
+			
+			$("#fakeloader").fakeLoader({
+		        timeToHide:300, 
+		        zIndex:999, 
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", 
+		    }); 
+			
 		});
 
 		var initVisitCount = function() {
@@ -168,6 +205,24 @@
 
 		};
 
+		var fastToSearch=function(fastKey){
+			$(".search .form-control").val(fastKey);
+			var params = $('#allVisit').bootstrapTable('getOptions');
+			params.queryParams = function(params) {
+				return {
+					pageSize : params.limit,
+					page : (params.offset) / params.limit + 1,
+					ip : fastKey,
+					platformType : fastKey,
+					browserType : fastKey,
+					city : fastKey,
+					startTime : $('#start').val(),
+					endTime : $('#end').val(),
+				};
+			};
+			$('#allVisit').bootstrapTable('refresh', params);
+			
+		}
 		
 		var reset = function() {
 			$('#start').val("");
@@ -294,7 +349,9 @@
 						                      valign: 'middle',
 						                      width: '5%',
 						                      formatter: function (value, row, index) {  
-						                          return index+1;  
+						                    	  var index1=index+1;
+						                          var id='<span title="ID:'+row.id+'">'+index1+'</span>';
+						                    	  return id;  
 						                      }  
 						                  }, 
 										{
@@ -329,7 +386,7 @@
 											title : '加入时间',
 											field : 'time',
 											align : 'center',
-											width : '17%',
+											width : '18%',
 											formatter : function(value, row,
 													index) {
 												return Format(row.time,
@@ -368,7 +425,7 @@
 		var deleteBlackIp=function(id,ip){
 			 var params = {
 					id : id,
-					prarm:'将ip为“'+ip+'”的用户移出黑名单',
+					prarm:'将ip为<span class="text-info">#'+ip+'#</span>的用户<span class="text-success">移出黑名单</span>',
 				}; 
 				$.ajax({
 					url : '../deleteBlackIp',

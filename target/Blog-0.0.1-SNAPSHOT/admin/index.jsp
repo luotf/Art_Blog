@@ -30,10 +30,13 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
+	rel="stylesheet">
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg"
-	style="overflow:hidden">
+<body class="fixed-sidebar full-height-layout white-bg"
+	style="overflow:hidden;">
 	<div id="wrapper">
 		<!--左侧导航开始-->
 		<nav class="navbar-default navbar-static-side" role="navigation">
@@ -69,7 +72,7 @@
 					</a></li>
 
 					<li><a class="J_menuItem"
-								href="${pageContext.request.contextPath}/admin/log.jsp"><i class="fa fa-hourglass-2"></i>
+								href="${pageContext.request.contextPath}/admin/log/log.jsp"><i class="fa fa-hourglass-2"></i>
 					<span class="nav-label">操作日志</span></a></li>
 					
 					<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/charts/eCharts.jsp"><i class="fa fa-bar-chart"></i><span
@@ -129,7 +132,7 @@
 		</nav>
 		<!--左侧导航结束-->
 		<!--右侧部分开始-->
-		<div id="page-wrapper" class="gray-bg dashbard-1">
+		<div id="page-wrapper" class="white-bg dashbard-1">
 			<div class="row border-bottom">
 				<nav class="navbar navbar-static-top" role="navigation"
 					style="margin-bottom: 0">
@@ -373,10 +376,12 @@
 	<script src="${pageContext.request.contextPath}/js/hplus.js"></script>
 	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
 
-	<!-- 第三方插件 -->
-	<script
-		src="${pageContext.request.contextPath}/js/plugins/pace/pace.min.js"></script>
+	
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 
+<script type="text/javascript">
+
+	</script>
 </body>
 
 </html>

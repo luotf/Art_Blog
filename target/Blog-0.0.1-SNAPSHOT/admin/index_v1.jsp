@@ -35,9 +35,13 @@
 <link
 	href="${pageContext.request.contextPath}/css/plugins/datapicker/datepicker3.css"
 	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/css/fakeLoader.css"
+	rel="stylesheet">
 </head>
 
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
+ <div id="fakeloader"></div>
 	<div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
@@ -237,19 +241,30 @@
 
 	<!-- 全局js -->
 	<script
-		src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+		src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/echarts/echarts.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Data picker -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/datapicker/bootstrap-datepicker.js"></script>
 
 	<script type="text/javascript">
-	$(document).ready(function() {
+		$(document).ready(function() {
+			$("#fakeloader").fakeLoader({
+		        timeToHide:10000, 
+		        zIndex:999, 
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", 
+		    }); 
+			setTimeout(function () {
+	       		$('body').css('opacity','1');
+	       		$('body').attr("class", "gray-bg") //添加样式
+			},100);
+			
 		$("#end").val(Format(new Date(),"yyyy-MM-dd"));
 		$("#start").val(Format(new Date().getTime() -  6*24*60*60*1000,"yyyy-MM-dd"));
 		var days=new Array();
@@ -258,6 +273,7 @@
 		for(var i=6,j=0;i>=0;i--,j++){
 			days[j]=Format(new Date(date.getTime() -  i*24*60*60*1000),"yyyy-MM-dd");
 		}
+		
 		initEcharts(days,counts);
 		initBlogCountByStatus();//初始化已发表/草稿箱博客数目
 		initResourceCountByStatus();//初始化已发表资源数目
@@ -265,6 +281,13 @@
 		initVisitCount("now");  //初始化今日访客
 		initVisitCount("history");  //初始化历史访客
 		initVisitCountByWeek(7);  //初始化num日访客
+		
+			$("#fakeloader").fakeLoader({
+			      timeToHide:300, 
+			      zIndex:999, 
+			      spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+			      bgColor:"#fff", 
+		}); 
 	});
 		$('#start').datepicker({
             keyboardNavigation: false,

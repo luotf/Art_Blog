@@ -46,7 +46,7 @@
 		</div>
 		<div class="rightbox">
 			<div class="search1">
-				<form name="searchform" id="searchform">
+				<form name="searchform" id="searchform" style="width:100%;height: 30px;">
 					<input name="keyword" id="keyword" class="input_text"
 						value="请输入关键字" style="color: rgb(153, 153, 153);"
 						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
@@ -56,7 +56,7 @@
 						type="hidden" class="type_id">
 				</form>
 			
-				<ul class="tag tag-list" style="padding: 0;margin: 0 auto;">
+				<ul class="tag tag-list" style="padding: 0;width:95%;margin: 0 auto;">
 					
 				</ul>
 			</div>

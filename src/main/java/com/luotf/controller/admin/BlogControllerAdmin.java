@@ -46,7 +46,7 @@ public class BlogControllerAdmin {
 	 @RequestMapping(value = "/uploadImages",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.UPLOAD_IMAGES,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map<String, Object> uploadImage(HttpServletRequest request) throws Exception {
+	 public Map<String, Object> uploadImage(String prarm,HttpServletRequest request) throws Exception {
 		 CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
 		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(multipartResolver.isMultipart(request)){

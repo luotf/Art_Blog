@@ -19,17 +19,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/font-awesome.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/js/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
     <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
-	
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
+<div id="fakeloader"></div>
     <div class="wrapper wrapper-content">
     <div class="row">
             <div class="col-sm-12">
@@ -124,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/plugins/peity/jquery.peity.min.js"></script>
 
  	<script src="${pageContext.request.contextPath}/js/plugins/fancybox/jquery.fancybox.js"></script>
-	
+	<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	
@@ -140,11 +141,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <script>
         $(document).ready(function () {
+        	$("#fakeloader").fakeLoader({
+    	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+    	        zIndex:999, // Default zIndex
+    	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+    	        bgColor:"#fff", //Hex, RGB or RGBA colors
+    	    }); 
+        	setTimeout(function () {
+           		$('body').css('opacity','1');
+           		$('body').attr("class", "gray-bg") //添加样式
+    		},100);
             $('.fancybox').fancybox({
                 openEffect: 'none',
                 closeEffect: 'none'
             });
             common_getPicFileList();
+            $("#fakeloader").fakeLoader({
+		        timeToHide:300, 
+		        zIndex:999, 
+		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+		        bgColor:"#fff", 
+		    }); 
             
         });
         

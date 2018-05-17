@@ -34,10 +34,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
+<div id="fakeloader"></div>
 	<div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
@@ -118,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
 	<script src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
@@ -138,9 +140,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
         
 	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	    }); 
+		
+		setTimeout(function () {
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},100);
+		
 		initType();
 		selectBlogType();
-			});
+		
+		$("#fakeloader").fakeLoader({
+	        timeToHide:300, 
+	        zIndex:999, 
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", 
+	    }); 
+		
+		
+	});
 	
 	
 	var initType=function(){
@@ -217,7 +240,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      valign: 'middle',
 		                      width: '5%',
 		                      formatter: function (value, row, index) {  
-		                          return index+1;  
+		                    	  var index1=index+1;
+		                          var id='<span title="ID:'+row.id+'">'+index1+'</span>';
+		                    	  return id;  
 		                      }  
 		                  }, 
 		                  {
@@ -323,7 +348,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		var params ={
 	 				'id':id,
         			'typename':$("#newTypeName").val(),
-        			 prarm:'将类别名称“'+typename+'”更新为“'+$("#newTypeName").val()+'”'
+        			 prarm:'将类别名称<span class="text-info">#'+typename+'#</span>修改为<span class="text-info">#'+$("#newTypeName").val()+'#</span>'
         	};
 	 		if($("#commentForm2").valid()){
 	 			 $.ajax({
@@ -354,7 +379,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var deleteBlogType=function(id,name){
 			var params ={
 	 				id:id,
-	 				prarm:'删除的博客类别为“'+name+'”',
+	 				prarm:'删除的博客类别为<span class="text-info">#'+name+'#</span>',
         	};
 			swal({
 	             title: "确定要删除该类别吗",
@@ -401,7 +426,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var addBlogType=function(){
           var params ={
         			'typename':$("#typename").val(),
-        			 prarm:'新增的博客类别为“'+$("#typename").val()+'”',
+        			 prarm:'新增的博客类别为<span class="text-info">#'+$("#typename").val()+'#</span>',
         	};
             $.ajax({
                    url:'../addBlogType',    

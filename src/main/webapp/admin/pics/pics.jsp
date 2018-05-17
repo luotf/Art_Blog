@@ -140,9 +140,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo.js"></script>
 
     <script>
-        $(document).ready(function () {
+    	var globalCount=0;
+    
         	$("#fakeloader").fakeLoader({
-    	        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+    	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
     	        zIndex:999, // Default zIndex
     	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
     	        bgColor:"#fff", //Hex, RGB or RGBA colors
@@ -152,15 +153,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            		$('body').attr("class", "gray-bg") //添加样式
     		},100);
         	
+        $(document).ready(function () {
             $('.fancybox').fancybox({
                 openEffect: 'none',
                 closeEffect: 'none'
             });
+            
             common_getPicFileList();
             
         });
+        var returnAllCount=function(){
+    		if(globalCount==1){
+    			setTimeout(function () {
+    				$('#fakeloader').css('display','none');
+    			},500);
+    		}
+    	}
         
-        function common_getPicFileList() {
+        var common_getPicFileList=function() {
             $.ajax({
                 //此处使用的是自己封装的JAVA类
                 url: "../getFileList",
@@ -175,11 +185,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	}
                     }
 					$(".pics").html(pics);
+					
                 },
                 error: function (e) {
                 	swal("获取图片错误", "请检查接口服务", "error");
                 }
             });
+            globalCount++;
+			returnAllCount();
         }
     </script>
 

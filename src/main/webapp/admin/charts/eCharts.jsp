@@ -227,19 +227,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/echarts/echarts.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
     <script>
-    $(document).ready(function() {
-			$("#fakeloader").fakeLoader({
-		        timeToHide:1200, //Time in milliseconds for fakeLoader disappear
+	    var globalCount=0;
+	    $("#fakeloader").fakeLoader({
+		        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 		        zIndex:999, // Default zIndex
 		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 		        bgColor:"#fff", //Hex, RGB or RGBA colors
 		    }); 
-			setTimeout(function () {
-	       		$('body').css('opacity','1');
-	       		$('body').attr("class", "gray-bg") //添加样式
-			},100);
+		setTimeout(function () {
+        		$('body').css('opacity','1');
+        		$('body').attr("class", "gray-bg") //添加样式
+ 		},100); 
+		
+    $(document).ready(function() {
 			
     	var date=new Date();
     	var start=Format(new Date(date.getTime() -  6*24*60*60*1000),"yyyy-MM-dd");
@@ -258,6 +260,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	initBlogClickSort();
     	
     });
+    
+    var returnAllCount=function(){
+		if(globalCount==4){
+			setTimeout(function () {
+				$('#fakeloader').css('display','none');
+			},500);
+		}
+	}
     
 	//访问量时间
 	$('#startTime').datepicker({
@@ -439,6 +449,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ]
         };
         lineChart.setOption(lineoption);
+        globalCount++;
+		returnAllCount();
     };
     
     
@@ -549,6 +561,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ]
         };
         lineChart.setOption(lineoption);
+        globalCount++;
+		returnAllCount();
     };
     
     
@@ -694,6 +708,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            ]
 	        };
 	        lineChart.setOption(lineoption);
+	        globalCount++;
+			returnAllCount();
 	    };
     
 	    
@@ -724,6 +740,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					swal("初始化历史浏览量排行错误", "请重新操作", "error");
 				}
 			});
+			
 		};
 	    
 		var initEchartsByBlogClickSort=function(idArray,counts){
@@ -792,6 +809,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            ]
 	        };
 	        lineChart.setOption(lineoption);
+	        globalCount++;
+			returnAllCount();
 	        lineChart.on('click', function (params) {
 	        	var blogId=0;
 	        	$('#btn').trigger("click");

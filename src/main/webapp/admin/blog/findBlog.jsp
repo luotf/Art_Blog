@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="mail_compose.html">博客查询</a>
+								href="javascript:void(0);">博客查询</a>
 							<div class="space-25"></div>
 							<h5 class="tag-title">搜索</h5>
 							<form role="form" class="form-inline">
@@ -152,23 +152,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 	<script>
-	  
-	$(document).ready(function() {
+		var globalCount=0;
 		$("#fakeloader").fakeLoader({
-	        timeToHide:1000, //Time in milliseconds for fakeLoader disappear
+	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
 	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 	        bgColor:"#fff", //Hex, RGB or RGBA colors
 	    }); 
+		
 		setTimeout(function () {
        		$('body').css('opacity','1');
        		$('body').attr("class", "gray-bg") //添加样式
 		},100);
 		
-		//参数1表示当前页为1
-		initBlog(1);
-		
-	});
+		$(document).ready(function() {
+			//参数1表示当前页为1
+			initBlog(1);
+			
+		});
+	
+	var returnAllCount=function(){
+		if(globalCount==1){
+			setTimeout(function () {
+				$('#fakeloader').css('display','none');
+			},500);
+		}
+	}
+	
 	var initBlog=function(pageNum){
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
@@ -190,7 +200,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	var data=data.blogList;
             	var circle = new Array("text-navy","text-danger"," text-info","text-primary","text-warning");
             	for (var i = 0; i < data.length; i++) {
-            		blogList+='<li class="animated fadeInDown" style="margin: 0 0 5px 0;animation-delay:0.'+i+'s""><a href="javascript:void(0);" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
+            		var time=0.03*i;
+            		blogList+='<li class="animated fadeInDown" style="margin: 0 0 5px 0;animation-delay:'+time+'s""><a href="javascript:void(0);" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
             	}
             	if(page.pageNum>=2){
              		$(".category-list").append(blogList);
@@ -207,14 +218,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		}
 			 $(".pageNav").html(more);
              $(".cPage").find("b").html(page.pageNum);
+             
            },    
 		    error:function(){
 		    	swal("您的请求太快", "请重新操作", "error");
 		    }	
         });
+		globalCount++;
+		returnAllCount();
 	};
 
-	var pageNav=function(pageNum,allPage){
+	 var pageNav=function(pageNum,allPage){
 		if(pageNum<=0){
 			swal("查询失败", "当前为第1页", "error");
 		}else if(pageNum>allPage){
@@ -224,9 +238,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	
-	
 	var findBlogByKey=function(){
-		initBlog(1);
+		if($(".form-group").find(".form-control").val()!=""){
+			initBlog(1);
+		}
+		
 	}
 	
 	

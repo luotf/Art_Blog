@@ -37,9 +37,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
 </head>
 
-<body class="gray-bg">
+<body class="white-bg" style="opacity:0">
+<div id="fakeloader"></div>
 	<div class="wrapper wrapper-content">
 		<div class="row">
 			<div class="col-sm-3">
@@ -168,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- iCheck -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -179,9 +181,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script>
         
 	$(document).ready(function() {
+		$("#fakeloader").fakeLoader({
+	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
+	        zIndex:999, // Default zIndex
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", //Hex, RGB or RGBA colors
+	    }); 
+		setTimeout(function () {
+       		$('body').css('opacity','1');
+       		$('body').attr("class", "gray-bg") //添加样式
+		},100);
 		initResourceCount();
 		selectResource();
-			});
+		
+		$("#fakeloader").fakeLoader({
+	        timeToHide:300, 
+	        zIndex:999, 
+	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	        bgColor:"#fff", 
+	    }); 
+		
+	 });
 	
 		var initResourceCount=function(){
 			$.ajax({
@@ -275,7 +295,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      valign: 'middle',
 		                      width: '5%',
 		                      formatter: function (value, row, index) {  
-		                          return index+1;  
+		                    	  var index1=index+1;
+		                          var id='<span title="ID:'+row.id+'">'+index1+'</span>';
+		                    	  return id;  
 		                      }  
 		                  }, 
 		                  {
@@ -355,7 +377,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            status:1,
 	        };
 	    }
-			
 		
 			
 		var selectResourceById=function(id){
@@ -363,7 +384,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				id:id
 				};
 			$.ajax({
-                   url:'../selectResourcecById',    
+                   url:'../selectResourceById',    
                    type:'post',
                    data:params,
                    dataType:'json',    
@@ -490,12 +511,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'content':$("#newContent").val(),
         			'link':$("#newLink").val(),
         			'password':$("#newPassword").val(),
-        			 prarm:'更新了资源“'+title+'”',
+        			 prarm:'更新了资源<span class="text-info">#'+$("#newTitle").val()+'#</span>',
         	};
 	 		if(status!=null&&status!=""){
-	 			var p='将资源“'+title+'”上架';
+	 			var p='将资源<span class="text-info">#'+title+'#</span>上架';
 	 			if(status==-1){
-	 				p='将资源“'+title+'”下架';
+	 				p='将资源<span class="text-info">#'+title+'#</span>下架';
 	 			}
 	 			params ={
 	 					'id':id,
@@ -528,7 +549,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var deleteResource=function(id,title){
 			var params ={
 	 				'id':id,
-	 				 prarm:'删除的资源为“'+title+'”'
+	 				 prarm:'删除的资源为<span class="text-info">#'+title+'#</span>'
         	};
 			swal({
 	             title: "确定要删除该资源吗",
@@ -569,7 +590,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			content:$("#content").val(),
         			link:$("#link").val(),
         			password:$("#password").val(),
-        			prarm:'新增的资源名称为“'+$("#title").val()+'”',
+        			prarm:'新增的资源名称为<span class="text-info">#'+$("#title").val()+'#</span>',
         	};
             $.ajax({
                    url:'../addResource',    
