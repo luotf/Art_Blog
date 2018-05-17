@@ -155,7 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 
 	<script>
-	$(document).ready(function() {
+		var globalCount=0;
 		$("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
@@ -167,16 +167,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        		$('body').attr("class", "gray-bg") //添加样式
 		},100);
 		
+	$(document).ready(function() {
 		selectBlog();
-		$("#fakeloader").fakeLoader({
-		      timeToHide:300, 
-		      zIndex:999, 
-		      spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-		      bgColor:"#fff", 
-		  }); 
-	
 	}); 
 	
+	var returnAllCount=function(){
+		if(globalCount==1){
+			setTimeout(function () {
+				$('#fakeloader').css('display','none');
+			},500);
+		}
+	}
 	//草稿/发布...按钮绑定查询事件  
     $("#toolbar .type").click(function() { 
  		var statu;
@@ -416,6 +417,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  }
 		              ]
 		      });
+		  globalCount++;
+		  returnAllCount();
 	  }
 	
 	//传参数到后台

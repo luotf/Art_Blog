@@ -138,33 +138,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
-        
-	$(document).ready(function() {
+		var globalCount=0;
+		
 		$("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
 	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 	        bgColor:"#fff", //Hex, RGB or RGBA colors
 	    }); 
-		
 		setTimeout(function () {
        		$('body').css('opacity','1');
        		$('body').attr("class", "gray-bg") //添加样式
 		},100);
+	$(document).ready(function() {
 		
 		initType();
 		selectBlogType();
-		
-		$("#fakeloader").fakeLoader({
-	        timeToHide:300, 
-	        zIndex:999, 
-	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-	        bgColor:"#fff", 
-	    }); 
-		
-		
 	});
 	
+	var returnAllCount=function(){
+		if(globalCount==2){
+			setTimeout(function () {
+				$('#fakeloader').css('display','none');
+			},500);
+		}
+	}
 	
 	var initType=function(){
 		//查询出文章类别
@@ -191,6 +189,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	swal("初始化类别错误", "请重新操作", "error");
 		    }	
         });
+		globalCount++;
+		returnAllCount();
 	}
 
 	 //初始化表格数据
@@ -306,6 +306,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  }
 		              ]
 		      });
+		  globalCount++;
+		  returnAllCount();
 	  }
 	
 	

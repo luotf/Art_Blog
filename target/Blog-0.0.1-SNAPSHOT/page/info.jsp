@@ -31,25 +31,25 @@
 			        		出错啦
 			        	</c:when>
 						<c:otherwise>
-							<h3 class="news_title animated fadeInDown">${blog.title}</h3>
+							<h3 class="news_title animated fadeIn">${blog.title}</h3>
 							<input class="id" type="hidden" value="${blog.id}">
-							<div class="news_author animated fadeInDown">
+							<div class="news_author animated fadeIn">
 								<span class="au01 ">罗廷方</span><span class="au02"> <input
 									class="addtime" type="hidden" value="${blog.addtime}"></span><span
 									class="au03">共<b>${blog.clicknum}</b>人围观
 								</span>
 							</div>
 							<input class="typeId" type="hidden" value="${blog.type.id}">
-							<div class="tags animated fadeInDown">
+							<div class="tags animated fadeIn">
 								<input class="tag" type="hidden" value="${blog.keyword}">
 							</div>
-							<div class="news_about animated fadeInDown">
+							<div class="news_about animated fadeIn">
 								<strong>简介</strong>${blog.introduction}</div>
-							<div class="news_infos animated fadeInDown">${blog.content}</div>
+							<div class="news_infos animated fadeIn">${blog.content}</div>
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div class="ds " style="text-align: center;display:none">
+				<div class="ds" style="text-align: center;opacity:0">
 					<div id="cyReward" role="cylabs" data-use="reward"></div>
 				</div>
 				<div class="share">
@@ -57,7 +57,7 @@
 				</div>
 
 			</div>
-			<div class="nextinfo animated fadeInDown">
+			<div class="nextinfo animated fadeIn">
 				<p>
 					上一篇：<span class="pre"></span>
 				</p>
@@ -65,7 +65,7 @@
 					下一篇：<span class="next"></span>
 				</p>
 			</div>
-			<div class="otherlink animated fadeInDown">
+			<div class="otherlink animated fadeIn">
 				<h2>相关文章</h2>
 				<ul>
 
@@ -88,16 +88,16 @@
 				<h2 class="ab_title">
 					<a href="/">本栏推荐</a>
 				</h2>
-				<ul class="like animated fadeInDown">
+				<ul class="like ">
 
 				</ul>
-				<div class="ad animated fadeInDown"></div>
+				<div class="ad "></div>
 			</div>
 			<div class="paihang ">
 				<h2 class="ab_title">
 					<a href="/">点击排行</a>
 				</h2>
-				<ul class="click animated fadeInDown">
+				<ul class="click">
 
 				</ul>
 
@@ -107,7 +107,7 @@
 				<h2 class="ab_title">
 					<a href="#">评论排行</a>
 				</h2>
-				<div class='pl_paihang animated fadeInDown' style="display:none" id="cyHotusers"
+				<div class='pl_paihang animated fadeIn' style="display:none" id="cyHotusers"
 					role="cylabs" data-use="hotusers"></div>
 				<script type="text/javascript" charset="utf-8"
 					src="http://changyan.itc.cn/js/lib/jquery.js"></script>
@@ -117,7 +117,7 @@
 
 			<div class="weixin">
 				<h2 class="ab_title">公众号</h2>
-				<ul class="animated fadeInDown">
+				<ul class="animated fadeIn">
 
 				</ul>
 			</div>
@@ -137,28 +137,23 @@
 			window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 				
 	<script type="text/javascript">
+	  
 		$(document).ready(function() {
-			var index ='';
-				
-			     /* layer.ready(function(){
-			    	index=layer.load(2, {
-						  shade: [0.1,'#eee'] //0.1透明度的白色背景
-			    	});
-			    });  */
-				 Format();
-				 Tags(); 
+			Format();
+		    Tags();
+		    initBlogByLike();
+			initBlogByClick();
+			selectPrevBlog();
+			selectNextBlog();
+			initBlogByRel();   //初始化相关文章
+			
 			setTimeout(function () {
-				$(".ds").css("display","block");
-				selectPrevBlog();
-				selectNextBlog();
-				initBlogByRel();   //初始化相关文章
-				initBlogByLike();
-				initBlogByClick(); 
-				setTimeout(function () {
-					$(".pl_paihang").css("display","block");
-					//layer.close(index);
-				},200);    
-			 }, 200);
+			$(".ds").css("opacity","1");
+			
+		 }, 1000);
+			setTimeout(function () {
+				$(".pl_paihang").css("display","block");
+			},200); 
 			
 		});
 
@@ -285,16 +280,19 @@
 	            success:function (data) {
 	            	var likeBlog='';
 	            	var data=data.blogList;
+	            	var time='';
 	                for (var i = 0; i < data.length; i++) {
 	                	if(data[i].introduction.length>35){
 	                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
 	                	}
 	                	var id=data[i].id.toString(8)*data[i].id;
-	                	likeBlog+='<li><b><a href="'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
+	                	time=i*0.05;
+	                	likeBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
 	                }
 	                // 初始化数据
 	                $(".paihang").find(".like").html(likeBlog);
-	                var ad='<img src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
+	                time=time+0.1;
+	                var ad='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
 					$(".ad").html(ad);
 					
 	            },    
@@ -320,17 +318,19 @@
 	            success:function (data) {
 	            	var clickBlog='';
 	            	var data=data.blogList;
-	            	 
+	            	var time='';
 	                for (var i = 0; i < data.length; i++) {
 	                	if(data[i].introduction.length>35){
 	                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
 	                	}
+	                	time=i*0.05;
 	                	var id=data[i].id.toString(8)*data[i].id;
-	                	clickBlog+='<li><b><a href="'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
+	                	clickBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
 	                }
 	                // 初始化数据
+	                time=time+0.1;
 	                $(".paihang").find(".click").html(clickBlog);
-	                var ab='<img src="../../images/wx.jpg">';
+	                var ab='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="../../images/wx.jpg">';
 	            	$(".weixin").find("ul").html(ab);
 	            	
 	            },    

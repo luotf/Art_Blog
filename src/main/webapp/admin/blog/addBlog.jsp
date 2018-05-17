@@ -113,7 +113,7 @@
 											onclick="findPicList()"> <img
 											class="picPath animated fadeInRight"
 											style="width: 190px; height: 115px;" alt="封面" title="点击更换封面"
-											src="${pageContext.request.contextPath}/images/p1.jpg" />
+											src="/upload/background/2018-05-17334750.JPG" />
 										</a>
 									</div>
 								</div>
@@ -428,7 +428,7 @@
 			$.ajax({
 				data : data,
 				type : "POST",
-				url : "../uploadImages",
+				url : "../uploadBlogImages",
 				dataType : "json",
 				cache : false,
 				contentType : false,

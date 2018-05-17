@@ -35,7 +35,7 @@ public class FileBrowseUtil {
             HttpServletResponse resp) throws ServletException, IOException,
             MalformedURLException {
         ArrayList<String> fileList=new ArrayList<String>();
-        String params="c:\\upload";
+        String params="c:\\upload\\background";
         fileList=getFiles(params,fileList);
         Map<String, Object> map=new HashMap<String, Object>();
         if(fileList.size()>0){

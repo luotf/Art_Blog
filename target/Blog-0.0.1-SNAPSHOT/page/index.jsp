@@ -19,7 +19,9 @@
 <article>
   <div class="pics ">
     <ul >
-      
+      <li></li>
+      <li></li>
+      <li></li>
     </ul>
   </div>
   
@@ -27,13 +29,13 @@
   <div class="leftbox ">
     <div class="tuijian" style="margin: 0px ">
       <h2 class="hometitle "></span>特别推荐</h2>
-      <ul class="animated fadeInDown">
+      <ul class="animated ">
         
       </ul>
     </div>
     <div class="newblogs">
       <h2 class="hometitle">最新文章</h2>
-      <ul class="animated fadeInDown">
+      <ul class="animated ">
         
       </ul>
     </div>
@@ -43,8 +45,8 @@
   <div class="rightbox">
     <div class="aboutme">
       <h2 class="ab_title ">关于我</h2>
-      <div class="avatar animated fadeInDown"><img src="${pageContext.request.contextPath}/images/my.jpeg"/></div>
-      <div class="ab_con animated fadeInDown">
+      <div class="avatar animated fadeIn"><img src="${pageContext.request.contextPath}/images/my.jpeg"/></div>
+      <div class="ab_con animated fadeIn">
         <p>网名：我倾尽一生,囚你无期 | Luotf</p>
         <p>职业：Java开发工程师 | 全栈 </p>
         <p>籍贯：四川省—成都市</p>
@@ -53,23 +55,23 @@
     </div>
     <div class="paihang">
       <h2 class="ab_title"><a href="/">点击排行</a></h2>
-      <ul class="animated fadeInDown">
+      <ul class="">
         
       </ul>
-      <div class="ad"><img src="${pageContext.request.contextPath}/images/ad300x100.jpg"></div> 
+      <div class="ad"></div> 
     </div>
     <div class="links">
       <h2 class="ab_title">友情链接</h2>
-      <ul class="animated fadeInDown">
-        <li><a href="/">XXX Github</a></li>
-        <li><a href="/">XXX Gitee&nbsp;&nbsp;</a></li>
-        <li><a href="/">优秀个人博客</a></li>
+      <ul class="animated fadeIn">
+        <li style="animation-delay:0.1s"><a href="/">XXX Github</a></li>
+        <li style="animation-delay:0.2's"><a href="/">XXX Gitee&nbsp;&nbsp;</a></li>
+        <li style="animation-delay:0.3s"><a href="/">优秀个人博客</a></li>
       </ul>
     </div>
     <div class="weixin">
       <h2 class="ab_title">公众号</h2>
-      <ul class="animated fadeInDown">
-        <img src="${pageContext.request.contextPath}/images/wx.jpg">
+      <ul class="animated fadeIn">
+        <img src="${pageContext.request.contextPath}/images/wx.jpg" >
       </ul>
     </div>
   </div>
@@ -115,7 +117,7 @@ window.onload = function (){
             	var data=data.blogList;
                 for (var i = 0; i < data.length; i++) {
                 	var id=data[i].id.toString(8)*data[i].id;
-                	topBlog+='<li><a href="find/'+id+'.html" onclick=""><img style="width:415px;height:155px;" src="'+data[i].images+'"></a><span>'+data[i].title+'</span></li>'
+                	topBlog+='<li class="animated fadeIn"><a href="find/'+id+'.html" onclick=""><img style="width:415px;height:155px;" src="'+data[i].images+'"></a><span>'+data[i].title+'</span></li>'
                 }
                 // 初始化数据
                 $(".pics").find("ul").html(topBlog);
@@ -145,7 +147,8 @@ window.onload = function (){
             	var data=data.blogList;
                 for (var i = 0; i < data.length; i++) {
                 	var id=data[i].id.toString(8)*data[i].id;
-                	likeBlog+='<li><a href="find/'+id+'.html" ><div class="tpic"><img src="'+data[i].images+'"></div><b>'+data[i].title+'</b><span>'+data[i].introduction+'</span><a href="find/'+id+'.html" class="readmore">阅读原文</a></a></li>'
+                	var time=i*0.05;
+                	likeBlog+='<li style="animation-delay:0.'+i+'s" class="animated fadeIn"><a href="find/'+id+'.html" ><div class="tpic"><img src="'+data[i].images+'"></div><b>'+data[i].title+'</b><span>'+data[i].introduction+'</span><a href="find/'+id+'.html" class="readmore">阅读原文</a></a></li>'
                 }
                 // 初始化数据
                 $(".tuijian").find("ul").html(likeBlog);
@@ -183,8 +186,8 @@ window.onload = function (){
                   			keyword=data[i].keyword;
                   		}
                   	}
-                	
-                	newBlog+='<li><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
+                	var time=i*0.05;
+                	newBlog+='<li style="animation-delay:0.'+i+'s" class="animated fadeInDown"><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
                 }
                 // 初始化数据
                 $(".newblogs").find("ul").html(newBlog);
@@ -212,17 +215,21 @@ window.onload = function (){
             success:function (data) {
             	var clickBlog='';
             	var data=data.blogList;
-            	 
+            	 var time='';
                 for (var i = 0; i < data.length; i++) {
                 	
                 	if(data[i].introduction.length>35){
                 		data[i].introduction=data[i].introduction.substring(0,34)+"...";
                 	}
                 	var id=data[i].id.toString(8)*data[i].id;
-                	clickBlog+='<li><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
+                	time=i*0.05;
+                	clickBlog+='<li style="animation-delay:0.'+i+'s" class="animated fadeIn"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
                 }
                 // 初始化数据
                 $(".paihang").find("ul").html(clickBlog);
+                time=time+0.25;
+                var ad='<img style="animation-delay:'+time+'s" class="animated fadeInDown" src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
+				$(".ad").html(ad);
             },    
 		    error:function(){
 		    	layer.msg('请求太快，请稍后再试！', {icon: 5});

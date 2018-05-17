@@ -277,8 +277,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote-zh-CN.js"></script>
 	<script>
-        
-	$(document).ready(function() { 
+		var globalCount=0;
 		$("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
@@ -288,7 +287,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		setTimeout(function () {
        		$('body').css('opacity','1');
        		$('body').attr("class", "gray-bg") //添加样式
-		},100);
+		},300);
+		
+	$(document).ready(function() { 
 		var url = window.location.href;
 		var url_param = url.split("=")[1];
 		   //编辑博客
@@ -384,16 +385,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								sendFile(files[0],editor,$editable);  
 						}
 					});
-		
-		    $("#fakeloader").fakeLoader({
-		        timeToHide:300, 
-		        zIndex:999, 
-		        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-		        bgColor:"#fff", 
-		    }); 
-		    
+		    globalCount++;
+			returnAllCount();
 		});
 				
+	var returnAllCount=function(){
+		if(globalCount==1){
+			setTimeout(function () {
+				$('#fakeloader').css('display','none');
+			},500);
+		}
+	}
+	
 			//图片上传  
 			function sendFile(file, editor, $editable){  
 			    var filename = false;  
@@ -413,7 +416,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    $.ajax({  
 			    data:data, 
 			    type: "POST",  
-			    url: "../uploadImages",
+			    url: "../uploadBlogImages",
 			    dataType:"json",
 			    cache: false,  
 			    contentType: false,  
@@ -589,12 +592,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			     }
 			});
 		
-      
-      
-      
     </script>
-
-
 
 </body>
 

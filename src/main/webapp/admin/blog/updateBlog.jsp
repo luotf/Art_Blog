@@ -416,7 +416,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    $.ajax({  
 			    data:data, 
 			    type: "POST",  
-			    url: "../uploadImages",
+			    url: "../uploadBlogImages",
 			    dataType:"json",
 			    cache: false,  
 			    contentType: false,  

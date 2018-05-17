@@ -42,6 +42,9 @@
 				<p class="page" style='display:none'>
 				
                 <p>
+                <p class="pageMin">
+				
+                <p>
 			</div>
 		</div>
 		<div class="rightbox">
@@ -56,7 +59,7 @@
 						type="hidden" class="type_id">
 				</form>
 			
-				<ul class="tag tag-list" style="padding: 0;width:95%;margin: 0 auto;">
+				<ul class="tag tag-list" style="padding: 0;">
 					
 				</ul>
 			</div>
@@ -97,10 +100,32 @@
 	<script>
 	var pageNext=1;
 	var isEnd=false;
+	var width = window.innerWidth || document.documentElement.clientWidth; 
+	if (width < 960) {
+		var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initBlog()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
+		$(".pageMin").html(pagenav);
+		$(".tag").css('display','none');
+	}else{
+		$(window).scroll(function(){
+	        if(isEnd == true){
+	           return;
+	       } 
+	       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
+	       	isEnd=true;
+	       	$('.page').css('display','block');
+	       	setTimeout(function () {
+	       		initBlogListByPage(pageNext,"none",null);
+			},500); 
+		   }
+	   });
+	}
+	var initBlog=function(){
+		setTimeout(function () {
+       		initBlogListByPage(pageNext,"none",null);
+		},100);
+	}
 	
 	$(document).ready(function() {
-		
-		
 		//初始化类别信息
 		initBlogType();
 		//初始化技术专栏的信息
@@ -108,20 +133,6 @@
 		initBlogByLike();
 		initBlogByClick();
 	});
-	
-	$(window).scroll(function(){
-        if(isEnd == true){
-           return;
-       } 
-       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
-       	isEnd=true;
-       	$('.page').css('display','block');
-       	setTimeout(function () {
-       		initBlogListByPage(pageNext,"none",null);
-		},500); 
-       	
-	   }
-   });
 	
 	var initBlogListByPage=function(pageNum,type_id,typename){
 		//查询出文章
@@ -214,6 +225,9 @@
             		if(page.pageNum==page.pages){
             			isEnd=true;
             			pagenav='<p style="text-align:center;margin:-5px auto 10px;"><a href="javascript:void(0);" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p>';
+            			if(width<960){
+            				$(".pageMin").html(pagenav);
+            			}
             		}else{
             			isEnd=false;
             			pageNext=page.pageNum+1;
@@ -223,7 +237,6 @@
             	}else{
             		$(".page").html("");
             	}
-             
             	},    
 		    error:function(){
 		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
@@ -284,7 +297,7 @@
             	var typeName='';
                 for (var i = 0; i < data.length; i++) {
                 	var time=i*0.03;
-                	typeName+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><a style="padding: 5px;margin-right: 3px;border: none; background-color: #f1f1f1;" onclick="searchType('+data[i].id+',\''+data[i].typename+'\')" href="javascript:void(0);"> <i class="fa fa-tag"></i>'+data[i].typename+'</a></li>'
+                	typeName+='<li style="animation-delay:'+time+'s" class="animated fadeInDown"><a style="padding: 5px;margin-right: 3px;border: none; background-color: #f1f1f1;" onclick="searchType('+data[i].id+',\''+data[i].typename+'\')" href="javascript:void(0);"> <i class="fa fa-tag"></i>'+data[i].typename+'</a></li>'
                 }
                 var length='';
                 var keyTitle='';
@@ -338,20 +351,20 @@
             success:function (data) {
             	var likeBlog='';
             	var data=data.blogList;
-            	
+            	var time='';
                 for (var i = 0; i < data.length; i++) {
                 	 if(data[i].introduction.length>35){
                 		data[i].introduction=data[i].introduction.substring(0,34)+"...";
                 	}
                 	var id=data[i].id.toString(8)*data[i].id;
-                	var time=i*0.05;
+                	time=i*0.05;
                 	likeBlog+='<li style="animation-delay:'+time+'s" class="animated fadeInDown"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
                 }
                 // 初始化数据
                 $(".paihang").find(".like").html(likeBlog);
-                var ad='<img src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
+                time=time+0.1;
+                var ad='<img style="animation-delay:'+time+'s" class="animated fadeInDown" src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
 				$(".ad").html(ad);
-				
             },    
 		    error:function(){
 		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
@@ -422,17 +435,18 @@
 	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 	    return fmt;
 	}   	
+</script>
+<script type="text/javascript">
 
-	window.onload = function (){
-		var oH2 = document.getElementsByTagName("h2")[0];
-		var oUl = document.getElementsByTagName("ul")[0];
-		oH2.onclick = function ()
-		{
-			var style = oUl.style;
-			style.display = style.display == "block" ? "none" : "block";
-			oH2.className = style.display == "block" ? "open" : ""
-		}
-}
+window.onload = function (){
+	var oH2 = document.getElementsByTagName("h2")[0];
+	var oUl = document.getElementsByTagName("ul")[0];
+	oH2.onclick = function (){
+		var style = oUl.style;
+		style.display = style.display == "block" ? "none" : "block";
+		oH2.className = style.display == "block" ? "open" : "";
+	};
+};
 </script>
 </body>
 

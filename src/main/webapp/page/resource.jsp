@@ -18,6 +18,15 @@
     <link href="${pageContext.request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/loaders.css"
+	rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/font-awesome.css"
+	rel="stylesheet">
+	<style type="text/css">
+	.loader-inner > div{
+		background-color: #907f819e
+	}
+</style>
 </head>
 <body>
 <%@ include file="top.jsp" %>
@@ -38,7 +47,10 @@
                 <div class="wrapper wrapper-content ">
                      
                 </div>
-                <div class="pagelist ">
+                <div class="pagelist " style='display:none'>
+      
+     		    </div>
+     		    <div class="pageMin ">
       
      		    </div>
             </div>
@@ -56,7 +68,7 @@
       </div>
       <div class="paihang ">
         <h2 class="ab_title"><a href="/">本栏推荐</a></h2>
-        <ul class="like animated fadeInDown">
+        <ul class="like ">
          
         </ul>
         <div class="ad"></div>
@@ -75,6 +87,32 @@
     <script src="${pageContext.request.contextPath}/js/content.js?v=1.0.0"></script>
     
     <script>
+    var pageNext=1;
+	var isEnd=false;
+	var width = window.innerWidth || document.documentElement.clientWidth; 
+	if (width < 960) {
+		var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initResourceByPage()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
+		$(".pageMin").html(pagenav);
+	}else{
+		$(window).scroll(function(){
+	        if(isEnd == true){
+	           return;
+	       } 
+	       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
+	       	isEnd=true;
+	       	$('.pagelist').css('display','block');
+	       	setTimeout(function () {
+	       		initResource(pageNext);
+			},500); 
+		   }
+	   });
+	}
+	var initResourceByPage=function(){
+		setTimeout(function () {
+			initResource(pageNext);
+		},100);
+	}
+	
 	$(document).ready(function() {
 		//初始化类别信息
 		 initResource(1);
@@ -90,7 +128,7 @@
 			prarm='搜索关键字为<span class="text-info">#'+keyword+'#</span>的资源'
 		}
 		 var params={
-				 pageSize: 12,
+				 pageSize: 9,
 		         page:pageNum,
    				 title:keyword,
    				 content:keyword,
@@ -108,67 +146,34 @@
 	            	var data=date.resourceList;
 	            	if(data.length>0){
 	            		for (var i = 0; i < data.length; i++) {
-	            			resourceList+='<div class="col-sm-4 animated fadeInDown" ><div class="panel panel-default"><div class="panel-heading" style="border:none">'+data[i].title+'</div><div class="panel-body" style=" padding: 10px 15px;"> <p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-info pull-right" style="background-color: #748c8c;">Go</span></a> </div></div></div>';
+	            			var time=i*0.05;
+	            			resourceList+='<div style="animation-delay:'+time+'s" class="col-sm-4 animated fadeIn" ><div class="panel panel-default"><div class="panel-heading" style="border:none">'+data[i].title+'</div><div class="panel-body" style=" padding: 10px 15px;"> <p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-info pull-right" style="background-color: #748c8c;">Go</span></a> </div></div></div>';
 	            		}
 	            	}else{
 	            		resourceList="无查询结果";
 	            	}
-	            	$(".newblogs").find(".wrapper").html(resourceList);
-	            	
-	            	if(page.total>12){
-	            		 var allTotal='<a title="Total record">&nbsp;<b>'+page.total+'</b> </a>&nbsp;&nbsp;';
-	            		 var pagesNum='';
-	            		 var fristPage='';
-	            		 var prePage='';
-	            		 var nextPage='';
-	            		 var lastPage='';
-	            		 var num='';
-	            		 var currNum=1;
-	            		 var maxNum=page.pages;
-	            		 if(page.pageNum>=3){
-	             			currNum=page.pageNum-2;
-	             		}
-	             		 if(page.pageNum>=page.pages-2){
-	             			 currNum=page.pages-4;
-	             		 }
-	            		 if(maxNum>5){
-	            			 maxNum=currNum+4;
-	            		 }else{
-	            			 currNum=1;
-	            		 }
-	            		 for(var i=currNum;i<=maxNum;i++){
-	            			 if(i>page.pages){
-	            				 break;
-	            			 }
-	            			 if(page.pageNum==i){
-	            				 num='<a href="javascript:void(0);"><b>'+i+'</b></a>&nbsp;'
-	            			 }else{
-	            				 num='<a href="javascript:void(0);" onclick="pageNav('+i+')">'+i+'</a>&nbsp;';
-	            			 }
-	            			 pagesNum+=num;
-	            		 }
-	            		 var pre=page.pageNum-1;
-	            		 var next=page.pageNum+1;
-	            		 if(page.pageNum==1){
-	            			 prePage='<a href="javascript:void(0);">上一页</a>&nbsp;';
-	            			 fristPage='<a href="javascript:void(0);">首页</a>&nbsp;';
-	            		 }else{
-	            			 prePage='<a href="javascript:void(0);" onclick="pageNav('+pre+')">上一页</a>&nbsp;';
-	            			 fristPage='<a href="javascript:void(0);" onclick="pageNav(1)">首页</a>&nbsp;';
-	            		 }
-	            		 if(page.pageNum==page.pages){
-	            			 nextPage='<a href="javascript:void(0);">下一页</a>&nbsp;';
-	            			 lastPage='<a href="javascript:void(0);">尾页</a>&nbsp;';
-	            		 }else{
-	            			 nextPage='<a href="javascript:void(0);" onclick="pageNav('+next+')">下一页</a>&nbsp;';
-	            			 lastPage='<a href="javascript:void(0);" onclick="pageNav('+page.pages+')">尾页</a>&nbsp;';
-	            		 }
-	            		 $(".pagelist").html(allTotal+fristPage+prePage+pagesNum+nextPage+lastPage);
-	            		
-	            	 }else{
-	            		 $(".pagelist").html("");
-	            	 }
-	            	
+	            	if(page.pageNum>=2){
+	            		$(".newblogs").find(".wrapper").append(resourceList);
+	            	}else{
+	            		$(".newblogs").find(".wrapper").html(resourceList);
+	            	} 
+	            	if(page.total>9){
+	            		var pagenav='';
+	            		if(page.pageNum==page.pages){
+	            			isEnd=true;
+	            			pagenav='<p style="text-align:center;margin:-5px auto 10px;"><a href="javascript:void(0);" style="border:none" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p>';
+	            			if(width<960){
+	            				$(".pageMin").html(pagenav);
+	            			}
+	            		}else{
+	            			isEnd=false;
+	            			pageNext=page.pageNum+1;
+	            			pagenav='<div style="margin:-5px auto 10px;width:10%;"><div class="loader-inner ball-pulse"><div></div><div></div><div></div></div></div>';
+	            		}
+	            		$(".pagelist").html(pagenav);
+	            	}else{
+	            		$(".pagelist").html("");
+	            	}
 	            },
 			    error:function(){
 			    	alert("失败");
@@ -205,17 +210,19 @@
             success:function (data) {
             	var likeBlog='';
             	var data=data.blogList;
-            	
+            	var time='';
                 for (var i = 0; i < data.length; i++) {
                 	 if(data[i].introduction.length>35){
                 		data[i].introduction=data[i].introduction.substring(0,34)+"...";
                 	}
                 	var id=data[i].id.toString(8)*data[i].id;
-                	likeBlog+='<li><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
+                	time=time*0.05;
+                	likeBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
                 }
                 // 初始化数据
                 $(".paihang").find(".like").html(likeBlog);
-                var ad='<img src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
+                time=time+0.2;
+                var ad='<img style="animation-delay:'+time+'s" class="animated fadeInDown" src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
 				$(".ad").html(ad);
 				
             },    

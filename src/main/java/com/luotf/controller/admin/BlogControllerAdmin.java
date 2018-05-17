@@ -38,15 +38,15 @@ public class BlogControllerAdmin {
 	private BlogService blogService;
 	
 	/**
-	 * 整合summernote实现图片上传
+	 * 上传封面图片
 	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
-	 @RequestMapping(value = "/uploadImages",method = RequestMethod.POST)
+	 @RequestMapping(value = "/uploadBg",method = RequestMethod.POST)
 	 @ResponseBody
 	 @SystemLog(description = ConstantUtil.UPLOAD_IMAGES,userType=ConstantUtil.USERTYPE_ADMIN) 
-	 public Map<String, Object> uploadImage(String prarm,HttpServletRequest request) throws Exception {
+	 public Map<String, Object> uploadBg(String prarm,HttpServletRequest request) throws Exception {
 		 CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
 		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(multipartResolver.isMultipart(request)){
@@ -63,13 +63,13 @@ public class BlogControllerAdmin {
 						 SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
 						 String newFileName=df.format(new Date());
 						 String fileNames=newFileName+new Random().nextInt(1000000)+"."+fileExt;
-						 String filePath="c:\\upload\\"+newFileName+"\\"+fileNames;
+						 String filePath="c:\\upload\\background\\"+fileNames;
 						 File localFile=new File(filePath);
 						 if(!localFile.exists()){
 							 localFile.mkdirs();
 						 }
 						 file.transferTo(localFile);
-						 fileNames="/upload/"+newFileName+"/"+fileNames;
+						 fileNames="/upload/background/"+newFileName+"/"+fileNames;
 						 map.put("name",fileBaseName);
 						 map.put("path",fileNames);
 						 map.put("status",200);
@@ -79,6 +79,49 @@ public class BlogControllerAdmin {
 		 }
 		 return map;
 	 }
+	 
+	 /**
+		 * 整合summernote实现图片上传
+		 * @param request
+		 * @return
+		 * @throws Exception
+		 */
+		 @RequestMapping(value = "/uploadBlogImages",method = RequestMethod.POST)
+		 @ResponseBody
+		 public Map<String, Object> uploadBlogImage(String prarm,HttpServletRequest request) throws Exception {
+			 CommonsMultipartResolver multipartResolver=new CommonsMultipartResolver(request.getSession().getServletContext());
+			 Map<String, Object> map=new HashMap<String, Object>();
+			 if(multipartResolver.isMultipart(request)){
+				 MultipartHttpServletRequest mreq=(MultipartHttpServletRequest) request;
+				 Iterator<String> fileNamesIter=mreq.getFileNames();
+				 while(fileNamesIter.hasNext()){
+					 MultipartFile file=mreq.getFile(fileNamesIter.next());
+					 if(file!=null){
+						 String myFileName=file.getOriginalFilename();
+						 if(myFileName.trim()!=""){
+							 String fileName=file.getOriginalFilename();
+							 String fileBaseName=fileName.substring(0,fileName.lastIndexOf("."));
+							 String fileExt=fileName.substring(fileName.lastIndexOf(".")+1).toUpperCase();
+							 SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+							 String newFileName=df.format(new Date());
+							 String fileNames=newFileName+new Random().nextInt(1000000)+"."+fileExt;
+							 String filePath="c:\\upload\\blog\\"+newFileName+"\\"+fileNames;
+							 File localFile=new File(filePath);
+							 if(!localFile.exists()){
+								 localFile.mkdirs();
+							 }
+							 file.transferTo(localFile);
+							 fileNames="/upload/blog/"+newFileName+"/"+fileNames;
+							 map.put("name",fileBaseName);
+							 map.put("path",fileNames);
+							 map.put("status",200);
+						 }
+					 }
+				 }
+			 }
+			 return map;
+		 }
+	 
 	 
 	 /**
 	  * 实现添加博客功能

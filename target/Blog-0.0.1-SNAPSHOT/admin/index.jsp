@@ -37,6 +37,7 @@
 
 <body class="fixed-sidebar full-height-layout white-bg"
 	style="overflow:hidden;">
+	<div id="fakeloader"></div>
 	<div id="wrapper">
 		<!--左侧导航开始-->
 		<nav class="navbar-default navbar-static-side" role="navigation">
@@ -381,6 +382,21 @@
 
 <script type="text/javascript">
 
+
+//$(document).ready(function() {
+	
+	/* setTimeout(function () {
+   		$('body').css('opacity','1');
+   		$('body').attr("class", "gray-bg") //添加样式
+	},100); */
+	/* 	
+	$("#fakeloader").fakeLoader({
+	      timeToHide:300, 
+	      zIndex:999, 
+	      spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
+	      bgColor:"#fff", 
+}); 
+}); */
 	</script>
 </body>
 

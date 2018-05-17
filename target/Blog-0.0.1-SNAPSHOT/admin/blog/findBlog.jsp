@@ -152,8 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 	<script>
-	  
-	$(document).ready(function() {
+		var globalCount=0;
 		$("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
@@ -165,17 +164,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        		$('body').css('opacity','1');
        		$('body').attr("class", "gray-bg") //添加样式
 		},100);
-		//参数1表示当前页为1
-		initBlog(1);
 		
-		$("#fakeloader").fakeLoader({
-	        timeToHide:300, 
-	        zIndex:999, 
-	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-	        bgColor:"#fff", 
-	    }); 
-		
-	});
+		$(document).ready(function() {
+			//参数1表示当前页为1
+			initBlog(1);
+			
+		});
+	
+	var returnAllCount=function(){
+		if(globalCount==1){
+			setTimeout(function () {
+				$('#fakeloader').css('display','none');
+			},500);
+		}
+	}
+	
 	var initBlog=function(pageNum){
 		//查询出文章
 		//获取关键字，表示查询所有符合的记录
@@ -215,14 +218,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      		}
 			 $(".pageNav").html(more);
              $(".cPage").find("b").html(page.pageNum);
+             
            },    
 		    error:function(){
 		    	swal("您的请求太快", "请重新操作", "error");
 		    }	
         });
+		globalCount++;
+		returnAllCount();
 	};
 
-	var pageNav=function(pageNum,allPage){
+	 var pageNav=function(pageNum,allPage){
 		if(pageNum<=0){
 			swal("查询失败", "当前为第1页", "error");
 		}else if(pageNum>allPage){
@@ -231,7 +237,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			initBlog(pageNum);
 		}
 	}
-	
 	
 	var findBlogByKey=function(){
 		if($(".form-group").find(".form-control").val()!=""){

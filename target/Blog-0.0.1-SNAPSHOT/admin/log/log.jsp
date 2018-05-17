@@ -187,31 +187,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
 	<script type="text/javascript">
-	var pageNext=1;
-	var isEnd=false;
-	$(document).ready(function() {
-		$("#fakeloader").fakeLoader({
+		var pageNext=1;
+		var isEnd=false;
+		var globalCount=0;
+		
+		 $("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
 	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
 	        bgColor:"#fff", //Hex, RGB or RGBA colors
 	    }); 
-		
 		setTimeout(function () {
        		$('body').css('opacity','1');
        		$('body').attr("class", "gray-bg") //添加样式
-		},100);
+		},100); 
 		
+	$(document).ready(function() {
 		selectLogByDate(pageNext,null,null);
-		
-		$("#fakeloader").fakeLoader({
-	        timeToHide:300, 
-	        zIndex:999, 
-	        spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-	        bgColor:"#fff", 
-	    }); 
-		
 	});
+	
+	var returnAllCount=function(){
+		if(globalCount==1){
+			setTimeout(function () {
+				$('#fakeloader').css('display','none');
+			},500);
+		}
+	}
 	
 	$(window).scroll(function(){
         if(isEnd == true){
@@ -227,18 +228,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    });
 	
 	var reset = function() {
-		var index ='';
+		 var index ='';
 		 layer.ready(function(){
 		   index=layer.load(2, {
 			  shade: [0.1,'#eee'] //0.1透明度的白色背景
 		    });
-		  }); 
+		  });  
 		$('#start').val("");
 		$('#end').val("");
 		$('.keyword').val("");
 		selectLogByDate(1,null, null);
 		setTimeout(function () {
-			layer.close(index);
+			layer.close(index); 
 		},500); 
 	};
 	
@@ -322,6 +323,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	}else{
                     		$(".page").html("");
                     	}
+                    	 
                     }else if(data.status==500){
                     		swal("查询失败", "不存在该日志信息", "error");
                     		$('#start').val("");
@@ -334,6 +336,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 		$('#end').val("");
         		    }	
                 }); 
+			 globalCount++;
+			 returnAllCount();
 	};
 
 	var pageNav=function(page){
