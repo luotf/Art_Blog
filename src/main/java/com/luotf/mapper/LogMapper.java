@@ -23,4 +23,6 @@ public interface LogMapper {
  	 * @return
  	 */
  	List<Log> selectLogListByDate(Map<String, Object> map);
+ 	
+ 	List<?> selectUserLogByDate(Map<String, Object> map);
 }

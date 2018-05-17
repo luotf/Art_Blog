@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-sm-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5> <i class="fa line-chart"></i> 博客浏览量</h5>
+                        <h5> <i class="fa line-chart"></i> 用户操作记录</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -130,12 +130,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="ibox-content">
-                        <div class="echarts" id="echarts-line-blogClick"></div>
+                        <div class="echarts" id="echarts-line-userLogClick"></div>
                     	<div class="col-sm-8 input-daterange input-group" style="margin: 20px auto 0px;" id="datepicker">
 							 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-							<input type="text" class="input-sm form-control" id="startBlogClick" />
+							<input type="text" class="input-sm form-control" id="startUserLogClick" />
 							<span class="input-group-addon">到 </span> 
-							<input type="text" class="input-sm form-control" id="endBlogClick" />
+							<input type="text" class="input-sm form-control" id="endUserLogClick" />
 						</div>
                     </div>
                 </div>
@@ -252,12 +252,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	$("#startBlog").val(start);
     	$("#endBlog").val(end);
-    	initBlogCountByDate(start,end);  //初始化7日访客
+    	initBlogCountByDate(start,end);  //初始化7日博客数量
     	
-    	$("#startBlogClick").val(start);
-    	$("#endBlogClick").val(end);
-    	initBlogClickByDate(start,end);  //初始化7日访客
-    	initBlogClickSort();
+    	$("#startUserLogClick").val(start);
+    	$("#endUserLogClick").val(end);
+    	initUserLogClickByDate(start,end);  //初始化7日访客
+    	
+    	
+    	initBlogClickSort();    //初始化博客点击排序
     	
     });
     
@@ -567,7 +569,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     
  	 //访问量时间
-	$('#startBlogClick').datepicker({
+	$('#startUserLogClick').datepicker({
 		keyboardNavigation : false,
 		forceParse : false,
 		autoclose : true,
@@ -576,14 +578,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		endDate : new Date(),
 	}).on('changeDate', function(ev) {
 		var start = ev.date.valueOf();
-		$('#startBlogClick').val(Format(start, "yyyy-MM-dd"));
-		if ($('#endBlogClick').val() != "" && $('#startBlogClick').val() > $('#endBlogClick').val()) {
+		$('#startUserLogClick').val(Format(start, "yyyy-MM-dd"));
+		if ($('#endUserLogClick').val() != "" && $('#startUserLogClick').val() > $('#endUserLogClick').val()) {
 			swal("指定日期范围出错", "请重新检查", "error");
-		} else if ($('#startBlogClick').val() != "" && $('#endBlogClick').val() != "") {
-			initBlogClickByDate($('#startBlogClick').val(), $('#endBlogClick').val());
+		} else if ($('#startUserLogClick').val() != "" && $('#endUserLogClick').val() != "") {
+			initUserLogClickByDate($('#startUserLogClick').val(), $('#endUserLogClick').val());
 		}
 	});
-	$('#endBlogClick').datepicker({
+	$('#endUserLogClick').datepicker({
 		keyboardNavigation : false,
 		forceParse : false,
 		autoclose : true,
@@ -592,27 +594,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		endDate : new Date(),
 	}).on('changeDate',function(ev) {
 			var end = ev.date.valueOf();
-			$('#endBlogClick').val(Format(end, "yyyy-MM-dd"));
-			if ($('#startBlogClick').val() != ""&& $('#startBlogClick').val() > $('#endBlogClick').val()) {
+			$('#endUserLogClick').val(Format(end, "yyyy-MM-dd"));
+			if ($('#startUserLogClick').val() != ""&& $('#startUserLogClick').val() > $('#endUserLogClick').val()) {
 				swal("指定日期范围出错", "截止日期必须大于起始日期", "error");
-			} else if ($('#startBlogClick').val() != ""&& $('#endBlogClick').val() != "") {
-				initBlogClickByDate($('#startBlogClick').val(), $('#endBlogClick').val());
+			} else if ($('#startUserLogClick').val() != ""&& $('#endUserLogClick').val() != "") {
+				initUserLogClickByDate($('#startUserLogClick').val(), $('#endUserLogClick').val());
 		}
 
 	});
 	  
 	    //最近num日博客点击数
-		var initBlogClickByDate=function(startTime,endTime){
+		var initUserLogClickByDate=function(startTime,endTime){
 			var start=Date.parse(new Date(startTime));
 			var end=Date.parse(new Date(endTime));
 			var num=Math.abs(parseInt((end - start)/1000/3600/24));
 			var params={
 				startTime:startTime,
 				endTime:endTime,
-				status:1
+				userType:'普通用户'
 			 };
 			$.ajax({
-				url : '../selectBlogListByDate',
+				url : '../selectUserLogByDate',
 				type : 'post',
 				data:params,
 				dataType : 'json',
@@ -628,14 +630,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						for(var i=0;i<data.list.length;i++){
 							var time=Format(data.list[i].addTime,"yyyy-MM-dd");
 							if(days[j]==time){
-								counts[j]=data.list[i].clickNum;
+								counts[j]=data.list[i].count;
 							}
 						}
 					}
 						for(var j=0;j<days.length;j++){
 							days[j]=Format(days[j],"yyyy/MM/dd");
 					}
-						initEchartsByBlogCount(days,counts); 
+						initEchartsByUserLogCount(days,counts); 
 				},
 				error : function() {
 					swal("近日博客发表数初始化错误", "请重新操作", "error");
@@ -643,17 +645,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			});
 		};
 	    
-		var initEchartsByBlogCount=function(days,counts){
-	    	var lineChart = echarts.init(document.getElementById("echarts-line-blogClick"));
+		var initEchartsByUserLogCount=function(days,counts){
+	    	var lineChart = echarts.init(document.getElementById("echarts-line-userLogClick"));
 	        var lineoption = {
 	            title : {
-	                text: '博客总浏览量'
+	                text: '操作记录'
 	            },
 	            tooltip : {
 	                trigger: 'axis'
 	            },
 	            legend: {
-	                data:['近'+days.length+'日博客浏览量']
+	                data:['近'+days.length+'日用户操作量']
 	            },
 	            toolbox: {
 	                show: true,
@@ -690,7 +692,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            ],
 	            series : [
 	                {
-	                    name:'近'+days.length+'日博客浏览量',
+	                    name:'近'+days.length+'日用户操作量',
 	                    type:'line',
 	                    data:counts,
 	                    markPoint : {

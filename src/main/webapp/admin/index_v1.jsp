@@ -237,7 +237,6 @@
 
 
 	</div>
-	</div>
 
 	<!-- 全局js -->
 	<script
@@ -541,7 +540,7 @@
 		 params="";
 		var date=null;
 		var startTime=null;
-		var endTime=null;
+		var nowTime=null;
 		if(e=="now"){
 			date=new Date();
 			startTime=Format(new Date(date.getTime() -  24*60*60*1000),"yyyy-MM-dd");

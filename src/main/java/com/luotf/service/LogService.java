@@ -20,4 +20,6 @@ public interface LogService {
     int updateByPrimaryKey(Log record);
     
     List<Log> selectLogListByDate(Map<String, Object> map);
+    
+    List<?> selectUserLogByDate(Map<String, Object> map);
 }

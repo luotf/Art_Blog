@@ -27,16 +27,14 @@ public class LogControllerAdmin {
 	@Resource(name = "logServiceImpl")
 	private LogService logService;
 	
-	/*
-	  * 按照不同时间查询访客的数量
-	  
-	 @RequestMapping(value = "/selectVisitListByDate",method = RequestMethod.POST)
+	
+	 @RequestMapping(value = "/selectUserLogByDate",method = RequestMethod.POST)
 	 @ResponseBody
 	 @AccessLimit(seconds=1,maxCount=10)
-	 public Map selectBlogListByDate(@RequestParam(value="format") String format,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
-		 Map map=new HashMap();
-		 if(format!=""&&format!=null){
-			 map.put("format", format);
+	 public Map<String, Object> selectBlogListByDate(Log log,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 if(log.getUserType()!=""&&log.getUserType()!=null){
+			 map.put("userType", log.getUserType());
 		 }
 		 if(startTime!=""&&startTime!=null){
 			 map.put("startTime", startTime);
@@ -44,8 +42,8 @@ public class LogControllerAdmin {
 		 if(endTime!=""&&endTime!=null){
 			 map.put("endTime", endTime);
 		 }
-		 List<Map> list=visitService.selectVisitListByDate(map);
-		 Map returnMap=new HashMap();
+		 List<?> list=logService.selectUserLogByDate(map);
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(list.size()>0){
 			 returnMap.put("status", 200);
 		 }else{
@@ -54,8 +52,7 @@ public class LogControllerAdmin {
 		 }
 		 returnMap.put("list", list);
 		 return returnMap;
-	 }*/
-	 
+	 }
 	
 	 
 	 /**
@@ -66,6 +63,7 @@ public class LogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/selectLogListByDate")
 	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=10)
 	 public Map<String,Object> selectLogListByDate(Log log,@RequestParam(value="startTime") String startTime,@RequestParam(value="endTime") String endTime,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="9") Integer pageSize) throws Exception{
 		 Map<String,Object> map=new HashMap<String,Object>();
 		 if(startTime!=""&&startTime!=null){

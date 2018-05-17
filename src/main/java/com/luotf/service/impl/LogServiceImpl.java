@@ -58,4 +58,10 @@ public class LogServiceImpl implements LogService {
 		return logMapper.selectLogListByDate(map);
 	}
 
+	@Override
+	public List<?> selectUserLogByDate(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return logMapper.selectUserLogByDate(map);
+	}
+
 }

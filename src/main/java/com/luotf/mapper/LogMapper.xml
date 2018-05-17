@@ -36,8 +36,23 @@
 		</where>
 		order by addTime desc
 	</select>
-  
-  
+  <select id="selectUserLogByDate" resultType="map"  parameterType="Map">
+	  	SELECT
+			addTime,
+			COUNT(*) AS count
+		FROM
+			t_log
+		<where>
+			<if test="startTime!=null and startTime!=''">
+				and DATE_FORMAT(addTime,'%Y-%m-%d') BETWEEN #{startTime} AND #{endTime}
+			</if>
+			<if test="userType!=null and userType!=''">
+		 		and userType=#{userType}
+		 	</if>
+		</where>
+			GROUP BY DATE_FORMAT(addTime,'%Y-%m-%d')
+		    
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_log
     where id = #{id,jdbcType=INTEGER}
