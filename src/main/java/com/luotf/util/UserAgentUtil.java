@@ -63,8 +63,10 @@ import com.luotf.model.Visit;
 public class UserAgentUtil {  
   
      
-    public static Visit getUserAgent(String userAgent) {  
-       
+    public static Visit getUserAgent(String userAgent) {
+    	if(userAgent==""||userAgent==null){
+    		userAgent="";
+    	}
         if (userAgent.contains("Windows")) {//主流应用靠前  
         	if (userAgent.contains("Windows NT 10.0")) {//Windows 10
                 return judgeBrowser(userAgent, "Windows 10");//判断浏览器  

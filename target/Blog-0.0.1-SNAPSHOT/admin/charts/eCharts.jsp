@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             
             
-            <div class="col-sm-6">
+            <div class="col-sm-6" style="clear:both">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5> <i class="fa line-chart"></i> 用户操作记录</h5>

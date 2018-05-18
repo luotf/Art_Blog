@@ -212,12 +212,16 @@
 		var reset = function() {
 			$('#start').val("");
 			$('#end').val("");
+			$(".search .form-control").val("");
 			var params = $('#allVisit').bootstrapTable('getOptions');
 			params.queryParams = function(params) {
 				return {
 					pageSize : params.limit,
 					page : (params.offset) / params.limit + 1,
 					ip : $(".search .form-control").val(),
+					platformType : $(".search .form-control").val(),
+					browserType : $(".search .form-control").val(),
+					city : $(".search .form-control").val(),
 					startTime : "",
 					endTime : "",
 				};
