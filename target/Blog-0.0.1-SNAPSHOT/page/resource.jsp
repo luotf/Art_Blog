@@ -203,7 +203,7 @@
 		         isrecommend:1  //1 表示推荐
 		};
 		$.ajax({
-            url:'../admin/selectGroupLikeBlogListByPage',    
+            url:'selectGroupLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    

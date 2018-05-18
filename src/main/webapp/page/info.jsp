@@ -12,8 +12,7 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/style.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 </head>
 <body>
@@ -149,8 +148,8 @@
 			
 			setTimeout(function () {
 			$(".ds").css("opacity","1");
-			
 		 }, 1000);
+			
 			setTimeout(function () {
 				$(".pl_paihang").css("display","block");
 			},200); 
@@ -166,7 +165,6 @@
 				style.display = style.display == "block" ? "none" : "block";
 				oH2.className = style.display == "block" ? "open" : ""
 			}
-			
 		}
 
 		var Tags=function() {
@@ -190,7 +188,7 @@
 		var selectPrevBlog=function(){
 			var id=$(".id").val();
 			var params ={
-					id:id
+					id:id-1
 			};
 			$.ajax({
 	            url:'../selectPrevBlog',    
@@ -198,19 +196,25 @@
 	            data:params,
 	            dataType:'json',    
 	            success:function (data) {
-	              var id=data.blog.id.toString(8)*data.blog.id;
-	              var preTitle='<a href="../find/'+id+'.html">'+data.blog.title+'</a>';
-	          	  $(".pre").html(preTitle);
+	            	var preTitle="";
+		            	if(data.status==200){
+		            	  var id=data.blog.id.toString(8)*data.blog.id;
+		  	              preTitle='<a href="../find/'+id+'.html">'+data.blog.title+'</a>';
+		            	}else{
+		            	  preTitle='<span>无</span>';
+		            	}
+		            	$(".pre").html(preTitle);
 	            	}, 
 			    error:function(){
-			    	layer.msg('出错啦', {icon: 2});
+			    	layer.msg('加载的太快啦', {icon: 2});
 			    }	
 	        });
 			
 		};
 
 		var selectNextBlog=function(){
-			var id=$(".id").val();
+			var vid=$(".id").val();
+			var id=parseInt(vid)+1;
 			var params ={
 					id:id
 			};
@@ -220,13 +224,17 @@
 	            data:params,
 	            dataType:'json',    
 	            success:function (data) {
-	              var id=data.blog.id.toString(8)*data.blog.id;
-	              var nextTitle='<a href="../find/'+id+'.html">'+data.blog.title+'</a>';
-	          	  $(".next").html(nextTitle);
-	          	 
+	            	var nextTitle='';
+	            	if(data.status==200){
+			            var sid=data.blog.id.toString(8)*data.blog.id;
+			            nextTitle='<a href="../find/'+sid+'.html">'+data.blog.title+'</a>';
+	            	}else{
+	            		nextTitle='<span>无</span>';
+	            	}
+	            	    $(".next").html(nextTitle);
 	            	}, 
 			    error:function(){
-			    	layer.msg('出错啦', {icon: 2});
+			    	layer.msg('加载的太快啦', {icon: 2});
 			    }	
 	        });
 			
@@ -240,7 +248,7 @@
 			         'type.id':$(".typeId").val(),
 			};
 			$.ajax({
-	            url:'../../admin/selectGroupLikeBlogListByPage',    
+	            url:'../selectGroupLikeBlogListByPage',    
 	            type:'get',
 	            data:params,
 	            dataType:'json',    
@@ -256,10 +264,9 @@
 	                }
 	                // 初始化数据
 	                $(".otherlink").find("ul").html(relBlog);
-	               
 	            },    
 			    error:function(){
-			    	layer.msg('出错啦', {icon: 2});
+			    	layer.msg('加载的太快啦', {icon: 2});
 			    }	
 	        });
 		};
@@ -273,7 +280,7 @@
 			         isrecommend:1  //1 表示推荐
 			};
 			$.ajax({
-	            url:'../../admin/selectGroupLikeBlogListByPage',    
+	            url:'../selectGroupLikeBlogListByPage',    
 	            type:'get',
 	            data:params,
 	            dataType:'json',    
@@ -297,7 +304,7 @@
 					
 	            },    
 			    error:function(){
-			    	layer.msg('出错啦', {icon: 2});
+			    	layer.msg('加载的太快啦', {icon: 2});
 			    }	
 	        });
 		};
@@ -311,7 +318,7 @@
 			         sort:"clickNum",   //按点击量排序,默认按时间
 			};
 			$.ajax({
-	            url:'../../admin/selectGroupLikeBlogListByPage',    
+	            url:'../selectGroupLikeBlogListByPage',    
 	            type:'get',
 	            data:params,
 	            dataType:'json',    
@@ -335,7 +342,7 @@
 	            	
 	            },    
 			    error:function(){
-			    	layer.msg('出错啦', {icon: 2});
+			    	layer.msg('加载的太快啦', {icon: 2});
 			    }	
 	        });
 		};

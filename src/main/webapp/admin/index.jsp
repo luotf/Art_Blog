@@ -48,25 +48,23 @@
 				<ul class="nav" id="side-menu">
 					<li class="nav-header">
 						<div class="dropdown profile-element">
-							<span><img alt="image" style="width:64px;height:64px;"class="img-circle"
+							<span><img alt="images" style="width:64px;height:64px;"class="img-circle"
 								src="${pageContext.request.contextPath}/images/my.jpeg" /></span>
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
 								class="clear"> <span class="block m-t-xs"><strong
-										class="font-bold">Beaut-zihan</strong></span> <span
+										class="font-bold">罗廷方</strong></span> <span
 									class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
 							</span>
 							</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">
-								<li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+								<li><a  href="javascript:void(0);" onclick="permission()">修改头像</a>
 								</li>
-								<li><a class="J_menuItem" href="profile.html">个人资料</a></li>
-								<li><a class="J_menuItem" href="contacts.html">联系我们</a></li>
-								<li><a class="J_menuItem" href="mailbox.html">信箱</a></li>
+								<li><a  href="javascript:void(0);" onclick="permission()">修改密码</a></li>
 								<li class="divider"></li>
-								<li><a href="login.html">安全退出</a></li>
+								<li><a href="${pageContext.request.contextPath}/admin/logout">安全退出</a></li>
 							</ul>
 						</div>
-						<div class="logo-element">H+</div>
+						<div class="logo-element"></div>
 					</li>
 					<li><a href="${pageContext.request.contextPath}/admin/index_v1.jsp" class="J_menuItem"> <i class="fa fa-home"></i> <span
 							class="nav-label">主页</span>
@@ -125,9 +123,8 @@
 					<li><a href="${pageContext.request.contextPath}/admin/pics/pics.jsp" class="J_menuItem"><i class="fa fa-picture-o"></i> <span
 							class="nav-label">本地图库</span></a>
 						</li>
-					<li><a href="#"><i class="fa fa-desktop"></i> <span
+					<li><a href="${pageContext.request.contextPath}/index.jsp" target= "_blank"><i class="fa fa-desktop"></i> <span
 							class="nav-label">前台页面 </span></a>
-
 				</ul>
 			</div>
 		</nav>
@@ -139,9 +136,8 @@
 					style="margin-bottom: 0">
 					<div class="navbar-header">
 						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
-							href="#"><i class="fa fa-bars"></i> </a>
-						<form role="search" class="navbar-form-custom" method="post"
-							action="search_results.html">
+							href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
+						<form role="search" class="navbar-form-custom" method="post" >
 							<div class="form-group">
 								<input type="text" placeholder="请输入您需要查找的内容 …"
 									class="form-control" name="top-search" id="top-search">
@@ -150,14 +146,14 @@
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
 						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="#"> <i class="fa fa-envelope"></i>
+							data-toggle="dropdown" href="javascript:void(0)"> <i class="fa fa-envelope"></i>
 								<span class="label label-warning">16</span>
 						</a>
 							<ul class="dropdown-menu dropdown-messages">
 								<li class="m-t-xs">
 									<div class="dropdown-messages-box">
 										<a href="profile.html" class="pull-left"> <img alt="image"
-											class="img-circle" src="img/a7.jpg">
+											class="img-circle" src="${pageContext.request.contextPath}/images/a7.jpg">
 										</a>
 										<div class="media-body">
 											<small class="pull-right">46小时前</small> <strong>小四</strong>
@@ -169,8 +165,8 @@
 								<li class="divider"></li>
 								<li>
 									<div class="dropdown-messages-box">
-										<a href="profile.html" class="pull-left"> <img alt="image"
-											class="img-circle" src="img/a4.jpg">
+										<a href="javascript:void(0)" class="pull-left"> <img alt="image"
+											class="img-circle" src="${pageContext.request.contextPath}/images/a4.jpg">
 										</a>
 										<div class="media-body ">
 											<small class="pull-right text-navy">25小时前</small> <strong>国民岳父</strong>
@@ -182,25 +178,25 @@
 								<li class="divider"></li>
 								<li>
 									<div class="text-center link-block">
-										<a class="J_menuItem" href="mailbox.html"> <i
+										<a class="J_menuItem" href="javascript:void(0)"> <i
 											class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
 										</a>
 									</div>
 								</li>
 							</ul></li>
 						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="#"> <i class="fa fa-bell"></i> <span
+							data-toggle="dropdown" href="javascript:void(0)"> <i class="fa fa-bell"></i> <span
 								class="label label-primary">8</span>
 						</a>
 							<ul class="dropdown-menu dropdown-alerts">
-								<li><a href="mailbox.html">
+								<li><a href="javascript:void(0)">
 										<div>
 											<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
 												class="pull-right text-muted small">4分钟前</span>
 										</div>
 								</a></li>
 								<li class="divider"></li>
-								<li><a href="profile.html">
+								<li><a href="javascript:void(0)">
 										<div>
 											<i class="fa fa-qq fa-fw"></i> 3条新回复 <span
 												class="pull-right text-muted small">12分钟钱</span>
@@ -209,7 +205,7 @@
 								<li class="divider"></li>
 								<li>
 									<div class="text-center link-block">
-										<a class="J_menuItem" href="notifications.html"> <strong>查看所有
+										<a class="J_menuItem" href="javascript:void(0)"> <strong>查看所有
 										</strong> <i class="fa fa-angle-right"></i>
 										</a>
 									</div>
@@ -229,7 +225,7 @@
 				</button>
 				<nav class="page-tabs J_menuTabs">
 					<div class="page-tabs-content">
-						<a href="javascript:;" class="active J_menuTab"
+						<a href="javascript:void(0)" class="active J_menuTab"
 							data-id="${pageContext.request.contextPath}/admin/index_v1.jsp">主页</a>
 					</div>
 				</nav>
@@ -332,17 +328,17 @@
 							</div>
 							<div class="title">皮肤选择</div>
 							<div class="setings-item default-skin nb">
-								<span class="skin-name "> <a href="#" class="s-skin-0">
+								<span class="skin-name "> <a href="javascript:void(0)" class="s-skin-0">
 										默认皮肤 </a>
 								</span>
 							</div>
 							<div class="setings-item blue-skin nb">
-								<span class="skin-name "> <a href="#" class="s-skin-1">
+								<span class="skin-name "> <a href="javascript:void(0)" class="s-skin-1">
 										蓝色主题 </a>
 								</span>
 							</div>
 							<div class="setings-item yellow-skin nb">
-								<span class="skin-name "> <a href="#" class="s-skin-3">
+								<span class="skin-name "> <a href="javascript:void(0)" class="s-skin-3">
 										黄色/紫色主题 </a>
 								</span>
 							</div>
@@ -376,28 +372,10 @@
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/hplus.js"></script>
 	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
-
 	
-<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
-
-<script type="text/javascript">
+    <script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 
 
-//$(document).ready(function() {
-	
-	/* setTimeout(function () {
-   		$('body').css('opacity','1');
-   		$('body').attr("class", "gray-bg") //添加样式
-	},100); */
-	/* 	
-	$("#fakeloader").fakeLoader({
-	      timeToHide:300, 
-	      zIndex:999, 
-	      spinner:"spinner6",//Options: 'spinner1', 'spinner2', 'spinner3', 'spinner4', 'spinner5', 'spinner6', 'spinner7' 
-	      bgColor:"#fff", 
-}); 
-}); */
-	</script>
 </body>
 
 </html>

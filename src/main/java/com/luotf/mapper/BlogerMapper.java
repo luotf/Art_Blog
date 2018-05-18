@@ -20,4 +20,6 @@ public interface BlogerMapper {
 
     
     int updateByPrimaryKey(Bloger record);
+    
+     Bloger findUserByLoginName(String name);
 }

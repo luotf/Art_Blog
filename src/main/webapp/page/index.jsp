@@ -108,7 +108,7 @@ window.onload = function (){
 		         status:1
 		};
 		$.ajax({
-            url:'../admin/selectGroupLikeBlogListByPage',    
+            url:'${pageContext.request.contextPath}/page/selectGroupLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    
@@ -138,7 +138,7 @@ window.onload = function (){
 		         status:1
 		};
 		$.ajax({
-            url:'../admin/selectGroupLikeBlogListByPage',    
+            url:'${pageContext.request.contextPath}/page/selectGroupLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    
@@ -168,7 +168,7 @@ window.onload = function (){
 		         status:1
 		};
 		$.ajax({
-            url:'../admin/selectGroupLikeBlogListByPage',    
+            url:'${pageContext.request.contextPath}/page/selectGroupLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    
@@ -208,7 +208,7 @@ window.onload = function (){
 		         status:1,
 		};
 		$.ajax({
-            url:'../admin/selectGroupLikeBlogListByPage',    
+            url:'${pageContext.request.contextPath}/page/selectGroupLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    
@@ -237,7 +237,6 @@ window.onload = function (){
         });
 	};
 	
-	 	
           //格式化时间
         	function Format(datetime, fmt) {
         	    if (parseInt(datetime) == datetime) {

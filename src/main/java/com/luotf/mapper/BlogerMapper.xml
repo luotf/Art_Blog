@@ -88,4 +88,11 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="findUserByLoginName" resultMap="BaseResultMap" parameterType="string" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_bloger
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

@@ -97,7 +97,7 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!--拼接视图地址的前缀和后缀 -->
-		<property name="prefix" value="/page/" />
+		<property name="prefix" value="/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 		<bean id="multipartResolver" name="multipartResolver"

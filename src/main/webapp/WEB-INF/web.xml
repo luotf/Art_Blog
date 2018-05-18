@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+   
+   <welcome-file-list>
+    <welcome-file>/index.jsp</welcome-file>
+  </welcome-file-list>
+  
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring/applicationContext-*.xml</param-value>
+    <param-value>classpath:spring/applicationContext-*.xml;classpath:spring/spring-shiro.xml</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -19,6 +24,8 @@
     <servlet-name>springMVC</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -31,14 +38,28 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <filter>  
+        <filter-name>shiroFilter</filter-name>  
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>  
+        <init-param>  
+            <param-name>targetFilterLifecycle</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>shiroFilter</filter-name>  
+        <url-pattern>/*</url-pattern> 
+    </filter-mapping>
+    
+  
   
    <filter>
       <filter-name>ip</filter-name>
       <filter-class>com.luotf.filter.IpFilter</filter-class>
   </filter>
+  
   <filter-mapping>
       <filter-name>ip</filter-name>
-<!--这里的/admin/* 表示是指定路径下的文件需要过滤   也可以写为 <url-pattern>/*</url-pattern> 表示所有文件都需要过滤-->
       <url-pattern>/*</url-pattern>
   </filter-mapping>
   
@@ -56,9 +77,14 @@
   <listener>
 		<listener-class>com.luotf.listener.VisitTimesListener</listener-class>
 	</listener>
-  <welcome-file-list>
-    <welcome-file>/index.html</welcome-file>
-    <welcome-file>/index.htm</welcome-file>
-    <welcome-file>/index.jsp</welcome-file>
-  </welcome-file-list>
+	
+	<!-- 配置session超时时间，单位分钟 -->
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/error.jsp</location>
+	</error-page>
+	
 </web-app>

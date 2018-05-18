@@ -168,7 +168,7 @@
 		}
 		
 		$.ajax({
-            url:'../page/selectLikeBlogListByPage',    
+            url:'selectLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    
@@ -289,7 +289,7 @@
 				"data":"all"
 		};
 		$.ajax({
-            url:'../admin/selectBlogType',    
+            url:'selectBlogType',    
             type:'post',
             data:params,
             dataType:'json',    
@@ -344,7 +344,7 @@
 		         isrecommend:1  //1 表示推荐
 		};
 		$.ajax({
-            url:'../admin/selectGroupLikeBlogListByPage',    
+            url:'selectGroupLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    
@@ -381,7 +381,7 @@
 		         sort:"clickNum",   //按点击量排序,默认按时间
 		};
 		$.ajax({
-            url:'../admin/selectGroupLikeBlogListByPage',    
+            url:'selectGroupLikeBlogListByPage',    
             type:'get',
             data:params,
             dataType:'json',    

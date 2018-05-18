@@ -49,7 +49,7 @@ public class BlogController {
 			}
 			model.addAttribute("blog", blog);
 		}
-	        return "info";
+	        return "page/info";
 	    }
 	 
 	 /**
@@ -60,7 +60,6 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectNextBlog")
 	 @ResponseBody
-	 @AccessLimit(seconds=1,maxCount=4)
 	 public Map<String, Object> selectNextBlog(Integer id) throws Exception{
 		 Map<String, Object> map=new HashMap<String, Object>();
 		 Blog blog=blogService.selectNextBlog(id);
@@ -82,13 +81,11 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectPrevBlog")
 	 @ResponseBody
-	 @AccessLimit(seconds=1,maxCount=5)
 	 public Map<String, Object> selectPrevBlog(Integer id) throws Exception{
 		 Map<String, Object> map=new HashMap<String, Object>();
 		 Blog blog=blogService.selectPrevBlog(id);
 		 if(blog!=null){
 			 map.put("status", 200);
-			 
 		 }else{
 			 //500表示：返回值为Null
 			 map.put("status", 500);
@@ -153,4 +150,61 @@ public class BlogController {
 		 return returnMap;
 	 }
 	
+	 /**
+	  * 模糊组合分页查询博客信息(and)
+	  * @param id
+	  * @return
+	  * @throws Exception
+	  */
+	 @RequestMapping(value = "/selectGroupLikeBlogListByPage")
+	 @ResponseBody
+	 @AccessLimit(seconds=1,maxCount=15)
+	 public Map<String, Object> selectGroupLikeBlogListByPage(Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 map.put("sort", sort);
+		 if(blog.getTitle()!=null&&blog.getTitle()!=""){
+			 map.put("title", blog.getTitle());
+		 }
+		 if(blog.getIntroduction()!=null&&blog.getIntroduction()!=""){
+			 map.put("introduction", blog.getIntroduction());
+		 }
+		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
+			 map.put("keyword", blog.getKeyword());
+		 }
+		 if(blog.getContent()!=null&&blog.getContent()!=""){
+			 map.put("content", blog.getContent());
+		 }
+		 if(blog.getIstop()!=null){
+			 map.put("isTop", blog.getIstop());
+		 }
+		 if(blog.getType()!=null){
+			 map.put("type_id", blog.getType().getId());
+		 }
+		 if(blog.getStatus()!=null){
+			 map.put("status", blog.getStatus());
+		 }
+		 if(blog.getIsrecommend()!=null){
+			 map.put("isRecommend", blog.getIsrecommend());
+		 }
+		 if(blog.getAddtime()!=null){
+			 map.put("addTime", blog.getAddtime());
+		 }
+		 //分页显示：第1页开始，每页显示10条记录
+		 PageHelper.startPage(page, pageSize);
+		 List<Blog> blogList=blogService.selectGroupLikeBlogListByPage(map);
+		 PageInfo<Blog> pageInfo=new PageInfo<Blog>(blogList);
+		 Map<String, Object> returnMap=new HashMap<String, Object>();
+		 if(blogList.size()>0){
+			 returnMap.put("status", 200);
+		 }else{
+			 //500表示：返回值为Null
+			 returnMap.put("status", 500);
+		 }
+		 returnMap.put("blogList", blogList);
+		 returnMap.put("pageInfo", pageInfo);
+		 return returnMap;
+	 }
+	 
+	 
+	 
 }

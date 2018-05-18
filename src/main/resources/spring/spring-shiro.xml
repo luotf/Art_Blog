@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro Configuration</description>
+
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<!-- <property name="cacheManager" ref="cacheManager" /> -->
+	</bean>
+
+	<!-- 項目自定义的Realm -->
+	<bean id="shiroDbRealm" class="com.luotf.shiro.ShiroDbRealm">
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<!-- loginUrl：没有登录的用户请求需要登录的页面时自动跳转到登录页面，不是必须的属性，不输入地址的话会自动寻找项目web项目的根目录下的”/login.jsp”页面。 -->
+		<property name="loginUrl" value="/login" />
+		
+		<!-- successUrl：登录成功默认跳转页面，不配置则跳转至”/”。如果登陆前点击的一个需要登录的页面，则在登录自动跳转到那个需要登录的页面。不跳转到此。 -->
+		<property name="successUrl" value="/index.jsp" />
+
+		<!-- unauthorizedUrl：没有权限默认跳转的页面。 -->
+		<property name="unauthorizedUrl" value="/login.jsp" />
+		<property name="filterChainDefinitions">
+			<value>
+			    /login = anon
+				/checkLogin = anon
+			    /css/**= anon
+			    /fonts/**= anon
+			    /images/**= anon
+			    /js/**= anon
+			    /error/** =anon
+				/page/** = anon
+				/index.jsp = anon
+				/login.jsp = anon
+				<!-- 直接加载项目名时   -->
+				/ = anon
+				/** = authc
+			</value>
+		</property>
+	</bean>
+
+	<!-- 用户授权信息Cache -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+	<!-- AOP式方法级权限检查 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+</beans>
