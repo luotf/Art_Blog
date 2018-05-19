@@ -22,6 +22,8 @@
 	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
 <link rel="shortcut icon" href="favicon.ico">
+<link href="${pageContext.request.contextPath}/css/base.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
@@ -40,8 +42,6 @@
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
@@ -152,7 +152,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
+						<div class="mail-text h-200" style="width:84%;margin:0 auto;">
 							<div id="summernote"></div>
 							<div class="clearfix"></div>
 						</div>
@@ -303,7 +303,7 @@
 			initBlogType();			
 							//初始化富文本
 			$('#summernote').summernote({
-				height : 300,//初始化默认高度    
+				height : 400,//初始化默认高度    
 				minHeight : null, //最小高度             
 				maxHeight : null, //最大高度
 				lang : 'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js

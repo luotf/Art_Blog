@@ -25,7 +25,6 @@ import com.luotf.util.ConstantUtil;
 
 
 @Controller
-@RequestMapping(value = "/page")
 public class BlogController {
 
 	@Resource(name = "blogServiceImpl")
@@ -102,7 +101,7 @@ public class BlogController {
 	  */
 	 @RequestMapping(value = "/selectLikeBlogListByPage")
 	 @ResponseBody
-	 @AccessLimit(seconds=1,maxCount=13)
+	 @AccessLimit(seconds=1,maxCount=15)
 	 @SystemLog(description = ConstantUtil.BLOG_FINDKEY,userType=ConstantUtil.USERTYPE_USER) 
 	 public Map<String, Object> selectLikeBlogListByPage(String param,Blog blog,@RequestParam(value="sort", required=true,defaultValue="addTime") String sort,@RequestParam(value="page", required=true,defaultValue="1") Integer page,@RequestParam(value="pageSize", required=true,defaultValue="10") Integer pageSize) throws Exception{
 		 Map<String, Object> map=new HashMap<String, Object>();
@@ -204,7 +203,5 @@ public class BlogController {
 		 returnMap.put("pageInfo", pageInfo);
 		 return returnMap;
 	 }
-	 
-	 
 	 
 }

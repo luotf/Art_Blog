@@ -31,19 +31,19 @@
 		<property name="unauthorizedUrl" value="/login.jsp" />
 		<property name="filterChainDefinitions">
 			<value>
-			    /login = anon
-				/checkLogin = anon
 			    /css/**= anon
 			    /fonts/**= anon
 			    /images/**= anon
 			    /js/**= anon
 			    /error/** =anon
 				/page/** = anon
+				/login = anon
+				/checkLogin = anon
 				/index.jsp = anon
 				/login.jsp = anon
 				<!-- 直接加载项目名时   -->
 				/ = anon
-				/** = authc
+				/admin/** = authc
 			</value>
 		</property>
 	</bean>

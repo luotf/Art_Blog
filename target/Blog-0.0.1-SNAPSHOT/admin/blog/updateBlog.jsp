@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							
 							</form>
 						</div>
-						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
+						<div class="mail-text h-200" style="width:84%;margin:0 auto;">
 							<div id="summernote"></div>
 							<div class="clearfix"></div>
 						</div>
@@ -376,7 +376,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             });
 			//初始化富文本
 		    $('#summernote').summernote({
-						height: 300,//初始化默认高度    
+						height: 400,//初始化默认高度    
 						minHeight: null, //最小高度             
 						maxHeight: null, //最大高度
 						lang:'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js

@@ -22,8 +22,12 @@
 	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/base.css"
+	rel="stylesheet">
+ <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
+	rel="stylesheet"> 
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
 <link
@@ -37,11 +41,9 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/style.css"
-	rel="stylesheet">
+ <link href="${pageContext.request.contextPath}/css/style.css"
+	rel="stylesheet"> 
 <link href="${pageContext.request.contextPath}/css/index.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 <link
 	href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css"
@@ -122,14 +124,14 @@
 									<label class="col-sm-2 control-label">标题：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="title"
-											name="title" value="" required="" aria-required="true">
+											name="title" value="" required="" maxlength="30" aria-required="true">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">摘要：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="introduction"
-											name="introduction" value="" required="" aria-required="true">
+											name="introduction" value="" required="" maxlength="100" aria-required="true">
 									</div>
 								</div>
 								<div class="form-group">
@@ -144,7 +146,7 @@
 									<label class="col-sm-2 control-label">关键字：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="keyword"
-											required="" aria-required="true" name="keyword" value="">
+											required="" aria-required="true" name="keyword" value="" maxlength="30">
 										<p class="help-block m-b-none">
 											<i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔
 										</p>
@@ -152,7 +154,7 @@
 								</div>
 							</form>
 						</div>
-						<div class="mail-text h-200" style="width:82.5%;margin:0 auto;">
+						<div class="mail-text h-200" style="width:84%;margin:0 auto;">
 							<div id="summernote"></div>
 							<div class="clearfix"></div>
 						</div>
@@ -195,7 +197,9 @@
 								<div class="news_about">
 									<strong>简介</strong><span class="news_intr"> </span>
 								</div>
+								
 								<div class="news_infos"></div>
+	
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -249,9 +253,10 @@
 
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script> 
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-
-
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
@@ -280,6 +285,8 @@
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
+	
+
 	<!-- SUMMERNOTE -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/summernote/summernote.min.js"></script>
@@ -303,7 +310,7 @@
 			initBlogType();			
 							//初始化富文本
 			$('#summernote').summernote({
-				height : 300,//初始化默认高度    
+				height : 400,//初始化默认高度    
 				minHeight : null, //最小高度             
 				maxHeight : null, //最大高度
 				lang : 'zh-CN',//注意这里，若要设置语言，则需要引入该语言配置js
@@ -504,6 +511,10 @@
 			$(".newsview").find(".news_infos").html($("#summernote").code());
 			var add = '<a  class="btn btn-white" href="javascript:void(0);" onclick="addBlog(1)">发表</a>';
 			$(".modal-footer").find(".add").html(add);
+			$('pre').each(function(i,block){
+     		    hljs.highlightBlock(block);
+     		});
+			
 		};
 
 		var addBlog = function(id) {

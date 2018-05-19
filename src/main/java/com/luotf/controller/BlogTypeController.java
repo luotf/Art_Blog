@@ -21,7 +21,6 @@ import com.luotf.service.BlogTypeService;
 import com.luotf.util.ConstantUtil;
 
 @Controller
-@RequestMapping(value = "/page")
 public class BlogTypeController {
 
 	@Resource(name = "blogTypeServiceImpl")

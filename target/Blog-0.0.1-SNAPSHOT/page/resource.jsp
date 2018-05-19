@@ -28,7 +28,7 @@
 	}
 </style>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
 <%@ include file="top.jsp" %>
   <article>
     <div class="leftbox">

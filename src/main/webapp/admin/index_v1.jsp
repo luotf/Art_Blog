@@ -576,10 +576,11 @@
 					var nowVisitorsPercent=level(now,yes);
 					$(".nowVisitorsPercent").html(nowVisitorsPercent);
 				}else if(e=="history"){
-					var sum=0;
+					var num=0;
 					for(var i=0;i<data.list.length;i++){
-						sum+=data.list[i].count;
+						num+=data.list[i].count;
 					}
+					var sum=toThousands(num);
 					$(".visitors").html(sum );
 				}
 				globalCount++;
@@ -590,6 +591,16 @@
 			}
 		});
 	};
+	
+	var toThousands=function(num){  
+	    var num = (num || 0).toString(), result = '';  
+	    while (num.length > 3) {  
+	        result = ',' + num.slice(-3) + result;  
+	        num = num.slice(0, num.length - 3);  
+	    }  
+	    if (num) { result = num + result; }  
+	    return result;  
+	}  
 	
 	//最近的num日访客
 	var initVisitCountByWeek=function(num){

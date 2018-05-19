@@ -16,7 +16,7 @@
 	rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
 	<%@ include file="top.jsp" %>
 	<article>
 		<div class="leftbox">

@@ -23,7 +23,6 @@ import com.luotf.util.ConstantUtil;
 
 
 @Controller
-@RequestMapping(value = "/page")
 public class ResourceController {
 
 	@Resource(name = "resourceServiceImpl")

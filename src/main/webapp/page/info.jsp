@@ -8,6 +8,8 @@
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css"
@@ -15,7 +17,7 @@
 <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
 	<%@ include file="top.jsp" %>
 	<article>
 		<div class="leftbox">
@@ -85,7 +87,7 @@
 			
 			<div class="paihang ">
 				<h2 class="ab_title">
-					<a href="/">本栏推荐</a>
+					<a href="javascript:void(0)">本栏推荐</a>
 				</h2>
 				<ul class="like ">
 
@@ -94,7 +96,7 @@
 			</div>
 			<div class="paihang ">
 				<h2 class="ab_title">
-					<a href="/">点击排行</a>
+					<a href="javascript:void(0)">点击排行</a>
 				</h2>
 				<ul class="click">
 
@@ -125,6 +127,8 @@
 
 	<%@ include file="fonter.jsp" %>
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script> 
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 	<script type="text/javascript"> 

@@ -53,8 +53,7 @@
   <select id="selectBlogByTypeId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
+    
     from t_blog
     where type_id = #{id,jdbcType=INTEGER}
   </select>
@@ -123,8 +122,6 @@
   <select id="selectBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
 	select 
 	<include refid="Base_Column_List" />
-   	,
-    <include refid="Blob_Column_List" />
 		from t_blog
 		<where>
 		 	<if test="title!=null and title!=''">
@@ -167,8 +164,7 @@
    <select id="selectLikeBlogListByPage" parameterType="Map" resultMap="ResultMapWithBLOBs">
 	select 
 	<include refid="Base_Column_List" />
-   	,
-    <include refid="Blob_Column_List" />
+   	
 		from t_blog
 		<where>
 		 	<if test="title!=null and title!=''">

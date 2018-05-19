@@ -28,7 +28,7 @@
 	}
 </style>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
 	<%@ include file="top.jsp"%>
 	<article>
 		<div class="leftbox">
@@ -67,7 +67,7 @@
 
 			<div class="paihang ">
 				<h2 class="ab_title">
-					<a href="/">本栏推荐</a>
+					<a href="javascript:void(0)">本栏推荐</a>
 				</h2>
 				<ul class="like">
 
@@ -76,7 +76,7 @@
 			</div>
 			<div class="paihang ">
 				<h2 class="ab_title">
-					<a href="/">点击排行</a>
+					<a href="javascript:void(0)">点击排行</a>
 				</h2>
 				<ul class="click">
 
@@ -231,7 +231,7 @@
             		}else{
             			isEnd=false;
             			pageNext=page.pageNum+1;
-            			pagenav='<div style="margin:-5px auto 10px;width:10%;"><div class="loader-inner ball-pulse"><div></div><div></div><div></div></div></div>';
+            			pagenav='<div style="margin:-5px auto 10px;text-align:center;"><div class="loader-inner ball-pulse"><div></div><div></div><div></div></div></div>';
             		}
             		$(".page").html(pagenav);
             	}else{

@@ -44,6 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
+<style type="text/css">
+	.loader-inner > div{
+		background-color: #907f819e
+	}
+</style>
+
 </head>
 
 <body class="white-bg" style="opacity:0">
@@ -105,6 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clearfix"></div>
 						</div>
 					</div>
+					<a class="top" onclick="window.scrollTo(0,0)" style="z-index:999;font-size: 22px;position: fixed;bottom: 5%;right: 0%;"><span><i class="fa fa-arrow-circle-up"></i></span></a>
 				</div>
 			</div>
 		
@@ -123,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            </div>
 	                        </div>
 	                    </form>
-	                  <button onclick="reset()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="刷新日志列表"><i class="fa fa-refresh"></i> 刷新</button>
+	                  <button onclick="reset()" class="btn btn-white btn-sm refresh" data-toggle="tooltip" data-placement="top" title="刷新日志列表"><i class="fa fa-refresh"></i> 刷新</button>
                     </div>
                     </div>
                     <div class="mail-box no-padding" style="margin-bottom:0px">
@@ -189,7 +196,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var pageNext=1;
 		var isEnd=false;
 		var globalCount=0;
-		
 		 $("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
@@ -222,7 +228,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	setTimeout(function () {
        		selectLogByDate(pageNext,null,null);
 		},500); 
-       	
 	   }
    });
 	
@@ -236,9 +241,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#start').val("");
 		$('#end').val("");
 		$('.keyword').val("");
+		$(".refresh").find("i").addClass("fa-spin");
 		selectLogByDate(1,null, null);
 		setTimeout(function () {
-			layer.close(index); 
+			layer.close(index);
+			setTimeout(function () {
+			$(".refresh").find("i").removeClass("fa-spin");
+			},500);
 		},500); 
 	};
 	
@@ -253,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var params ={
 				startTime : startTime,
 				endTime : endTime,
-				pageSize: 9,
+				pageSize: 15,
 	            page:pageNum,
 	            ip:keyword,
 	            userType:keyword,
@@ -316,7 +325,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		}else{
                     			isEnd=false;
                     			pageNext=page.pageNum+1;
-                    			pagenav='<div style="margin:10px auto;width:10%;"><div class="loader-inner ball-pulse"><div style="background-color:rgb(231, 76, 60)"></div><div style="background-color:rgb(231, 76, 60)"></div><div style="background-color:rgb(231, 76, 60)"></div></div></div>';
+                    			pagenav='<div style="margin:10px auto;text-align:center;"><div class="loader-inner ball-pulse"><div></div><div ></div><div></div></div></div>';
                     		}
                     		$(".page").html(pagenav);
                     	}else{

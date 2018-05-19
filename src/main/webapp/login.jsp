@@ -42,7 +42,8 @@
                         <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 注：访问者无删除、修改操作</li>
                     </ul>
                      <div class=" tooltip-demo ">
-                   	 <strong>还没有账号？ <a href="#" style="color:#3c3a39" data-toggle="tooltip" data-placement="top" title="QQ:849673404">联系站长&raquo;</a><a href="index.jsp" style="color:#3c3a39;margin-left:15px;" >首页&raquo;</a></strong>
+                   	 <strong>还没有账号？ <a href="#" style="color:#3c3a39" data-toggle="tooltip" data-placement="top" title="QQ:849673404">联系站长&raquo;</a>
+                   	 <a href="${pageContext.request.contextPath}/index.jsp" style="color:#3c3a39;margin-left:15px;" >首页&raquo;</a></strong>
                     
                     </div>
                 </div>

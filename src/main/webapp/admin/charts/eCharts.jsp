@@ -746,7 +746,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		};
 	    
 		var initEchartsByBlogClickSort=function(idArray,counts){
-			console.log(idArray);
 	    	var lineChart = echarts.init(document.getElementById("echarts-line-blogClickSort"));
 	        var lineoption = {
 	            title : {
