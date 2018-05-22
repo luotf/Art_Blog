@@ -244,7 +244,7 @@
 						<li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
 					</ul>
 				</div>
-				<a href="login.html" class="roll-nav roll-right J_tabExit"><i
+				<a href="${pageContext.request.contextPath}/admin/logout" class="roll-nav roll-right J_tabExit"><i
 					class="fa fa fa-sign-out"></i> 退出</a>
 			</div>
 			<div class="row J_mainContent" id="content-main">
@@ -353,10 +353,7 @@
 
 			</div>
 		</div>
-		<!--右侧边栏结束-->
-		<!--mini聊天窗口开始-->
-
-		<!--mini聊天窗口结束-->
+		
 	</div>
 
 	<!-- 全局js -->

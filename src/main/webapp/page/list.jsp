@@ -46,12 +46,13 @@
 				
                 <p>
 			</div>
+			<a class="top" onclick="window.scrollTo(0,0)" style="z-index:-1;font-size: 22px;position: fixed;bottom: 5%;right: 30%;color:#fff"><span><i class="fa fa-arrow-circle-up"></i></span></a>
 		</div>
 		<div class="rightbox">
 			<div class="search1">
 				<form name="searchform" id="searchform" style="width:100%;height: 30px;">
-					<input name="keyword" id="keyword" class="input_text"
-						value="请输入关键字" style="color: rgb(153, 153, 153);"
+					<input name="keyword" id="keyword"  class="input_text"
+						value="请输入关键字" style="width:76%;color: rgb(153, 153, 153);"
 						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
 						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
 						type="text"> <input name="Submit" class="input_submit"
@@ -191,7 +192,7 @@
                       			keyword=data[i].keyword;
                       		}
                       	}
-                      	blogList+='<li style="animation-delay:0.'+i+'s" class="animated fadeInDown"><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span class="lm f_l"><a href="javascript:void(0);">'+data[i].type.typename+'</a></span><span style="float:left;padding:0;color: #38485a"><i class="fa fa-tags" style="color: #88827dcc;"></i>&nbsp;'+keyword+'</span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a class='+data[i].id+' href="javascript:void(0);"></a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
+                      	blogList+='<li style="animation-delay:0.'+i+'s" class="animated fadeInDown"><h3 class="blogtitle"><a href="find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span class="lm f_l"><a href="javascript:void(0);">'+data[i].type.typename+'</a></span><span style="float:left;padding:0;color: #38485a"><i class="fa fa-tags" style="color: #88827dcc;"></i>&nbsp;'+keyword+'</span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a class='+data[i].id+' href="javascript:void(0);">0</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
             		 };
             		
             		 var p={
@@ -399,7 +400,7 @@
                 }
                 // 初始化数据
                 $(".paihang").find(".click").html(clickBlog);
-                var ab='<img src="../images/wx.jpg">';
+                var ab='<img src="${pageContext.request.contextPath}/images/wx.jpg">';
             	$(".weixin").find("ul").html(ab);
             	
             },    

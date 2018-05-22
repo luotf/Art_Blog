@@ -54,6 +54,7 @@ public class BlogerController {
      * @return 
      */  
     @RequestMapping("/checkLogin")
+    @SystemLog(description = ConstantUtil.LOGIN_IN,userType=ConstantUtil.USERTYPE_ADMIN) 
     public String login(String username,String password,Model model) {  
         String result = "login"; 
         //取得 密码，并用MD5加密  
@@ -77,7 +78,8 @@ public class BlogerController {
      * 退出 
      * @return 
      */  
-    @RequestMapping(value = "/admin/logout")    
+    @RequestMapping(value = "/admin/logout")  
+    @SystemLog(description = ConstantUtil.LOGIN_OUT,userType=ConstantUtil.USERTYPE_ADMIN) 
     public String logout() {    
         Subject currentUser = SecurityUtils.getSubject();    
         String result = "login";    

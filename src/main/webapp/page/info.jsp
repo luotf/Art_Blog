@@ -26,10 +26,10 @@
 					<h2 class="intitle">
 						您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/">技术专栏</a>
 					</h2>
-
 					<c:choose>
 						<c:when test="${status== '0' || status== '500'}">
-			        		出错啦
+			        		<h1 style="font-size:110px;text-align:center;margin:20px;">404</h1>
+			        		<h3 style="text-align:center;" class="font-bold">抱歉，你所访问的页面不存在~</h3>
 			        	</c:when>
 						<c:otherwise>
 							<h3 class="news_title animated fadeIn">${blog.title}</h3>
@@ -72,7 +72,7 @@
 
 				</ul>
 			</div>
-			<div class="news_pl">
+			<div class="news_pl animated fadeIn">
 				<h2>文章评论</h2>
 				<div style="width:90%;margin: 0 auto;">
 				<div  id="cyEmoji" role="cylabs" data-use="emoji"

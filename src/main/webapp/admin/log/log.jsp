@@ -14,10 +14,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>H+ 后台主题UI框架 - 写信</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<title>日志记录</title>
+<meta name="keywords" content="">
 <meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
@@ -310,7 +310,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     			data[i].param='查看的博客ID为：<a class="text-info" title="点击查看对应博客"  data-toggle="modal" data-target="#myModal" onclick="selectBlogByVid('+data[i].param+')">'+data[i].param+'</a>';
                     		}
                     		var time=i*0.03;
-                    		logList+='<li style="animation-delay:'+time+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+timeStr+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
+                    		logList+='<li style="animation-delay:'+time+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+timeStr+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#" onclick="fastToSearch(\''+data[i].ip+'\')">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
                     	}
                     	 if(page.pageNum>=2){
                     		$(".logList").append(logList);
