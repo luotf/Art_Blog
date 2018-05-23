@@ -1,13 +1,16 @@
 package com.luotf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
-public class Blog {
-    /** 自增 */
+public class Blog implements Serializable{
+    
+	private static final long serialVersionUID = 1L;
+
+	/** 自增 */
     private Integer id;
 
     /** 博客标题 */
@@ -49,7 +52,7 @@ public class Blog {
     private Integer status;
 
     /** 类别 */
-    //@JsonBackReference
+   
     private BlogType type;
 
     /** 博客内容 */
@@ -393,6 +396,7 @@ public class Blog {
     public void setStatus(Integer status) {
         this.status = status;
     }
+    
 	public BlogType getType() {
 		return type;
 	}

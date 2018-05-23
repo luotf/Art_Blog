@@ -11,11 +11,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>H+ 后台主题UI框架 - Bootstrap Table</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<title>博客数据</title>
+<meta name="keywords" content="">
 <meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+	content="">
 <link rel="shortcut icon" href="favicon.ico">
+<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
@@ -139,6 +141,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>  
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 	<!-- 自定义js -->
@@ -691,6 +696,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	  var update='<a  class="J_menuItem btn btn-white" href="../blog/updateBlog.jsp?id='+data.blog.id+'">编辑</a>';
             	  $(".modal-footer").find(".update").html(update);
             	}
+            	 $('pre').each(function(i,block){
+         		    hljs.highlightBlock(block);
+         		});
             },    
 		    error:function(){
 		    	swal("查询错误", "请重新操作", "error");

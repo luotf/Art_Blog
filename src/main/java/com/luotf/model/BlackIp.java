@@ -1,11 +1,15 @@
 package com.luotf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class BlackIp {
-    private Integer id;
+public class BlackIp implements Serializable{
+    
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private Integer vid;
     

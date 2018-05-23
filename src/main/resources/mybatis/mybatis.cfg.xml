@@ -7,9 +7,14 @@
 
 	<settings>
 		<!-- 打开延迟加载的开关 -->
-		<setting name="lazyLoadingEnabled" value="true" />
-		<!-- 将积极加载改为消息加载即按需加载 -->
-		<setting name="aggressiveLazyLoading" value="false" />
+		<!-- <setting name="lazyLoadingEnabled" value="true" />
+		将积极加载改为消息加载即按需加载
+		<setting name="aggressiveLazyLoading" value="false" /> -->
+		<!-- 开启二级缓存，默认是false -->
+		<setting name="cacheEnabled" value="true"/>
+		<!-- 开启 sql调试 -->
+		<!--  <setting name="logImpl" value="STDOUT_LOGGING" /> -->
+		
 	</settings>
 	<!-- 为JAVA PO类起类别名 -->
 	<typeAliases>

@@ -34,6 +34,6 @@ nav ul li a { color: #fff }
 #mnav h2.open .navicon:before { margin-top: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); }
 #mnav h2.open .navicon:after { margin-top: 0; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
 #mnav h2.open .navicon:before, #mnav h2.open .navicon:after { content: ''; display: block; width: 30px; height: 5px; position: absolute; background: #FFFFFF; -webkit-transition-property: margin, -webkit-transform; transition-property: margin, -webkit-transform; transition-property: margin, transform; transition-property: margin, transform, -webkit-transform; -webkit-transition-duration: 300ms; transition-duration: 300ms; }
-article { width: 1000px; margin: auto; overflow: hidden }
+article { width: 74.2%; margin: auto; overflow: hidden }
 footer { width: 100%; background: #333; color: #a5a4a4; text-align: center; padding: 20px 0; }
 footer a { color: #a5a4a4 }

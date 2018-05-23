@@ -1,12 +1,15 @@
 package com.luotf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Visit {
-	
-    private Integer id;
+public class Visit implements Serializable{
+    
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
     
     private String ip;
     

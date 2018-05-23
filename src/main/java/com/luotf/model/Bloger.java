@@ -1,7 +1,12 @@
 package com.luotf.model;
 
-public class Bloger {
-    /**  */
+import java.io.Serializable;
+
+public class Bloger implements Serializable{
+   
+	private static final long serialVersionUID = 1L;
+
+	/**  */
     private Integer id;
 
     /** 用户名 */

@@ -341,7 +341,7 @@
 	                // 初始化数据
 	                time=time+0.1;
 	                $(".paihang").find(".click").html(clickBlog);
-	                var ab='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="../../images/wx.jpg">';
+	                var ab='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="${pageContext.request.contextPath}/images/wx.jpg">';
 	            	$(".weixin").find("ul").html(ab);
 	            	
 	            },    

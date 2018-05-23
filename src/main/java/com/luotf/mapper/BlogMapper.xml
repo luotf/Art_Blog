@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luotf.mapper.BlogMapper">
+  <cache /> 
   <resultMap id="BaseResultMap" type="com.luotf.model.Blog">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -17,19 +18,12 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <!-- 配置 多对一 关联关系 -->
     <association property="type" column="type_id" javaType="com.luotf.model.BlogType" select="com.luotf.mapper.BlogTypeMapper.selectBlogTypeById" >
-    
     </association>
- 
   </resultMap>
-  
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.luotf.model.Blog">
-    
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   
-  <!-- <resultMap id="dateMap" type="com.luotf.model.Blog">
-     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
-  </resultMap> -->
   <sql id="Base_Column_List">
     id, title, introduction, keyword, images, clickNum, commentNum, agreeNum, isTop, 
     isRecommend, updateTime, addTime, status, type_id
@@ -37,8 +31,6 @@
   <sql id="Blob_Column_List">
     content
   </sql>
-  
-
   
   <select id="selectBlogById" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
@@ -48,7 +40,6 @@
     from t_blog
     where id = #{id,jdbcType=INTEGER}
   </select>
-  
   
   <select id="selectBlogByTypeId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
@@ -470,5 +461,9 @@
       type_id = #{type.id,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+	<update id="refreshCache" flushCache="true">  
+            SELECT 1;  
+    </update> 
 
 </mapper>

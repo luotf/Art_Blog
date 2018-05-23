@@ -1,12 +1,16 @@
 package com.luotf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Log {
+public class Log implements Serializable{
     
-    private Integer id;
+    
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String userType;
     

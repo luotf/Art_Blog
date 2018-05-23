@@ -14,10 +14,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>H+ 后台主题UI框架 - 写信</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<title>日志记录</title>
+<meta name="keywords" content="">
 <meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
@@ -44,6 +44,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
+<style type="text/css">
+	.loader-inner > div{
+		background-color: #907f819e
+	}
+</style>
+
 </head>
 
 <body class="white-bg" style="opacity:0">
@@ -105,6 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="clearfix"></div>
 						</div>
 					</div>
+					<a class="top" onclick="window.scrollTo(0,0)" style="z-index:999;font-size: 22px;position: fixed;bottom: 5%;right: 0%;"><span><i class="fa fa-arrow-circle-up"></i></span></a>
 				</div>
 			</div>
 		
@@ -123,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                            </div>
 	                        </div>
 	                    </form>
-	                  <button onclick="reset()" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="刷新日志列表"><i class="fa fa-refresh"></i> 刷新</button>
+	                  <button onclick="reset()" class="btn btn-white btn-sm refresh" data-toggle="tooltip" data-placement="top" title="刷新日志列表"><i class="fa fa-refresh"></i> 刷新</button>
                     </div>
                     </div>
                     <div class="mail-box no-padding" style="margin-bottom:0px">
@@ -189,7 +196,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var pageNext=1;
 		var isEnd=false;
 		var globalCount=0;
-		
 		 $("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex
@@ -222,7 +228,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	setTimeout(function () {
        		selectLogByDate(pageNext,null,null);
 		},500); 
-       	
 	   }
    });
 	
@@ -236,9 +241,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#start').val("");
 		$('#end').val("");
 		$('.keyword').val("");
+		$(".refresh").find("i").addClass("fa-spin");
 		selectLogByDate(1,null, null);
 		setTimeout(function () {
-			layer.close(index); 
+			layer.close(index);
+			setTimeout(function () {
+			$(".refresh").find("i").removeClass("fa-spin");
+			},500);
 		},500); 
 	};
 	
@@ -253,7 +262,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var params ={
 				startTime : startTime,
 				endTime : endTime,
-				pageSize: 9,
+				pageSize: 15,
 	            page:pageNum,
 	            ip:keyword,
 	            userType:keyword,
@@ -301,7 +310,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     			data[i].param='查看的博客ID为：<a class="text-info" title="点击查看对应博客"  data-toggle="modal" data-target="#myModal" onclick="selectBlogByVid('+data[i].param+')">'+data[i].param+'</a>';
                     		}
                     		var time=i*0.03;
-                    		logList+='<li style="animation-delay:'+time+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+timeStr+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
+                    		logList+='<li style="animation-delay:'+time+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+timeStr+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#" onclick="fastToSearch(\''+data[i].ip+'\')">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
                     	}
                     	 if(page.pageNum>=2){
                     		$(".logList").append(logList);
@@ -316,7 +325,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		}else{
                     			isEnd=false;
                     			pageNext=page.pageNum+1;
-                    			pagenav='<div style="margin:10px auto;width:10%;"><div class="loader-inner ball-pulse"><div style="background-color:rgb(231, 76, 60)"></div><div style="background-color:rgb(231, 76, 60)"></div><div style="background-color:rgb(231, 76, 60)"></div></div></div>';
+                    			pagenav='<div style="margin:10px auto;text-align:center;"><div class="loader-inner ball-pulse"><div></div><div ></div><div></div></div></div>';
                     		}
                     		$(".page").html(pagenav);
                     	}else{

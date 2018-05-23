@@ -14,12 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>H+ 后台主题UI框架 - 写信</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<title>查询博客</title>
+<meta name="keywords" content="">
 <meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
+<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
@@ -141,7 +143,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script> 
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -276,7 +279,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	  } 
           	  	$(".newsview").find(".tags").append(keyword);
           	  	$(".newsview").find(".news_infos").html(data.blog.content);
-            	}, 
+          	    $('pre').each(function(i,block){
+       		    hljs.highlightBlock(block);
+       		  });	
+            }, 
 		    error:function(){
 		    	swal("初始化内容失败", "请重新操作", "error");
 		    }	

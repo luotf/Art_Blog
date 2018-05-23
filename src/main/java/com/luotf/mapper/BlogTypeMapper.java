@@ -19,6 +19,7 @@ public interface BlogTypeMapper {
 
     int updateBlogType(BlogType record);
     
+    int refreshCache();
     /**
  	 * 按不同条件组合 分页查询博客类别
  	 * @param map

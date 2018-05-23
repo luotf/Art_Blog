@@ -1,5 +1,6 @@
 package com.luotf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -8,9 +9,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
-public class BlogType {
-    /**  */
+public class BlogType implements Serializable{
+    
+	private static final long serialVersionUID = 1L;
+
+	/**  */
     private Integer id;
 
     /** 类别名称 */
@@ -22,21 +25,15 @@ public class BlogType {
     @DateTimeFormat(pattern="yyyy-MM-dd hh:mm:ss")
     private Date addTime;
     
-    /**该类别下的所有博客信息*/
-    @JsonBackReference
-    private List<Blog> blogs;
 
-    
-   
-
-	public BlogType(Integer id, String typename, Integer num, Date addTime,
-			List<Blog> blogs) {
+	public BlogType(Integer id, String typename, Integer num, Date addTime
+			) {
 		super();
 		this.id = id;
 		this.typename = typename;
 		this.num = num;
 		this.addTime = addTime;
-		this.blogs = blogs;
+		
 	}
 
 	public Date getAddTime() {
@@ -47,14 +44,7 @@ public class BlogType {
 		this.addTime = addTime;
 	}
 
-	public List<Blog> getBlogs() {
-		return blogs;
-	}
-
-	public void setBlogs(List<Blog> blogs) {
-		this.blogs = blogs;
-	}
-
+	
 	public BlogType() {
 		// TODO Auto-generated constructor stub
 	}
@@ -135,7 +125,7 @@ public class BlogType {
 	@Override
 	public String toString() {
 		return "BlogType [id=" + id + ", typename=" + typename + ", num=" + num
-				+ ", addTime=" + addTime + ", blogs=" + blogs + "]";
+				+ ", addTime=" + addTime + "]";
 	}
 
 	

@@ -14,12 +14,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>H+ 后台主题UI框架 - 写信</title>
-<meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+<title>更新博客</title>
+<meta name="keywords" content="">
 <meta name="description"
-	content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
+<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
@@ -119,14 +121,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<label class="col-sm-2 control-label">标题：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="title" required="" aria-required="true"
-											name="title" value="">
+											name="title" value="" maxlength="30">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">摘要：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="introduction" required="" aria-required="true"
-											name="introduction" value="">
+											name="introduction" value="" maxlength="100">
 									</div>
 								</div>
 								<div class="form-group">
@@ -142,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<label class="col-sm-2 control-label">关键字：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="keyword" required="" aria-required="true"
-											name="keyword" value=""> <p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
+											name="keyword" value="" maxlength="30"> <p class="help-block m-b-none"><i class="fa fa-info-circle"></i> 多个关键字之间用“;”分隔</p>
 									</div>
 								</div>
 							
@@ -246,6 +248,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script> 
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 
@@ -496,6 +500,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      	  $(".newsview").find(".news_infos").html($("#summernote").code());
 	      	  var update='<a  class="btn btn-white" href="#" onclick="updateBlog(1)">发表</a>';
 	      	  $(".modal-footer").find(".update").html(update);
+	      	  $('pre').each(function(i,block){
+     		    hljs.highlightBlock(block);
+     		  });
 			}
 		
 		

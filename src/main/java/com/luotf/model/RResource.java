@@ -1,11 +1,15 @@
 package com.luotf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class RResource {
-    private Integer id;
+public class RResource implements Serializable{
+   
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
 
     private String title;
 

@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.luotf.mapper.BlogMapper;
 import com.luotf.mapper.BlogTypeMapper;
-import com.luotf.model.Blog;
 import com.luotf.model.BlogType;
 import com.luotf.service.BlogTypeService;
 
@@ -15,6 +15,8 @@ import com.luotf.service.BlogTypeService;
 public class BlogTypeServiceImpl implements BlogTypeService {
 	@Autowired
 	private BlogTypeMapper blogTypeMapper;
+	@Autowired
+	private BlogMapper blogMapper;
 	
 	/**
  	 * 按不同条件组合 分页查询博客类别
@@ -40,8 +42,10 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 
 	@Override
 	public int updateBlogTypeSelective(BlogType record) {
-		// TODO Auto-generated method stub
-		return blogTypeMapper.updateBlogTypeSelective(record);
+		if(blogTypeMapper.updateBlogTypeSelective(record)!=0){
+			return blogMapper.refreshCache();
+		}
+		return 0;
 	}
 
 	@Override
@@ -52,10 +56,9 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 
 	@Override
 	public int deleteBlogTypeById(Integer id) {
-		// TODO Auto-generated method stub
-		return blogTypeMapper.deleteBlogTypeById(id);
+		if(blogTypeMapper.deleteBlogTypeById(id)!=0){
+			return blogMapper.refreshCache();
+		}
+		return 0;
 	}
-
-	
-
 }

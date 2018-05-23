@@ -8,6 +8,8 @@
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css"
@@ -24,10 +26,10 @@
 					<h2 class="intitle">
 						您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/">技术专栏</a>
 					</h2>
-
 					<c:choose>
 						<c:when test="${status== '0' || status== '500'}">
-			        		出错啦
+			        		<h1 style="font-size:110px;text-align:center;margin:20px;">404</h1>
+			        		<h3 style="text-align:center;" class="font-bold">抱歉，你所访问的页面不存在~</h3>
 			        	</c:when>
 						<c:otherwise>
 							<h3 class="news_title animated fadeIn">${blog.title}</h3>
@@ -70,7 +72,7 @@
 
 				</ul>
 			</div>
-			<div class="news_pl">
+			<div class="news_pl animated fadeIn">
 				<h2>文章评论</h2>
 				<div style="width:90%;margin: 0 auto;">
 				<div  id="cyEmoji" role="cylabs" data-use="emoji"
@@ -125,6 +127,8 @@
 
 	<%@ include file="fonter.jsp" %>
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script> 
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 	<script type="text/javascript"> 

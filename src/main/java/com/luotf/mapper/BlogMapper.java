@@ -10,6 +10,8 @@ public interface BlogMapper {
     int deleteBlogById(Integer id);
 
     int insertBlog(Blog record);
+    
+    int refreshCache();
 
     int insertBlogSelective(Blog record);
 

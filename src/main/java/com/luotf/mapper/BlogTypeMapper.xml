@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luotf.mapper.BlogTypeMapper">
+  <cache /> 
   <resultMap id="BaseResultMap" type="com.luotf.model.BlogType">
-   
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="typeName" jdbcType="VARCHAR" property="typename" />
     <result column="num" jdbcType="INTEGER" property="num" />
     <result column="addTime" jdbcType="TIMESTAMP" property="addTime" />
    
-    <!-- 配置 一对多 关联关系 -->
-    <collection property="blogs" javaType="ArrayList" column="id"
-    ofType="com.luotf.model.Blog" select="com.luotf.mapper.BlogMapper.selectBlogByTypeId" fetchType="lazy">
-    
-    </collection>
-    
   </resultMap>
   <sql id="Base_Column_List">
     id, typeName, num,addTime
@@ -121,4 +115,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <update id="refreshCache" flushCache="true">  
+            SELECT 1;  
+    </update>
 </mapper>
