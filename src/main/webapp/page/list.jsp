@@ -141,7 +141,7 @@
 		var params="";
 		var prarm="";
 		if(type_id=="none"){
-			var keyword=$("#keyword").val();
+			var keyword=$("#keyword").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 			if(keyword=="请输入关键字"){
 				keyword="";
 				prarm='none'
@@ -214,7 +214,7 @@
 	        			    }	
 	        	        });
             	}else{
-            		blogList="无查询结果";
+            		blogList="<h1 style='font-size:110px;text-align:center;margin:20px;'>404</h1><h3 style='text-align:center;' class='font-bold'>抱歉，你所访问的资源不存在~</h3><h4 style='margin-bottom:110px;margin-top:55px;text-align:center;'><a style='background-color: #676a6c;padding: 5px 10px;color: #fff;border-radius: 10px;' href='${pageContext.request.contextPath}/index.jsp'>去首页</a></h4>";
             	}
             	if(page.pageNum>=2){
             		$(".newblogs").find("ul").append(blogList);

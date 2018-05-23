@@ -30,6 +30,7 @@
 						<c:when test="${status== '0' || status== '500'}">
 			        		<h1 style="font-size:110px;text-align:center;margin:20px;">404</h1>
 			        		<h3 style="text-align:center;" class="font-bold">抱歉，你所访问的页面不存在~</h3>
+			        		<h4 style="margin-top:55px;text-align:center;"><a style="background-color: #676a6c;padding: 5px 10px;color: #fff;border-radius: 10px;"href="${pageContext.request.contextPath}/index.jsp">去首页</a></h4>
 			        	</c:when>
 						<c:otherwise>
 							<h3 class="news_title animated fadeIn">${blog.title}</h3>
@@ -341,7 +342,7 @@
 	                // 初始化数据
 	                time=time+0.1;
 	                $(".paihang").find(".click").html(clickBlog);
-	                var ab='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="../../images/wx.jpg">';
+	                var ab='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="${pageContext.request.contextPath}/images/wx.jpg">';
 	            	$(".weixin").find("ul").html(ab);
 	            	
 	            },    

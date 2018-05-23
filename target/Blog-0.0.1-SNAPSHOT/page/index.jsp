@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="baidu-site-verification" content="Eg9tVrHSEK" />
 <title>首页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />

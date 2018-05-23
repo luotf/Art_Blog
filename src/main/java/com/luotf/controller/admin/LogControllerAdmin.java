@@ -108,8 +108,8 @@ public class LogControllerAdmin {
 	  */
 	 @RequestMapping(value = "/updateLog",method = RequestMethod.POST)
 	 @ResponseBody
-	 public Map updateVisit(Log log) throws Exception{
-		 Map map=new HashMap();
+	 public Map<String,Object>  updateVisit(Log log) throws Exception{
+		 Map<String,Object>  map=new HashMap<String,Object> ();
 		 if(logService.updateByPrimaryKeySelective(log)!=0){
 			 map.put("status", 200);
 		 }else{

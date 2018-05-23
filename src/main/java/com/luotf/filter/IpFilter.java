@@ -49,7 +49,7 @@ public class IpFilter implements Filter {
 				arg2.doFilter(request, response);
 	            return;
 			}else{
-				request.getRequestDispatcher("/error/error.jsp").forward(request, response);
+				request.getRequestDispatcher("/error/blackIp.jsp").forward(request, response);
 			}
 	}
 	@Override

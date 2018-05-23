@@ -20,6 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
+<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
@@ -180,6 +182,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<!-- 全局js -->
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script> 
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 	<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
@@ -432,6 +436,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	  $(".newsview").find(".tags").append(keyword);
 	            	  $(".newsview").find(".news_infos").html(data.blog.content);
 	            	}
+	            	$('pre').each(function(i,block){
+	         		    hljs.highlightBlock(block);
+	         		});
 	            },    
 			    error:function(){
 			    	swal("查询错误", "请重新操作", "error");

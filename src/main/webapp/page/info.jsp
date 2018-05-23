@@ -30,6 +30,7 @@
 						<c:when test="${status== '0' || status== '500'}">
 			        		<h1 style="font-size:110px;text-align:center;margin:20px;">404</h1>
 			        		<h3 style="text-align:center;" class="font-bold">抱歉，你所访问的页面不存在~</h3>
+			        		<h4 style="margin-top:55px;text-align:center;"><a style="background-color: #676a6c;padding: 5px 10px;color: #fff;border-radius: 10px;"href="${pageContext.request.contextPath}/index.jsp">去首页</a></h4>
 			        	</c:when>
 						<c:otherwise>
 							<h3 class="news_title animated fadeIn">${blog.title}</h3>
@@ -72,7 +73,7 @@
 
 				</ul>
 			</div>
-			<div class="news_pl animated fadeIn">
+			<div class="news_pl ">
 				<h2>文章评论</h2>
 				<div style="width:90%;margin: 0 auto;">
 				<div  id="cyEmoji" role="cylabs" data-use="emoji"

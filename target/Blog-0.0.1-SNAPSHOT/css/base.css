@@ -12,7 +12,7 @@ a { text-decoration: none; color: #555 }
 .f_r { float: right }
 /* nav */
 nav { width: 100%; background: #333; color: #999; line-height: 32px; }
-nav ul { width: 1000px; margin: auto; padding: 10px 0; text-align: right; background: url(../images/logo.png) no-repeat left 10px center }
+nav ul { width: 1000px; margin: auto; padding: 10px 0; text-align: right; background: url(../images/logo2.png) no-repeat left 10px center }
 nav ul li { display: inline; font-size: 16px; padding: 10px 20px }
 nav ul li a { color: #fff }
 .m20 { margin: 20px 0 }

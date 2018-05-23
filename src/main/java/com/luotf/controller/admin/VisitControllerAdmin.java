@@ -131,7 +131,7 @@ public class VisitControllerAdmin {
 		 //分页显示：第1页开始，每页显示9条记录
 		 PageHelper.startPage(page, pageSize);
 		 List<?> visitList=visitService.selectLikeVisitListGroupByIp(map);
-		PageInfo pageInfo=new PageInfo(visitList);
+		 PageInfo pageInfo=new PageInfo(visitList);
 		 Map<String, Object> returnMap=new HashMap<String, Object>();
 		 if(visitList.size()>0){
 			 returnMap.put("status", 200);

@@ -121,14 +121,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<label class="col-sm-2 control-label">标题：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="title" required="" aria-required="true"
-											name="title" value="" maxlength="30">
+											name="title" value="" maxlength="50">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">摘要：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="introduction" required="" aria-required="true"
-											name="introduction" value="" maxlength="100">
+											name="introduction" value="" maxlength="150">
 									</div>
 								</div>
 								<div class="form-group">

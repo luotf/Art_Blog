@@ -124,14 +124,14 @@
 									<label class="col-sm-2 control-label">标题：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="title"
-											name="title" value="" required="" maxlength="30" aria-required="true">
+											name="title" value="" required="" maxlength="50" aria-required="true">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">摘要：</label>
 									<div class="col-sm-10">
 										<input type="text" class="form-control" id="introduction"
-											name="introduction" value="" required="" maxlength="100" aria-required="true">
+											name="introduction" value="" required="" maxlength="150" aria-required="true">
 									</div>
 								</div>
 								<div class="form-group">

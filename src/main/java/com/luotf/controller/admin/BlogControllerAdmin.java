@@ -134,7 +134,6 @@ public class BlogControllerAdmin {
 	 @SystemLog(description = ConstantUtil.BLOG_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map<String, Object> addBlog(String prarm,Blog blog) throws Exception{
 		 Map<String, Object> map=new HashMap<String, Object>();
-		 
 		 //将中文的分号转换成英文的分号
 		 if(blog.getKeyword()!=null&&blog.getKeyword()!=""){
 			 blog.setKeyword(subStringUtil.subKeyword(blog.getKeyword()));

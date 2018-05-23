@@ -187,15 +187,10 @@
 <body class="gray-bg">
 	<div class="middle-box text-center ">
 		<h1>404</h1>
-		<h3 class="font-bold">抱歉，你的Ip地址已被剔除~</h3>
+		<h3 class="font-bold">抱歉，访问的网页不在了~</h3>
 		<div class="error-desc">
-			申请访问~请填写理由并提交
-			<form class="form-inline m-t" role="form">
-				<div class="form-group">
-					<input type="email" class="form-control" placeholder="请输入您的理由 …">
-				</div>
-				<button type="submit" class="btn btn-primary">提交</button>
-			</form>
+			您还可以选择：
+				<button type="submit" onclick="window.location.href='${pageContext.request.contextPath}/index.jsp'" class="btn btn-primary">去首页</button>
 		</div>
 	</div>
 

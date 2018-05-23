@@ -2,11 +2,11 @@
 .leftbox { width: 70%; float: left; overflow: hidden }
 .rightbox { width: 28%; float: right; overflow: hidden }
 /*图片展示*/
-.pics { margin: 10px 0; overflow: hidden }
-.pics ul li { width: 320px; height: 155px; float: left; margin: 10px auto; display: block; overflow: hidden; border-radius: 5px; position: relative; }
+.pics { margin: 1% 0; overflow: hidden }
+.pics ul li { width: 31.9%; height: 155px; float: left; margin: 10px auto; display: block; overflow: hidden; border-radius: 5px; position: relative; }
 .pics ul li img { margin: auto; height: 100%; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
 .pics ul li:nth-child(1) { float: left }
-.pics ul li:nth-child(2) { margin: 10px 20px }
+.pics ul li:nth-child(2) { margin: 10px 2% }
 .pics ul li:nth-child(3) { float: right }
 .pics ul li span { width: 100%; display: block; position: absolute; bottom: 10px; background: #000; line-height: 30px; height: 30px; overflow: hidden; text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px; color: #ccc; padding-left: 10px }
 .pics ul li:hover img { transform: scale(1.1) }
@@ -52,8 +52,8 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
 /*关于我*/
 .aboutme { background: #FFF; border-radius: 10px; overflow: hidden }
 .ab_title { text-align: center; position: relative; margin: 20px; width: 1005 }
-.ab_title:before { content: ""; width: 70px; height: 2px; background: #000; position: absolute; left: 0; bottom: 8px }
-.ab_title:after { content: ""; width: 70px; height: 2px; background: #000; position: absolute; right: 0; bottom: 8px }
+.ab_title:before { content: ""; width: 30%; height: 2px; background: #000; position: absolute; left: 0; bottom: 8px }
+.ab_title:after { content: ""; width: 30%; height: 2px; background: #000; position: absolute; right: 0; bottom: 8px }
 .ab_con { line-height: 30px; padding: 10px; }
 .ab_con p { background: #f6f6f6; margin: 5px 0; padding-left: 10px; border-radius: 5px; text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px; }
 .avatar { width: 158px; height: 100px; overflow: hidden;  margin: auto; }
