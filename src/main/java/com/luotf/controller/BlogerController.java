@@ -57,7 +57,6 @@ public class BlogerController {
     @SystemLog(description = ConstantUtil.LOGIN_IN,userType=ConstantUtil.USERTYPE_ADMIN) 
     public String login(String username,String password,Model model) {  
         String result = ""; 
-        System.out.println(username+"  "+password);
         //取得 密码，并用MD5加密  
         password = CipherUtil.generatePassword(password);  
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);  
@@ -70,6 +69,7 @@ public class BlogerController {
             result = "admin/index";//验证成功  
         } catch (Exception e) {  
             result = "login";//验证失败  
+            model.addAttribute("message", "用户名或密码错误");
         }  
         return result;  
     }  

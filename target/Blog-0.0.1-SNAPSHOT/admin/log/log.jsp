@@ -310,11 +310,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     		if(data[i].userType=="管理员"){
                     			data[i].userType="管理员"+'&nbsp;&nbsp;&nbsp;&nbsp;';
                     		}
+                    		var param=data[i].param;
+                    		var p=data[i].param;
                     		if(data[i].description=="查看博客"){
-                    			data[i].param='查看的博客ID为：<a class="text-info" title="点击查看对应博客"  data-toggle="modal" data-target="#myModal" onclick="selectBlogByVid('+data[i].param+')">'+data[i].param+'</a>';
+                    			data[i].description='查看的博客ID为：<a class="text-info" title="点击查看对应博客"  data-toggle="modal" data-target="#myModal" onclick="selectBlogByVid('+data[i].param+')">'+data[i].param+'</a>';
+                    			param="";
+                    		}else{
+	                    		if(param.length>70){
+	                    			param=param.substring(0,5)+"...";
+	                    		}
                     		}
                     		var time=i*0.03;
-                    		logList+='<li style="animation-delay:'+time+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+timeStr+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#" onclick="fastToSearch(\''+data[i].ip+'\')">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong>：'+data[i].param+'<span title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
+                    		logList+='<li style="animation-delay:'+time+'s" class="list-group-item  animated fadeInDown"><p style="margin: 4px 0px;">'+timeStr+'<strong>&nbsp;&nbsp;<i class="fa fa-user"> '+data[i].userType+'</i>&nbsp;</strong><a class="text-info" href="#" onclick="fastToSearch(\''+data[i].ip+'\')">@'+data[i].ip+'</a>  &nbsp;<strong><small class="text-muted"><i class="fa fa-tag"> </i> </small>'+data[i].description+'</strong><span title=\''+data[i].param+'\'>：'+param+'</span><span  title="'+Format(data[i].addTime,"yyyy/MM/dd hh:mm:ss")+'" class="pull-right"><i class="fa fa-clock-o"> '+Format(data[i].addTime,"MM/dd  hh:mm:ss")+'</i></span></p></li>'
                     	}
                     	 if(page.pageNum>=2){
                     		$(".logList").append(logList);

@@ -71,7 +71,7 @@
 						class="form-control pword m-b" placeholder="密码" /> <a
 						style="color:#101010de" href="javascript:void(0);">忘记密码了？</a>
 						 <span class="msg" style="color:#6722228a;margin-left:20px;"
-						href="javascript:void(0);"></span>
+						href="javascript:void(0);">${message }</span>
 					<button type="button" onclick="login()" class="btn btn-success btn-block">登录</button>
 				</form>
 			</div>

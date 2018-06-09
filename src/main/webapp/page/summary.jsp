@@ -28,8 +28,8 @@
 	}
 </style>
 </head>
-<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
-	<%@ include file="top.jsp"%>
+<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
+	 <%@ include file="top.jsp"%> 
 	<article>
 		<div class="leftbox">
 			<div class="newblogs ">
@@ -46,13 +46,13 @@
 				
                 <p>
 			</div>
-	<a class="top" onclick="window.scrollTo(0,0)" style="z-index:-1;font-size: 22px;position: fixed;bottom: 5%;right: 30%;color:#fff"><span><i class="fa fa-arrow-circle-up"></i></span></a>
+			<a class="top animated fadeIn" onclick="window.scrollTo(0,0)" style="display:none;z-index:0;font-size: 24px;position: fixed;bottom: 5%;right: 30%;color:#fff"><span style="padding: 6.5px 12px;background-color: #fff;color: #999;"><i class="fa fa-angle-up"></i></span></a>
 		</div>
 		<div class="rightbox">
 			<div class="search1">
 				<form name="searchform" id="searchform" style="width:100%;height: 30px;">
-					<input name="keyword" id="keyword" class="input_text"
-						value="请输入关键字" style="width:76%;color: rgb(153, 153, 153);"
+					<input name="keyword" id="keyword"  class="input_text"
+						value="请输入关键字" style="width:70%;color: rgb(153, 153, 153);"
 						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
 						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
 						type="text"> <input name="Submit" class="input_submit"
@@ -75,7 +75,7 @@
 				</ul>
 				<div class="ad"></div>
 			</div>
-			<div class="paihang ">
+			<div class="dj paihang animated fadeInUp" style="display:none;animation-delay:0.3s">
 				<h2 class="ab_title">
 					<a href="javascript:void(0)">点击排行</a>
 				</h2>
@@ -85,7 +85,7 @@
 
 			</div>
 
-			<div class="weixin">
+			<div class="weixin animated fadeInUp" style="display:none;animation-delay:0.3s">
 				<h2 class="ab_title">公众号</h2>
 				<ul class="animated fadeInDown">
 
@@ -100,7 +100,15 @@
 		src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytzg9rLH"></script>
 	<script>
 	var pageNext=1;
+	var count=1;
 	var isEnd=false;
+	for(var i=1;i<=7;i++){
+		if(i==3){
+			$(".3 a").addClass("nav_color");
+		}else{
+			$('.'+i+' a').removeClass("nav_color");
+		}
+	}
 	var width = window.innerWidth || document.documentElement.clientWidth; 
 	if (width < 960) {
 		var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initBlog()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
@@ -111,6 +119,20 @@
 	        if(isEnd == true){
 	           return;
 	       } 
+	        if($(document).scrollTop()>560&&count==1){
+				$(".dj").css("display","block");
+				initBlogByClick();
+				count++;
+		    }
+	        if($(document).scrollTop()>960&&count==2){
+				$(".weixin").css("display","block");
+				count++;
+		    }
+	    	if($(document).scrollTop()>1000){
+	    		$(".top").css("display","block");
+	    	}else{
+	    		$(".top").css("display","none");
+	    	}
 	       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
 	       	isEnd=true;
 	       	$('.page').css('display','block');
@@ -132,7 +154,6 @@
 		//初始化技术专栏的信息
 		initBlogListByPage(pageNext,"none",null);
 		initBlogByLike();
-		initBlogByClick();
 	});
 	
 	var initBlogListByPage=function(pageNum,type_id,typename){
@@ -438,7 +459,6 @@
 	}   	
 </script>
 <script type="text/javascript">
-
 window.onload = function (){
 	var oH2 = document.getElementsByTagName("h2")[0];
 	var oUl = document.getElementsByTagName("ul")[0];

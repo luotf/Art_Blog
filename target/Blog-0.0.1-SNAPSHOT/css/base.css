@@ -11,9 +11,12 @@ a { text-decoration: none; color: #555 }
 .f_l { float: left }
 .f_r { float: right }
 /* nav */
-nav { width: 100%; background: #333; color: #999; line-height: 32px; }
-nav ul { width: 1000px; margin: auto; padding: 10px 0; text-align: right; background: url(../images/logo2.png) no-repeat left 10px center }
-nav ul li { display: inline; font-size: 16px; padding: 10px 20px }
+nav { z-index:999;position:fixed;top:10px;width: 100%; background: #444; color: #999; line-height: 53px; height: 53px;}
+nav ul { width: 1000px; margin: auto;  text-align: right;  }
+nav ul li { display: inline-block; font-size: 15px; padding: 0px 15px;height: 53px;line-height: 53px;}
+
+nav ul li a:hover{ display: inline-block;color:#f8ac59;transition: 0.3s;}
+
 nav ul li a { color: #fff }
 .m20 { margin: 20px 0 }
 /*phone  nav */
@@ -21,7 +24,7 @@ nav ul li a { color: #fff }
 #mnav h2 { text-align: right; color: #fff; font-size: 18px; height: 52px; line-height: 52px; padding-left: 10px; width: 100% }
 #mnav h2.open { text-align: right; background: rgba(1,1,1,0.8); width: 100%; }
 #mnav ul { display: none; background: rgba(1,1,1,0.8); width: 100%; padding-bottom: 40px }
-#mnav li { height: 40px; line-height: 40px; vertical-align: top; font-size: 16px; display: block; overflow: hidden; text-align: center }
+#mnav li { height: 40px; line-height: 40px; vertical-align: top; font-size: 15px; display: block; overflow: hidden; text-align: center }
 #mnav li a { color: #fff }
 /* Ä¬ÈÏ²Ëµ¥À¸ */
 #mnav h2 .navicon { margin-right: 15px; }
@@ -34,6 +37,6 @@ nav ul li a { color: #fff }
 #mnav h2.open .navicon:before { margin-top: 0; -webkit-transform: rotate(45deg); transform: rotate(45deg); }
 #mnav h2.open .navicon:after { margin-top: 0; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
 #mnav h2.open .navicon:before, #mnav h2.open .navicon:after { content: ''; display: block; width: 30px; height: 5px; position: absolute; background: #FFFFFF; -webkit-transition-property: margin, -webkit-transform; transition-property: margin, -webkit-transform; transition-property: margin, transform; transition-property: margin, transform, -webkit-transform; -webkit-transition-duration: 300ms; transition-duration: 300ms; }
-article { width: 74.2%; margin: auto; overflow: hidden }
+article { width: 74.2%; margin:70px auto; overflow: hidden }
 footer { width: 100%; background: #333; color: #a5a4a4; text-align: center; padding: 20px 0; }
 footer a { color: #a5a4a4 }

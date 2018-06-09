@@ -13,7 +13,7 @@
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 
 </head>
-<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
+<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
 <%@ include file="top.jsp" %>
 <article>
   <div class="leftbox">
@@ -59,6 +59,13 @@
 </article>
 <%@ include file="fonter.jsp" %>
 <script>
+for(var i=1;i<=7;i++){
+	if(i==6){
+		$(".6 a").addClass("nav_color");
+	}else{
+		$('.'+i+' a').removeClass("nav_color");
+	}
+}
 window.onload = function ()
 {
 	var oH2 = document.getElementsByTagName("h2")[0];

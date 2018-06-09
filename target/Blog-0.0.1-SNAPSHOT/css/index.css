@@ -2,11 +2,11 @@
 .leftbox { width: 70%; float: left; overflow: hidden }
 .rightbox { width: 28%; float: right; overflow: hidden }
 /*图片展示*/
-.pics { margin: 10px 0; overflow: hidden }
-.pics ul li { width: 320px; height: 155px; float: left; margin: 10px auto; display: block; overflow: hidden; border-radius: 5px; position: relative; }
+.pics { margin: 1% 0; overflow: hidden }
+.pics ul li { width: 31.9%; height: 155px; float: left; margin: 10px auto; display: block; overflow: hidden; border-radius: 5px; position: relative; }
 .pics ul li img { margin: auto; height: 100%; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
 .pics ul li:nth-child(1) { float: left }
-.pics ul li:nth-child(2) { margin: 10px 20px }
+.pics ul li:nth-child(2) { margin: 10px 2% }
 .pics ul li:nth-child(3) { float: right }
 .pics ul li span { width: 100%; display: block; position: absolute; bottom: 10px; background: #000; line-height: 30px; height: 30px; overflow: hidden; text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px; color: #ccc; padding-left: 10px }
 .pics ul li:hover img { transform: scale(1.1) }
@@ -24,7 +24,7 @@
 .tuijian li:nth-child(4) { border-left: 0; border-bottom: 0; }
 .tuijian li:nth-child(5) { border-bottom: 0; }
 .tuijian li:nth-child(6) { border-bottom: 0; }
-.tpic { width: 100%; height: 100px; overflow: hidden; border-radius: 10px; background: #CCC }
+.tpic { width: 100%; height: 100%; overflow: hidden; border-radius: 10px; background: #CCC }
 .tuijian li img { margin: auto; width: 100%; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
 .tuijian li b { display: block; width: 100%; overflow: hidden; height: 30px; line-height: 30px; margin: 10px 0; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
 .tuijian li span { color: #999; height: 76px; display: block; overflow: hidden; }
@@ -52,8 +52,8 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
 /*关于我*/
 .aboutme { background: #FFF; border-radius: 10px; overflow: hidden }
 .ab_title { text-align: center; position: relative; margin: 20px; width: 1005 }
-.ab_title:before { content: ""; width: 70px; height: 2px; background: #000; position: absolute; left: 0; bottom: 8px }
-.ab_title:after { content: ""; width: 70px; height: 2px; background: #000; position: absolute; right: 0; bottom: 8px }
+.ab_title:before { content: ""; width: 30%; height: 2px; background: #000; position: absolute; left: 0; bottom: 8px }
+.ab_title:after { content: ""; width: 30%; height: 2px; background: #000; position: absolute; right: 0; bottom: 8px }
 .ab_con { line-height: 30px; padding: 10px; }
 .ab_con p { background: #f6f6f6; margin: 5px 0; padding-left: 10px; border-radius: 5px; text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px; }
 .avatar { width: 158px; height: 100px; overflow: hidden;  margin: auto; }
@@ -131,7 +131,9 @@ line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 
 header, article, footer { width: 100%; margin: auto; overflow: hidden }
 nav ul { width: 100% }
 nav ul li { display: none; }
-#mnav { display: block; z-index: 99999; background: url(../images/logo.png) no-repeat left 10px top 13px #333; }
+#mnav { display: block; z-index: 99999; 
+/*background: url(../images/logo.png) no-repeat left 10px top 13px #333;*/
+ }
 .pics { margin-top: 40px }
 .pics ul li { width: 94%; margin-bottom: 10px; margin-left: 10px; background: #fff }
 .pics ul li:nth-child(1) { float: none }

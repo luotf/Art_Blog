@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+<link href="${pageContext.request.contextPath}/css/github-gist.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -44,6 +44,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
+<style>
+.news_infos span{
+ 	font-size:13px;
+ }
+
+</style>
+
 </head>
 
 <body class="white-bg" style="opacity:0">

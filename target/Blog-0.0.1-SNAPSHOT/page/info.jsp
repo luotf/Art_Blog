@@ -8,16 +8,65 @@
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+<link href="${pageContext.request.contextPath}/css/github-gist.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/index.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/font-awesome.css"
+	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
+<style>
+.fixed-menu-list {
+    display: none;
+    padding: 10px;
+    width: 15%;
+    position: fixed;
+    right: 17%;
+    top: 16%;
+    bottom:200px;
+    border: 1px solid #eee;
+    font-size: 24px;
+    z-index: 500;
+    overflow-y: auto!important;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.sidebar-nav-toc {
+    margin: 0 0 5px;
+    padding: 0 5px;
+    color: #fc6423;
+    border-bottom: 1px solid transparent;
+    font-size: 18px;
+    text-align: center;
+}
+.post-toc {
+    overflow: auto;
+}
+.post-toc ol {
+    margin: 0;
+    padding: 0 2px 5px 10px;
+    text-align: left;
+    list-style: none;
+    font-size: 14px;
+}
+
+.post-toc .nav-item {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.8;
+}
+.post-toc ol a {
+    transition-property: all;
+    color: #999;
+    border-bottom-color: #555;
+}
+</style>
 </head>
-<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
+<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
 	<%@ include file="top.jsp" %>
 	<article>
 		<div class="leftbox">
@@ -73,7 +122,7 @@
 
 				</ul>
 			</div>
-			<div class="news_pl animated fadeIn">
+			<div class="news_pl ">
 				<h2>文章评论</h2>
 				<div style="width:90%;margin: 0 auto;">
 				<div  id="cyEmoji" role="cylabs" data-use="emoji"
@@ -81,8 +130,8 @@
 				<!--PC和WAP自适应版-->
 				<div  id="SOHUCS" sid="${blog.id }"></div>
 				</div>
-
 			</div>
+			<a class="top animated fadeIn" onclick="window.scrollTo(0,0)" style="display:none;z-index:0;font-size: 24px;position: fixed;bottom: 7%;right: 30%;color:#fff"><span style="padding: 6.5px 12px;background-color: #fff;color: #999;"><i class="fa fa-angle-up"></i></span></a>
 		</div>
 		<div class="rightbox  ">
 			
@@ -93,9 +142,8 @@
 				<ul class="like ">
 
 				</ul>
-				<div class="ad "></div>
 			</div>
-			<div class="paihang ">
+			<div class="dj paihang animated fadeInUp" style="display:none;animation-delay:0.3s">
 				<h2 class="ab_title">
 					<a href="javascript:void(0)">点击排行</a>
 				</h2>
@@ -105,7 +153,7 @@
 
 			</div>
 
-			<div class="paihang">
+			<div class="pl paihang animated fadeInUp" style="display:none">
 				<h2 class="ab_title">
 					<a href="#">评论排行</a>
 				</h2>
@@ -116,13 +164,17 @@
 				<script type="text/javascript" charset="utf-8"
 					src="http://changyan.sohu.com/js/changyan.labs.https.js?appid=cytzg9rLH"></script>
 			</div>
-
-			<div class="weixin">
-				<h2 class="ab_title">公众号</h2>
-				<ul class="animated fadeIn">
-
-				</ul>
+			
+			<div class="fixed-menu-list animated fadeInUp">
+			<div class="sidebar-nav-toc">文章目录</div>
+			<div class="post-toc">
+				<div class="post-toc-content">
+					<ol class="nav1">
+					
+					</ol>
+				</div>
 			</div>
+		</div>
 		</div>
 	</article>
 
@@ -133,6 +185,16 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 	<script type="text/javascript"> 
+			$(function(){  
+		        //查找h1-h6  
+		        var i=1;
+		        var navToc="";
+		        $(".news_infos :header").each(function(){
+		        	navToc+='<li class="nav-item nav-level-4"><a class="nav-link" href="#'+$(this).text()+'"><span class="nav-number">'+i+'.</span> <span class="nav-text">'+$(this).text()+'</span></a></li>';
+		        	i++;
+		        });  
+		        $(".nav1").html(navToc);
+		    });  
 			(function(){ 
 			var appid = 'cytzg9rLH'; 
 			var conf = 'prod_230eb23e872ad7a4302e5802e6f91bf9'; 
@@ -141,16 +203,33 @@
 			window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
 				
 	<script type="text/javascript">
-	  
+	var count=1;
+	$(window).scroll(function(){
+		if($(document).scrollTop()>130&&count==1){
+				$(".dj").css("display","block");
+				initBlogByClick();
+				count++;
+		}
+		if($(document).scrollTop()>550&&count==2){
+			$(".pl").css("display","block");
+		}
+		
+		if($(document).scrollTop()>1350){
+			$(".top").css("display","block");
+			$(".fixed-menu-list").css("display","block");
+		}else{
+			$(".top").css("display","none");
+			$(".fixed-menu-list").css("display","none");
+		}
+	});
 		$(document).ready(function() {
 			Format();
 		    Tags();
 		    initBlogByLike();
-			initBlogByClick();
+			//initBlogByClick();
 			selectPrevBlog();
 			selectNextBlog();
 			initBlogByRel();   //初始化相关文章
-			
 			setTimeout(function () {
 			$(".ds").css("opacity","1");
 		 }, 1000);
@@ -160,7 +239,6 @@
 			},200); 
 			
 		});
-
 		//加载完成后
 		window.onload = function() {
 			var oH2 = document.getElementsByTagName("h2")[0];

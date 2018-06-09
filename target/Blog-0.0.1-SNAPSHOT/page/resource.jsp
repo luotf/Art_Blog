@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="favicon.ico"> 
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/loaders.css"
@@ -28,7 +28,7 @@
 	}
 </style>
 </head>
-<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
+<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
 <%@ include file="top.jsp" %>
   <article>
     <div class="leftbox">

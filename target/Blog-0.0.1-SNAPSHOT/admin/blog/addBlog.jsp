@@ -22,7 +22,7 @@
 	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+<link href="${pageContext.request.contextPath}/css/github-gist.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
@@ -53,7 +53,12 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
 <link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
+<style>
+.news_infos span{
+ 	font-size:13px;
+ }
 
+</style>
 </head>
 
 <body class="white-bg" style="opacity:0">
@@ -509,6 +514,9 @@
 			}
 			$(".newsview").find(".tags").append(keyword);
 			$(".newsview").find(".news_infos").html($("#summernote").code());
+			$(".news_infos :header").each(function(){
+	        	$(this).attr("id",$(this).text());
+	        }); 
 			var add = '<a  class="btn btn-white" href="javascript:void(0);" onclick="addBlog(1)">发表</a>';
 			$(".modal-footer").find(".add").html(add);
 			$('pre').each(function(i,block){
@@ -527,7 +535,7 @@
 				'introduction' : $("#introduction").val(),
 				'type.id' : $("#typeName").val(),
 				'keyword' : $("#keyword").val(),
-				'content' : $("#summernote").code(),
+				'content' : $(".news_infos").html(),
 				'images':$(".imagePath").val(),
 				 prarm:prarm,
 				'status' : id
@@ -547,6 +555,7 @@
 						}else if(id==-1){
 						 swal("放入草稿成功", "你可以前往草稿箱查看", "success");
 						}
+						$("#summernote").code()
 						$("#title").val("");
 						$("#introduction").val("");
 						$("#keyword").val("");

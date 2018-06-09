@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+<link href="${pageContext.request.contextPath}/css/github-gist.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -51,6 +51,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader.css">
     <link rel="stylesheet"href="${pageContext.request.contextPath}/css/plugins/webuploader/webuploader-demo.css">
+<style>
+.news_infos span{
+ 	font-size:13px;
+ }
+
+</style>
+
 </head>
 
 <body class="white-bg" style="opacity:0">
@@ -313,7 +320,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            	  $("#summernote").code(data.blog.content);
 	            	  $("#keyword").val(data.blog.keyword);
 	            	  var imgPath='<img class="picPath animated fadeInRight"  style="width:100%" alt="封面" title="点击更换封面" src="'+data.blog.images+'" />';
-	  				  $(".picPath").html(imgPath)
+	            	  $(".imagePath").val(data.blog.images);
+	            	  $(".picPath").html(imgPath)
 	            	  //加载编辑页面预览的  时间和浏览量
 	            	  $(".newsview").find(".au02").html(Format(data.blog.addtime,"yyyy-MM-dd hh:mm:ss"));
 	           	  	  $(".au03").find('b').html(data.blog.clicknum);
@@ -498,6 +506,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      	  } 
 	      	  $(".newsview").find(".tags").append(keyword);
 	      	  $(".newsview").find(".news_infos").html($("#summernote").code());
+		      	$(".news_infos :header").each(function(){
+		        	$(this).attr("id",$(this).text());
+		        }); 
 	      	  var update='<a  class="btn btn-white" href="#" onclick="updateBlog(1)">发表</a>';
 	      	  $(".modal-footer").find(".update").html(update);
 	      	  $('pre').each(function(i,block){
@@ -520,7 +531,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         			'type.id':$("#typeName").val(),
         			'images':$(".imagePath").val(),
         			'keyword':$("#keyword").val(),
-        			'content':$("#summernote").code(),
+        			'content':$(".news_infos").html(),
         			'status':id,
         			 prarm:prarm
         	};

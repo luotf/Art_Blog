@@ -16,7 +16,7 @@
 	rel="stylesheet">
 </head>
 
-<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed;z-index:-1">
+<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll;z-index:-1">
 <%@ include file="top.jsp" %>
 <article style="opacity:0">
   <div class="pics ">
@@ -35,7 +35,7 @@
         
       </ul>
     </div>
-    <div class="newblogs">
+    <div class="newblogs animated fadeInUp" style="display:none;animation-delay:0.3s">
       <h2 class="hometitle">最新文章</h2>
       <ul class="animated ">
         
@@ -55,22 +55,22 @@
         <p>邮箱：849673404@qq.com</p>
       </div>
     </div>
-    <div class="paihang">
+    <div class="dj paihang animated fadeInUp" style="display:none;animation-delay:0.3s">
       <h2 class="ab_title"><a href="javascript:void(0)">点击排行</a></h2>
       <ul class="">
         
       </ul>
       <div class="ad"></div> 
     </div>
-    <div class="links">
+    <div class="links animated fadeInUp" style="display:none;animation-delay:0.3s">
       <h2 class="ab_title">友情链接</h2>
       <ul class="animated fadeIn">
-        <li ><a href="javascript:void(0)">XXX Github</a></li>
-        <li ><a href="javascript:void(0)">XXX Gitee&nbsp;&nbsp;</a></li>
+        <li ><a href="javascript:void(0)">luotf Github</a></li>
+        <li ><a href="javascript:void(0)">luotf Gitee&nbsp;&nbsp;</a></li>
         <li ><a href="javascript:void(0)">优秀个人博客</a></li>
       </ul>
     </div>
-    <div class="weixin">
+    <div class="weixin animated fadeInUp" style="display:none;animation-delay:0.3s">
       <h2 class="ab_title">公众号</h2>
       <ul class="animated fadeIn">
         <img src="${pageContext.request.contextPath}/images/wx.jpg" >
@@ -86,7 +86,34 @@
 <script>
 
 var globalCount=0;
-
+for(var i=1;i<=7;i++){
+	if(i==1){
+		$(".1 a").addClass("nav_color");
+	}else{
+		$('.'+i+' a').removeClass("nav_color");
+	}
+}
+var count=1;
+$(window).scroll(function(){
+	if($(document).scrollTop()>160&&count==1){
+			$(".dj").css("display","block");
+			initBlogByClick();   			//初始化点击排行5篇文章
+			count++;
+	}
+	if($(document).scrollTop()>350&&count==2){
+		$(".newblogs").css("display","block");
+		initBlogByNew();   			  //初始化最新5篇文章
+		count++;
+    }
+	if($(document).scrollTop()>850&&count==3){
+		$(".links").css("display","block");
+		count++;
+    }
+	if($(document).scrollTop()>1050&&count==4){
+		$(".weixin").css("display","block");
+		count++;
+    }
+});
 window.onload = function (){
 	var oH2 = document.getElementsByTagName("h2")[0];
 	var oUl = document.getElementsByTagName("ul")[0];
@@ -100,11 +127,9 @@ window.onload = function (){
 	$(document).ready(function() {
 		initBlogByTop();              //初始化置顶的3篇文章
 		initBlogByLike();             //初始化特别推荐6篇文章
-		initBlogByNew();   			  //初始化最新5篇文章
-		initBlogByClick();   			//初始化点击排行5篇文章
 	});
 	var returnAllCount=function(){
-		if(globalCount==4){
+		if(globalCount==2){
 			setTimeout(function () {
 				$('article').css('opacity','1');
 			},200);

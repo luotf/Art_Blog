@@ -34,8 +34,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/fakeLoader.css" rel="stylesheet">
-</head>
 <link href="${pageContext.request.contextPath}/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+
+<style>
+ .news_infos span{
+ 	font-size:13px;
+ }
+</style>
+</head>
 
 <body class="white-bg" style="opacity:0">
 <div id="fakeloader"></div>

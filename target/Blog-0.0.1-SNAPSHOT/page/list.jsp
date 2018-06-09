@@ -28,7 +28,7 @@
 	}
 </style>
 </head>
-<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
+<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
 	<%@ include file="top.jsp"%>
 	<article>
 		<div class="leftbox">
@@ -46,7 +46,7 @@
 				
                 <p>
 			</div>
-			<a class="top" onclick="window.scrollTo(0,0)" style="z-index:-1;font-size: 22px;position: fixed;bottom: 5%;right: 30%;color:#fff"><span><i class="fa fa-arrow-circle-up"></i></span></a>
+			<a class="top animated fadeIn" onclick="window.scrollTo(0,0)" style="display:none;z-index:0;font-size: 24px;position: fixed;bottom: 5%;right: 30%;color:#fff"><span style="padding: 6.5px 12px;background-color: #fff;color: #999;"><i class="fa fa-angle-up"></i></span></a>
 		</div>
 		<div class="rightbox">
 			<div class="search1">
@@ -111,6 +111,11 @@
 	        if(isEnd == true){
 	           return;
 	       } 
+	    	if($(document).scrollTop()>1000){
+	    		$(".top").css("display","block");
+	    	}else{
+	    		$(".top").css("display","none");
+	    	}
 	       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
 	       	isEnd=true;
 	       	$('.page').css('display','block');
@@ -141,7 +146,7 @@
 		var params="";
 		var prarm="";
 		if(type_id=="none"){
-			var keyword=$("#keyword").val();
+			var keyword=$("#keyword").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 			if(keyword=="请输入关键字"){
 				keyword="";
 				prarm='none'
