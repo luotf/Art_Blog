@@ -5,6 +5,7 @@
 <head>
 <meta charset="utf-8">
 <title>留言页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,24 +27,22 @@
 				<div  id="SOHUCS" sid="849673404@qq.com"></div>
 				</div>
 			</div>
+			<a class="top animated fadeIn" onclick="window.scrollTo(0,0)" style="display:none;z-index:0;font-size: 24px;position: fixed;bottom: 5%;right: 30%;color:#fff"><span style="padding: 6.5px 12px;background-color: #fff;color: #999;"><i class="fa fa-angle-up"></i></span></a>
 		</div>
 		<div class="rightbox  ">
-			
-			<!-- <div class="paihang">
+			<div class="paihang ">
 				<h2 class="ab_title">
-					<a href="#">留言排行</a>
+					<a href="javascript:void(0)">最新文章</a>
 				</h2>
-				<div class='pl_paihang animated fadeInDown' id="cyHotusers"
-					role="cylabs" data-use="hotusers"></div>
-				<script type="text/javascript" charset="utf-8"
-					src="http://changyan.itc.cn/js/lib/jquery.js"></script>
-				<script type="text/javascript" charset="utf-8"
-					src="http://changyan.sohu.com/js/changyan.labs.https.js?appid=cytzg9rLH"></script>
-			</div> -->
+				<ul class="new ">
 
+				</ul>
+			</div>
+			
 		</div>
 	</article>
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 	<script type="text/javascript"> 
 			(function(){ 
 			var appid = 'cytzg9rLH'; 
@@ -60,6 +59,56 @@
 			$('.'+i+' a').removeClass("nav_color");
 		}
 	}
+	var width = window.innerWidth || document.documentElement.clientWidth; 
+	if (width < 700) {
+		$(".top").css("display","none");
+	}
+	$(window).scroll(function(){
+		if($(document).scrollTop()>800&&width>700){
+			$(".top").css("display","block");
+		}else{
+			$(".top").css("display","none");
+		}
+	});
+	$(document).ready(function() {
+	    initBlogByNew();	
+	});
+	
+	//初始化推荐
+	var initBlogByNew=function(){
+		//设置参数
+		var params ={
+				 pageSize: 10,
+		         page:1,
+		         status:1  
+		};
+		$.ajax({
+            url:'${pageContext.request.contextPath}/selectGroupLikeBlogListByPage',    
+            type:'get',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            	var newBlog='';
+            	var data=data.blogList;
+            	var time='';
+                for (var i = 0; i < data.length; i++) {
+                	if(data[i].introduction.length>35){
+                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
+                	}
+                	var id=data[i].id.toString(8)*data[i].id;
+                	time=i*0.05;
+                	newBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
+                }
+                // 初始化数据
+                $(".paihang").find(".new").html(newBlog);
+            },    
+		    error:function(){
+		    	layer.msg('加载的太快啦', {icon: 2});
+		    }	
+        });
+	};
+	
+	
 		//加载完成后
 		window.onload = function() {
 			var oH2 = document.getElementsByTagName("h2")[0];

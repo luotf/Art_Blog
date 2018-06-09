@@ -5,6 +5,7 @@
 <head>
 <meta charset="utf-8">
 <title>列表页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +30,7 @@
 </style>
 </head>
 <body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
-	<%@ include file="top.jsp"%>
+	 <%@ include file="top.jsp"%> 
 	<article>
 		<div class="leftbox">
 			<div class="newblogs ">
@@ -52,7 +53,7 @@
 			<div class="search1">
 				<form name="searchform" id="searchform" style="width:100%;height: 30px;">
 					<input name="keyword" id="keyword"  class="input_text"
-						value="请输入关键字" style="width:76%;color: rgb(153, 153, 153);"
+						value="请输入关键字" style="width:70%;color: rgb(153, 153, 153);"
 						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
 						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
 						type="text"> <input name="Submit" class="input_submit"
@@ -67,26 +68,26 @@
 			
 
 			<div class="paihang ">
-				<h2 class="ab_title">
+				<h3 class="ab_title">
 					<a href="javascript:void(0)">本栏推荐</a>
-				</h2>
+				</h3>
 				<ul class="like">
 
 				</ul>
 				<div class="ad"></div>
 			</div>
-			<div class="paihang ">
-				<h2 class="ab_title">
+			<div class="dj paihang animated fadeInUp" style="display:none;animation-delay:0.3s">
+				<h3 class="ab_title">
 					<a href="javascript:void(0)">点击排行</a>
-				</h2>
+				</h3>
 				<ul class="click">
 
 				</ul>
 
 			</div>
 
-			<div class="weixin">
-				<h2 class="ab_title">公众号</h2>
+			<div class="weixin animated fadeInUp" style="display:none;animation-delay:0.3s">
+				<h3 class="ab_title"><a href="javascript:void(0)">公众号</a></h3>
 				<ul class="animated fadeInDown">
 
 				</ul>
@@ -100,31 +101,47 @@
 		src="http://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytzg9rLH"></script>
 	<script>
 	var pageNext=1;
+	var count=1;
 	var isEnd=false;
+	for(var i=1;i<=7;i++){
+		if(i==2){
+			$(".2 a").addClass("nav_color");
+		}else{
+			$('.'+i+' a').removeClass("nav_color");
+		}
+	}
 	var width = window.innerWidth || document.documentElement.clientWidth; 
 	if (width < 960) {
 		var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initBlog()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
 		$(".pageMin").html(pagenav);
 		$(".tag").css('display','none');
-	}else{
-		$(window).scroll(function(){
-	        if(isEnd == true){
-	           return;
-	       } 
-	    	if($(document).scrollTop()>1000){
-	    		$(".top").css("display","block");
-	    	}else{
-	    		$(".top").css("display","none");
-	    	}
-	       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
-	       	isEnd=true;
-	       	$('.page').css('display','block');
-	       	setTimeout(function () {
-	       		initBlogListByPage(pageNext,"none",null);
-			},500); 
-		   }
-	   });
 	}
+	$(window).scroll(function(){
+        if(isEnd == true){
+           return;
+       } 
+        if($(document).scrollTop()>560&&count==1){
+			$(".dj").css("display","block");
+			initBlogByClick();
+			count++;
+	    }
+        if($(document).scrollTop()>960&&count==2){
+			$(".weixin").css("display","block");
+			count++;
+	    }
+    	if($(document).scrollTop()>1000&&width>700){
+    		$(".top").css("display","block");
+    	}else{
+    		$(".top").css("display","none");
+    	}
+       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()&&width>700) {
+       	isEnd=true;
+       	$('.page').css('display','block');
+       	setTimeout(function () {
+       		initBlogListByPage(pageNext,"none",null);
+		},500); 
+	   }
+   });
 	var initBlog=function(){
 		setTimeout(function () {
        		initBlogListByPage(pageNext,"none",null);
@@ -137,7 +154,6 @@
 		//初始化技术专栏的信息
 		initBlogListByPage(pageNext,"none",null);
 		initBlogByLike();
-		initBlogByClick();
 	});
 	
 	var initBlogListByPage=function(pageNum,type_id,typename){
@@ -443,7 +459,6 @@
 	}   	
 </script>
 <script type="text/javascript">
-
 window.onload = function (){
 	var oH2 = document.getElementsByTagName("h2")[0];
 	var oUl = document.getElementsByTagName("ul")[0];

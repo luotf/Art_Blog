@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>详情页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
-<meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
-<meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
+<title>${blog.title}</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
+<meta name="keywords" content="${blog.keyword}" />
+<meta name="description" content="${blog.introduction}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="${pageContext.request.contextPath}/css/github-gist.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
@@ -16,7 +19,7 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
-<%-- <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet"> --%>
+
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 <style>
 .fixed-menu-list {
@@ -212,12 +215,12 @@
 	<script type="text/javascript">
 	var count=1;
 	$(window).scroll(function(){
-		if($(document).scrollTop()>160&&count==1){
+		if($(document).scrollTop()>260&&count==1){
 				$(".dj").css("display","block");
 				initBlogByClick();
 				count++;
 		}
-		if($(document).scrollTop()>950){
+		if($(document).scrollTop()>1150){
 			$(".top").css("display","block");
 			$(".fixed-menu-list").css("display","block");
 		}else{

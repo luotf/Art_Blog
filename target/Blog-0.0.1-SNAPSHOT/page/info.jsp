@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>详情页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
-<meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
-<meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
+<title>${blog.title}</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
+<meta name="keywords" content="${blog.keyword}" />
+<meta name="description" content="${blog.introduction}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="${pageContext.request.contextPath}/css/github-gist.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/base.css"
 	rel="stylesheet">
@@ -16,7 +19,7 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 <style>
 .fixed-menu-list {
@@ -153,7 +156,7 @@
 
 			</div>
 
-			<div class="pl paihang animated fadeInUp" style="display:none">
+		<!-- 	<div class="pl paihang animated fadeInUp" style="display:none">
 				<h2 class="ab_title">
 					<a href="#">评论排行</a>
 				</h2>
@@ -163,7 +166,7 @@
 					src="http://changyan.itc.cn/js/lib/jquery.js"></script>
 				<script type="text/javascript" charset="utf-8"
 					src="http://changyan.sohu.com/js/changyan.labs.https.js?appid=cytzg9rLH"></script>
-			</div>
+			</div> -->
 			
 			<div class="fixed-menu-list animated fadeInUp">
 			<div class="sidebar-nav-toc">文章目录</div>
@@ -185,6 +188,13 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
 	<script type="text/javascript"> 
+	for(var i=1;i<=7;i++){
+		if(i==5){
+			$(".5 a").addClass("nav_color");
+		}else{
+			$('.'+i+' a').removeClass("nav_color");
+		}
+	}
 			$(function(){  
 		        //查找h1-h6  
 		        var i=1;
@@ -205,16 +215,12 @@
 	<script type="text/javascript">
 	var count=1;
 	$(window).scroll(function(){
-		if($(document).scrollTop()>130&&count==1){
+		if($(document).scrollTop()>260&&count==1){
 				$(".dj").css("display","block");
 				initBlogByClick();
 				count++;
 		}
-		if($(document).scrollTop()>550&&count==2){
-			$(".pl").css("display","block");
-		}
-		
-		if($(document).scrollTop()>1350){
+		if($(document).scrollTop()>1150){
 			$(".top").css("display","block");
 			$(".fixed-menu-list").css("display","block");
 		}else{
@@ -226,7 +232,6 @@
 			Format();
 		    Tags();
 		    initBlogByLike();
-			//initBlogByClick();
 			selectPrevBlog();
 			selectNextBlog();
 			initBlogByRel();   //初始化相关文章
@@ -234,9 +239,9 @@
 			$(".ds").css("opacity","1");
 		 }, 1000);
 			
-			setTimeout(function () {
+			/* setTimeout(function () {
 				$(".pl_paihang").css("display","block");
-			},200); 
+			},200);  */
 			
 		});
 		//加载完成后
@@ -440,7 +445,7 @@
 			month["Mar"] = '03';
 			month["Apr"] = '04';
 			month["May"] = '05';
-			month["Jan"] = '06';
+			month["Jun"] = '06';
 			month["Jul"] = '07';
 			month["Aug"] = '08';
 			month["Sep"] = '09';

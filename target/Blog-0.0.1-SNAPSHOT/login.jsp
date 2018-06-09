@@ -11,6 +11,7 @@
 <title>登录</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"

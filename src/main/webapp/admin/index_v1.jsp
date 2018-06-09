@@ -20,7 +20,6 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 
-<link rel="shortcut icon" href="favicon.ico">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.min.css"

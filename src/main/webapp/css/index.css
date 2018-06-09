@@ -18,8 +18,8 @@
 .hometitle span a:after { content: ''; display: block; width: 1px; height: 20px; border-radius: 10px; background: #000; -webkit-transform: rotate(45deg); transform: rotate(45deg); position: absolute; bottom: -10px }
 /*特别推荐*/
 .tuijian { background: #fff; overflow: hidden; width: 100%; clear: both; border-radius: 10px;margin: 20px 0px; }
-.tuijian ul { overflow: hidden; padding: 0 10px }
-.tuijian li { float: left; width: 27%; border-bottom: #ccc 1px solid; border-left: #ccc 1px solid; overflow: hidden; padding: 20px }
+.tuijian ul { overflow: hidden; padding: 0 1%;width:100% }
+.tuijian li { float: left; width: 27%; border-bottom: #ccc 1px solid; border-left: #ccc 1px solid; overflow: hidden; padding: 3% }
 .tuijian li:nth-child(1) { border-left: 0 }
 .tuijian li:nth-child(4) { border-left: 0; border-bottom: 0; }
 .tuijian li:nth-child(5) { border-bottom: 0; }
@@ -51,9 +51,10 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
 .more { font-size: 14px; }
 /*关于我*/
 .aboutme { background: #FFF; border-radius: 10px; overflow: hidden }
-.ab_title { text-align: center; position: relative; margin: 20px; width: 1005 }
-.ab_title:before { content: ""; width: 30%; height: 2px; background: #000; position: absolute; left: 0; bottom: 8px }
-.ab_title:after { content: ""; width: 30%; height: 2px; background: #000; position: absolute; right: 0; bottom: 8px }
+.ab_title { text-align: center;font-size: 150%; position: relative; margin: 20px; width: 1005 }
+.ab_title a:hover{text-decoration:none}
+.ab_title:before { content: ""; width: 25%; height: 2px; background: #000; position: absolute; left: 0; bottom: 8px }
+.ab_title:after { content: ""; width: 25%; height: 2px; background: #000; position: absolute; right: 0; bottom: 8px }
 .ab_con { line-height: 30px; padding: 10px; }
 .ab_con p { background: #f6f6f6; margin: 5px 0; padding-left: 10px; border-radius: 5px; text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px; }
 .avatar { width: 158px; height: 100px; overflow: hidden;  margin: auto; }
@@ -72,7 +73,7 @@ line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 
 .paihang ul li { border-bottom: solid 1px #EAEAEA; font-size: 14px; margin: 0 0 10px 0; padding: 0 0 10px 0; }
 .paihang ul li b { height: 30px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; display: block; }
 .paihang ul li p { line-height: 24px; color: #888 }
-.paihang ul li a:hover { color: #000; }
+.paihang ul li a:hover { color: #000;text-decoration: none; }
 .paihang ul li:hover { border-bottom: #000 1px solid; }/* 鼠标放上去的效果 */
 .paihang ul li:hover p { color: #000; }
 .paihang ul li:hover b a { color: #000; }
@@ -129,6 +130,7 @@ line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 
 /* for 480px or less */
 @media screen and (max-width: 480px) {
 header, article, footer { width: 100%; margin: auto; overflow: hidden }
+nav { z-index:999;position:fixed;top:10px;background:none;width: 100%; color: #999; line-height: 53px; height: 53px;}
 nav ul { width: 100% }
 nav ul li { display: none; }
 #mnav { display: block; z-index: 99999; 
@@ -142,7 +144,7 @@ nav ul li { display: none; }
 .pics ul li img { margin: auto; width: 100%; height: auto }
 .leftbox, .tuijian, .rightbox { width: 100%; }
 .tuijian h2 span { display: none }
-.tuijian li { width: 42%; padding: 10px }
+.tuijian li { width: 45%; padding: 8px }
 .tuijian li:nth-child(3) { border-left: 0 }
 .tuijian li:nth-child(4) { border-left: #ccc 1px solid; border-bottom: #ccc 1px solid }
 .tuijian li:nth-child(5) { border-left: 0 }

@@ -5,6 +5,7 @@
 <head>
 <meta charset="utf-8">
 <title>列表页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,18 +68,18 @@
 			
 
 			<div class="paihang ">
-				<h2 class="ab_title">
+				<h3 class="ab_title">
 					<a href="javascript:void(0)">本栏推荐</a>
-				</h2>
+				</h3>
 				<ul class="like">
 
 				</ul>
 				<div class="ad"></div>
 			</div>
 			<div class="dj paihang animated fadeInUp" style="display:none;animation-delay:0.3s">
-				<h2 class="ab_title">
+				<h3 class="ab_title">
 					<a href="javascript:void(0)">点击排行</a>
-				</h2>
+				</h3>
 				<ul class="click">
 
 				</ul>
@@ -86,7 +87,7 @@
 			</div>
 
 			<div class="weixin animated fadeInUp" style="display:none;animation-delay:0.3s">
-				<h2 class="ab_title">公众号</h2>
+				<h3 class="ab_title"><a href="javascript:void(0)">公众号</a></h3>
 				<ul class="animated fadeInDown">
 
 				</ul>
@@ -114,34 +115,33 @@
 		var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initBlog()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
 		$(".pageMin").html(pagenav);
 		$(".tag").css('display','none');
-	}else{
-		$(window).scroll(function(){
-	        if(isEnd == true){
-	           return;
-	       } 
-	        if($(document).scrollTop()>560&&count==1){
-				$(".dj").css("display","block");
-				initBlogByClick();
-				count++;
-		    }
-	        if($(document).scrollTop()>960&&count==2){
-				$(".weixin").css("display","block");
-				count++;
-		    }
-	    	if($(document).scrollTop()>1000){
-	    		$(".top").css("display","block");
-	    	}else{
-	    		$(".top").css("display","none");
-	    	}
-	       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
-	       	isEnd=true;
-	       	$('.page').css('display','block');
-	       	setTimeout(function () {
-	       		initBlogListByPage(pageNext,"none",null);
-			},500); 
-		   }
-	   });
 	}
+	$(window).scroll(function(){
+        if(isEnd == true){
+           return;
+       } 
+        if($(document).scrollTop()>560&&count==1){
+			$(".dj").css("display","block");
+			initBlogByClick();
+			count++;
+	    }
+        if($(document).scrollTop()>960&&count==2){
+			$(".weixin").css("display","block");
+			count++;
+	    }
+    	if($(document).scrollTop()>1000&&width>700){
+    		$(".top").css("display","block");
+    	}else{
+    		$(".top").css("display","none");
+    	}
+       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()&&width>700) {
+       	isEnd=true;
+       	$('.page').css('display','block');
+       	setTimeout(function () {
+       		initBlogListByPage(pageNext,"none",null);
+		},500); 
+	   }
+   });
 	var initBlog=function(){
 		setTimeout(function () {
        		initBlogListByPage(pageNext,"none",null);

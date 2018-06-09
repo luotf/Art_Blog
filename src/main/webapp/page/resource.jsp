@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>资源页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,7 +72,7 @@
         </form>
       </div>
       <div class="paihang ">
-        <h2 class="ab_title"><a href="/">本栏推荐</a></h2>
+        <h3 class="ab_title"><a href="javascript:void(0)">本栏推荐</a></h3>
         <ul class="like ">
          
         </ul>
@@ -130,7 +131,7 @@
 		 initBlogByLike();
 	});
 	var initResource=function(pageNum){
-		var keyword=$("#keyword").val();
+		var keyword=$("#keyword").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 		var prarm='';
 		if(keyword=="请输入关键字"){
 			keyword="";

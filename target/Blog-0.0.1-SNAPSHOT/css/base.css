@@ -15,7 +15,7 @@ nav { z-index:999;position:fixed;top:10px;width: 100%; background: #444; color: 
 nav ul { width: 1000px; margin: auto;  text-align: right;  }
 nav ul li { display: inline-block; font-size: 15px; padding: 0px 15px;height: 53px;line-height: 53px;}
 
-nav ul li a:hover{ display: inline-block;color:#f8ac59;transition: 0.3s;}
+nav ul li a:hover{ display: inline-block;color:#f8ac59;transition: 0.3s;text-decoration:none;}
 
 nav ul li a { color: #fff }
 .m20 { margin: 20px 0 }
@@ -28,8 +28,8 @@ nav ul li a { color: #fff }
 #mnav li a { color: #fff }
 /* 默认菜单栏 */
 #mnav h2 .navicon { margin-right: 15px; }
-.navicon { display: inline-block; position: relative; width: 30px; height: 5px; background-color: #FFFFFF; }
-.navicon:before, .navicon:after { content: ''; display: block; width: 30px; height: 5px; position: absolute; background: #FFFFFF; -webkit-transition-property: margin, -webkit-transform; transition-property: margin, -webkit-transform; transition-property: margin, transform; transition-property: margin, transform, -webkit-transform; -webkit-transition-duration: 300ms; transition-duration: 300ms; }
+.navicon { display: inline-block; position: relative; width: 30px; height: 5px; background-color: #000; }
+.navicon:before, .navicon:after { content: ''; display: block; width: 30px; height: 5px; position: absolute; background: #000; -webkit-transition-property: margin, -webkit-transform; transition-property: margin, -webkit-transform; transition-property: margin, transform; transition-property: margin, transform, -webkit-transform; -webkit-transition-duration: 300ms; transition-duration: 300ms; }
 .navicon:before { margin-top: -10px; }
 .navicon:after { margin-top: 10px; }
 /* 展开后导航栏目 */

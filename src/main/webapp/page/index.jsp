@@ -6,6 +6,7 @@
 <meta charset="utf-8">
 <meta name="baidu-site-verification" content="Eg9tVrHSEK" />
 <title>首页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,13 @@
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/loaders.css"
+	rel="stylesheet">
+<style type="text/css">
+	.loader-inner > div{
+		background-color: #907f819e
+	}
+</style>
 </head>
 
 <body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll;z-index:-1">
@@ -40,13 +48,20 @@
       <ul class="animated ">
         
       </ul>
+      <p class="page" style='display:none'>
+				
+      <p>
+      <p class="pageMin">
+				
+      <p>
     </div>
+    <a class="top animated fadeIn" onclick="window.scrollTo(0,0)" style="display:none;z-index:0;font-size: 24px;position: fixed;bottom: 12%;right: 30%;color:#fff"><span style="padding: 6.5px 12px;background-color: #fff;color: #999;"><i class="fa fa-angle-up"></i></span></a>
   </div>
   
   
   <div class="rightbox">
     <div class="aboutme">
-      <h2 class="ab_title ">关于我</h2>
+      <h3 class="ab_title "><a href="javascript:void(0)">关于我</a></h3>
       <div class="avatar"><img src="${pageContext.request.contextPath}/images/my.jpeg"/></div>
       <div class="ab_con ">
         <p>网名：我倾尽一生,囚你无期 | Luotf</p>
@@ -56,26 +71,43 @@
       </div>
     </div>
     <div class="dj paihang animated fadeInUp" style="display:none;animation-delay:0.3s">
-      <h2 class="ab_title"><a href="javascript:void(0)">点击排行</a></h2>
+      <h3 class="ab_title"><a href="javascript:void(0)">点击排行</a></h3>
       <ul class="">
         
       </ul>
       <div class="ad"></div> 
     </div>
     <div class="links animated fadeInUp" style="display:none;animation-delay:0.3s">
-      <h2 class="ab_title">友情链接</h2>
+      <h3 class="ab_title"><a href="javascript:void(0)">开源项目</a></h3>
       <ul class="animated fadeIn">
-        <li ><a href="javascript:void(0)">luotf Github</a></li>
-        <li ><a href="javascript:void(0)">luotf Gitee&nbsp;&nbsp;</a></li>
-        <li ><a href="javascript:void(0)">优秀个人博客</a></li>
+        <li ><a href="https://github.com/luotf" target= "_blank">Github</a></li>
+        <li ><a href="https://gitee.com/luotf" target= "_blank">Gitee&nbsp;&nbsp;</a></li>
       </ul>
     </div>
     <div class="weixin animated fadeInUp" style="display:none;animation-delay:0.3s">
-      <h2 class="ab_title">公众号</h2>
+      <h3 class="ab_title">公众号</h3>
       <ul class="animated fadeIn">
         <img src="${pageContext.request.contextPath}/images/wx.jpg" >
       </ul>
     </div>
+    <div class="links animated fadeInUp" style="display:none;animation-delay:1.3s">
+      <h3 class="ab_title"><a href="javascript:void(0)">友情链接</a></h3>
+      <ul class="animated fadeIn">
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优秀客</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优秀个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优秀个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优秀个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优博客</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优秀个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">个博客</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优秀个</a></li>
+        <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">个博客</a></li>
+      </ul>
+    </div>
+    
   </div>
 </article>
 
@@ -93,27 +125,53 @@ for(var i=1;i<=7;i++){
 		$('.'+i+' a').removeClass("nav_color");
 	}
 }
+var pageNext=1;
 var count=1;
+var isEnd=false;
+var width = window.innerWidth || document.documentElement.clientWidth; 
+if (width < 660) {
+	var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initBlogByClickMore()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
+	$(".pageMin").html(pagenav);
+	$(".top").css("display","none");
+}
 $(window).scroll(function(){
-	if($(document).scrollTop()>160&&count==1){
+	if(isEnd == true){
+           return;
+     } 
+	if($(document).scrollTop()>110&&count==1){
 			$(".dj").css("display","block");
 			initBlogByClick();   			//初始化点击排行5篇文章
 			count++;
 	}
-	if($(document).scrollTop()>350&&count==2){
+	if($(document).scrollTop()>400&&count==2){
 		$(".newblogs").css("display","block");
-		initBlogByNew();   			  //初始化最新5篇文章
+		initBlogByNew(1);   			  //初始化最新5篇文章
 		count++;
     }
-	if($(document).scrollTop()>850&&count==3){
+	if($(document).scrollTop()>870&&count==3){
 		$(".links").css("display","block");
 		count++;
     }
-	if($(document).scrollTop()>1050&&count==4){
+	if($(document).scrollTop()>1070&&count==4){
 		$(".weixin").css("display","block");
 		count++;
     }
+	if($(document).scrollTop()>1300&&width>700){
+		$(".top").css("display","block");
+	}else{
+		$(".top").css("display","none");
+	}
+	if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()&&width>700) {
+	       	isEnd=true;
+	       	$('.page').css('display','block');
+	       	setTimeout(function () {
+	       		initBlogByNew(pageNext);
+			},500); 
+		   }
 });
+
+
+
 window.onload = function (){
 	var oH2 = document.getElementsByTagName("h2")[0];
 	var oUl = document.getElementsByTagName("ul")[0];
@@ -128,6 +186,13 @@ window.onload = function (){
 		initBlogByTop();              //初始化置顶的3篇文章
 		initBlogByLike();             //初始化特别推荐6篇文章
 	});
+	
+	var initBlogByClickMore=function(){
+		setTimeout(function () {
+			initBlogByNew(pageNext);
+		},200);
+	}
+	
 	var returnAllCount=function(){
 		if(globalCount==2){
 			setTimeout(function () {
@@ -201,11 +266,11 @@ window.onload = function (){
 	};
 	
 	//初始化最新文章
-	var initBlogByNew=function(){
+	var initBlogByNew=function(page){
 		//设置参数
 		var params ={
 				 pageSize: 5,
-		         page:1,
+		         page:page,
 		         status:1
 		};
 		$.ajax({
@@ -213,10 +278,10 @@ window.onload = function (){
             type:'get',
             data:params,
             dataType:'json',    
-            success:function (data) {
+            success:function (dataAll) {
             	var newBlog='';
-            	var data=data.blogList;
-            	
+            	var data=dataAll.blogList;
+            	var page=dataAll.pageInfo;
                 for (var i = 0; i < data.length; i++) {
                 	var id=data[i].id.toString(8)*data[i].id;
                 	var keyword="";
@@ -231,9 +296,31 @@ window.onload = function (){
                 	newBlog+='<li style="animation-delay:0.'+i+'s" class="animated fadeInDown"><h3 class="blogtitle"><a href="${pageContext.request.contextPath}/find/'+id+'.html"  >'+data[i].title+'</a></h3><div class="bloginfo"><span class="blogpic"><a href="page/find/'+id+'.html" title=""><img src="'+data[i].images+'"  /></a></span><p>'+data[i].introduction+'</p></div><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'+keyword+'</a></span><span class="dtime f_l">'+Format(data[i].addtime,"yyyy-MM-dd")+'</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'+data[i].clicknum+'</a></b>）</span><span class="pingl f_l">评论（<b><a href="javascript:void(0);">'+data[i].commentnum+'</a></b>）</span><span class="f_r"><a href="find/'+id+'.html" class="more">阅读原文>></a></span></div></li>'
                 }
                 // 初始化数据
-                $(".newblogs").find("ul").html(newBlog);
+                if(page.pageNum>=2){
+            		$(".newblogs").find("ul").append(newBlog);
+            	}else{
+            		$(".newblogs").find("ul").html(newBlog);
+            	} 
+                if(page.total>5){
+            		var pagenav='';
+            		if(page.pageNum==page.pages){
+            			isEnd=true;
+            			pagenav='<p style="text-align:center;margin:-5px auto 10px;"><a href="javascript:void(0);" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p>';
+            			if(width<660){
+            				$(".pageMin").html(pagenav);
+            			}
+            		}else{
+            			isEnd=false;
+            			pageNext=page.pageNum+1;
+            			pagenav='<div style="margin:-5px auto 10px;text-align:center;"><div class="loader-inner ball-pulse"><div></div><div></div><div></div></div></div>';
+            		}
+            		$(".page").html(pagenav);
+            	}else{
+            		$(".page").html("");
+            	}
+                
                 globalCount++;
-				 returnAllCount();
+				returnAllCount();
             },    
 		    error:function(){
 		    	layer.msg('请求太快，请稍后再试！', {icon: 5});

@@ -16,12 +16,9 @@
 <meta name="renderer" content="webkit">
 
 <title>博客后台 - 主页</title>
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="">
 <meta name="description" content="">
-
-
-<link rel="shortcut icon" href="favicon.ico">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.min.css"

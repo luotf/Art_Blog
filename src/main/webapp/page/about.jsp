@@ -6,6 +6,7 @@
 <meta charset="utf-8">
 <title>关于我_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">

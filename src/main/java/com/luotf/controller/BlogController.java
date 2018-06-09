@@ -26,7 +26,6 @@ import com.luotf.util.ConstantUtil;
 
 @Controller
 public class BlogController {
-
 	@Resource(name = "blogServiceImpl")
 	private BlogService blogService;
 	

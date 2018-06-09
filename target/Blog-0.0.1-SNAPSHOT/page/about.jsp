@@ -6,6 +6,7 @@
 <meta charset="utf-8">
 <title>关于我_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
@@ -13,7 +14,7 @@
 <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
 
 </head>
-<body style="background:url(${pageContext.request.contextPath}/images/bg.jpg) no-repeat center fixed">
+<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
 <%@ include file="top.jsp" %>
 <article>
   <div class="leftbox">
@@ -59,6 +60,13 @@
 </article>
 <%@ include file="fonter.jsp" %>
 <script>
+for(var i=1;i<=7;i++){
+	if(i==6){
+		$(".6 a").addClass("nav_color");
+	}else{
+		$('.'+i+' a').removeClass("nav_color");
+	}
+}
 window.onload = function ()
 {
 	var oH2 = document.getElementsByTagName("h2")[0];

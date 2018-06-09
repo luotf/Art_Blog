@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>资源页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,13 +62,17 @@
 
     <div class="rightbox ">
       <div class="search1">
-        <form name="searchform" id="searchform">
-          <input id="keyword" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+        <form name="searchform" id="searchform" style="width:100%;height: 30px;">
+        <input name="keyword" id="keyword"  class="input_text"
+						value="请输入关键字" style="width:70%;color: rgb(153, 153, 153);"
+						onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"
+						onblur="if(value==''){this.style.color='#999';value='请输入关键字'}"
+						type="text">
           <input  class="input_submit" value="搜索" type="button" onclick="selectResource()">
         </form>
       </div>
       <div class="paihang ">
-        <h2 class="ab_title"><a href="/">本栏推荐</a></h2>
+        <h3 class="ab_title"><a href="javascript:void(0)">本栏推荐</a></h3>
         <ul class="like ">
          
         </ul>
@@ -89,6 +94,13 @@
     <script>
     var pageNext=1;
 	var isEnd=false;
+	for(var i=1;i<=7;i++){
+		if(i==4){
+			$(".4 a").addClass("nav_color");
+		}else{
+			$('.'+i+' a').removeClass("nav_color");
+		}
+	}
 	var width = window.innerWidth || document.documentElement.clientWidth; 
 	if (width < 960) {
 		var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initResourceByPage()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
@@ -119,7 +131,7 @@
 		 initBlogByLike();
 	});
 	var initResource=function(pageNum){
-		var keyword=$("#keyword").val();
+		var keyword=$("#keyword").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 		var prarm='';
 		if(keyword=="请输入关键字"){
 			keyword="";

@@ -1,14 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
-	
 <style>
  .nav_color{
  	color:#f8ac59;
  }
- 
 </style>
 </head>
 <header>

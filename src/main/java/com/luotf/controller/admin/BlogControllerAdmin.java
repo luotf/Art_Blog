@@ -148,7 +148,7 @@ public class BlogControllerAdmin {
 		 return map;
 	 }
 	 
-	 
+	 	
 	 /**
 	  * 实现删除博客功能
 	  * @param blog
