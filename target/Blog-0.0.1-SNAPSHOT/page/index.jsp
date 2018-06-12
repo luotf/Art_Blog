@@ -77,7 +77,7 @@
       </ul>
       <div class="ad"></div> 
     </div>
-    <div class="links animated fadeInUp" style="display:none;animation-delay:0.3s">
+    <div class="git links animated fadeInUp" style="display:none;animation-delay:0.3s">
       <h3 class="ab_title"><a href="javascript:void(0)">开源项目</a></h3>
       <ul class="animated fadeIn">
         <li ><a href="https://github.com/luotf" target= "_blank">Github</a></li>
@@ -90,7 +90,7 @@
         <img src="${pageContext.request.contextPath}/images/wx.jpg" >
       </ul>
     </div>
-    <div class="links animated fadeInUp" style="display:none;animation-delay:1.3s">
+    <div class="link links animated fadeInUp" style="display:none;animation-delay:0.3s">
       <h3 class="ab_title"><a href="javascript:void(0)">友情链接</a></h3>
       <ul class="animated fadeIn">
         <li style="float:left;margin: 0 1% 10px 0;padding:3px;"><a href="javascript:void(0)">优秀客</a></li>
@@ -149,11 +149,16 @@ $(window).scroll(function(){
 		count++;
     }
 	if($(document).scrollTop()>870&&count==3){
-		$(".links").css("display","block");
+		$(".git").css("display","block");
 		count++;
     }
 	if($(document).scrollTop()>1070&&count==4){
 		$(".weixin").css("display","block");
+		count++;
+    }
+	if($(document).scrollTop()>1250&&count==5){
+		$(".link").css("display","block");
+		initAllLinks();   			  //初始化所有已上架友链
 		count++;
     }
 	if($(document).scrollTop()>1300&&width>700){
@@ -318,9 +323,7 @@ window.onload = function (){
             	}else{
             		$(".page").html("");
             	}
-                
-                globalCount++;
-				returnAllCount();
+               
             },    
 		    error:function(){
 		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
@@ -347,7 +350,6 @@ window.onload = function (){
             	var data=data.blogList;
             	 var time='';
                 for (var i = 0; i < data.length; i++) {
-                	
                 	if(data[i].introduction.length>35){
                 		data[i].introduction=data[i].introduction.substring(0,34)+"...";
                 	}
@@ -360,14 +362,53 @@ window.onload = function (){
                 time=time+0.25;
                 var ad='<img style="animation-delay:'+time+'s" class="animated fadeInDown" src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
 				$(".ad").html(ad);
-				globalCount++;
-				 returnAllCount();
             },    
 		    error:function(){
 		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
 		    }	
         });
 	};
+	
+	var initAllLinks=function(){
+		
+		$.ajax({
+            url:'${pageContext.request.contextPath}/selectAllLinks',    
+            type:'get',
+            data:"",
+            dataType:'json',    
+            success:function (data) {
+            	var linksAll='';
+            	var data=data.linksList;
+            	 var time='';
+                for (var i = 0; i < data.length; i++) {
+                	time=i*0.05;
+                	linksAll+='<li style="animation-delay:0.'+i+'s;float:left;margin: 0 1% 10px 0;padding:3px;" class="animated fadeIn"><a href="'+data[i].link+'" target= "_blank" onclick="clickNum('+ data[i].id + ')">'+data[i].name+'</a></li>';
+                }
+                // 初始化数据
+                $(".link").find("ul").html(linksAll);
+            },    
+		    error:function(){
+		    	layer.msg('请求太快，请稍后再试！', {icon: 5});
+		    }	
+        });
+	}
+	
+	//更新链接点击次数
+	var clickNum=function(id){
+		var params ={
+				id:id,
+		};
+		$.ajax({
+            url:'${pageContext.request.contextPath}/selectLinksById',    
+            type:'post',
+            data:params,
+            dataType:'json',    
+            success:function (data) {
+            },    
+		    error:function(){
+		    }	
+        });
+	}
 	
           //格式化时间
         	function Format(datetime, fmt) {

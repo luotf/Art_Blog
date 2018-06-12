@@ -9,11 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>资源页_个人博客 - 一个在Java道路上的技术员个人博客网站</title>
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico"> 
     <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
@@ -89,7 +88,6 @@
     <script src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
     <!-- 自定义js -->
-    <script src="${pageContext.request.contextPath}/js/content.js?v=1.0.0"></script>
     
     <script>
     var pageNext=1;

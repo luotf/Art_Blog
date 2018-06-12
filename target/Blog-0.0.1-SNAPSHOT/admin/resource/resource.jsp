@@ -19,13 +19,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description"
 	content="">
 
-<link rel="shortcut icon" href="favicon.ico">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
-	rel="stylesheet">
-<link
-	href="${pageContext.request.contextPath}/css/plugins/iCheck/custom.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css"
 	rel="stylesheet">
@@ -51,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<a class="btn btn-block btn-primary compose-mail"
 								href="javascript:void(0);">资源管理</a>
 							<div class="space-25"></div>
-							<h5>博客状态</h5>
+							<h5>资源状态</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
 								<li class="share" value="0"><a href="javascript:void(0);">
 										<i class="fa fa-inbox "></i>总共<span
@@ -167,9 +163,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
-	<!-- iCheck -->
-	<script
-		src="${pageContext.request.contextPath}/js/plugins/iCheck/icheck.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Bootstrap table -->
 	<script
@@ -179,8 +172,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
+	 //判断页面ajax请求加载成功的次数
 		var globalCount=0;
-		
 		$("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
 	        zIndex:999, // Default zIndex

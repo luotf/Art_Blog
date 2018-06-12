@@ -112,7 +112,9 @@
 							
 							
 						</li>
-						
+						<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/links/links.jsp"><i class="fa fa-unlink"></i> <span
+							class="nav-label">友情链接</span></a>
+						</li>
 					<li><a href="http://changyan.kuaizhan.com/" class="J_menuItem"><i class="fa fa-commenting-o"></i> <span
 							class="nav-label">评论模块</span></a>
 						</li>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luotf.mapper.LinksMapper">
+  <cache /> 
+  <resultMap id="BaseResultMap" type="com.luotf.model.Links">
+    
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="clickNum" jdbcType="INTEGER" property="clicknum" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    
+    id, link, name, clickNum, sort, status,addTime
+  </sql>
+  
+   <select id="selectLinksListByStatus" resultType="map">
+		  SELECT 
+		    status,
+		    COUNT(*) AS count
+		  FROM
+		    t_links
+		  GROUP BY status
+	</select>
+ 
+ <select id="selectAllLinks" resultMap="BaseResultMap">
+	select 
+	<include refid="Base_Column_List" />
+		from t_links
+		where
+		 	status=1
+		ORDER BY sort DESC,addTime DESC
+	</select>
+ 
+ 
+  <select id="selectLikeLinksListByPage" parameterType="Map" resultMap="BaseResultMap">
+	select 
+	<include refid="Base_Column_List" />
+		from t_links
+		<where>
+			<if test="status!=null and status!=''">
+		 		and status=#{status}
+		 	</if>
+		 	<if test="name!=null and name!=''">
+		 	and name like CONCAT(CONCAT('%', #{name}), '%')
+		 	</if>
+		 </where>
+		  ORDER BY sort DESC,addTime DESC
+	</select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    
+    select 
+    <include refid="Base_Column_List" />
+    from t_links
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    
+    delete from t_links
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.luotf.model.Links">
+    
+    insert into t_links (id, link, name, 
+      clickNum, sort,status, addTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{link,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      0, #{sort,jdbcType=INTEGER}, 1, #{addtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.luotf.model.Links">
+    
+    insert into t_links
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="clicknum != null">
+        clickNum,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+       <if test="status != null">
+        status,
+      </if>
+      <if test="addtime != null">
+        addTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="clicknum != null">
+        #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+       <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luotf.model.Links">
+   
+    update t_links
+    <set>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="clicknum != null">
+        clickNum = #{clicknum,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+       <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luotf.model.Links">
+    
+    update t_links
+    set link = #{link,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      clickNum = #{clicknum,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      addTime = #{addtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
