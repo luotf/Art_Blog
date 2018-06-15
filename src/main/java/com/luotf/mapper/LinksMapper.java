@@ -24,6 +24,8 @@ public interface LinksMapper {
     
     List<Links> selectAllLinks();
     
+    int selectNoApplyLinksCount();
+    
     /**
  	 *  获取友链信息，根据状态分组查询
  	 * @return

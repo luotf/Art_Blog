@@ -46,7 +46,7 @@
 					<li class="nav-header">
 						<div class="dropdown profile-element">
 							<span><img alt="images" style="width:64px;height:64px;"class="img-circle"
-								src="${pageContext.request.contextPath}/images/my.jpeg" /></span>
+								src="${pageContext.request.contextPath}/images/photos2.jpg" /></span>
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
 								class="clear"> <span class="block m-t-xs"><strong
 										class="font-bold">罗廷方</strong></span> <span
@@ -109,12 +109,17 @@
 							<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/visit/black.jsp">黑名单
 							</a></li>
 						</ul>	
-							
-							
 						</li>
-						<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/links/links.jsp"><i class="fa fa-unlink"></i> <span
-							class="nav-label">友情链接</span></a>
+						<li><a href="#" class="links"><i class="fa fa-unlink"></i> <span
+							class="nav-label">友情链接</span>               </a>
+						<ul class="nav nav-second-level">
+							<li><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/links/links.jsp"> 友情链接 </a>
+							</li>
+							<li class="isApplyLinks"><a class="J_menuItem" href="${pageContext.request.contextPath}/admin/links/isApplyLinks.jsp"> 未处理消息 </a>
+							</li>
+						</ul>	
 						</li>
+						
 					<li><a href="http://changyan.kuaizhan.com/" class="J_menuItem"><i class="fa fa-commenting-o"></i> <span
 							class="nav-label">评论模块</span></a>
 						</li>
@@ -136,81 +141,9 @@
 					<div class="navbar-header">
 						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary "
 							href="javascript:void(0)"><i class="fa fa-bars"></i> </a>
-						<form role="search" class="navbar-form-custom" method="post" >
-							<div class="form-group">
-								<input type="text" placeholder="请输入您需要查找的内容 …"
-									class="form-control" name="top-search" id="top-search">
-							</div>
-						</form>
+						
 					</div>
 					<ul class="nav navbar-top-links navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="javascript:void(0)"> <i class="fa fa-envelope"></i>
-								<span class="label label-warning">16</span>
-						</a>
-							<ul class="dropdown-menu dropdown-messages">
-								<li class="m-t-xs">
-									<div class="dropdown-messages-box">
-										<a href="profile.html" class="pull-left"> <img alt="image"
-											class="img-circle" src="${pageContext.request.contextPath}/images/a7.jpg">
-										</a>
-										<div class="media-body">
-											<small class="pull-right">46小时前</small> <strong>小四</strong>
-											这个在日本投降书上签字的军官，建国后一定是个不小的干部吧？ <br> <small
-												class="text-muted">3天前 2014.11.8</small>
-										</div>
-									</div>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<div class="dropdown-messages-box">
-										<a href="javascript:void(0)" class="pull-left"> <img alt="image"
-											class="img-circle" src="${pageContext.request.contextPath}/images/a4.jpg">
-										</a>
-										<div class="media-body ">
-											<small class="pull-right text-navy">25小时前</small> <strong>国民岳父</strong>
-											如何看待“男子不满自己爱犬被称为狗，刺伤路人”？——这人比犬还凶 <br> <small
-												class="text-muted">昨天</small>
-										</div>
-									</div>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<div class="text-center link-block">
-										<a class="J_menuItem" href="javascript:void(0)"> <i
-											class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-										</a>
-									</div>
-								</li>
-							</ul></li>
-						<li class="dropdown"><a class="dropdown-toggle count-info"
-							data-toggle="dropdown" href="javascript:void(0)"> <i class="fa fa-bell"></i> <span
-								class="label label-primary">8</span>
-						</a>
-							<ul class="dropdown-menu dropdown-alerts">
-								<li><a href="javascript:void(0)">
-										<div>
-											<i class="fa fa-envelope fa-fw"></i> 您有16条未读消息 <span
-												class="pull-right text-muted small">4分钟前</span>
-										</div>
-								</a></li>
-								<li class="divider"></li>
-								<li><a href="javascript:void(0)">
-										<div>
-											<i class="fa fa-qq fa-fw"></i> 3条新回复 <span
-												class="pull-right text-muted small">12分钟钱</span>
-										</div>
-								</a></li>
-								<li class="divider"></li>
-								<li>
-									<div class="text-center link-block">
-										<a class="J_menuItem" href="javascript:void(0)"> <strong>查看所有
-										</strong> <i class="fa fa-angle-right"></i>
-										</a>
-									</div>
-								</li>
-							</ul></li>
-						
 						<li class="dropdown hidden-xs"><a
 							class="right-sidebar-toggle" aria-expanded="false"> <i
 								class="fa fa-tasks"></i> 主题
@@ -362,15 +295,42 @@
 		src="${pageContext.request.contextPath}/js/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/plugins/layer/layer.min.js"></script>
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/hplus.js"></script>
 	<script src="${pageContext.request.contextPath}/js/contabs.js"></script>
 	
     <script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
-
+	
+	<script>
+	$(document).ready(function() {
+		initNoApplyLinksCount()  //初始化未处理链接消息数
+	});
+	//初始化未处理链接消息数
+	var initNoApplyLinksCount=function(){
+		$.ajax({
+			url : 'admin/selectNoApplyLinksCount',
+			type : 'post',
+			data:'',
+			dataType : 'json',
+			success : function(data) {
+				var count='';
+				var isApplyLinks='';
+				if(data.status==200){
+					 count='<span class="label label-danger pull-right">'+data.count+'</span>';
+					 isApplyLinks='<span class="label label-danger pull-right">'+data.count+'</span>';
+				}else{
+					 count='<span class="fa arrow"></span>';
+				}
+				$(".links").append(count);
+				$(".isApplyLinks").find('a').append(isApplyLinks);
+			},
+			error : function() {
+			}
+		});
+	} 
+	
+	</script>
 
 </body>
 

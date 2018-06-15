@@ -137,11 +137,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         var BASE_URL = '${pageContext.request.contextPath}/js/plugins/webuploader';
     </script>
     <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader.min.js"></script>
-   <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/plugins/webuploader/webuploader-demo.js"></script>
     <script>
     	var globalCount=0;
-    
         	$("#fakeloader").fakeLoader({
     	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
     	        zIndex:999, // Default zIndex
@@ -195,9 +193,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			returnAllCount();
         }
     </script>
-
-
 </body>
-
 
 </html>

@@ -514,9 +514,11 @@
 			}
 			$(".newsview").find(".tags").append(keyword);
 			$(".newsview").find(".news_infos").html($("#summernote").code());
+			var topNum=1;
 			$(".news_infos :header").each(function(){
-	        	$(this).attr("id",$(this).text());
-	        }); 
+	        	$(this).attr("id",'nav1_'+topNum+'');
+	        	topNum++;
+	        });
 			var add = '<a  class="btn btn-white" href="javascript:void(0);" onclick="addBlog(1)">发表</a>';
 			$(".modal-footer").find(".add").html(add);
 			$('pre').each(function(i,block){
@@ -531,10 +533,10 @@
 				prarm='将博客放入<span class="text-navy">草稿箱</span>';
 			}
 			var params = {
-				'title' : $("#title").val(),
-				'introduction' : $("#introduction").val(),
+				'title' : $("#title").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+				'introduction' : $("#introduction").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
 				'type.id' : $("#typeName").val(),
-				'keyword' : $("#keyword").val(),
+				'keyword' : $("#keyword").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
 				'content' : $(".news_infos").html(),
 				'images':$(".imagePath").val(),
 				 prarm:prarm,

@@ -14,11 +14,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>资源数据</title>
+<title>未处理链接</title>
 <meta name="keywords" content="">
 <meta name="description"
 	content="">
-
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
@@ -45,9 +44,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="ibox-content mailbox-content">
 						<div class="file-manager">
 							<a class="btn btn-block btn-primary compose-mail"
-								href="javascript:void(0);">资源管理</a>
+								href="javascript:void(0);">友链处理</a>
 							<div class="space-25"></div>
-							<h5>资源状态</h5>
+							<h5>友链状态</h5>
 							<ul class="folder-list m-b-md" style="padding: 0">
 								<li class="share" value="0"><a href="javascript:void(0);">
 										<i class="fa fa-inbox "></i>总共<span
@@ -58,27 +57,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										class="a-2 label label-warning pull-right">0 条</span>
 								</a></li>
 								<li class="share" value="-1"><a href="javascript:void(0);">
-										<i class="fa fa-trash-o "></i>下架<span
+										<i class="fa fa-trash-o " ></i>下架<span
 										class="a-3 label label-danger pull-right">0 条</span>
 								</a></li>
 							</ul>
 
-							<h5 class="tag-title">增加资源</h5>
+							<h5 class="tag-title">增加友链</h5>
 							<form role="form" id="commentForm">
 								<div class="form-group">
 									<div class="input-group m-b">
 										<span class="input-group-addon">名称</span> <input type="text"
-											id="title" name="title" placeholder="请输入名称"
-											class="form-control" required="" maxlength="20" aria-required="true">
+											id="name" name="name" placeholder="请输入名称" required="" maxlength="5" aria-required="true"
+											class="form-control">
 									</div>
 								</div>
-								<div class="form-group">
-									<div class="input-group m-b">
-										<span class="input-group-addon">内容</span>
-										<!-- <input type="text" placeholder="请输入内容" class="form-control"> -->
-										<textarea id="content" name="content" class="form-control" required="" maxlength="50" aria-required="true"></textarea>
-									</div>
-								</div>
+								
 								<div class="form-group">
 									<div class="input-group m-b">
 										<span class="input-group-addon">链接</span> <input type="text"
@@ -89,13 +82,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<div class="form-group">
 									<div class="col-md-9" style="padding:0px">
 										<div class="input-group m-b">
-											<span class="input-group-addon">密码</span> <input type="text"
-												id="password" name="password" placeholder="请输入密码"
+											<span class="input-group-addon">置顶量</span> <input type="text"
+												id="sort" name="sort" placeholder="置顶量"
 												class="form-control">
 										</div>
 									</div>
 								</div>
-								<button id="addResource"  class="btn btn-white pull-right"
+								<button id="addLinks" class="btn btn-white pull-right"
 									type="button">提交</button>
 							</form>
 							<div class="clearfix"></div>
@@ -106,9 +99,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="col-sm-9">
 				<div class="ibox float-e-margins">
 					<div class="mail-box-header">
-						<h2>资源信息</h2>
+						<h2>未处理友链</h2>
 
-						<table id="allResource" data-mobile-responsive="true">
+						<table id="allLinks" data-mobile-responsive="true">
 
 						</table>
 					</div>
@@ -121,24 +114,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="modal-content">
 				<div class="modal-body">
 					<div class="row">
-						<h3 class="m-t-none m-b">修改资源信息</h3>
-
-						<form role="form" class="form-horizontal" >
+						<h3 class="m-t-none m-b">修改友链信息</h3>
+						<form role="form" class="form-horizontal">
 							<div class="input-group m-b">
 								<span class="input-group-addon">名称</span> <input type="text"
-									id="newTitle" class="form-control" >
-							</div>
-							<div class="input-group m-b">
-								<span class="input-group-addon">内容</span>
-								<textarea id="newContent" class="form-control" ></textarea>
+									id="newName" class="form-control">
 							</div>
 							<div class="input-group m-b">
 								<span class="input-group-addon">链接</span> <input type="text"
-									id="newLink" class="form-control " >
+									id="newLink" class="form-control">
 							</div>
 							<div class="input-group m-b">
-								<span class="input-group-addon">密码</span> <input type="text"
-									id="newPassword" class="form-control">
+								<span class="input-group-addon">置顶量</span> <input type="text"
+									id="newSort" class="form-control">
+							</div>
+							<div class="input-group m-b">
+								<span class="input-group-addon">点击量</span> <input type="text"
+									id="clickNum" disabled placeholder="警用" class="form-control">
 							</div>
 
 							<div id="update"></div>
@@ -157,14 +149,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
 
-
-	<!-- 自定义js -->
-	<script src="${pageContext.request.contextPath}/js/content.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
-
 <script
 		src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
 	<script
@@ -172,7 +156,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
 
+	<!-- 自定义js -->
+	<script src="${pageContext.request.contextPath}/js/content.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/sweetalert/sweetalert.min.js"></script>
 
+<script src="${pageContext.request.contextPath}/js/fakeLoader.min.js"></script>
 	<!-- Bootstrap table -->
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
@@ -181,7 +170,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script
 		src="${pageContext.request.contextPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 	<script>
-	 //判断页面ajax请求加载成功的次数
 		var globalCount=0;
 		$("#fakeloader").fakeLoader({
 	        timeToHide:10000, //Time in milliseconds for fakeLoader disappear
@@ -196,8 +184,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	$(document).ready(function() {
 		
-		initResourceCount();
-		selectResource();
+		initLinksCount();
+		selectLinks();
 		
 	 });
 	
@@ -210,9 +198,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	}
 	
-		var initResourceCount=function(){
+		var initLinksCount=function(){
 			$.ajax({
-				url : '../selectResourceListByStatus',
+				url : '../selectLinksListByStatus',
 				type : 'post',
 				dataType : 'json',
 				success : function(data) {
@@ -233,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							count + '条');
 				},
 				error : function() {
-					swal("初始化资源数目错误", "请重新操作", "error");
+					swal("初始化友链数目错误", "请重新操作", "error");
 				}
 			});
 			
@@ -244,24 +232,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//草稿/发布...按钮绑定查询事件  
 	    $(".share").click(function() { 
 	 		var statu=$(this).val();
-	        var params = $('#allResource').bootstrapTable('getOptions');
+	        var params = $('#allLinks').bootstrapTable('getOptions');
 	        params.queryParams = function(params) {  
 	         return{
 	            pageSize: params.limit,
 	            page:(params.offset)/params.limit+1,
-	            title:$(".search .form-control").val(),
-	            status:statu,
+	            name:$(".search .form-control").val(),
+	            isapply:-1,
 	    		}
 	        };
-	        $('#allResource').bootstrapTable('refresh',params);
+	        $('#allLinks').bootstrapTable('refresh',params);
 	    }); 
 		
 		
 	 //初始化表格数据
-	  var selectResource=function(){
-		  $('#allResource').bootstrapTable({
+	  var selectLinks=function(){
+		  $('#allLinks').bootstrapTable({
 				method: 'post',  
-				url: "../selectLikeResourceListByPage", 
+				url: "../selectLikeLinksListByPage", 
 				dataType: "json",  
 				striped: false,     //使表格带有条纹  
 				pagination: true, //在表格底部显示分页工具栏  
@@ -311,37 +299,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                  }, 
 		                  {
 		                      title: '名称',
-		                      field: 'title',
+		                      field: 'name',
 		                      align: 'center',
 		                      width:'10%',
 		                      cellStyle:formatTableUnit,
 		                      formatter:operateOpinionFormatter
 		                  },
 		                  {
-		                      title: '内容',
-		                      field: 'content',
+		                      title: '点击数',
+		                      field: 'clicknum',
 		                      align: 'center',
-		                      width:'15%',
-		                      cellStyle:formatTableUnit,
-		                      formatter:operateOpinionFormatterContent
+		                      width:'6%',
 		                  },
-		                  
+		                  {
+		                      title: '置顶量',
+		                      field: 'sort',
+		                      align: 'center',
+		                      width:'6%',
+		                  },
 		                  {
 		                      title: '状态',
 		                      field: 'status',
 		                      align: 'center',
-		                      width:'5%',
+		                      width:'8%',
 		                      formatter:function(value,row,index){  
-		   	                  if(row.status==-1){
-		   	                	return '<button class="btn-xs btn-warning">下架</button> ';  
-		   	                  	}else if(row.status==1){
-		   	                  	return '<button class="btn-xs btn-info" >上架</button> '; 
+		   	                  if(row.isapply==-1){
+		   	                	return '<button class="btn-xs btn-warning">未处理</button> ';  
 		   	                  	}
-		   	                  	 
 		   	                    } 
 		                  },
 		                  {
-		                      title: '发表时间',
+		                      title: '申请时间',
 		                      field: 'addtime',
 		                      align: 'center',
 		                      width:'15%',
@@ -353,21 +341,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '操作',
 		                      field: 'id',
 		                      align: 'center',
-		                      width:'15%',
+		                      width:'18%',
 		                      formatter:function(value,row,index){
-			                   //编辑
-		                       var a = '<a  class=" btn-sm btn-info" data-toggle="modal" data-target="#modal-form" onclick="selectResourceById('+row.id+')"><i class="fa fa-edit" ></i> 编辑</a> ';  
+		                       //通过审核
+		                       var a = '<a  class=" btn-sm btn-info"  title="通过后将在前台展示" onclick="updateLinks('+ row.id + ',\''+ row.name + '\')"><i class="fa fa-check" ></i> 通过审核</a> '; 
 		                       //删除
-		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteResource('+ row.id + ',\''+ row.title + '\')"><i class="fa fa-trash-o" ></i> 删除</a> '; 
-			                   //下架
-		                       var c = '<a  class=" btn-sm btn-danger"  title="下架后前台将无法展示" onclick="updateResource('+ row.id + ',\''+ row.title + '\',-1)"><i class="fa fa-hand-o-down" ></i> 下架</a> '; 
-		                       //上架
-		                       var d = '<a  class=" btn-sm btn-primary"  title="上架后将在前台展示" onclick="updateResource('+ row.id + ',\''+ row.title + '\',1)"><i class="fa fa-hand-o-up" ></i> 上架</a> '; 
-		                   	 	if(row.status==-1){
-		                   	 	  return d+b;  
-		                   	 	}else if(row.status==1){
-		                   	 	  return a+c;  
-		                   	 	}
+		                       var b = '<a  class=" btn-sm btn-danger"   onclick="deleteLinks('+ row.id + ',\''+ row.name + '\')"><i class="fa fa-trash-o" ></i> 忽略</a> '; 
 		                       return a+b;  
 		                    } 
 		                  }
@@ -383,56 +362,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            //每页多少条数据
 	            pageSize: params.limit,
 	            page:(params.offset)/params.limit+1,
-	            title:$(".search .form-control").val(),
-	            content:$(".search .form-control").val(),
-	            status:1,
+	            name:$(".search .form-control").val(),
+	            isapply:-1,
 	        };
 	    }
 		
-			
-		var selectResourceById=function(id){
-			var params ={
-				id:id
-				};
-			$.ajax({
-                   url:'../selectResourceById',    
-                   type:'post',
-                   data:params,
-                   dataType:'json',    
-                   success:function (data) { 
-                    if(data.status==200){
-                    	$("#newTitle").val(data.resource.title);
-                    	$("#newContent").val(data.resource.content);
-                    	$("#newLink").val(data.resource.link);
-                    	$("#newPassword").val(data.resource.password);
-                    	var updateButton=' <button class="btn btn-sm btn-primary pull-right m-t-n-xs" onclick="updateResource('+data.resource.id+',\''+data.resource.title+'\',null)" type="button"><strong>提交</strong></button>'
-                    	$("#update").html(updateButton);
-                    }else if(data.status==0){
-                    	swal("查询失败", "不存在该类别信息", "error");
-                    }	
-                    },    
-        		    error:function(){
-        		    	swal("查询错误", "请重新操作", "error");
-        		    }	
-                }); 
-			
-		};
-		
+				
 		//设置 字数不超过宽度限制
 		  var operateOpinionFormatter=function(value,row,index){ 
 			  var title="";
-        	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
-        	  var resoureName=$(".search .form-control").val();
+        	  var linksNameLow=$(".search .form-control").val().toLowerCase();
+        	  var linksName=$(".search .form-control").val();
         	  var strStartIndex="";
         	  var strEndIndex="";
-        	  if(value.search(resoureName)!=-1||value.toLowerCase().search(resoureNameLow)!=-1){
+        	  if(value.search(linksName)!=-1||value.toLowerCase().search(linksNameLow)!=-1){
         		  var strs= new Array();
             	  strs=value.split("");
-            	  strStartIndex=value.indexOf(resoureName);
-            	  strEndIndex = strStartIndex+resoureName.length-1;
-            	  if(value.toLowerCase().search(resoureNameLow)!=-1){
-            		  strStartIndex = value.toLowerCase().indexOf(resoureNameLow);
-            		  strEndIndex = strStartIndex+resoureNameLow.length-1;
+            	  strStartIndex=value.indexOf(linksName);
+            	  strEndIndex = strStartIndex+linksName.length-1;
+            	  if(value.toLowerCase().search(linksNameLow)!=-1){
+            		  strStartIndex = value.toLowerCase().indexOf(linksNameLow);
+            		  strEndIndex = strStartIndex+linksNameLow.length-1;
             	  }
         		  for(var i=0;i<strs.length;i++){
         			  if(i>=strStartIndex&&i<=strEndIndex){
@@ -444,65 +394,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	  }else{
         		  title=value;
         	  }
-        	  if(value.length>15){
-          		  var num=strEndIndex-strStartIndex;
-          		  var index=strStartIndex-4;
-          		  if(index<0){
-          			  index=0;
-          		  }
-          		  if(resoureName==""){
-          			  return "<a href='"+row.link+"'><span  title='密码:"+row.password+"'>"+title.substring(0,150)+"..."+"</span></a>"; 
-          		  }else{
-          			  return "<a href='"+row.link+"'><span  title='密码:"+row.password+"'>"+title.substring(15*index,(15*index)+(num+1)*51+(9-num)*15)+"..."+"</span></a>"; 
-          		  }
-          	  }else{
-          		  return  "<a href='"+row.link+"'><span  title='密码:"+row.password+"'>"+title.substring(0,title.length)+"</span></a>"; 
-          	  }
+          		  return  "<a href='"+row.link+"'><span>"+title+"</span></a>"; 
 	        }
 		  
-		//设置 字数不超过宽度限制
-		  var operateOpinionFormatterContent=function(value,row,index){ 
-			  var title="";
-        	  var resoureNameLow=$(".search .form-control").val().toLowerCase();
-        	  var resoureName=$(".search .form-control").val();
-        	  var strStartIndex="";
-        	  var strEndIndex="";
-        	  if(value.search(resoureName)!=-1||value.toLowerCase().search(resoureNameLow)!=-1){
-        		  var strs= new Array();
-            	  strs=value.split("");
-            	  strStartIndex=value.indexOf(resoureName);
-            	  strEndIndex = strStartIndex+resoureName.length-1;
-            	  if(value.toLowerCase().search(resoureNameLow)!=-1){
-            		  strStartIndex = value.toLowerCase().indexOf(resoureNameLow);
-            		  strEndIndex = strStartIndex+resoureNameLow.length-1;
-            	  }
-        		  for(var i=0;i<strs.length;i++){
-        			  if(i>=strStartIndex&&i<=strEndIndex){
-        				  title+='<span style="color:#000;font-weight:bold;">'+strs[i]+'</span>';
-        			  }else{
-        				  title+='<span >'+strs[i]+'</span>';
-        			  }
-        		  }
-        	  }else{
-        		  title=value;
-        	  }
-        	  if(value.length>15){
-          		  var num=strEndIndex-strStartIndex;
-          		  var index=strStartIndex-4;
-          		  if(index<0){
-          			  index=0;
-          		  }
-          		  if(resoureName==""){
-          			  return "<span title='"+value+"'>"+title.substring(0,150)+"..."+"</span>"; 
-          		  }else{
-          			  return "<span title='"+value+"'>"+title.substring(15*index,(15*index)+(num+1)*51+(9-num)*15)+"..."+"</span>"; 
-          		  }
-          	  }else{
-          		  return  "<span  title='"+value+"'>"+title.substring(0,title.length)+"</span>"; 
-          	  }
-	        }
-		
-		
 		var formatTableUnit=function (value, row, index) {
 		  return {
 		      css: {
@@ -514,40 +408,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		};
 		
 		
-		
-	 	var updateResource=function(id,title,status){
+	 	var updateLinks=function(id,title){
 	 		var params={
 	 				'id':id,
-        			'title':$("#newTitle").val(),
-        			'content':$("#newContent").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
-        			'link':$("#newLink").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
-        			'password':$("#newPassword").val(),
-        			 prarm:'更新了资源<span class="text-info">#'+$("#newTitle").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;")+'#</span>',
+        			 isapply:1,
+        			 prarm:'审核了友链<span class="text-info">#'+title+'#</span>',
         	};
-	 		if(status!=null&&status!=""){
-	 			var p='将资源<span class="text-info">#'+title+'#</span>上架';
-	 			if(status==-1){
-	 				p='将资源<span class="text-info">#'+title+'#</span>下架';
-	 			}
-	 			params ={
-	 					'id':id,
-	        			'status':status,
-	        			 prarm:p,
-	        	};
-	 		}
 	 			 $.ajax({
-	                 url:'../updateResource',    
+	                 url:'../updateLinks',    
 	                 type:'post',
 	                 data:params,
 	                 dataType:'json',    
 	                 success:function (data) { 
 	                  if(data.status==200){
-	                	initResourceCount();
+	                	initLinksCount();
 	                	$("#modal-form").modal('hide');
-	                  	$("#allResource").bootstrapTable('refresh');
+	                  	$("#allLinks").bootstrapTable('refresh');
 	                  	swal("更新成功", "", "success");
 	                  }else if(data.status==0){
-	                	  swal("更新失败", "", "error");
+	                	swal("更新失败", "", "error");
 	                  }	
 	                  },    
 	      		    error:function(){
@@ -556,78 +435,74 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	              });	
 	 		
 	 	}
-		
-		var deleteResource=function(id,title){
+	
+	 	var deleteLinks=function(id,title){
 			var params ={
 	 				'id':id,
-	 				 prarm:'删除的资源为<span class="text-info">#'+title+'#</span>'
+	 				 prarm:'忽略的友链为<span class="text-info">#'+title+'#</span>'
         	};
 			swal({
-	             title: "确定要删除该资源吗",
-	             text: "删除后将无法恢复，请谨慎操作！",
+	             title: "确定要忽略该友链信息吗",
+	             text: "忽略后将无法恢复，请谨慎操作！",
 	             type: "warning",
 	             showCancelButton: true,
 	             confirmButtonColor: "#DD6B55",
-	             confirmButtonText: "删除",
+	             confirmButtonText: "确定",
 	             closeOnConfirm: false
 	         }, function () {
-	        	 
 	        	 $.ajax({
-	                 url:'../deleteResource',    
+	                 url:'../deleteLinks',    
 	                 type:'post',
 	                 data:params,
 	                 dataType:'json',    
 	                 success:function (data) { 
 	                  if(data.status==200){
-	                	  $("#allResource").bootstrapTable('refresh');
-	                	  initResourceCount();
-	                	  swal("删除成功！", "", "success");
+	                	  $("#allLinks").bootstrapTable('refresh');
+	                	  initLinksCount();
+	                	  swal("忽略成功！", "", "success");
 	                  }else{
 	                	  swal("删除失败", "请重新操作", "error");
 	                  }	
 	                  },    
 	      		    error:function(){
-	      		    	swal("删除错误", "请重新操作", "error");
+	      		    	swal("忽略错误", "请重新操作", "error");
 	      		    }	
 	              });
 	         });
-			
-	 		 
 		};
 	 	
 		//只有验证通过才能执行 添加
-		$("#addResource").click(function(){
+		$("#addLinks").click(function(){
 		    if($("#commentForm").valid()){
-		    	addResource();
+		    	addLinks();
 		     }
 		});
 		
-        var addResource=function(){
+        var addLinks=function(){
           var params ={
-        			title:$("#title").val(),
-        			content:$("#content").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+        			name:$("#name").val(),
         			link:$("#link").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
-        			password:$("#password").val(),
-        			prarm:'新增的资源名称为<span class="text-info">#'+$("#title").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;")+'#</span>',
+        			sort:$("#sort").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+        			isapply:1,
+        			prarm:'新增的友链名称为<span class="text-info">#'+$("#name").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;")+'#</span>',
         	};
             $.ajax({
-                   url:'../addResource',    
+                   url:'../addLinks',    
                    type:'post',
                    data:params,
                    dataType:'json',    
                    success:function (data) { 
                     if(data.status==200){
-                    	$("#allResource").bootstrapTable('refresh');
-                    	initResourceCount();
-                    	$("#title").val("");
-                    	$("#content").val("");
-                    	$("#link").val("");
-                    	$("#password").val("");
+                    	$("#allLinks").bootstrapTable('refresh');
+                    	initLinksCount();
+                    	name:$("#name").val("");
+            			link:$("#link").val("");
+            			sort:$("#sort").val("");
                     	swal("添加成功", "", "success");
                     }	
                     },    
         		    error:function(){
-        		    	swal("添加资源错误", "请重新操作", "error");
+        		    	swal("添加友链错误", "请重新操作", "error");
         		    }	
                 }); 
             };

@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	content="">
 
 <link rel="shortcut icon" href="favicon.ico">
-<link href="${pageContext.request.contextPath}/css/gruvbox-light.css"
+<link href="${pageContext.request.contextPath}/css/github-gist.css"
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -316,7 +316,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     			data[i].description='查看的博客ID为：<a class="text-info" title="点击查看对应博客"  data-toggle="modal" data-target="#myModal" onclick="selectBlogByVid('+data[i].param+')">'+data[i].param+'</a>';
                     			param="";
                     		}else{
-	                    		if(param.length>70){
+	                    		if(param.length>50){
 	                    			param=param.substring(0,5)+"...";
 	                    		}
                     		}

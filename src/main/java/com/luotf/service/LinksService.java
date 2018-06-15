@@ -14,6 +14,8 @@ public interface LinksService {
 
     int insertSelective(Links record);
     
+    int selectNoApplyLinksCount();
+    
     Links selectByPrimaryKeyAdmin(Integer id);
     
     Links selectByPrimaryKey(Integer id);

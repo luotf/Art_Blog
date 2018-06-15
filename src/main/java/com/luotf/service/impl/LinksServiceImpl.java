@@ -81,4 +81,10 @@ public class LinksServiceImpl implements LinksService {
 		return linksMapper.selectAllLinks();
 	}
 
+	@Override
+	public int selectNoApplyLinksCount() {
+		// TODO Auto-generated method stub
+		return linksMapper.selectNoApplyLinksCount();
+	}
+
 }

@@ -69,10 +69,4 @@ public class VisitTimesListener implements ServletRequestListener {
 			e.printStackTrace();
 		}
 	}
-	
-
-	/*public String getLocalIp() throws UnknownHostException {
-		InetAddress ia = InetAddress.getLocalHost();
-		return ia.getHostAddress();
-	}*/
 }

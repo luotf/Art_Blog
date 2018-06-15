@@ -506,9 +506,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      	  } 
 	      	  $(".newsview").find(".tags").append(keyword);
 	      	  $(".newsview").find(".news_infos").html($("#summernote").code());
-		      	$(".news_infos :header").each(function(){
-		        	$(this).attr("id",$(this).text());
-		        }); 
+		      	var topNum=1;
+				$(".news_infos :header").each(function(){
+		        	$(this).attr("id",'nav1_'+topNum+'');
+		        	topNum++;
+		        });
 	      	  var update='<a  class="btn btn-white" href="#" onclick="updateBlog(1)">发表</a>';
 	      	  $(".modal-footer").find(".update").html(update);
 	      	  $('pre').each(function(i,block){
@@ -526,11 +528,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
           var params ={
         		    'id':url_param,
-        			'title':$("#title").val(),
-        			'introduction':$("#introduction").val(),
+        			'title':$("#title").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+        			'introduction':$("#introduction").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
         			'type.id':$("#typeName").val(),
         			'images':$(".imagePath").val(),
-        			'keyword':$("#keyword").val(),
+        			'keyword':$("#keyword").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
         			'content':$(".news_infos").html(),
         			'status':id,
         			 prarm:prarm

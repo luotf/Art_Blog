@@ -272,6 +272,7 @@
 			initVisitCount("now")  //初始化今日访客
 			initVisitCount("history")  //初始化历史访客
 			initVisitCountByWeek(7)  //初始化num日访客 
+			
 	});
 		var returnAllCount=function(){
 			if(globalCount==6){
@@ -818,6 +819,7 @@
         return arry;  
     }
 	
+	
 	 //格式化时间
 	function Format(datetime, fmt) {
 	    if (parseInt(datetime) == datetime) {
@@ -845,11 +847,6 @@
 	    return fmt;
 	}   	
 	</script>
-	<script>
-	window.onload = function () {
-		
-    };
-</script>
 </body>
 
 </html>

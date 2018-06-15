@@ -10,11 +10,12 @@
     <result column="clickNum" jdbcType="INTEGER" property="clicknum" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="isApply" jdbcType="INTEGER" property="isapply" />
     <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
   </resultMap>
   <sql id="Base_Column_List">
     
-    id, link, name, clickNum, sort, status,addTime
+    id, link, name, clickNum, sort, status,addTime,isApply
   </sql>
   
    <select id="selectLinksListByStatus" resultType="map">
@@ -23,20 +24,28 @@
 		    COUNT(*) AS count
 		  FROM
 		    t_links
+		  where isApply=1
 		  GROUP BY status
 	</select>
  
- <select id="selectAllLinks" resultMap="BaseResultMap">
-	select 
-	<include refid="Base_Column_List" />
-		from t_links
-		where
-		 	status=1
-		ORDER BY sort DESC,addTime DESC
+	 <select id="selectAllLinks" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+			from t_links
+			where
+			 	isApply=1 and status=1
+			ORDER BY sort DESC,addTime
 	</select>
- 
- 
-  <select id="selectLikeLinksListByPage" parameterType="Map" resultMap="BaseResultMap">
+	
+ 	 <select id="selectNoApplyLinksCount" resultType="Integer">
+		select 
+			COUNT(*)
+			from t_links
+			where
+			 	isApply=-1 
+	</select>
+ 	
+ <select id="selectLikeLinksListByPage" parameterType="Map" resultMap="BaseResultMap">
 	select 
 	<include refid="Base_Column_List" />
 		from t_links
@@ -47,16 +56,21 @@
 		 	<if test="name!=null and name!=''">
 		 	and name like CONCAT(CONCAT('%', #{name}), '%')
 		 	</if>
+		 	<if test="isapply!=null and isapply!=''">
+		 		and isApply=#{isapply,jdbcType=INTEGER}
+		 	</if>
 		 </where>
-		  ORDER BY sort DESC,addTime DESC
+		  ORDER BY sort DESC,addTime
 	</select>
+ 
+ 
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     
     select 
     <include refid="Base_Column_List" />
     from t_links
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and isApply=1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     
@@ -66,10 +80,10 @@
   <insert id="insert" parameterType="com.luotf.model.Links">
     
     insert into t_links (id, link, name, 
-      clickNum, sort,status, addTime
+      clickNum, sort,status, addTime,isApply
       )
     values (#{id,jdbcType=INTEGER}, #{link,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      0, #{sort,jdbcType=INTEGER}, 1, #{addtime,jdbcType=TIMESTAMP}
+      0, #{sort,jdbcType=INTEGER}, 1, #{addtime,jdbcType=TIMESTAMP},#{isapply,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.luotf.model.Links">
@@ -97,6 +111,9 @@
       <if test="addtime != null">
         addTime,
       </if>
+      <if test="isapply != null">
+        isApply,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -119,6 +136,9 @@
       </if>
       <if test="addtime != null">
         #{addtime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="isapply != null">
+        #{isapply,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -144,6 +164,9 @@
       <if test="addtime != null">
         addTime = #{addtime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isapply != null">
+        isApply= #{isapply,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -155,7 +178,8 @@
       clickNum = #{clicknum,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
-      addTime = #{addtime,jdbcType=TIMESTAMP}
+      addTime = #{addtime,jdbcType=TIMESTAMP},
+      isApply= #{isapply,jdbcType=INTEGER},
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

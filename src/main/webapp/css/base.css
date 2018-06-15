@@ -40,3 +40,109 @@ nav ul li a { color: #fff }
 article { width: 74.2%; margin:70px auto; overflow: hidden }
 footer { width: 100%; background: #333; color: #a5a4a4; text-align: center; padding: 20px 0; }
 footer a { color: #a5a4a4 }
+
+.fixed-menu-list {
+	display: none;
+	padding: 10px;
+	width: 17%;
+	position: fixed;
+	right: 15%;
+	top: 16%;
+	bottom: 200px;
+	border: 1px solid #eee;
+	font-size: 24px;
+	z-index: 500;
+	overflow-y: auto !important;
+	background-color: #fff;
+	border-radius: 10px;
+}
+
+.sidebar-nav-toc {
+	margin: 0 0 5px;
+	padding: 0 5px;
+	color: #fc6423;
+	border-bottom: 1px solid transparent;
+	font-size: 18px;
+	text-align: center;
+}
+
+.post-toc {
+	overflow: auto;
+}
+
+.post-toc ol {
+	margin: 0;
+	padding: 0 2px 5px 10px;
+	text-align: left;
+	list-style: none;
+	font-size: 14px;
+}
+
+.post-toc .nav-item {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 1.8;
+}
+
+.post-toc ol a {
+	transition-property: all;
+	color: #999;
+	border-bottom-color: #555;
+}
+
+.tool-box {
+	position: fixed;
+	top: 26%;
+	left: 3%;
+}
+
+.tool-box ul {
+	width: 43px;
+}
+
+.tool-box ul li {
+	background: #fff;
+	padding: 6px 0px 3px;
+	border-radius: 10px;
+	margin: 10px 0px;
+}
+
+.tool-box ul li a {
+	font-size: 12px;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+}
+
+.tool-box ul li a i {
+	font-size: 20px;
+}
+
+.tool-box ul li a:hover {
+	color: #ca0c16;
+	text-decoration: none;
+}
+
+.cd-top.cd-is-visible {
+    visibility: visible;
+    opacity: 1;
+}
+.cd-top {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    bottom: 40px;
+    right: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.8) url(../images/top.png) no-repeat center;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}

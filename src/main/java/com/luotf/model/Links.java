@@ -19,6 +19,8 @@ public class Links implements Serializable{
     
     private Integer status;
     
+    private Integer isapply;
+    
     private Date addtime;
     
     public Integer getId() {
@@ -77,4 +79,13 @@ public class Links implements Serializable{
     public void setAddtime(Date addtime) {
         this.addtime = addtime;
     }
+
+	public Integer getIsapply() {
+		return isapply;
+	}
+
+	public void setIsapply(Integer isapply) {
+		this.isapply = isapply;
+	}
+    
 }

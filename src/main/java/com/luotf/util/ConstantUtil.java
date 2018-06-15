@@ -39,4 +39,10 @@ public class ConstantUtil {
 	public static final String LOGIN_IN="登录了系统";
 	
 	public static final String LOGIN_OUT="退出了系统";
+	
+	public static final String LINKS_ADD="新增友链";
+	
+	public static final String LINKS_UPDATE="更新友链";
+	
+	public static final String LINKS_DELETE="删除友链";
 }

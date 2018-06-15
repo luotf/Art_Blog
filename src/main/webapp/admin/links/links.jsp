@@ -63,11 +63,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</ul>
 
 							<h5 class="tag-title">增加友链</h5>
-							<form role="form">
+							<form role="form" id="commentForm">
 								<div class="form-group">
 									<div class="input-group m-b">
 										<span class="input-group-addon">名称</span> <input type="text"
-											id="name" name="name" placeholder="请输入名称"
+											id="name" name="name" placeholder="请输入名称" required="" maxlength="5" aria-required="true"
 											class="form-control">
 									</div>
 								</div>
@@ -76,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<div class="input-group m-b">
 										<span class="input-group-addon">链接</span> <input type="text"
 											id="link" name="link" placeholder="请输入链接"
-											class="form-control">
+											class="form-control" required="" maxlength="100" aria-required="true">
 									</div>
 								</div>
 								<div class="form-group">
@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 										</div>
 									</div>
 								</div>
-								<button onclick="addLinks()" class="btn btn-white pull-right"
+								<button id="addLinks" class="btn btn-white pull-right"
 									type="button">提交</button>
 							</form>
 							<div class="clearfix"></div>
@@ -149,7 +149,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 
-
+<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/jquery.validate.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/messages_zh.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/js/plugins/validate/form-validate-demo.js"></script>
 
 	<!-- 自定义js -->
 	<script src="${pageContext.request.contextPath}/js/content.js"></script>
@@ -234,6 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            page:(params.offset)/params.limit+1,
 	            name:$(".search .form-control").val(),
 	            status:statu,
+	            isapply:1,
 	    		}
 	        };
 	        $('#allLinks').bootstrapTable('refresh',params);
@@ -371,6 +377,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            page:(params.offset)/params.limit+1,
 	            name:$(".search .form-control").val(),
 	            status:1,
+	            isapply:1,
 	        };
 	    }
 		
@@ -447,9 +454,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		var params={
 	 				'id':id,
         			'name':$("#newName").val(),
-        			'sort':$("#newSort").val(),
-        			'link':$("#newLink").val(),
-        			 prarm:'更新了友链<span class="text-info">#'+$("#newName").val()+'#</span>',
+        			'sort':$("#newSort").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+        			'link':$("#newLink").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+        			 prarm:'更新了友链<span class="text-info">#'+$("#newName").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;")+'#</span>',
         	};
 	 		if(status!=null&&status!=""){
 	 			var p='将友链<span class="text-info">#'+title+'#</span>上架';
@@ -490,7 +497,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 				 prarm:'删除的友链为<span class="text-info">#'+title+'#</span>'
         	};
 			swal({
-	             title: "确定要删除该资源吗",
+	             title: "确定要删除该友链吗",
 	             text: "删除后将无法恢复，请谨慎操作！",
 	             type: "warning",
 	             showCancelButton: true,
@@ -498,7 +505,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	             confirmButtonText: "删除",
 	             closeOnConfirm: false
 	         }, function () {
-	        	 
 	        	 $.ajax({
 	                 url:'../deleteLinks',    
 	                 type:'post',
@@ -522,12 +528,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		 
 		};
 	 	
+		//只有验证通过才能执行 添加
+		$("#addLinks").click(function(){
+		    if($("#commentForm").valid()){
+		    	addLinks();
+		     }
+		});
+		
+		
         var addLinks=function(){
           var params ={
         			name:$("#name").val(),
-        			link:$("#link").val(),
-        			sort:$("#sort").val(),
-        			prarm:'新增的友链名称为<span class="text-info">#'+$("#name").val()+'#</span>',
+        			link:$("#link").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+        			sort:$("#sort").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+        			isapply:1,
+        			prarm:'新增的友链名称为<span class="text-info">#'+$("#name").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;")+'#</span>',
         	};
             $.ajax({
                    url:'../addLinks',    

@@ -70,190 +70,22 @@
           <input  class="input_submit" value="搜索" type="button" onclick="selectResource()">
         </form>
       </div>
-      <div class="paihang ">
-        <h3 class="ab_title"><a href="javascript:void(0)">本栏推荐</a></h3>
-        <ul class="like ">
-         
-        </ul>
-        <div class="ad"></div>
-      </div>
+     		<div class="tuijian2" >
+		      <h2 class="cloud_hometitle">推荐文章</h2>
+		      <ul class="tjpic animated fadeInDown" >
+		        <i><img src="images/t03.jpg"></i>
+		      </ul>
+		      <ul class="sidenews">
+		       
+		      </ul>
+		    </div>
     </div>
   </article>
 
-
-
-    
-
     <!-- 全局js -->
     <script src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
+	<script src="${pageContext.request.contextPath}/js/page/resource.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
-    <!-- 自定义js -->
-    
-    <script>
-    var pageNext=1;
-	var isEnd=false;
-	for(var i=1;i<=7;i++){
-		if(i==4){
-			$(".4 a").addClass("nav_color");
-		}else{
-			$('.'+i+' a').removeClass("nav_color");
-		}
-	}
-	var width = window.innerWidth || document.documentElement.clientWidth; 
-	if (width < 960) {
-		var pagenav='<p style="text-align:center;margin:-5px auto 20px;"><a href="javascript:void(0);" onclick="initResourceByPage()"><i class="fa fa-arrow-down"></i> 加载更多</a></p>';
-		$(".pageMin").html(pagenav);
-	}else{
-		$(window).scroll(function(){
-	        if(isEnd == true){
-	           return;
-	       } 
-	       if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
-	       	isEnd=true;
-	       	$('.pagelist').css('display','block');
-	       	setTimeout(function () {
-	       		initResource(pageNext);
-			},500); 
-		   }
-	   });
-	}
-	var initResourceByPage=function(){
-		setTimeout(function () {
-			initResource(pageNext);
-		},100);
-	}
-	
-	$(document).ready(function() {
-		//初始化类别信息
-		 initResource(1);
-		 initBlogByLike();
-	});
-	var initResource=function(pageNum){
-		var keyword=$("#keyword").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-		var prarm='';
-		if(keyword=="请输入关键字"){
-			keyword="";
-			prarm='none'
-		}else{
-			prarm='搜索关键字为<span class="text-info">#'+keyword+'#</span>的资源'
-		}
-		 var params={
-				 pageSize: 9,
-		         page:pageNum,
-   				 title:keyword,
-   				 content:keyword,
-   				 prarm:prarm,
-   				 status:1    //1 表示已发布
-   			 };
-              	$.ajax({
-	            url:'selectLikeResourceListByPage',    
-	            type:'get',
-	            data:params,
-	            dataType:'json',    
-	            success:function (date) {
-	            	var resourceList='';
-	            	var page=date.pageInfo;
-	            	var data=date.resourceList;
-	            	if(data.length>0){
-	            		for (var i = 0; i < data.length; i++) {
-	            			var time=i*0.05;
-	            			resourceList+='<div style="animation-delay:'+time+'s" class="col-sm-4 animated fadeIn" ><div class="panel panel-default"><div class="panel-heading" style="border:none">'+data[i].title+'</div><div class="panel-body" style=" padding: 10px 15px;"> <p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-info pull-right" style="background-color: #748c8c;">Go</span></a> </div></div></div>';
-	            		}
-	            	}else{
-	            		resourceList="无查询结果";
-	            	}
-	            	if(page.pageNum>=2){
-	            		$(".newblogs").find(".wrapper").append(resourceList);
-	            	}else{
-	            		$(".newblogs").find(".wrapper").html(resourceList);
-	            	} 
-	            	if(page.total>9){
-	            		var pagenav='';
-	            		if(page.pageNum==page.pages){
-	            			isEnd=true;
-	            			pagenav='<p style="text-align:center;margin:-5px auto 10px;"><a href="javascript:void(0);" style="border:none" onclick="window.scrollTo(0,0)"><i class="fa fa-arrow-up"></i> 没有更多了</a></p>';
-	            			if(width<960){
-	            				$(".pageMin").html(pagenav);
-	            			}
-	            		}else{
-	            			isEnd=false;
-	            			pageNext=page.pageNum+1;
-	            			pagenav='<div style="margin:-5px auto 10px;width:10%;"><div class="loader-inner ball-pulse"><div></div><div></div><div></div></div></div>';
-	            		}
-	            		$(".pagelist").html(pagenav);
-	            	}else{
-	            		$(".pagelist").html("");
-	            	}
-	            },
-			    error:function(){
-			    	alert("失败");
-			    }	
-	        });
-	};
-	
-	var pageNav=function(pageNum){
-		var index ='';
-		 layer.ready(function(){
-		   index=layer.load(2, {
-			  shade: [0.1,'#eee'] //0.1透明度的白色背景
-		    });
-		  }); 
-		 initResource(pageNum);
-		setTimeout(function () {
-		 window.scrollTo(0,0);   //滑动到浏览器顶部
-		 layer.close(index);
-	},200);
-	};
-	
-	//初始化推荐
-	var initBlogByLike=function(){
-		var params ={
-				 pageSize: 5,
-		         page:1,
-		         isrecommend:1  //1 表示推荐
-		};
-		$.ajax({
-            url:'selectGroupLikeBlogListByPage',    
-            type:'get',
-            data:params,
-            dataType:'json',    
-            success:function (data) {
-            	var likeBlog='';
-            	var data=data.blogList;
-            	var time='';
-                for (var i = 0; i < data.length; i++) {
-                	 if(data[i].introduction.length>35){
-                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
-                	}
-                	var id=data[i].id.toString(8)*data[i].id;
-                	time=time*0.05;
-                	likeBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
-                }
-                // 初始化数据
-                $(".paihang").find(".like").html(likeBlog);
-                time=time+0.2;
-                var ad='<img style="animation-delay:'+time+'s" class="animated fadeInDown" src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
-				$(".ad").html(ad);
-				
-            },    
-		    error:function(){
-		    	layer.msg('出错啦', {icon: 2});
-		    }	
-        });
-	};
-	
-	var selectResource=function(){
-		var index ='';
-	     layer.ready(function(){
-	    	index=layer.load(2, {
-				  shade: [0.1,'#eee'] //0.1透明度的白色背景
-	    	});
-	    }); 
-	     initResource(1);
-		setTimeout(function () {
-			layer.close(index);
-		},200);
-	};
-	</script>
+   
 </body>
 </html>

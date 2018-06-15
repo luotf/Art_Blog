@@ -1,5 +1,6 @@
 package com.luotf.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
+import com.luotf.annotation.SystemLog;
 import com.luotf.model.Links;
 import com.luotf.model.RResource;
 import com.luotf.service.LinksService;
+import com.luotf.util.ConstantUtil;
 
 
 
@@ -44,6 +47,28 @@ public class LinksController {
 		 returnMap.put("linksList", linksList);
 		 return returnMap;
 	 }
+	 
+	 /**
+	  * 实现申请友链功能
+	  * @param resource
+	  * @return
+	  * @throws Exception
+	  */
+	 @RequestMapping(value = "/addLinks",method = RequestMethod.POST)
+	 @ResponseBody
+	 @SystemLog(description = ConstantUtil.LINKS_ADD,userType=ConstantUtil.USERTYPE_USER) 
+	 public Map<String, Object> addLinks(String prarm,Links links) throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 links.setAddtime(new Date());
+		 if(linksService.insert(links)!=0){
+			 map.put("status", 200);
+		}else{
+			 //0表示：插入失败
+			 map.put("status", 0);
+		 }
+		 return map;
+	 }
+	 
 	 
 	 /**
 	  * 按博客id查询资源信息

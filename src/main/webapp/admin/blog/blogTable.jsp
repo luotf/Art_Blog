@@ -317,7 +317,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '序号',
 		                      align: 'center',
 		                      valign: 'middle',
-		                      width: '5%',
+		                      width: '4%',
 		                      formatter: function (value, row, index) {  
 		                    	  var index1=index+1;
 		                          var id='<span title="ID:'+row.id+'">'+index1+'</span>';
@@ -329,7 +329,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      field: 'title',
 		                      align: 'center',
 		                      valign: 'middle',
-		                      width:'15%',
+		                      width:'13%',
 		                      cellStyle:formatTableUnit,
 		                      formatter:operateOpinionFormatter
 		                  },
@@ -343,7 +343,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '关键字',
 		                      field: 'keyword',
 		                      align: 'center',
-		                      width:'15%',
+		                      width:'13%',
 		                      cellStyle:formatTableUnit,
 		                      formatter:operateOpinionFormatter
 		                  },
@@ -398,7 +398,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                      title: '操作',
 		                      field: 'id',
 		                      align: 'center',
-		                      width:'13%',
+		                      width:'15%',
 		                      formatter:function(value,row,index){
 		                   //查看	
 		                   var a = '<a  class=" btn-sm btn-info" href="#" data-toggle="modal" data-target="#myModal" onclick="selectBlogById(\''+ row.id + '\')">查看</a> ';  

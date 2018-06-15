@@ -195,8 +195,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var params ={
 				pageSize: 9,
 	            page:pageNum,
-	            title:$(".form-control").val(),
-	            keyword:$(".form-control").val(),
+	            title:$(".form-control").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
+	            keyword:$(".form-control").val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g, "&quot;").replace(/'/g, "&#039;"),
 	           	status:1  //1 表示已发布
 		};
 		$.ajax({
@@ -211,7 +211,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	var circle = new Array("text-navy","text-danger"," text-info","text-primary","text-warning");
             	for (var i = 0; i < data.length; i++) {
             		var time=0.03*i;
-            		blogList+='<li class="animated fadeInDown" style="margin: 0 0 5px 0;animation-delay:'+time+'s""><a href="javascript:void(0);" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
+            		blogList+='<li class="animated fadeInDown" style="margin: 0 0 5px 0;animation-delay:'+time+'s""><a href="javascript:void(0);" style="padding: 0;" onclick="findBlogById('+data[i].id+')"> <i style="width:14px;height: 15px;" class="fa '+circle[i%5]+' fa-circle "></i> '+data[i].title+'</a></li>';
             	}
             	if(page.pageNum>=2){
              		$(".category-list").append(blogList);

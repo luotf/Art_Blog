@@ -23,7 +23,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<!-- loginUrl：没有登录的用户请求需要登录的页面时自动跳转到登录页面，不是必须的属性，不输入地址的话会自动寻找项目web项目的根目录下的”/login.jsp”页面。 -->
 		<property name="loginUrl" value="/login" />
-		
+
 		<!-- successUrl：登录成功默认跳转页面，不配置则跳转至”/”。如果登陆前点击的一个需要登录的页面，则在登录自动跳转到那个需要登录的页面。不跳转到此。 -->
 		<property name="successUrl" value="/index.jsp" />
 
@@ -31,17 +31,17 @@
 		<property name="unauthorizedUrl" value="/login.jsp" />
 		<property name="filterChainDefinitions">
 			<value>
-			    /css/**= anon
-			    /fonts/**= anon
-			    /images/**= anon
-			    /js/**= anon
-			    /error/** =anon
+				/css/**= anon
+				/fonts/**= anon
+				/images/**= anon
+				/js/**= anon
+				/error/** =anon
 				/page/** = anon
 				/login = anon
 				/checkLogin = anon
-				/index.jsp = anon
+				/index.jsp =anon
 				/login.jsp = anon
-				<!-- 直接加载项目名时   -->
+				<!-- 直接加载项目名时 -->
 				/ = anon
 				/admin/** = authc
 			</value>
@@ -55,12 +55,14 @@
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
 	<!-- AOP式方法级权限检查 -->
-	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+	<bean
+		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor">
 		<property name="proxyTargetClass" value="true" />
 	</bean>
 
-	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
 </beans>

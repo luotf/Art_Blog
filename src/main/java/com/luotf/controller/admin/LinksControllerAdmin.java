@@ -37,7 +37,7 @@ public class LinksControllerAdmin {
 	  */
 	 @RequestMapping(value = "/addLinks",method = RequestMethod.POST)
 	 @ResponseBody
-	 @SystemLog(description = ConstantUtil.RESOURCE_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 @SystemLog(description = ConstantUtil.LINKS_ADD,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map<String, Object> addLinks(String prarm,Links links) throws Exception{
 		 Map<String, Object> map=new HashMap<String, Object>();
 		 links.setAddtime(new Date());
@@ -58,7 +58,7 @@ public class LinksControllerAdmin {
 	  */
 	 @RequestMapping(value = "/updateLinks",method = RequestMethod.POST)
 	 @ResponseBody
-	 @SystemLog(description = ConstantUtil.RESOURCE_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 @SystemLog(description = ConstantUtil.LINKS_UPDATE,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map<String, Object> updateLinks(String prarm,Links links) throws Exception{
 		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(linksService.updateByPrimaryKeySelective(links)!=0){
@@ -78,7 +78,7 @@ public class LinksControllerAdmin {
 	  */
 	 @RequestMapping(value = "/deleteLinks",method = RequestMethod.POST)
 	 @ResponseBody
-	 @SystemLog(description = ConstantUtil.RESOURCE_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
+	 @SystemLog(description = ConstantUtil.LINKS_DELETE,userType=ConstantUtil.USERTYPE_ADMIN) 
 	 public Map<String, Object> deleteLinks(String prarm, Integer id) throws Exception{
 		 Map<String, Object> map=new HashMap<String, Object>();
 		 if(linksService.deleteByPrimaryKey(id)!=0){
@@ -111,7 +111,29 @@ public class LinksControllerAdmin {
 		 return map;
 	 }
 	 
-	
+	 
+	 
+	 /**
+	  * 查询未处理的连接数
+	  * @return
+	  * @throws Exception
+	  */
+	 @RequestMapping(value = "/selectNoApplyLinksCount",method = RequestMethod.POST)
+	 @ResponseBody
+	 public Map<String, Object> selectNoApplyLinksCount() throws Exception{
+		 Map<String, Object> map=new HashMap<String, Object>();
+		 int count=linksService.selectNoApplyLinksCount();
+		 if(count!=0){
+			 map.put("status", 200);
+		 }else{
+			 //500表示：返回值为Null
+			 map.put("status", 500);
+		 }
+		 map.put("count", count);
+		 return map;
+	 }
+	 
+	 
 	 /**
 	  * 模糊组合分页查询友链信息
 	  * @param id，resource
@@ -127,6 +149,9 @@ public class LinksControllerAdmin {
 		 }
 		 if(links.getStatus()!=null){
 			 map.put("status", links.getStatus());
+		 }
+		 if(links.getIsapply()!=null){
+			 map.put("isapply", links.getIsapply());
 		 }
 		 //分页显示：第1页开始，每页显示9条记录
 		 PageHelper.startPage(page, pageSize);

@@ -5,7 +5,8 @@
 <head>
 <meta charset="utf-8">
 <title>${blog.title}</title>
-<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico"> 
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/images/favicon.ico">
 <meta name="keywords" content="${blog.keyword}" />
 <meta name="description" content="${blog.introduction}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,59 +20,82 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/font-awesome.css"
 	rel="stylesheet">
-
-<link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
-<style>
-.fixed-menu-list {
-    display: none;
-    padding: 10px;
-    width: 15%;
-    position: fixed;
-    right: 17%;
-    top: 16%;
-    bottom:200px;
-    border: 1px solid #eee;
-    font-size: 24px;
-    z-index: 500;
-    overflow-y: auto!important;
-    background-color: #fff;
-    border-radius: 10px;
-}
-.sidebar-nav-toc {
-    margin: 0 0 5px;
-    padding: 0 5px;
-    color: #fc6423;
-    border-bottom: 1px solid transparent;
-    font-size: 18px;
-    text-align: center;
-}
-.post-toc {
-    overflow: auto;
-}
-.post-toc ol {
-    margin: 0;
-    padding: 0 2px 5px 10px;
-    text-align: left;
-    list-style: none;
-    font-size: 14px;
-}
-
-.post-toc .nav-item {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    line-height: 1.8;
-}
-.post-toc ol a {
-    transition-property: all;
-    color: #999;
-    border-bottom-color: #555;
-}
-</style>
+<link href="${pageContext.request.contextPath}/css/animate.css"
+	rel="stylesheet">
 </head>
-<body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
-	<%@ include file="top.jsp" %>
+<body
+	style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
+	<%@ include file="top.jsp"%>
 	<article>
+		<div class="tool-box">
+			<!-- 分享： -->
+			<ul>
+				<li><a title="点赞" style="" href="#cyEmoji"><i
+						class="fa fa-thumbs-up"></i><br>点赞</a></li>
+				<li><a title="评论" style="" href="#news_pl"><i
+						class="fa fa-commenting"></i><br>评论</a></li>
+				<li><script type="text/javascript">
+					(function(){
+					var p = {
+					url:location.href, /*获取URL，可加上来自分享到QQ标识，方便统计*/
+					desc:'', /*分享理由(风格应模拟用户对话),支持多分享语随机展现（使用|分隔）*/
+					title:'${blog.title}', /*分享标题(可选)*/
+					summary:'${blog.introduction}', /*分享摘要(可选)*/
+					pics:'${blog.images}', /*分享图片(可选)*/
+					flash: '', /*视频地址(可选)*/
+					site:'罗廷方个人网站', /*分享来源(可选) 如：QQ分享*/
+					style:'201',
+					width:35,
+					height:35
+					};
+					var s = [];
+					for(var i in p){
+					s.push(i + '=' + encodeURIComponent(p[i]||''));
+					}
+					document.write(['<a title="分享到QQ" style="" href="http://connect.qq.com/widget/shareqq/index.html?',s.join('&'),'" target="_blank"><i class="fa fa-qq"></i><br>QQ</a>'].join(''));
+					})();
+				</script> <script src="http://connect.qq.com/widget/loader/loader.js"
+						widget="shareqq" charset="utf-8"></script></li>
+				<li><script type="text/javascript">
+					(function(){
+					var p = {
+					url:location.href,
+					showcount:'1',/*是否显示分享总数,显示：'1'，不显示：'0' */
+					desc:'',/*默认分享理由(可选)*/
+					summary:'${blog.introduction}',/*分享摘要(可选)*/
+					title:'${blog.title}', /*分享标题(可选)*/
+					site:'罗廷方个人网站',/*分享来源 如：腾讯网(可选)*/
+					pics:'${blog.images}', /*分享图片的路径(可选)*/
+					style:'201',
+					width:113,
+					height:39
+					};
+					var s = [];
+					for(var i in p){
+					s.push(i + '=' + encodeURIComponent(p[i]||''));
+					}
+					
+					document.write(['<a title="分享到空间" version="1.0" style="" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?',s.join('&'),'" target="_blank"><i class="fa fa-star"></i><br>空间</a>'].join(''));
+					})();
+				</script> <script
+						src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201"
+						charset="utf-8"></script></li>
+				<li><script type="text/javascript">
+					(function(){
+					var p = {
+					url:location.href,
+					title:'${blog.title}', /*分享标题(可选)*/
+					pic:'${blog.images}', /*分享图片的路径(可选)*/
+					};
+					var s = [];
+					for(var i in p){
+					s.push(i + '=' + encodeURIComponent(p[i]||''));
+					}
+					document.write(['<a title="分享到微博"  style="" href="http://service.weibo.com/share/share.php?',s.join('&'),'" target="_blank"><i class="fa fa-weibo"></i><br>微博</a>'].join(''));
+					})();
+				</script></li>
+			</ul>
+		</div>
 		<div class="leftbox">
 			<div class="infos">
 				<div class="newsview ">
@@ -80,10 +104,14 @@
 					</h2>
 					<c:choose>
 						<c:when test="${status== '0' || status== '500'}">
-			        		<h1 style="font-size:110px;text-align:center;margin:20px;">404</h1>
-			        		<h3 style="text-align:center;" class="font-bold">抱歉，你所访问的页面不存在~</h3>
-			        		<h4 style="margin-top:55px;text-align:center;"><a style="background-color: #676a6c;padding: 5px 10px;color: #fff;border-radius: 10px;"href="${pageContext.request.contextPath}/index.jsp">去首页</a></h4>
-			        	</c:when>
+							<h1 style="font-size:110px;text-align:center;margin:20px;">404</h1>
+							<h3 style="text-align:center;" class="font-bold">抱歉，你所访问的页面不存在~</h3>
+							<h4 style="margin-top:55px;text-align:center;">
+								<a
+									style="background-color: #676a6c;padding: 5px 10px;color: #fff;border-radius: 10px;"
+									href="${pageContext.request.contextPath}/index.jsp">去首页</a>
+							</h4>
+						</c:when>
 						<c:otherwise>
 							<h3 class="news_title animated fadeIn">${blog.title}</h3>
 							<input class="id" type="hidden" value="${blog.id}">
@@ -106,10 +134,6 @@
 				<div class="ds" style="text-align: center;opacity:0">
 					<div id="cyReward" role="cylabs" data-use="reward"></div>
 				</div>
-				<div class="share">
-					<!-- 分享： -->
-				</div>
-
 			</div>
 			<div class="nextinfo animated fadeIn">
 				<p>
@@ -125,338 +149,55 @@
 
 				</ul>
 			</div>
-			<div class="news_pl ">
+			<div class="news_pl " id="news_pl">
 				<h2>文章评论</h2>
 				<div style="width:90%;margin: 0 auto;">
-				<div  id="cyEmoji" role="cylabs" data-use="emoji"
-					sid="${blog.id }"></div>
-				<!--PC和WAP自适应版-->
-				<div  id="SOHUCS" sid="${blog.id }"></div>
+					<div id="cyEmoji" role="cylabs" data-use="emoji" sid="${blog.id }"></div>
+					<!--PC和WAP自适应版-->
+					<div id="SOHUCS" sid="${blog.id }"></div>
 				</div>
 			</div>
-			<a class="top animated fadeIn" onclick="window.scrollTo(0,0)" style="display:none;z-index:0;font-size: 24px;position: fixed;bottom: 7%;right: 30%;color:#fff"><span style="padding: 6.5px 12px;background-color: #fff;color: #999;"><i class="fa fa-angle-up"></i></span></a>
+			
 		</div>
 		<div class="rightbox  ">
-			
-			<div class="paihang ">
-				<h2 class="ab_title">
-					<a href="javascript:void(0)">本栏推荐</a>
-				</h2>
-				<ul class="like ">
+
+			<div class="dianji paihang ">
+				<h2 class="cloud_hometitle" style="padding-top: 15px;">本栏推荐</h2>
+				<ul class="like " style="padding:0px">
 
 				</ul>
 			</div>
-			<div class="dj paihang animated fadeInUp" style="display:none;animation-delay:0.3s">
-				<h2 class="ab_title">
-					<a href="javascript:void(0)">点击排行</a>
-				</h2>
-				<ul class="click">
+			<div class="dj dianji paihang animated fadeInUp"
+				style="display:none;animation-delay:0.3s">
+				<h2 class="cloud_hometitle">点击排行</h2>
+				<ul class="click" style="padding:0px">
 
 				</ul>
 
 			</div>
-
-		<!-- 	<div class="pl paihang animated fadeInUp" style="display:none">
-				<h2 class="ab_title">
-					<a href="#">评论排行</a>
-				</h2>
-				<div class='pl_paihang animated fadeIn' style="display:none" id="cyHotusers"
-					role="cylabs" data-use="hotusers"></div>
-				<script type="text/javascript" charset="utf-8"
-					src="http://changyan.itc.cn/js/lib/jquery.js"></script>
-				<script type="text/javascript" charset="utf-8"
-					src="http://changyan.sohu.com/js/changyan.labs.https.js?appid=cytzg9rLH"></script>
-			</div> -->
-			
+			<script type="text/javascript" charset="utf-8"
+				src="http://changyan.sohu.com/js/changyan.labs.https.js?appid=cytzg9rLH"></script>
 			<div class="fixed-menu-list animated fadeInUp">
-			<div class="sidebar-nav-toc">文章目录</div>
-			<div class="post-toc">
-				<div class="post-toc-content">
-					<ol class="nav1">
-					
-					</ol>
+				<div class="sidebar-nav-toc">文章目录</div>
+				<div class="post-toc">
+					<div class="post-toc-content">
+						<ol class="nav1">
+
+						</ol>
+					</div>
 				</div>
 			</div>
 		</div>
-		</div>
+		
+		<a href="#" class="top cd-top animated ">Top</a>
 	</article>
 
-	<%@ include file="fonter.jsp" %>
+	<%@ include file="fonter.jsp"%>
 	<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/page/info.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/highlight.pack.js"></script>
-		<script>hljs.initHighlightingOnLoad();</script> 
+	<script>hljs.initHighlightingOnLoad();</script>
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
-	<script type="text/javascript"> 
-	for(var i=1;i<=7;i++){
-		if(i==5){
-			$(".5 a").addClass("nav_color");
-		}else{
-			$('.'+i+' a').removeClass("nav_color");
-		}
-	}
-			$(function(){  
-		        //查找h1-h6  
-		        var i=1;
-		        var navToc="";
-		        $(".news_infos :header").each(function(){
-		        	navToc+='<li class="nav-item nav-level-4"><a class="nav-link" href="#'+$(this).text()+'"><span class="nav-number">'+i+'.</span> <span class="nav-text">'+$(this).text()+'</span></a></li>';
-		        	i++;
-		        });  
-		        $(".nav1").html(navToc);
-		    });  
-			(function(){ 
-			var appid = 'cytzg9rLH'; 
-			var conf = 'prod_230eb23e872ad7a4302e5802e6f91bf9'; 
-			var width = window.innerWidth || document.documentElement.clientWidth; 
-			if (width < 960) { 
-			window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); } })(); </script>
-				
-	<script type="text/javascript">
-	var count=1;
-	$(window).scroll(function(){
-		if($(document).scrollTop()>260&&count==1){
-				$(".dj").css("display","block");
-				initBlogByClick();
-				count++;
-		}
-		if($(document).scrollTop()>1150){
-			$(".top").css("display","block");
-			$(".fixed-menu-list").css("display","block");
-		}else{
-			$(".top").css("display","none");
-			$(".fixed-menu-list").css("display","none");
-		}
-	});
-		$(document).ready(function() {
-			Format();
-		    Tags();
-		    initBlogByLike();
-			selectPrevBlog();
-			selectNextBlog();
-			initBlogByRel();   //初始化相关文章
-			setTimeout(function () {
-			$(".ds").css("opacity","1");
-		 }, 1000);
-			
-			/* setTimeout(function () {
-				$(".pl_paihang").css("display","block");
-			},200);  */
-			
-		});
-		//加载完成后
-		window.onload = function() {
-			var oH2 = document.getElementsByTagName("h2")[0];
-			var oUl = document.getElementsByTagName("ul")[0];
-			oH2.onclick = function() {
-				var style = oUl.style;
-				style.display = style.display == "block" ? "none" : "block";
-				oH2.className = style.display == "block" ? "open" : ""
-			}
-		}
-
-		var Tags=function() {
-			var tag = $(".tag").val();
-			var keyword = "";
-			$(".newsview").find(".tags").html("");
-			if (tag != '' && tag != null) {
-				if (tag.search(';') != -1) {
-					var strs = new Array();
-					strs = tag.split(";");
-					for (var i = 0; i < strs.length && strs[i] != ''; i++) {
-						keyword += '<a href="#">' + strs[i] + '</a>';
-					}
-				} else {
-					keyword = '<a href="#">' + tag + '</a>';
-				}
-			}
-			$(".newsview").find(".tags").append(keyword);
-		}
-
-		var selectPrevBlog=function(){
-			var id=$(".id").val();
-			var params ={
-					id:id-1
-			};
-			$.ajax({
-	            url:'../selectPrevBlog',    
-	            type:'get',
-	            data:params,
-	            dataType:'json',    
-	            success:function (data) {
-	            	var preTitle="";
-		            	if(data.status==200){
-		            	  var id=data.blog.id.toString(8)*data.blog.id;
-		  	              preTitle='<a href="../find/'+id+'.html">'+data.blog.title+'</a>';
-		            	}else{
-		            	  preTitle='<span>无</span>';
-		            	}
-		            	$(".pre").html(preTitle);
-	            	}, 
-			    error:function(){
-			    	layer.msg('加载的太快啦', {icon: 2});
-			    }	
-	        });
-			
-		};
-
-		var selectNextBlog=function(){
-			var vid=$(".id").val();
-			var id=parseInt(vid)+1;
-			var params ={
-					id:id
-			};
-			$.ajax({
-	            url:'../selectNextBlog',    
-	            type:'get',
-	            data:params,
-	            dataType:'json',    
-	            success:function (data) {
-	            	var nextTitle='';
-	            	if(data.status==200){
-			            var sid=data.blog.id.toString(8)*data.blog.id;
-			            nextTitle='<a href="../find/'+sid+'.html">'+data.blog.title+'</a>';
-	            	}else{
-	            		nextTitle='<span>无</span>';
-	            	}
-	            	    $(".next").html(nextTitle);
-	            	}, 
-			    error:function(){
-			    	layer.msg('加载的太快啦', {icon: 2});
-			    }	
-	        });
-			
-		};
-		
-		//初始化相关文章
-		var initBlogByRel=function(){
-			var params ={
-					 pageSize: 6,
-			         page:1,
-			         'type.id':$(".typeId").val(),
-			};
-			$.ajax({
-	            url:'../selectGroupLikeBlogListByPage',    
-	            type:'get',
-	            data:params,
-	            dataType:'json',    
-	            success:function (data) {
-	            	var relBlog='';
-	            	var data=data.blogList;
-	                for (var i = 0; i < data.length; i++) {
-	                	if(data[i].title.length>20){
-	                		data[i].title=data[i].title.substring(0,19)+"...";
-	                	}
-	                	var id=data[i].id.toString(8)*data[i].id;
-	                	relBlog+='<li><a href="'+id+'.html" title="'+data[i].title+'">'+data[i].title+'</a></li>'
-	                }
-	                // 初始化数据
-	                $(".otherlink").find("ul").html(relBlog);
-	            },    
-			    error:function(){
-			    	layer.msg('加载的太快啦', {icon: 2});
-			    }	
-	        });
-		};
-		
-		//初始化推荐
-		var initBlogByLike=function(){
-			//设置参数
-			var params ={
-					 pageSize: 5,
-			         page:1,
-			         isrecommend:1  //1 表示推荐
-			};
-			$.ajax({
-	            url:'../selectGroupLikeBlogListByPage',    
-	            type:'get',
-	            data:params,
-	            dataType:'json',    
-	            success:function (data) {
-	            	var likeBlog='';
-	            	var data=data.blogList;
-	            	var time='';
-	                for (var i = 0; i < data.length; i++) {
-	                	if(data[i].introduction.length>35){
-	                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
-	                	}
-	                	var id=data[i].id.toString(8)*data[i].id;
-	                	time=i*0.05;
-	                	likeBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
-	                }
-	                // 初始化数据
-	                $(".paihang").find(".like").html(likeBlog);
-	                time=time+0.1;
-	                var ad='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="${pageContext.request.contextPath}/images/ad300x100.jpg">';
-					$(".ad").html(ad);
-					
-	            },    
-			    error:function(){
-			    	layer.msg('加载的太快啦', {icon: 2});
-			    }	
-	        });
-		};
-		
-		//初始化点击排行
-		var initBlogByClick=function(){
-			//设置参数
-			var params ={
-					 pageSize: 5,
-			         page:1,
-			         sort:"clickNum",   //按点击量排序,默认按时间
-			};
-			$.ajax({
-	            url:'../selectGroupLikeBlogListByPage',    
-	            type:'get',
-	            data:params,
-	            dataType:'json',    
-	            success:function (data) {
-	            	var clickBlog='';
-	            	var data=data.blogList;
-	            	var time='';
-	                for (var i = 0; i < data.length; i++) {
-	                	if(data[i].introduction.length>35){
-	                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
-	                	}
-	                	time=i*0.05;
-	                	var id=data[i].id.toString(8)*data[i].id;
-	                	clickBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>'
-	                }
-	                // 初始化数据
-	                time=time+0.1;
-	                $(".paihang").find(".click").html(clickBlog);
-	                var ab='<img style="animation-delay:'+time+'s" class="animated fadeIn" src="${pageContext.request.contextPath}/images/wx.jpg">';
-	            	$(".weixin").find("ul").html(ab);
-	            	
-	            },    
-			    error:function(){
-			    	layer.msg('加载的太快啦', {icon: 2});
-			    }	
-	        });
-		};
-		
-		
-		//格式化时间
-		var Format=function() {
-			var datetime=$(".addtime").val();
-			var month = new Array();
-			month["Jan"] = '01';
-			month["Feb"] = '02';
-			month["Mar"] = '03';
-			month["Apr"] = '04';
-			month["May"] = '05';
-			month["Jun"] = '06';
-			month["Jul"] = '07';
-			month["Aug"] = '08';
-			month["Sep"] = '09';
-			month["Oct"] = 10;
-			month["Nov"] = 11;
-			month["Dec"] = 12;
-			var arr = new Array();
-			arr = datetime.split(" ");
-			var fmt = arr[5] + '-' + month[arr[1]] + '-' + arr[2];
-			$(".au02").html(fmt);
-		}
-	</script>
 </body>
 </html>
