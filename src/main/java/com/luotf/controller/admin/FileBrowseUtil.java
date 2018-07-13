@@ -56,17 +56,19 @@ public class FileBrowseUtil {
         File root = new File(filePath);
         File[] files = root.listFiles();
         String[] arr=new String[10];
-        for (File file : files) {
+        if(files!=null){
+          for (File file : files) {
             if (file.isDirectory()) {
                 /*
                  * 递归调用
                  */
-            	arr=file.getAbsolutePath().split(":");
+                arr=file.getAbsolutePath().split(":");
                 getFiles(arr[1].replace("\\","/"),fileListAll);
             } else {
-            	arr=file.getAbsolutePath().split(":");
+                arr=file.getAbsolutePath().split(":");
                 fileList.add(arr[1].replace("\\","/"));
             }
+           }
         }
         return fileListAll;
     }
