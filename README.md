@@ -66,7 +66,7 @@ contabs | 选项卡
 
 #### <font color=#1E90FF size=3 >[ 详情页 ]</font> 显示博客的具体内容，评论，推荐博客等。（截长屏 导致图片浮动元素 出现多次）
 <html>
-  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info.jpg" width="650" div align=left height="750" alt="PC"/>
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info.jpg" width="590" div align=left height="750" alt="PC"/>
   <img src="https://github.com/luotf/Art_Blog/raw/master/images/info_1.png" width="240" div align=right height="426" alt="手机"/>
 </html>
 <br>
