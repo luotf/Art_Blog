@@ -1,4 +1,6 @@
 # Art_Blog
+&emsp;&emsp;基于Spring+SpringMVC+Mybatis架构的开源博客：**博客管理**、**图表数据**、**日志分析**、**访问记录**、**图库管理**、**资源管理**、**友链通知**等。良好的页面预加载，无限滚动加载，文章置顶，博主推荐等。提供 **<font color=#FF6347 size=2 >用户端+管理端</font>** 的整套系统源码。**<font color=#FF6347 size=2 >响应式设计，支持手机、平板、PC，都有良好的视觉效果！</font>**
+
 ### 前言
 > 大三学生，断断续续的三个月，终于完成了一个属于自己的作品。<br>
 > 从需求分析，功能设计，前端到后台，再到数据库的设计。一点点的积累，一点点的完善。<br>
@@ -17,9 +19,6 @@
 ### 演示站点
 [www.luotf.com](http://www.luotf.com/)   <br>
 后台账号：luotf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:admin
-
-### 项目介绍
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于Spring+SpringMVC+Mybatis架构的开源博客：**博客管理**、**图表数据**、**日志分析**、**访问记录**、**图库管理**、**资源管理**、**友链通知**等。良好的页面预加载，无限滚动加载，文章置顶，博主推荐等。提供 **<font color=#FF6347 size=2 >用户端+管理端</font>** 的整套系统源码。**<font color=#FF6347 size=2 >响应式设计，支持手机、平板、PC，都有良好的视觉效果！</font>**
 
 ### 技术栈
 #### 后端
@@ -102,18 +101,18 @@ contabs | 选项卡
 > 1. 下载并导入本项目。
 > 2. 在数据库中导入webapp文件下的 **blog.sql** ，赠送几千条数据。 (如果sql文件导入出错,请粘贴导入) 导入成功后将会多一个 **blog** 数据库。
 > 3. 修改项目中的 **mysql.properties** 中的数据库信息。
-> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host>元素中添加子元素。 
+> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host>元素中添加子元素。 （重要）
 > ```
 > <Context path="/upload" docBase="C:\upload"/> 
 > ```
-> 这里采用虚拟目录映射，实现上传图片路径与项目路径分离<br>
->  5. 然后通过Tomcat启动项目即可  http://localhost:8080/Blog <br>
->  6. 如果个别文件有报错，请直接无视。因版本和开发工具差异。
+> &emsp;这里采用虚拟目录映射，实现上传图片路径与项目路径分离。<br>
+> &emsp;5. 然后通过Tomcat启动项目即可  http://localhost:8080/Blog <br>
+> &emsp;6. 如果个别文件有报错，请直接无视。因版本和开发工具差异。
 > 
 
 ### 开源赞助
 &emsp;&emsp;如果你觉得 本系统不错，有用，对你的学习有帮助，以及作者的辛苦，请作者喝杯 咖啡吧。
-#### <center><font color=#00BFFF size=3 >[ 欢迎 Star，Fork 谢谢。]</font></center>
+#### <center><font color=#00BFFF size=3 >[ 欢迎 Star，Fork ]&emsp;&emsp;[ 欢迎提出问题，提出需求 ]&emsp;&emsp;[ 谢谢 ！]</font></center>
 <html>
   <div align=left>支付宝|<img src="https://github.com/luotf/Art_Blog/blob/master/images/pay_1.jpg" width="200" div align=left height="200" alt="支付宝"/><!--在这里插入内容-->
 </html>
