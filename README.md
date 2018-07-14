@@ -66,13 +66,13 @@ contabs | 选项卡
 
 #### <font color=#1E90FF size=3 >[ 详情页 ]</font> 显示博客的具体内容，评论，推荐博客等。（截长屏 导致图片浮动元素 出现多次）
 <html>
-  <img src="https://github.com/luotf/Art_Blog/blob/master/images/info.jpg" width="590" div align=left height="750" alt="PC"/>
-  <img src="https://github.com/luotf/Art_Blog/blob/master/images/info_1.png" width="240" div align=right height="426" alt="手机"/>
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info.jpg" width="650" div align=left height="750" alt="PC"/>
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info_1.png" width="240" div align=right height="426" alt="手机"/>
 </html>
 <br>
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;移动端
-<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>  <br><br><br>
 <br><br><br><br><br><br><br>
 <br><br><br><br><br><br>
 
@@ -114,9 +114,9 @@ contabs | 选项卡
 &emsp;&emsp;如果你觉得 本系统不错，有用，对你的学习有帮助，以及作者的辛苦，请作者喝杯 咖啡吧。
 #### <center><font color=#00BFFF size=3 >[ 欢迎 Star，Fork ]&emsp;&emsp;[ 欢迎提出问题，提出需求 ]&emsp;&emsp;[ 谢谢 ！]</font></center>
 <html>
-  <div align=left>支付宝|<img src="https://github.com/luotf/Art_Blog/blob/master/images/pay_1.jpg" width="200" div align=left height="200" alt="支付宝"/><!--在这里插入内容-->
+  <div align=left>支付宝|<img src="https://github.com/luotf/Art_Blog/raw/master/images/pay_1.jpg" width="200" div align=left height="200" alt="支付宝"/><!--在这里插入内容-->
 </html>
 <html>
   <center>微信</center>
-  <img src="https://github.com/luotf/Art_Blog/blob/master/images/pay_2.jpg" width="200" div align=center height="200" alt="微信"/><!--在这里插入内容-->
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/pay_2.jpg" width="200" div align=center height="200" alt="微信"/><!--在这里插入内容-->
 </html>
