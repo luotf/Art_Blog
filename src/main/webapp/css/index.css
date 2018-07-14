@@ -1,7 +1,7 @@
- @charset "gb2312";
+ @charset "UTF-8";
 .leftbox { width: 70%; float: left; overflow: hidden }
 .rightbox { width: 28%; float: right; overflow: hidden }
-/*Í¼Æ¬Õ¹Ê¾*/
+/*å›¾ç‰‡å±•ç¤º*/
 .pics { margin: 1% 0; overflow: hidden }
 .pics ul li { width: 31.9%; height: 155px; float: left; margin: 10px auto; display: block; overflow: hidden; border-radius: 5px; position: relative; }
 .pics ul li img { margin: auto; height: 100%; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
@@ -16,7 +16,7 @@
 .hometitle span { float: right; font-weight: normal; font-size: 14px; height: 42px; overflow: hidden; position: absolute; right: 0; width: 100%; text-align: right }
 .hometitle span a { display: block; float: right; position: relative; overflow: hidden; margin-right: 20px }
 .hometitle span a:after { content: ''; display: block; width: 1px; height: 20px; border-radius: 10px; background: #000; -webkit-transform: rotate(45deg); transform: rotate(45deg); position: absolute; bottom: -10px }
-/*ÌØ±ðÍÆ¼ö*/
+/*ç‰¹åˆ«æŽ¨è*/
 .tuijian { background: #fff; overflow: hidden; width: 100%; clear: both; border-radius: 10px;margin: 20px 0px; }
 .tuijian ul { overflow: hidden; padding: 0 1%;width:100% }
 .tuijian li { float: left; width: 27%; border-bottom: #ccc 1px solid; border-left: #ccc 1px solid; overflow: hidden; padding: 3% }
@@ -33,7 +33,7 @@
 .tuijian li:hover { background: #fff; box-shadow: #000 1px 1px 10px; }
 .tuijian li:hover img { transform: scale(1.1) }
 
-/*×îÐÂÎÄÕÂ*/
+/*æœ€æ–°æ–‡ç« */
 .newblogs { background: #fff; overflow: hidden; width: 100%; clear: both; border-radius: 10px; margin: 20px 0 }
 h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
 .blogpic { overflow: hidden; width: 30%; height: 115px; display: block; float: left; margin-right: 20px; border-radius: 5px; background: #333333; }
@@ -267,7 +267,7 @@ h3.blogtitle { line-height: 30px; height: 30px; margin: 10px 0; }
 .gd { width: 260px; top: 100px; z-index: 999; position: fixed; _position: absolute; _top:expression(documentElement.scrollTop + 0 + "px");
 _margin-top: 100px; }
 
-/*¹ØÓÚÎÒ*/
+/*å…³äºŽæˆ‘*/
 .aboutme { background: #FFF; border-radius: 10px; overflow: hidden }
 .ab_title { text-align: center;font-size: 150%; position: relative; margin: 20px; width: 1005 }
 .ab_title a:hover{text-decoration:none}
@@ -283,7 +283,7 @@ _margin-top: 100px; }
 /*height: 26px; */
 line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 0 5px }
 .input_submit { background-color: #333; color: #FFF; float: left; width: 22%; border: none; cursor: pointer; height: 28px; line-height: 28px; border-radius: 0 5px 5px 0 }
-/*ÅÅÐÐ*/
+/*æŽ’è¡Œ*/
 .paihang { background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .paihang ul { padding: 10px; }
 .paihang ul li {    overflow: hidden; border-bottom: solid 1px #EAEAEA; font-size: 14px; margin: 0 0 10px 0; padding: 0 0 10px 0; }
@@ -294,7 +294,7 @@ line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 
 .paihang li:hover i img { transform: scale(1.1) }
 
 .paihang ul li a:hover { color: #000;text-decoration: none; }
-.paihang ul li:hover { border-bottom: #000 1px solid; }/* Êó±ê·ÅÉÏÈ¥µÄÐ§¹û */
+.paihang ul li:hover { border-bottom: #000 1px solid; }/* é¼ æ ‡æ”¾ä¸ŠåŽ»çš„æ•ˆæžœ */
 .paihang ul li:hover p { color: #000; }
 .paihang ul li:hover b a { color: #000; }
 .ad i mg { width: 100%; margin: auto; display: block }
@@ -307,12 +307,12 @@ line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 
 /*wx*/
 .weixin { width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .weixin img { width: 100%; height: auto }
-/* ·ÖÒ³ */
+/* åˆ†é¡µ */
 .pagelist { text-align: center; color: #666; width: 100%; clear: both; margin: 20px 0; padding-top: 20px }
 .pagelist a { color: #666; margin: 0 2px; border: 1px solid #000; padding: 5px 10px; }
 .pagelist a:hover { color: #f00; text-decoration: underline }
 .pagelist > b { border: 1px solid #000; padding: 5px 10px; }
-/*ÄÚÈÝÒ³*/
+/*å†…å®¹é¡µ*/
 .infos { width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .newsview { padding: 20px }
 .intitle { line-height: 40px; height: 40px; font-size: 14px; ; border-bottom: #000 2px solid; }
@@ -338,16 +338,16 @@ line-height: 26px; background-color: #f2f2f2; float: left; border-radius: 5px 0 
 .newblogs li:hover img { transform: scale(1.1) }
 
 .share { padding: 20px; }
-.nextinfo { line-height: 24px; width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }/*ÉÏÒ»ÆªÏÂÒ»Æª*/
+.nextinfo { line-height: 24px; width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }/*ä¸Šä¸€ç¯‡ä¸‹ä¸€ç¯‡*/
 .nextinfo p { padding: 4px 10px; border-radius: 5px; }
 .nextinfo a:hover { color: #000; text-decoration: underline }
-/*Ïà¹ØÎÄÕÂ*/
+/*ç›¸å…³æ–‡ç« */
 .otherlink { width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .otherlink h2 { border-bottom: #000 2px solid; line-height: 40px; font-size: 14px; background: url(../images/5794.png) left 10px center no-repeat; padding-left: 40px; color: #000 }
 .otherlink ul { margin: 10px 0 }
 .otherlink li { line-height: 24px; height: 24px; display: block; width: 300px; float: left; overflow: hidden; margin-right: 30px; padding-left: 10px; }
 .otherlink li a:hover { text-decoration: underline; color: #000 }
-/*ÎÄÕÂÆÀÂÛ*/
+/*æ–‡ç« è¯„è®º*/
 .news_pl { margin: 10px 0; width: 100%; background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .news_pl h2 { background: url(../images/newsbg03.png) no-repeat left 10px center; border-bottom: #000 2px solid; line-height: 40px; font-size: 14px; padding-left: 30px; color: #000 }
 
@@ -372,7 +372,7 @@ nav ul li { display: none; }
 .tuijian li:nth-child(3) { border-left: 0 }
 .tuijian li:nth-child(4) { border-left: #ccc 1px solid; border-bottom: #ccc 1px solid }
 .tuijian li:nth-child(5) { border-left: 0 }
-h3.blogtitle { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }/*ÎÄ×ÖÒç³ö*/
+h3.blogtitle { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }/*æ–‡å­—æº¢å‡º*/
 .blogpic { overflow: hidden; width: 100%; height: 160px; float: none; border-radius: 5px; }
 .lm, .viewnum, .pingl { display: none }
 .input_text { width: 70% }
