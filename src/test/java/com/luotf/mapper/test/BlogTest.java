@@ -1,9 +1,9 @@
-package com.luotf.mapper.tset;
+package com.luotf.mapper.test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.generator.logging.Log;
@@ -24,9 +24,9 @@ import com.luotf.service.VisitService;
 
 @RunWith(SpringJUnit4ClassRunner.class) // 表示继承了SpringJUnit4ClassRunner类 
 @ContextConfiguration(locations = {"classpath:spring/applicationContext-*.xml" }) 
+@Ignore
 public class BlogTest{
 	private Log log = LogFactory.getLog(BlogTest.class);
-	
 	
 	@Autowired
 	private BlogService blogService;
