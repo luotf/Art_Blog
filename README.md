@@ -1,4 +1,6 @@
 # Art_Blog
+&emsp;&emsp;基于Spring+SpringMVC+Mybatis架构的开源博客：**博客管理**、**图表数据**、**日志分析**、**访问记录**、**图库管理**、**资源管理**、**友链通知**等。良好的页面预加载，无限滚动加载，文章置顶，博主推荐等。提供 **<font color=#FF6347 size=2 >用户端+管理端</font>** 的整套系统源码。**<font color=#FF6347 size=2 >响应式设计，支持手机、平板、PC，都有良好的视觉效果！</font>**
+
 ### 前言
 > 大三学生，断断续续的三个月，终于完成了一个属于自己的作品。<br>
 > 从需求分析，功能设计，前端到后台，再到数据库的设计。一点点的积累，一点点的完善。<br>
@@ -17,9 +19,6 @@
 ### 演示站点
 [www.luotf.com](http://www.luotf.com/)   <br>
 后台账号：luotf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密码:admin
-
-### 项目介绍
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于Spring+SpringMVC+Mybatis架构的开源博客：**博客管理**、**图表数据**、**日志分析**、**访问记录**、**图库管理**、**资源管理**、**友链通知**等。良好的页面预加载，无限滚动加载，文章置顶，博主推荐等。提供 **<font color=#FF6347 size=2 >用户端+管理端</font>** 的整套系统源码。**<font color=#FF6347 size=2 >响应式设计，支持手机、平板、PC，都有良好的视觉效果！</font>**
 
 ### 技术栈
 #### 后端
@@ -60,67 +59,6 @@ contabs | 选项卡
 
 ### 界面预览
 #### <font color=#1E90FF size=3 >[ 首页 ]</font> 显示 置顶的博客，特别推荐，点击排行，最新博客等，无限滚动加载。
-<<<<<<< HEAD
-![首页](http://www.luotf.com/upload/blog/images/index.jpg)
-
-#### <font color=#1E90FF size=3 >[ 列表页 ]</font> 显示某个类别的博客列表，关键字搜索，博客数量，专题等。
-![列表页](http://www.luotf.com/upload/blog/images/list.jpg)
-
-#### <font color=#1E90FF size=3 >[ 详情页 ]</font> 显示博客的具体内容，评论，推荐博客等。（截长屏 导致图片浮动元素 出现多次）
-<html>
-  <img src="http://www.luotf.com/upload/blog/images/info.jpg" width="590" div align=left height="750" alt="PC"/>
-  <img src="http://www.luotf.com/upload/blog/images/info_1.png" width="240" div align=right height="426" alt="手机"/>
-</html>
-<br>
-
-#### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;移动端
-<br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br>
-<br><br><br><br><br><br>
-
----
-
-#### <font color=#1E90FF size=3 >[ 后端首页 ]</font> 显示博客数，资源数，垃圾数，访客图表等。
-![后台首页](http://www.luotf.com/upload/blog/images/后台首页.png)
-
-#### <font color=#1E90FF size=3 >[ 博客管理 ]</font> 增/删/改/查博客，设置博客专栏等。
-![博客管理](http://www.luotf.com/upload/blog/images/博客管理.jpg)
-
-#### <font color=#1E90FF size=3 >[ 添加博客 ]</font> 封面图片可以直接选择服务器目录，也可以自己上传。富文本采用summernote，整合heightlight 实现代码高亮。提供发布前预览功能。
-![添加博客](http://www.luotf.com/upload/blog/images/addBlog.png)
-#### <font color=#1E90FF size=3 >[ 图表页 ]</font> 以图表的形式显示出博客的浏览量，网站访问量，发表量，日志数等。
-![图表](http://www.luotf.com/upload/blog/images/图表.jpg)
-
-#### <font color=#1E90FF size=3 >[ 操作日志 ]</font> 可以记录管理员的增删改查操作，可以记录下用户具体的查询内容等。
-![操作日志](http://www.luotf.com/upload/blog/images/操作日志.jpg)
-
-#### <font color=#1E90FF size=3 >[ 访问记录 ]</font> 获取用户的真实IP、地理位置、浏览器及操作系统等。 用户每天第一次登录将会被记录、一天内多次登录或清除cookie将不会被记录。
-![访问记录](http://www.luotf.com/upload/blog/images/访问记录.jpg)
-
-#### 其余界面访问 www.luotf.com 预览 &emsp;&emsp;后台:luotf/admin  
-### 项目部署说明
-> 1. 下载并导入本项目。
-> 2. 在数据库中导入webapp文件下的 **blog.sql** ，赠送几千条数据。 (如果sql文件导入出错,请粘贴导入) 导入成功后将会多一个 **blog** 数据库。
-> 3. 修改项目中的 **mysql.properties** 中的数据库信息。
-> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host>元素中添加子元素。 
-> ```
-> <Context path="/upload" docBase="C:\upload"/> 
-> ```
-> 这里采用虚拟目录映射，实现上传图片路径与项目路径分离<br>
->  5. 然后通过Tomcat启动项目即可  http://localhost:8080/Blog <br>
->  6. 如果个别文件有报错，请直接无视。因版本和开发工具差异。
-> 
-
-### 开源赞助
-&emsp;&emsp;如果你觉得 本系统不错，有用，对你的学习有帮助，以及作者的辛苦，请作者喝杯 咖啡吧。
-#### <center><font color=#00BFFF size=3 >[ 欢迎 Star，Fork 谢谢。]</font></center>
-<html>
-  <div align=left>支付宝|<img src="http://www.luotf.com/upload/blog/images/pay_1.jpg" width="200" div align=left height="200" alt="支付宝"/><!--在这里插入内容-->
-</html>
-<html>
-  <center>微信</center>
-  <img src="http://www.luotf.com/upload/blog/images/pay_2.jpg" width="200" div align=center height="200" alt="微信"/><!--在这里插入内容-->
-=======
 ![首页](images/index.jpg)
 
 #### <font color=#1E90FF size=3 >[ 列表页 ]</font> 显示某个类别的博客列表，关键字搜索，博客数量，专题等。
@@ -128,13 +66,13 @@ contabs | 选项卡
 
 #### <font color=#1E90FF size=3 >[ 详情页 ]</font> 显示博客的具体内容，评论，推荐博客等。（截长屏 导致图片浮动元素 出现多次）
 <html>
-  <img src="https://github.com/luotf/Art_Blog/blob/master/images/info.jpg" width="590" div align=left height="750" alt="PC"/>
-  <img src="https://github.com/luotf/Art_Blog/blob/master/images/info_1.png" width="240" div align=right height="426" alt="手机"/>
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info.jpg" width="650" div align=left height="750" alt="PC"/>
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info_1.png" width="240" div align=right height="426" alt="手机"/>
 </html>
 <br>
 
 #### &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;移动端
-<br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br>  <br><br><br>
 <br><br><br><br><br><br><br>
 <br><br><br><br><br><br>
 
@@ -163,22 +101,22 @@ contabs | 选项卡
 > 1. 下载并导入本项目。
 > 2. 在数据库中导入webapp文件下的 **blog.sql** ，赠送几千条数据。 (如果sql文件导入出错,请粘贴导入) 导入成功后将会多一个 **blog** 数据库。
 > 3. 修改项目中的 **mysql.properties** 中的数据库信息。
-> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host>元素中添加子元素。 
+> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host>元素中添加子元素。 （重要）
 > ```
 > <Context path="/upload" docBase="C:\upload"/> 
 > ```
-> 这里采用虚拟目录映射，实现上传图片路径与项目路径分离<br>
->  5. 然后通过Tomcat启动项目即可  http://localhost:8080/Blog <br>
->  6. 如果个别文件有报错，请直接无视。因版本和开发工具差异。
+> &emsp;这里采用虚拟目录映射，实现上传图片路径与项目路径分离。<br>
+> &emsp;5. 然后通过Tomcat启动项目即可  http://localhost:8080/Blog <br>
+> &emsp;6. 如果个别文件有报错，请直接无视。因版本和开发工具差异。
 > 
 
 ### 开源赞助
 &emsp;&emsp;如果你觉得 本系统不错，有用，对你的学习有帮助，以及作者的辛苦，请作者喝杯 咖啡吧。
-#### <center><font color=#00BFFF size=3 >[ 欢迎 Star，Fork 谢谢。]</font></center>
+#### <center><font color=#00BFFF size=3 >[ 欢迎 Star，Fork ]&emsp;&emsp;[ 欢迎提出问题，提出需求 ]&emsp;&emsp;[ 谢谢 ！]</font></center>
 <html>
-  <div align=left>支付宝|<img src="https://github.com/luotf/Art_Blog/blob/master/images/pay_1.jpg" width="200" div align=left height="200" alt="支付宝"/><!--在这里插入内容-->
+  <div align=left>支付宝|<img src="https://github.com/luotf/Art_Blog/raw/master/images/pay_1.jpg" width="200" div align=left height="200" alt="支付宝"/><!--在这里插入内容-->
 </html>
 <html>
   <center>微信</center>
-  <img src="https://github.com/luotf/Art_Blog/blob/master/images/pay_2.jpg" width="200" div align=center height="200" alt="微信"/><!--在这里插入内容-->
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/pay_2.jpg" width="200" div align=center height="200" alt="微信"/><!--在这里插入内容-->
 </html>
