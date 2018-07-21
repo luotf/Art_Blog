@@ -14,8 +14,10 @@ for(var i=1;i<=7;i++){
 		        //查找h1-h6  
 		        var i=1;
 		        var navToc="";
+		        var navToc="";
 		        $(".news_infos :header").each(function(){
 		        	navToc+='<li class="nav-item nav-level-4" id="#nav1_'+i+'"><a class="nav-link" ><span class="nav-number">'+i+'.</span> <span class="nav-text">'+$(this).text()+'</span></a></li>';
+		        	$("#nav1_"+i).css({'border-left':'5px solid #FF926F','background-color':' #f6f6f6',padding:'7px 20px'});
 		        	i++;
 		        });  
 		        $(".nav1").html(navToc);
