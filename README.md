@@ -101,7 +101,7 @@ contabs | 选项卡
 > 1. 下载并导入本项目。
 > 2. 在数据库中导入webapp文件下的 **blog.sql** ，赠送几千条数据。 (如果sql文件导入出错,请粘贴导入) 导入成功后将会多一个 **blog** 数据库。
 > 3. 修改项目中的 **mysql.properties** 中的数据库信息。
-> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host>元素中添加子元素。 （重要）
+> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host></Host>元素中添加子元素。 （重要）
 > ```
 > <Context path="/upload" docBase="C:\upload"/> 
 > ```

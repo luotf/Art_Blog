@@ -38,7 +38,7 @@
     ,
     <include refid="Blob_Column_List" />
     from t_blog
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and status=1
   </select>
   
   <select id="selectBlogByTypeId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
