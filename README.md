@@ -101,7 +101,7 @@ contabs | 选项卡
 > 1. 下载并导入本项目。
 > 2. 在数据库中导入webapp文件下的 **blog.sql** ，赠送几千条数据。 (如果sql文件导入出错,请粘贴导入) 导入成功后将会多一个 **blog** 数据库。
 > 3. 修改项目中的 **mysql.properties** 中的数据库信息。
-> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在<Host>元素中添加子元素。 （重要）
+> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在**Host**元素中添加子元素。 （重要）
 > ```
 > <Context path="/upload" docBase="C:\upload"/> 
 > ```
@@ -120,3 +120,4 @@ contabs | 选项卡
   <center>微信</center>
   <img src="https://github.com/luotf/Art_Blog/raw/master/images/pay_2.jpg" width="200" div align=center height="200" alt="微信"/><!--在这里插入内容-->
 </html>
+#### 最新更新情况，[**请移至这里**](https://github.com/luotf/Art_Blog/tree/master)
