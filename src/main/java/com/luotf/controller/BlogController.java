@@ -38,7 +38,7 @@ public class BlogController {
 			//0表示查询 错误
 			model.addAttribute("status", 0);
 		}else{
-			Blog blog=blogService.selectBlogById(sId);
+			Blog blog=blogService.selectBlogUserById(sId);
 			if(blog==null){
 				//查询的博客不存在
 				model.addAttribute("status", 500);
@@ -123,6 +123,7 @@ public class BlogController {
 		 if(blog.getType()!=null){
 			 map.put("type_id", blog.getType().getId());
 		 }
+		 map.put("status", 1);
 		 if(blog.getStatus()!=null){
 			 map.put("status", blog.getStatus());
 		 }
@@ -178,6 +179,7 @@ public class BlogController {
 		 if(blog.getType()!=null){
 			 map.put("type_id", blog.getType().getId());
 		 }
+		 map.put("status", 1);
 		 if(blog.getStatus()!=null){
 			 map.put("status", blog.getStatus());
 		 }
@@ -202,5 +204,27 @@ public class BlogController {
 		 returnMap.put("pageInfo", pageInfo);
 		 return returnMap;
 	 }
+
 	 
+	 
+	 /**
+      * 模糊组合分页查询博客信息(and)
+      * @param id
+      * @return
+      * @throws Exception
+      */
+     @RequestMapping(value = "/selectBlogByAllType")
+     @ResponseBody
+     public Map<String, Object> selectBlogByAllType() throws Exception{
+         Map<String,List<Blog>> blogMap=blogService.selectBlogByAllType();
+         Map<String, Object> returnMap=new HashMap<String, Object>();
+         if(blogMap.size()>0){
+             returnMap.put("status", 200);
+         }else{
+             //500表示：返回值为Null
+             returnMap.put("status", 500);
+         }
+         returnMap.put("blogMap", blogMap);
+         return returnMap;
+     }
 }

@@ -12,7 +12,9 @@ public interface BlogService {
 	 * @功能 根据id查询博客信息
 	 */
 	Blog selectBlogById(Integer id);
-
+	
+	Blog selectBlogUserById(Integer id);
+	
 	/**
 	 * @author Luotf
 	 * @功能 插入全部博客信息
@@ -61,6 +63,12 @@ public interface BlogService {
 
  	List<Blog> selectGroupLikeBlogListByPage(Map<String, Object> map);
  	
+ 	/**
+     * 取得每个类别下的前N条记录
+     * @param map
+     * @return
+     */
+ 	Map<String,List<Blog>> selectBlogByAllType();
  	
  	List<Blog> selectLikeBlogListByPageWithBlobs(Map<String, Object> map);
  	

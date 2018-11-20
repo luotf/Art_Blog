@@ -10,10 +10,6 @@
 	href="${pageContext.request.contextPath}/images/favicon.ico">
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="${pageContext.request.contextPath}/css/base.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/index.css"
-	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css"
 	rel="stylesheet">
 
@@ -22,7 +18,7 @@
 	style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
 	<%@ include file="top.jsp"%>
 	<article>
-		<div class="leftbox">
+		<div class="lbox">
 			<div class="infos">
 				<div class="newsview">
 					<h2 class="intitle">
@@ -30,10 +26,12 @@
 							href="about.jsp">关于我</a>
 					</h2>
 					<div class="news_infos m20 animated fadeIn">
+          <br>
 						<h3 style="color: #000;font-size: 15px;">关于站长</h3>
 						<br>
 						<p>罗廷方，男，一个95后站长，四川人。</p>
-						<p>15年09月至18年4月一直潜心研究Java，一边读书一边学习Java，目前大三。</p>
+            <p>建站时间：2018.03-2018.06。</p>
+						<p>15年09月至18年4月一直潜心研究Java，一边读书一边学习Java，完成该作品时、大三。</p>
 						<br>
 						<h3 style="color: #000;font-size: 15px;">为什么要做这个网站</h3>
 						<br>
@@ -49,13 +47,15 @@
 						<p>备案号：蜀ICP备18001827号-1</p>
 						<p>程序：Java</p>
 						<a target= "_blank" href="http://www.luotf.com/find/13015.html"><span style="color: #12aae8;font-size: 13px;">查看更多</span></a>
-					</div>
+					<br>
+          <br>
+          </div>
 				</div>
 			</div>
 		</div>
-		<div class="rightbox ">
-			<div class="aboutme m20">
-				<h2 class="ab_title">关于我</h2>
+		<div class="rbox ">
+			<div class="aboutme m20 whitebg">
+				<h2 class="htitle">关于我</h2>
 				<div class="avatar animated fadeIn">
 					<img src="${pageContext.request.contextPath}/images/my.jpeg">
 				</div>
@@ -66,32 +66,13 @@
 					<p>邮箱：849673404@qq.com</p>
 				</div>
 			</div>
-			<div class="weixin animated fadeIn">
-				<h2 class="ab_title">公众号</h2>
+			<div class="weixin animated fadeIn whitebg">
+				<h2 class="htitle">公众号</h2>
 				<ul>
 					<img src="${pageContext.request.contextPath}/images/wx.jpg">
 				</ul>
 			</div>
 		</div>
 	</article>
-	<%@ include file="fonter.jsp"%>
-	<script>
-		for (var i = 1; i <= 7; i++) {
-			if (i == 6) {
-				$(".a6 a").addClass("nav_color");
-			} else {
-				$('.a' + i + ' a').removeClass("nav_color");
-			}
-		}
-		window.onload = function() {
-			var oH2 = document.getElementsByTagName("h2")[0];
-			var oUl = document.getElementsByTagName("ul")[0];
-			oH2.onclick = function() {
-				var style = oUl.style;
-				style.display = style.display == "block" ? "none" : "block";
-				oH2.className = style.display == "block" ? "open" : ""
-			}
-		}
-	</script>
 </body>
 </html>

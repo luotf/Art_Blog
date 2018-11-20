@@ -1,21 +1,12 @@
 package com.luotf.controller;
 
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.luotf.service.BlogerService;
-import com.luotf.util.CipherUtil;
-
+import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @Controller
@@ -32,4 +23,16 @@ public class NavController {
     	return result;  
     }  
     
+    /** 
+     * 初始登陆界面 
+     * @param request 
+     * @return 
+     */  
+    @RequestMapping(value="/result")
+    public String searchResult(String keyboard,Model model){ 
+      if(keyboard != null){
+        model.addAttribute("keyword", keyboard);
+      }
+      return "/page/result";  
+    }  
 }

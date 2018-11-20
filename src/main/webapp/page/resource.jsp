@@ -13,11 +13,9 @@
 <meta name="keywords" content="个人博客,罗廷方个人博客,罗廷方" />
 <meta name="description" content="罗廷方个人博客，是一个在Java道路上的技术员个人博客网站" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet">
+    <%-- <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet"> --%>
     <link href="${pageContext.request.contextPath}/css/animate.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/base.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/index.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/loaders.css"
 	rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/font-awesome.css"
@@ -31,8 +29,8 @@
 <body style="background:url(${pageContext.request.contextPath}/images/bj.png) repeat top left scroll">
 <%@ include file="top.jsp" %>
   <article>
-    <div class="leftbox">
-      <div class="newblogs">
+    <div class="lbox">
+      <div class="newblogs notice">
       <h2 class="hometitle">
 	      <span class="tagTitle">
 	      	<a href="javascript:void(0);">学习视频</a>
@@ -42,25 +40,21 @@
 	      </span>
 	     资源分享
 	     </h2>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="wrapper wrapper-content ">
-                     
-                </div>
-                <div class="pagelist " style='display:none'>
+       
+        <ul>
       
-     		    </div>
-     		    <div class="pageMin ">
+        </ul>
+        <div class="pagelist ">
       
-     		    </div>
             </div>
-        </div>
-
+            <div class="pageMin ">
+      
+            </div>
       </div>
     </div>
 
-    <div class="rightbox ">
-      <div class="search1">
+    <div class="rbox ">
+      <div class="search1 whitebg">
         <form name="searchform" id="searchform" style="width:100%;height: 30px;">
         <input name="keyword" id="keyword"  class="input_text"
 						value="请输入关键字" style="width:70%;color: rgb(153, 153, 153);"
@@ -70,7 +64,7 @@
           <input  class="input_submit" value="搜索" type="button" onclick="selectResource()">
         </form>
       </div>
-     		<div class="tuijian2" >
+     		<div class="tuijian2 whitebg" >
 		      <h2 class="cloud_hometitle">推荐文章</h2>
 		      <ul class="tjpic animated fadeInDown" >
 		        <i><img src="images/t03.jpg"></i>
@@ -83,8 +77,8 @@
   </article>
 
     <!-- 全局js -->
-    <script src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script>
-	<script src="${pageContext.request.contextPath}/js/page/resource.min.js"></script>
+  <%--   <script src="${pageContext.request.contextPath}/js/jquery.min.js?v=2.1.4"></script> --%>
+	<script src="${pageContext.request.contextPath}/js/page/resource.js"></script>
 	<script src="${pageContext.request.contextPath}/js/layer/layer.js"></script>
    
 </body>
