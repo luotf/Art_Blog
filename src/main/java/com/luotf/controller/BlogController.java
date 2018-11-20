@@ -123,6 +123,7 @@ public class BlogController {
 		 if(blog.getType()!=null){
 			 map.put("type_id", blog.getType().getId());
 		 }
+		 map.put("status", 1);
 		 if(blog.getStatus()!=null){
 			 map.put("status", blog.getStatus());
 		 }
@@ -178,6 +179,7 @@ public class BlogController {
 		 if(blog.getType()!=null){
 			 map.put("type_id", blog.getType().getId());
 		 }
+		 map.put("status", 1);
 		 if(blog.getStatus()!=null){
 			 map.put("status", blog.getStatus());
 		 }

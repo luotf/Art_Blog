@@ -38,7 +38,7 @@
     ,
     <include refid="Blob_Column_List" />
     from t_blog
-    where id = #{id,jdbcType=INTEGER} and status=1
+    where id = #{id,jdbcType=INTEGER}
   </select>
   
   <select id="selectBlogByTypeId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
@@ -46,7 +46,7 @@
     <include refid="Base_Column_List" />
     
     from t_blog
-    where type_id = #{id,jdbcType=INTEGER}
+    where type_id = #{id,jdbcType=INTEGER} and status=1
   </select>
   <delete id="deleteBlogById" parameterType="java.lang.Integer">
     delete from t_blog
@@ -265,13 +265,13 @@
   <select id="selectPrevBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">
 	SELECT 
 	id, title
-	from t_blog where id&lt;#{id} ORDER BY id DESC LIMIT 1
+	from t_blog where id&lt;#{id} and status=1 ORDER BY id DESC LIMIT 1
 	</select>
 	
 	<select id="selectNextBlog" parameterType="Integer" resultMap="ResultMapWithBLOBs">
 	SELECT 
 	id, title
-	from t_blog where id&gt;#{id} ORDER BY id ASC LIMIT 1
+	from t_blog where id&gt;#{id} and status=1 ORDER BY id ASC LIMIT 1
 	</select>
   
   <insert id="insertBlog" parameterType="com.luotf.model.Blog">

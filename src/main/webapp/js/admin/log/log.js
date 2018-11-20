@@ -23,7 +23,6 @@ var returnAllCount = function() {
 		}, 500);
 	}
 }
-
 $(window).scroll(function() {
 	if (isEnd == true) {
 		return;
@@ -31,7 +30,7 @@ $(window).scroll(function() {
 	if ($(document).scrollTop() + 50 >= $(document).height() - $(window).height()) {
 		isEnd = true;
 		setTimeout(function() {
-			selectLogByDate(pageNext, null, null);
+			selectLogByDate(pageNext, $('#start').val(), $('#end').val());
 		}, 500);
 	}
 });
@@ -58,7 +57,7 @@ var reset = function() {
 
 var fastToSearch = function(fastKey) {
 	$(".keyword").val(fastKey);
-	selectLogByDate(1, null, null);
+	selectLogByDate(1,$('#start').val(), $('#end').val());
 }
 
 //指定日期查询事件
