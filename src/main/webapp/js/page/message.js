@@ -50,12 +50,9 @@ $(".top").click(function(){
             	var data=data.blogList;
             	var time='';
                 for (var i = 0; i < data.length; i++) {
-                	if(data[i].introduction.length>35){
-                		data[i].introduction=data[i].introduction.substring(0,34)+"...";
-                	}
                 	var id=data[i].id.toString(8)*data[i].id;
                 	time=i*0.05;
-                	newBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
+                	newBlog+='<li style="animation-delay:'+time+'s" class="animated fadeIn"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p><span>'+data[i].introduction+'</span></p></li>';
                 }
                 // 初始化数据
                 $(".paihang").find(".new").html(newBlog);

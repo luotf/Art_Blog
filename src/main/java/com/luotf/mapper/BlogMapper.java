@@ -16,7 +16,9 @@ public interface BlogMapper {
     int insertBlogSelective(Blog record);
 
     Blog selectBlogById(Integer id);
-
+    
+    Blog selectBlogUserById(Integer id);
+    
     List<Blog> selectBlogByTypeId(Integer id);
 
     /**
@@ -70,6 +72,13 @@ public interface BlogMapper {
  	 */
 
  	List<Blog> selectGroupLikeBlogListByPage(Map<String, Object> map);
+ 	
+ 	/**
+     * 取得每个类别下的前N条记录
+     * @param map
+     * @return
+     */
+    List<Blog> selectBlogByAllType();
  	
  	/**
  	 * 模糊分页组合查询博客 含内容

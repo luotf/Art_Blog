@@ -3,13 +3,7 @@ $(".top").click(function(){
     $('body,html').animate({scrollTop:0},1000);
     return false;
 });
-for(var i=1;i<=7;i++){
-			if(i==5){
-				$(".a5 a").addClass("nav_color");
-			}else{
-				$('.a'+i+' a').removeClass("nav_color");
-			}
-		}
+
 			$(function(){  
 		        //查找h1-h6  
 		        var i=1;
@@ -34,12 +28,12 @@ for(var i=1;i<=7;i++){
 		$(".tool-box").css("display","none");
 	}
 	$(window).scroll(function(){
-		if($(document).scrollTop()>400&&count==1){
+		if($(document).scrollTop()>20&&count==1){
 				$(".dj").css("display","block");
 				initBlogByClick();
 				count++;
 		}
-		if($(document).scrollTop()>1400&&width>700){
+		if($(document).scrollTop()>1200&&width>700){
 			$(".top").addClass('cd-is-visible fadeIn');
 			$(".fixed-menu-list").css("display","block");
 		}else{
@@ -50,12 +44,14 @@ for(var i=1;i<=7;i++){
 	
 
 		$(document).ready(function() {
-			Format();
-		    Tags();
-		    initBlogByLike();
-			selectPrevBlog();
-			selectNextBlog();
-			initBlogByRel();   //初始化相关文章
+		  if($(".newsview h1").text() != "404"){
+		    Format();
+	      Tags();
+	      selectPrevBlog();
+	      selectNextBlog();
+	      initBlogByRel();   //初始化相关文章
+		  }
+		  initBlogByLike();
 			setTimeout(function () {
 			$(".ds").css("opacity","1");
 		 }, 1000);
@@ -66,17 +62,6 @@ for(var i=1;i<=7;i++){
 					 return false;
 			});
 		});
-		//加载完成后
-		window.onload = function() {
-			var oH2 = document.getElementsByTagName("h2")[0];
-			var oUl = document.getElementsByTagName("ul")[0];
-			oH2.onclick = function() {
-				var style = oUl.style;
-				style.display = style.display == "block" ? "none" : "block";
-				oH2.className = style.display == "block" ? "open" : ""
-			}
-		}
-
 		var Tags=function() {
 			var tag = $(".tag").val();
 			var keyword = "";
@@ -166,11 +151,8 @@ for(var i=1;i<=7;i++){
 	            	var relBlog='';
 	            	var data=data.blogList;
 	                for (var i = 0; i < data.length; i++) {
-	                	if(data[i].title.length>20){
-	                		data[i].title=data[i].title.substring(0,19)+"...";
-	                	}
 	                	var id=data[i].id.toString(8)*data[i].id;
-	                	relBlog+='<li><a href="'+id+'.html" title="'+data[i].title+'">'+data[i].title+'</a></li>'
+	                	relBlog+='<li><i style="color:#5788aa" class="fa fa-paperclip"></i> <a href="'+id+'.html" title="'+data[i].title+'">'+data[i].title+'</a></li>'
 	                }
 	                // 初始化数据
 	                $(".otherlink").find("ul").html(relBlog);
@@ -199,17 +181,13 @@ for(var i=1;i<=7;i++){
 	            	var data=data.blogList;
 	            	var time='';
 	                for (var i = 0; i < data.length; i++) {
-	                	if (data[i].introduction.length > 26) {
-							data[i].introduction = data[i].introduction
-									.substring(0, 26)
-									+ "...";
-						}
+	                	
 						var id = data[i].id.toString(8) * data[i].id;
 						time = i * 0.05;
 						likeBlog += '<li style="animation-delay:0.'+i+'s" class="animated fadeIn"><b><a href="../find/'+id+'.html">'
 								+ data[i].title
-								+ '</a></b><p><i><img src="'+data[i].images+'"></i>'
-								+ data[i].introduction + '</p></li>'
+								+ '</a></b><p><i><img src="'+data[i].images+'"></i><span>'
+								+ data[i].introduction + '<span></p></li>'
 					}
 	                // 初始化数据
 	                $(".paihang").find(".like").html(likeBlog);
@@ -238,17 +216,13 @@ for(var i=1;i<=7;i++){
 	            	var data=data.blogList;
 	            	var time='';
 	                for (var i = 0; i < data.length; i++) {
-	                	if (data[i].introduction.length > 26) {
-							data[i].introduction = data[i].introduction
-									.substring(0, 26)
-									+ "...";
-						}
+	                	
 						var id = data[i].id.toString(8) * data[i].id;
 						time = i * 0.05;
 						clickBlog += '<li style="animation-delay:0.'+i+'s" class="animated fadeIn"><b><a href="../find/'+id+'.html">'
 								+ data[i].title
-								+ '</a></b><p><i><img src="'+data[i].images+'"></i>'
-								+ data[i].introduction + '</p></li>'
+								+ '</a></b><p><i><img src="'+data[i].images+'"></i><span>'
+								+ data[i].introduction + '</span></p></li>'
 					}
 	                // 初始化数据
 	                $(".paihang").find(".click").html(clickBlog);

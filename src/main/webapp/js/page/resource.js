@@ -51,7 +51,7 @@ var pageNext=1;
 			prarm='搜索关键字为<span class="text-info">#'+keyword+'#</span>的资源'
 		}
 		 var params={
-				 pageSize: 9,
+				 pageSize: 20,
 		         page:pageNum,
    				 title:keyword,
    				 content:keyword,
@@ -70,15 +70,17 @@ var pageNext=1;
 	            	if(data.length>0){
 	            		for (var i = 0; i < data.length; i++) {
 	            			var time=i*0.05;
-	            			resourceList+='<div style="animation-delay:'+time+'s" class="col-sm-4 animated fadeIn" ><div class="panel panel-default"><div class="panel-heading" style="border:none">'+data[i].title+'</div><div class="panel-body" style=" padding: 10px 15px;"> <p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-info pull-right" style="background-color: #748c8c;">Go</span></a> </div></div></div>';
+	            			resourceList +='<li><a href='+data[i].link+' title='+data[i].title+' target="_blank"><b>['+data[i].title+']</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+data[i].content+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>[密码:'+data[i].password+']</b></a></li>';
+	                  
+	            			//resourceList+='<div style="animation-delay:'+time+'s" class="col-sm-4 animated fadeIn" ><div class="panel panel-default"><div class="panel-heading" style="border:none">'+data[i].title+'</div><div class="panel-body" style=" padding: 10px 15px;"> <p style="word-break:break-word;height: 40px;">'+data[i].content+'</p></div><div class="panel-footer"><b>密码：'+data[i].password+'</b></span><a href="'+data[i].link+'" target="_blank"><span class="label label-info pull-right" style="background-color: #748c8c;">Go</span></a> </div></div></div>';
 	            		}
 	            	}else{
 	            		resourceList="无查询结果";
 	            	}
 	            	if(page.pageNum>=2){
-	            		$(".newblogs").find(".wrapper").append(resourceList);
+	            		$(".notice").find("ul").append(resourceList);
 	            	}else{
-	            		$(".newblogs").find(".wrapper").html(resourceList);
+	            		$(".notice").find("ul").html(resourceList);
 	            	} 
 	            	if(page.total>9){
 	            		var pagenav='';
@@ -121,7 +123,7 @@ var pageNext=1;
 	//初始化推荐
 	var initBlogByLike=function(){
 		var params ={
-				 pageSize: 5,
+				 pageSize: 7,
 		         page:1,
 		         isrecommend:1  //1 表示推荐
 		};
@@ -143,7 +145,7 @@ var pageNext=1;
                 	var id=data[i].id.toString(8)*data[i].id;
                 	time=i*0.05;
                 	if(i==1){
-                		likeBlog_1='<i ><img src="'+data[i].images+'"></i><p><a href="find/'+id+'.html">'+data[i].title+'</a></p>'
+                		likeBlog_1='<i ><a href="find/'+id+'.html"><img src="'+data[i].images+'"></i><p>'+data[i].title+'</p></a>'
                 	}else{
                 		likeBlog_2+='<li style="animation-delay:'+time+'s" class="animated fadeInDown"> <i><img src="'+data[i].images+'"></i><p><a href="find/'+id+'.html">'+data[i].title+'</a></p><span>'+Format(data[i].addtime,"yyyy-MM-dd")+'</span> </li>';
                 		//likeBlog+='<li style="animation-delay:'+time+'s" class="animated fadeInDown"><b><a href="find/'+id+'.html">'+data[i].title+'</a></b><p>'+data[i].introduction+'</p></li>';
@@ -198,12 +200,3 @@ var pageNext=1;
 	            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 	    return fmt;
 	}   	
-	window.onload = function (){
-		var oH2 = document.getElementsByTagName("h2")[0];
-		var oUl = document.getElementsByTagName("ul")[0];
-		oH2.onclick = function (){
-			var style = oUl.style;
-			style.display = style.display == "block" ? "none" : "block";
-			oH2.className = style.display == "block" ? "open" : "";
-		};
-	};

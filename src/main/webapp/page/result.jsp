@@ -51,14 +51,9 @@
   <%@ include file="top.jsp"%>
   <article>
     <div class="lbox">
-      <div class="whitebg lanmu">
-        <img src="${pageContext.request.contextPath}/images/lm01.jpg">
-        <h1>个人博客日记</h1>
-        <p>个人博客日记，记录了我博客建站初到现在的过程，还有我从毕业到现在的一个状态，感谢您的阅读，如果你还是学生，也许你能从此文中，找到我们曾经相似的地方。如果你已经工作，有自己的博客，我想，你并没有忘记当初建立个人博客的初衷吧！</p>
-      </div>
       <div class="newblogs bloglist">
         <h2 class="hometitle">
-          <span class="tagTitle"> </span>技术专栏
+          <span class="tagTitle"> </span>搜索结果
         </h2>
         <ul>
 
@@ -72,31 +67,30 @@
     <div class="rbox">
     <input name="keyword" id="keyword" value="${keyword}"
           type="hidden">
-      <div class="cloud animated fadeIn whitebg">
+      <div class="cloud  whitebg">
         <h2 class="cloud_hometitle">标签云</h2>
         <ul>
 
         </ul>
       </div>
-      <div class="tuijian2  animated fadeIn whitebg">
+       <div class="whitebg notice">
+      <h2 class="htitle">猜你喜欢</h2>
+      <ul>
+      
+     </ul>
+    </div>
+      <div class="tuijian2 whitebg">
         <h2 class="cloud_hometitle">推荐文章</h2>
-        <ul class="tjpic animated fadeIn">
+        <ul class="tjpic">
           <i><img src="images/t03.jpg"></i>
         </ul>
         <ul class="sidenews">
 
         </ul>
       </div>
-
-      <div class="djpaihang dj whitebg dianji animated fadeIn"
-        style="display:none;animation-delay:0.3s">
-        <h2 class="cloud_hometitle">点击排行</h2>
-        <ul class="click">
-
-        </ul>
-
-      </div>
-      <div class="guanzhu gd whitebg animated fadeIn" style="display:none"
+    
+      
+      <div class="guanzhu gd whitebg " style="display:none"
         id="follow-us">
         <h2 class="cloud_hometitle">来波关注</h2>
         <ul>

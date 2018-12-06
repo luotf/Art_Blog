@@ -36,6 +36,8 @@ public class ConstantUtil {
 	
 	public static final String UPLOAD_IMAGES="上传了图片";
 	
+	public static final String DELETE_IMAGES="删除了图片";
+	
 	public static final String LOGIN_IN="登录了系统";
 	
 	public static final String LOGIN_OUT="退出了系统";
