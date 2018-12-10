@@ -102,7 +102,20 @@ nav { float: left; height: 50px; line-height: 50px; text-align: center;    margi
 .open .navicon:after { margin-top: 0; -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
 .open .navicon:before, .open .navicon:after { content: ''; display: block; width: 30px; height: 5px; position: absolute; background: #fff; }
 /*menu+*/
+a.viewmore { display: block; right: 10px; bottom: 20px; position: absolute; padding: 3px 10px; background: #12b7de; color: #fff; border-radius: 3px; }
 .menu span { display: none; width: 50px; height: 50px; background: #12b7de; opacity: 0.5; position: absolute; top: 0; right: 0; border-left: #49ccea 1px solid; }
+.blogtext { font-size: 14px; color: #666; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 3; margin-top: 20px }
+.bloginfo { margin-top: 20px; overflow: hidden; color: #999; line-height: 34px; }
+.bloginfo span { margin: 0 5px }
+.bloginfo span a { color: #096 }
+.avatar {position: relative;float: left;width: 30px;height: 30px;border-radius: 100%;padding: 2px;display: block;
+/*background: -webkit-linear-gradient(bottom left, rgba(0,153,255,.9), rgba(42,228,197,.7));
+background: -o-linear-gradient(bottom left, rgba(0,153,255,.9), rgba(42,228,197,.7));
+background: linear-gradient(to top right, rgba(0,153,255,.9), rgba(42,228,197,.7));
+*/
+}
+.avatar img { width: 100%; border-radius: 50%; }
+.avatar::after { content: ""; position: absolute; background: url(https://www.yangqq.com/skin/jxhx/images/v.png) no-repeat; background-size: 12px; width: 12px; height: 12px; right: 0; bottom: 0 }
 
 .whitebg {
     background: #fff;
@@ -597,7 +610,7 @@ footer a {
 .blogtitle { margin: 0 0 10px 0; font-size: 18px; overflow: hidden; }
 .bloglist li:hover .blogtitle a { color: #337ab7; }
 .blogtitle b { color: #F00 }
-a.viewmore { display: block; right: 10px; bottom: 20px; position: absolute; padding: 3px 10px; background: #12b7de; color: #fff; border-radius: 3px; }
+a.viewmore { display: block; right: 10px; bottom: 20px; position: absolute; padding: 3px 10px; background: #000000; color: #fff; border-radius: 3px; }
 .blogpic {float: left;width: 23.2%;margin-right: 20px;display: block;overflow: hidden;border-radius: 3px;position: relative;}
 .blogpic i { display: block; position: absolute; top: 0; left: 0; z-index: 9; font-style: normal; padding: 3px 5px; background: rgba(18,182,221,.8); font-size: 14px; }
 .blogpic i a { color: #FFF }

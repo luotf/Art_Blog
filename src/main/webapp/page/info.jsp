@@ -16,7 +16,7 @@
   rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/animate.css"
   rel="stylesheet">
-  <script
+<script
     src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
 </head>
 <body

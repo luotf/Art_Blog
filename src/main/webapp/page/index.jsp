@@ -101,7 +101,7 @@
       </div>
       <div class="ad whitebg">
         <a href="#" target="_blank"> <img
-          src="${pageContext.request.contextPath}/images/longad.png">
+          src="${pageContext.request.contextPath}/images/longad2.png">
         </a>
       </div>
 

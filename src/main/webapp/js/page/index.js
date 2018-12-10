@@ -165,7 +165,7 @@ $.ajax({
           newspic+="<li><a href=find/"+ id + ".html target='_blank'><img src="+data[type][i].images+"> <span>"+data[type][i].title+"</span></a></li>";
         }
         if(i>=1){
-          newslist +="<li><i></i><a href=find/"+ id + ".html target='_blank'>"+data[type][i].title+"</a><p>"+data[type][i].introduction+"</p></li>";
+          newslist +="<li><i></i><a href=find/"+ id + ".html target='_blank'>"+data[type][i].title+"<p>"+data[type][i].introduction+"</p></a></li>";
         }
       }
       newspic+="</ul></div>"
@@ -174,8 +174,6 @@ $.ajax({
       newsitem+="</ul></div>"
     }
     $('.newstab').html(newsitem);
-    /*globalCount++;
-    returnAllCount();*/
   },
   error : function() {
     layer.msg('请求太快，请稍后再试！', {
@@ -263,17 +261,13 @@ var initBlogByNew = function(page) {
             + data[i].title
             + '</a></h3><span class="blogpic imgscale"><a href="find/' + id + '.html" title=""><img src="' + data[i].images + '"  /></a></span><p class="blogtext">'
             + data[i].introduction
-            + '</p><div class="autor"><span style="float:left;padding:0;color: #38485a"><i class="fa fa-user" style="color: #88827dcc;"></i>&nbsp;罗廷方</span><span class="lm f_l"><a href="javascript:void(0);">'
+            + '</p><p class="bloginfo"><i class = "avatar"><img src="images/image_.jpg" border=0 width="30" height="30"></i><span>luotf</span><span><a href="javascript:void(0);">【'
             + keyword
-            + '</a></span><span class="dtime f_l">'
+            + '】</a></span><span class="m_time">'
             + Format(data[i].addtime, "yyyy-MM-dd")
-            + '</span><span class="viewnum f_l">浏览<b>（<a href="javascript:void(0);">'
+            + '</span><span  class="clicknum">浏览('
             + data[i].clicknum
-            + '</a></b>）</span><span class="pingl f_l">评论（<b><a class='
-            + data[i].id
-            + ' href="javascript:void(0);">'
-            + data[i].commentnum
-            + '</a></b>）</span><span class="f_r"><a href="find/' + id + '.html" class="more">阅读原文>></a></span></div></li>'
+            + ')</span><span class="f_r"></p><a href="find/' + id + '.html" class="viewmore">阅读原文</a></span></li>'
         }
         var p = {
           client_id : 'cytzg9rLH',

@@ -653,16 +653,16 @@ h3.blogtitle {
     text-shadow: rgba(255, 255, 255, 0.3) 0px 1px 0px;
 }
 
-.avatar {
+ .avatar1 {
     width: 158px;
     height: 100px;
     overflow: hidden;
     margin: auto;
 }
 
-.avatar img {
+.avatar1 img {
     height: 100px
-}
+} 
 
 
 /*search*/

@@ -56,7 +56,7 @@
 		<div class="rbox ">
 			<div class="aboutme m20 whitebg">
 				<h2 class="htitle">关于我</h2>
-				<div class="avatar animated fadeIn">
+				<div class="avatar1 animated fadeIn">
 					<img src="${pageContext.request.contextPath}/images/my.jpeg">
 				</div>
 				<div class="ab_con animated fadeIn">

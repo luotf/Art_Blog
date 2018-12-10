@@ -59,7 +59,7 @@ article { padding-top: 80px; }
 .zhuanti li { width: 27.6%; padding: 8px }
 }
  @media only screen and (max-width: 480px) {
- .lm, .viewnum, .pingl {
+ .lm, .m_time,.clicknum, .pingl {
     display: none;}
 .headline { width: 100% }
 .headline ul { height: auto; padding-bottom: 10px; overflow: hidden }
