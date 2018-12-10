@@ -101,7 +101,7 @@ contabs | 选项卡
 > 1. 下载并导入本项目。
 > 2. 在数据库中导入webapp文件下的 **blog.sql** ，赠送几千条数据。 (如果sql文件导入出错,请粘贴导入) 导入成功后将会多一个 **blog** 数据库。
 > 3. 修改项目中的 **mysql.properties** 中的数据库信息。
-> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在*Host**元素中添加子元素。 （重要）
+> 4. 进入Tomcat 安装目录，找到**conf/server.xml** 在**Host**元素中添加子元素。 （重要）
 > ```
 > <Context path="/upload" docBase="C:\upload"/> 
 > ```
@@ -109,7 +109,7 @@ contabs | 选项卡
 > &emsp;5. 然后通过Tomcat启动项目即可  http://localhost:8080/Blog <br>
 > &emsp;6. 如果个别文件有报错，请直接无视。因版本和开发工具差异。
 > 
-
+#### 最新更新情况，[**请移至这里**](https://github.com/luotf/Art_Blog/tree/master)
 ### 开源赞助
 &emsp;&emsp;如果你觉得 本系统不错，有用，对你的学习有帮助，以及作者的辛苦，请作者喝杯 咖啡吧。
 #### <center><font color=#00BFFF size=3 >[ 欢迎 Star，Fork ]&emsp;&emsp;[ 欢迎提出问题，提出需求 ]&emsp;&emsp;[ 谢谢 ！]</font></center>
