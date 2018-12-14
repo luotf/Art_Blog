@@ -59,15 +59,15 @@ contabs | 选项卡
 
 ### 界面预览
 #### <font color=#1E90FF size=3 >[ 首页 ]</font> 显示 置顶的博客，特别推荐，点击排行，最新博客等，无限滚动加载。
-![首页](images/index.jpg)
+![首页](images/index.png)
 
 #### <font color=#1E90FF size=3 >[ 列表页 ]</font> 显示某个类别的博客列表，关键字搜索，博客数量，专题等。
-![列表页](images/list.jpg)
+![列表页](images/list.png)
 
 #### <font color=#1E90FF size=3 >[ 详情页 ]</font> 显示博客的具体内容，评论，推荐博客等。（截长屏 导致图片浮动元素 出现多次）
 <html>
-  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info.jpg" width="590" div align=left height="750" alt="PC"/>
-  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info_1.png" width="240" div align=right height="426" alt="手机"/>
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/info.png" width="590" div align=left height="750" alt="PC"/>
+  <img src="https://github.com/luotf/Art_Blog/raw/master/images/mobile.png" width="240" div align=right height="426" alt="手机"/>
 </html>
 <br>
 
